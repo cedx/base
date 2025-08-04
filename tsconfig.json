@@ -1,0 +1,20 @@
+{
+	"include": ["src/**/*.ts", "test/**/*.js"],
+	"compilerOptions": {
+		"allowJs": true,
+		"baseUrl": ".",
+		"checkJs": true,
+		"erasableSyntaxOnly": true,
+		"experimentalDecorators": true,
+		"incremental": true,
+		"module": "NodeNext",
+		"noEmit": true,
+		"noImplicitOverride": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"target": "ESNext",
+		"tsBuildInfoFile": "var/tsbuildinfo.json",
+		"verbatimModuleSyntax": true
+	}
+}
