@@ -1,26 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<Company>Belin.io</Company>
-		<Copyright>© Belin.io. Tous droits réservés.</Copyright>
+		<Copyright>© Cédric Belin</Copyright>
 		<Product>Belin.io Base</Product>
 		<Version>1.0.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<AssemblyName>Mc2it.Base.Tests</AssemblyName>
+		<AssemblyName>Belin.Base.Tests</AssemblyName>
 		<BaseOutputPath>obj</BaseOutputPath>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<OutDir>../../bin</OutDir>
 		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.*" />
 		<PackageReference Include="MSTest" Version="3.*" />
-		<ProjectReference Include="../../src/Server/Sage/Sage.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
