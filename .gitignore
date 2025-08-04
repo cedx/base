@@ -1,0 +1,10 @@
+/**/*.user
+/.idea/
+/.vs/
+/bin/
+/docs/
+/lib/
+/node_modules/
+/npm-debug.log
+/**/obj/
+/var/
