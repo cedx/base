@@ -1,7 +1,11 @@
 {
 	"files": [],
 	"references": [
+		{"path": "Abstractions/tsconfig.json"},
 		{"path": "Base/tsconfig.json"},
+		{"path": "DependencyInjection/tsconfig.json"},
+		{"path": "Html/tsconfig.json"},
+		{"path": "Http/tsconfig.json"},
 		{"path": "UI/tsconfig.json"}
 	]
 }
