@@ -39,7 +39,8 @@
 		"src/Client/"
 	],
 	"imports": {
-		"#Abstractions/*.js": "./lib/Abstractions/*.js"
+		"#Abstractions/*.js": "./lib/Abstractions/*.js",
+		"#Html/*.js": "./lib/Html/*.js"
 	},
 	"keywords": [
 		"belin",

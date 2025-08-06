@@ -13,6 +13,7 @@
 		"useDefineForClassFields": false
 	},
 	"references": [
-		{"path": "../Abstractions/tsconfig.json"}
+		{"path": "../Abstractions/tsconfig.json"},
+		{"path": "../Html/tsconfig.json"}
 	]
 }
