@@ -11,5 +11,8 @@
 		"rootDir": ".",
 		"tsBuildInfoFile": "../../../var/UI.tsbuildinfo",
 		"useDefineForClassFields": false
-	}
+	},
+	"references": [
+		{"path": "../Abstractions/tsconfig.json"}
+	]
 }
