@@ -2,5 +2,6 @@
 	"files": [],
 	"references": [
 		{"path": "Base/tsconfig.json"},
+		{"path": "UI/tsconfig.json"}
 	]
 }
