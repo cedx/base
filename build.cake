@@ -50,7 +50,7 @@ Task("publish")
 	.IsDependentOn("default")
 	.Does(() => DotNetPack("Base.slnx", new() { OutputDirectory = "var" }))
 	.DoesForEach(["tag", "push origin"], action => StartProcess("git", $"{action} v{version}"))
-	.DoesForEach(["https://registry.npmjs.org", "https://npm.pkg.github.com"], action => StartShell("npm", $"publish --registry={registry}"))
+	.DoesForEach(["https://registry.npmjs.org", "https://npm.pkg.github.com"], registry => StartShell("npm", $"publish --registry={registry}"))
 	.DoesForEach(() => GetFiles("var/*.nupkg"), file => DotNetNuGetPush(file, new() { ApiKey = EnvironmentVariable("NUGET_API_KEY"), Source = "https://api.nuget.org/v3/index.json" }))
 	.DoesForEach(() => GetFiles("var/*.nupkg"), file => DotNetNuGetPush(file, new() { ApiKey = EnvironmentVariable("GITHUB_TOKEN"), Source = "https://nuget.pkg.github.com/mc2it/index.json" }));
 
@@ -74,6 +74,13 @@ Task("version")
 	.Does(() => ReplaceInFile("package.json", @"""version"": ""\d+(\.\d+){2}""", $"\"version\": \"{version}\""))
 	.Does(() => ReplaceInFile("ReadMe.md", @"projet/v\d+(\.\d+){2}", $"projet/v{version}"))
 	.DoesForEach(GetFiles("**/*.csproj"), file => ReplaceInFile(file, @"<Version>\d+(\.\d+){2}</Version>", $"<Version>{version}</Version>"));
+
+Task("watch")
+	.Description("Watches for file changes.")
+	.Does(() => {
+		using var watcher = StartAndReturnShell("npx", "tsc --build src/Client/tsconfig.json --preserveWatchOutput --sourceMap --watch");
+		watcher.WaitForExit();
+	});
 
 Task("default")
 	.Description("The default task.")
@@ -100,3 +107,12 @@ static void ReplaceInFile(FilePath file, [StringSyntax(StringSyntaxAttribute.Reg
 /// <param name="arguments">The arguments used in the process settings.</param>
 void StartShell(string command, string arguments) =>
 	StartProcess("pwsh", $"-Command {command} {arguments}");
+
+/// <summary>
+/// Executes the specified command using a shell.
+/// </summary>
+/// <param name="command">The name of the command to be executed.</param>
+/// <param name="arguments">The arguments used in the process settings.</param>
+/// <returns>The newly started process.</returns>
+IProcess StartAndReturnShell(string command, string arguments) =>
+	StartAndReturnProcess("pwsh", new() { Arguments = $"-Command {command} {arguments}" });
