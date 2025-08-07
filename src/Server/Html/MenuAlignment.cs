@@ -1,4 +1,4 @@
-namespace Belin.UI;
+namespace Belin.Base.Html;
 
 /// <summary>
 /// Defines the alignment of a dropdown menu.

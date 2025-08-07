@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<Company>Belin.io</Company>
 		<Copyright>© Cédric Belin</Copyright>
@@ -19,7 +19,7 @@
 
 	<PropertyGroup>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<AssemblyName>Belin.Base.UI</AssemblyName>
+		<AssemblyName>Belin.Base.Html</AssemblyName>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>preview</LangVersion> <!-- Remove when .NET 10 / C# 14 will be released. -->
 		<Nullable>enable</Nullable>
@@ -29,11 +29,5 @@
 
 	<ItemGroup>
 		<None Include="../../../ReadMe.md" Pack="true" PackagePath="/" />
-		<SupportedPlatform Include="browser" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components" Version="9.*" />
-		<ProjectReference Include="../Html/Html.csproj" />
 	</ItemGroup>
 </Project>
