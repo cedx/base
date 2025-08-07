@@ -12,9 +12,9 @@ import {Component} from "./Component.js";
 export class ThemeDropdown extends Component {
 
 	/**
-	 * The alignement of the dropdown menu.
+	 * The alignment of the dropdown menu.
 	 */
-	@property() align: "end"|"start" = "end";
+	@property() alignment: "end"|"start" = "end";
 
 	/**
 	 * The label of the dropdown menu.
@@ -46,7 +46,7 @@ export class ThemeDropdown extends Component {
 	}
 
 	/**
-	 * The current theme.
+	 * The current theme mode.
 	 */
 	get theme(): ThemeMode {
 		return this.themeMode;
@@ -91,7 +91,7 @@ export class ThemeDropdown extends Component {
 					<i class="icon icon-fill">${themeIcon(this.themeMode)}</i>
 					${when(this.label, () => html`<span class="ms-1">${this.label}</span>`)}
 				</a>
-				<ul class="dropdown-menu ${classMap({"dropdown-menu-end": this.align == "end"})}">
+				<ul class="dropdown-menu ${classMap({"dropdown-menu-end": this.alignment == "end"})}">
 					${Object.values(ThemeMode).map(value => html`
 						<li>
 							<button class="dropdown-item d-flex align-items-center justify-content-between" @click=${() => this.theme = value}>

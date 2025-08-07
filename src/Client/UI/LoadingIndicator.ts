@@ -49,10 +49,6 @@ export class LoadingIndicator extends Component implements ILoadingIndicator {
 	 * @returns The view template.
 	 */
 	protected override render(): TemplateResult {
-		return html`
-			<slot>
-				<div class="spinner-border text-light"></div>
-			</slot>
-		`;
+		return html`<slot></slot>`;
 	}
 }

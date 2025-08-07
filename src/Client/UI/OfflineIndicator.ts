@@ -1,6 +1,5 @@
 import {html, type TemplateResult} from "lit";
-import {customElement, state} from "lit/decorators.js";
-import {when} from "lit/directives/when.js";
+import {customElement} from "lit/decorators.js";
 import {Component} from "./Component.js";
 
 /**
@@ -10,15 +9,11 @@ import {Component} from "./Component.js";
 export class OfflineIndicator extends Component {
 
 	/**
-	 * Value indicating whether the browser is online.
-	 */
-	@state() private isOnline = navigator.onLine;
-
-	/**
 	 * Creates a new offline indicator.
 	 */
 	constructor() {
 		super({shadowRoot: true});
+		this.hidden = navigator.onLine;
 	}
 
 	/**
@@ -41,7 +36,7 @@ export class OfflineIndicator extends Component {
 	 * Handles the events.
 	 */
 	handleEvent(): void {
-		this.isOnline = navigator.onLine;
+		this.hidden = navigator.onLine;
 	}
 
 	/**
@@ -49,13 +44,6 @@ export class OfflineIndicator extends Component {
 	 * @returns The view template.
 	 */
 	protected override render(): TemplateResult {
-		return when(!this.isOnline, () => html`
-			<slot>
-				<div class="alert alert-danger border-end-0 border-start-0 mb-0 rounded-0">
-					<i class="icon icon-fill fw-bold me-1">error</i> Le réseau est inaccessible.
-					<span class="d-none d-sm-inline">Vérifiez votre connexion.</span>
-				</div>
-			</slot>
-		`);
+		return html`<slot></slot>`;
 	}
 }
