@@ -1,11 +1,11 @@
 @namespace Belin.UI
 
 <loading-indicator hidden>
-	@Template
+	@Slot
 </loading-indicator>
 
 @code {
 	// The child content template.
 	[Parameter]
-	public required RenderFragment Template { get; set; }
+	public required RenderFragment Slot { get; set; }
 }
