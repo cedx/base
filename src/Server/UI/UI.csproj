@@ -31,4 +31,8 @@
 		<None Include="../../../ReadMe.md" Pack="true" PackagePath="/" />
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="9.*" />
+	</ItemGroup>
 </Project>
