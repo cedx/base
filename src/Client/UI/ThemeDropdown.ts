@@ -48,9 +48,7 @@ export class ThemeDropdown extends LitElement {
 	/**
 	 * The current theme mode.
 	 */
-	get theme(): ThemeMode {
-		return this.themeMode;
-	}
+	get theme(): ThemeMode { return this.themeMode; }
 	set theme(value: ThemeMode) {
 		localStorage.setItem(this.storageKey, this.themeMode = value);
 		this.#applyTheme();
