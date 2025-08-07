@@ -1,18 +1,17 @@
-import {html, type TemplateResult} from "lit";
+import {html, LitElement, type TemplateResult} from "lit";
 import {customElement} from "lit/decorators.js";
-import {Component} from "./Component.js";
 
 /**
  * A component that shows up when the network is unavailable, and hides when connectivity is restored.
  */
 @customElement("offline-indicator")
-export class OfflineIndicator extends Component {
+export class OfflineIndicator extends LitElement {
 
 	/**
 	 * Creates a new offline indicator.
 	 */
 	constructor() {
-		super({shadowRoot: true});
+		super();
 		this.hidden = navigator.onLine;
 	}
 

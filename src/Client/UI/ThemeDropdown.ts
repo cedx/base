@@ -1,15 +1,15 @@
-import {ThemeMode, themeIcon, themeLabel} from "#Html/ThemeMode.js";
-import {html, type TemplateResult} from "lit";
+import {MenuAlignment} from "#Html/MenuAlignment.js";
+import {themeIcon, themeLabel, ThemeMode} from "#Html/ThemeMode.js";
+import {html, LitElement, type TemplateResult} from "lit";
 import {customElement, property, state} from "lit/decorators.js";
 import {classMap} from "lit/directives/class-map.js";
 import {when} from "lit/directives/when.js";
-import {Component} from "./Component.js";
 
 /**
  * A dropdown menu for switching the color mode.
  */
 @customElement("theme-dropdown")
-export class ThemeDropdown extends Component {
+export class ThemeDropdown extends LitElement {
 
 	/**
 	 * The alignment of the dropdown menu.
@@ -24,7 +24,7 @@ export class ThemeDropdown extends Component {
 	/**
 	 * The key of the storage entry providing the saved theme.
 	 */
-	@property() storageKey = "theme";
+	@property() storageKey = "ThemeMode";
 
 	/**
 	 * The current theme.
@@ -78,6 +78,14 @@ export class ThemeDropdown extends Component {
 	 */
 	handleEvent(): void {
 		this.#applyTheme();
+	}
+
+	/**
+	 * Returns the node into which this component should render.
+	 * @returns The node into which this component should render.
+	 */
+	protected override createRenderRoot(): DocumentFragment|HTMLElement {
+		return this;
 	}
 
 	/**
