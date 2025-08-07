@@ -1,5 +1,5 @@
+import {AppTheme, themeIcon, themeLabel} from "#Html/AppTheme.js";
 import {MenuAlignment} from "#Html/MenuAlignment.js";
-import {themeIcon, themeLabel, ThemeMode} from "#Html/ThemeMode.js";
 import {html, LitElement, type TemplateResult} from "lit";
 import {customElement, property, state} from "lit/decorators.js";
 import {classMap} from "lit/directives/class-map.js";
@@ -24,12 +24,12 @@ export class ThemeDropdown extends LitElement {
 	/**
 	 * The key of the storage entry providing the saved theme.
 	 */
-	@property() storageKey = "ThemeMode";
+	@property() storageKey = "AppTheme";
 
 	/**
-	 * The current theme.
+	 * The current application theme.
 	 */
-	@state() private themeMode: ThemeMode;
+	@state() private appTheme: AppTheme;
 
 	/**
 	 * The media query used to check the system theme.
@@ -41,16 +41,16 @@ export class ThemeDropdown extends LitElement {
 	 */
 	constructor() {
 		super();
-		const theme = localStorage.getItem(this.storageKey) as ThemeMode;
-		this.themeMode = Object.values(ThemeMode).includes(theme) ? theme : ThemeMode.System;
+		const theme = localStorage.getItem(this.storageKey) as AppTheme;
+		this.appTheme = Object.values(AppTheme).includes(theme) ? theme : AppTheme.System;
 	}
 
 	/**
 	 * The current theme mode.
 	 */
-	get theme(): ThemeMode { return this.themeMode; }
-	set theme(value: ThemeMode) {
-		localStorage.setItem(this.storageKey, this.themeMode = value);
+	get theme(): AppTheme { return this.appTheme; }
+	set theme(value: AppTheme) {
+		localStorage.setItem(this.storageKey, this.appTheme = value);
 		this.#applyTheme();
 	}
 
@@ -94,15 +94,15 @@ export class ThemeDropdown extends LitElement {
 		return html`
 			<li class="nav-item dropdown">
 				<a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
-					<i class="icon icon-fill">${themeIcon(this.themeMode)}</i>
+					<i class="icon icon-fill">${themeIcon(this.appTheme)}</i>
 					${when(this.label, () => html`<span class="ms-1">${this.label}</span>`)}
 				</a>
 				<ul class="dropdown-menu ${classMap({"dropdown-menu-end": this.alignment == MenuAlignment.End})}">
-					${Object.values(ThemeMode).map(value => html`
+					${Object.values(AppTheme).map(value => html`
 						<li>
 							<button class="dropdown-item d-flex align-items-center justify-content-between" @click=${() => this.theme = value}>
 								<span><i class="icon icon-fill me-1">${themeIcon(value)}</i> ${themeLabel(value)}</span>
-								${when(value == this.themeMode, () => html`<i class="icon ms-2">check</i>`)}
+								${when(value == this.appTheme, () => html`<i class="icon ms-2">check</i>`)}
 							</button>
 						</li>
 					`)}
@@ -115,7 +115,7 @@ export class ThemeDropdown extends LitElement {
 	 * Applies the theme to the document.
 	 */
 	#applyTheme(): void {
-		const theme = this.themeMode == ThemeMode.System ? (this.#mediaQuery.matches ? ThemeMode.Dark : ThemeMode.Light) : this.themeMode;
+		const theme = this.appTheme == AppTheme.System ? (this.#mediaQuery.matches ? AppTheme.Dark : AppTheme.Light) : this.appTheme;
 		document.documentElement.dataset.bsTheme = theme.toLowerCase();
 	}
 }
