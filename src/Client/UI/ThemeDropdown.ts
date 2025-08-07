@@ -119,3 +119,16 @@ export class ThemeDropdown extends LitElement {
 		document.documentElement.dataset.bsTheme = theme.toLowerCase();
 	}
 }
+
+/**
+ * Declaration merging.
+ */
+declare global {
+
+	/**
+	 * The map of HTML tag names.
+	 */
+	interface HTMLElementTagNameMap {
+		"theme-dropdown": ThemeDropdown;
+	}
+}

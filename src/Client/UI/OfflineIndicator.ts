@@ -46,3 +46,16 @@ export class OfflineIndicator extends LitElement {
 		return html`<slot></slot>`;
 	}
 }
+
+/**
+ * Declaration merging.
+ */
+declare global {
+
+	/**
+	 * The map of HTML tag names.
+	 */
+	interface HTMLElementTagNameMap {
+		"offline-indicator": OfflineIndicator;
+	}
+}

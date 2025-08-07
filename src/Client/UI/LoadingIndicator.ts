@@ -51,3 +51,16 @@ export class LoadingIndicator extends LitElement implements ILoadingIndicator {
 		return html`<slot></slot>`;
 	}
 }
+
+/**
+ * Declaration merging.
+ */
+declare global {
+
+	/**
+	 * The map of HTML tag names.
+	 */
+	interface HTMLElementTagNameMap {
+		"loading-indicator": LoadingIndicator;
+	}
+}
