@@ -1,7 +1,7 @@
 {
 	"author": "Cédric Belin <cedx@outlook.com>",
 	"bugs": "https://github.com/cedx/base/issues",
-	"description": "Base library of Cédric Belin, full stack developer.",
+	"description": "Base library by Cédric Belin, full stack developer.",
 	"homepage": "https://github.com/cedx/base",
 	"license": "MIT",
 	"name": "@cedx/base",
