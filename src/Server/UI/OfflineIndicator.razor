@@ -1,0 +1,11 @@
+@namespace Belin.UI
+
+<offline-indicator hidden>
+	@Template
+</offline-indicator>
+
+@code {
+	// The child content template.
+	[Parameter]
+	public required RenderFragment Template { get; set; }
+}

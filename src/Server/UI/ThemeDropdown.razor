@@ -1,0 +1,17 @@
+@namespace Belin.UI
+
+<theme-dropdown alignment="@Alignment" label="@Label" storageKey="@StorageKey"></theme-dropdown>
+
+@code {
+	// The alignment of the dropdown menu.
+	[Parameter]
+	public string Alignment { get; set; } = "end";
+
+	// The label of the dropdown menu.
+	[Parameter]
+	public string Label { get; set; } = string.Empty;
+
+	// The key of the storage entry providing the saved theme.
+	[Parameter]
+	public string StorageKey { get; set; } = "theme";
+}
