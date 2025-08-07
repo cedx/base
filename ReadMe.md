@@ -1,5 +1,5 @@
 # Belin.io Base
-![.NET](https://badgen.net/badge/.net/%3E%3D8.0/green) ![NuGet](https://badgen.net/nuget/v/Belin.Base) ![License](https://badgen.net/badge/license/MIT/blue) ![Downloads](https://badgen.net/nuget/dt/Belin.Base)  
+![.NET](https://badgen.net/badge/.net/%3E%3D9.0/green) ![NuGet](https://badgen.net/nuget/v/Belin.Base) ![License](https://badgen.net/badge/license/MIT/blue) ![Downloads](https://badgen.net/nuget/dt/Belin.Base)  
 ![Node.js](https://badgen.net/npm/node/@cedx/base) ![npm](https://badgen.net/npm/v/@cedx/base) ![License](https://badgen.net/npm/license/@cedx/base) ![Downloads](https://badgen.net/npm/dt/@cedx/base)
 
 Base library by [Cédric Belin](https://belin.io), full stack developer,
