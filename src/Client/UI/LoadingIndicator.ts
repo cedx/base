@@ -1,12 +1,9 @@
 import type {ILoadingIndicator} from "#Abstractions/ILoadingIndicator.js";
-import {html, LitElement, type TemplateResult} from "lit";
-import {customElement} from "lit/decorators.js";
 
 /**
  * A component that shows up when an HTTP request starts, and hides when all concurrent HTTP requests are completed.
  */
-@customElement("loading-indicator")
-export class LoadingIndicator extends LitElement implements ILoadingIndicator {
+export class LoadingIndicator extends HTMLElement implements ILoadingIndicator {
 
 	/**
 	 * The number of concurrent HTTP requests.
@@ -19,6 +16,14 @@ export class LoadingIndicator extends LitElement implements ILoadingIndicator {
 	constructor() {
 		super();
 		this.hidden = true;
+		this.attachShadow({mode: "open"}).appendChild(document.createElement("slot"));
+	}
+
+	/**
+	 * Registers the component.
+	 */
+	static {
+		customElements.define("loading-indicator", this);
 	}
 
 	/**
@@ -41,14 +46,6 @@ export class LoadingIndicator extends LitElement implements ILoadingIndicator {
 			this.hidden = true;
 			document.body.classList.remove("loading");
 		}
-	}
-
-	/**
-	 * Renders this component.
-	 * @returns The view template.
-	 */
-	protected override render(): TemplateResult {
-		return html`<slot></slot>`;
 	}
 }
 
