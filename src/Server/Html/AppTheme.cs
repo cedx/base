@@ -29,7 +29,7 @@ public static class AppThemeExtensions {
 	/// <summary>
 	/// Gets the icon corresponding to the specified theme.
 	/// </summary>
-	/// <param name="theme">The theme mode.</param>
+	/// <param name="theme">The application theme.</param>
 	/// <returns>The icon corresponding to the specified theme.</returns>
 	public static string GetIcon(this AppTheme theme) => theme switch {
 		AppTheme.System => "contrast",
@@ -40,7 +40,7 @@ public static class AppThemeExtensions {
 	/// <summary>
 	/// Gets the label corresponding to the specified theme.
 	/// </summary>
-	/// <param name="theme">The theme mode.</param>
+	/// <param name="theme">The application theme.</param>
 	/// <returns>The label corresponding to the specified theme.</returns>
 	public static string GetLabel(this AppTheme theme) => theme switch {
 		AppTheme.System => "Auto",

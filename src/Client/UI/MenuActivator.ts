@@ -4,9 +4,9 @@
 export class MenuActivator extends HTMLElement {
 
 	/**
-	 * The child content.
+	 * The root element.
 	 */
-	readonly #slot = this.shadowRoot!.querySelector("slot")!;
+	readonly #root = this.shadowRoot!.querySelector("slot")!.assignedElements().at(0)!;
 
 	/**
 	 * Registers the component.
@@ -19,8 +19,7 @@ export class MenuActivator extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
-		const menu = this.#slot.assignedElements().at(0);
-		if (menu) for (const anchor of menu.getElementsByTagName("a"))
+		for (const anchor of this.#root.getElementsByTagName("a"))
 			if (anchor.href != location.href) anchor.classList.remove("active");
 			else {
 				anchor.classList.add("active");
