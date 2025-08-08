@@ -72,7 +72,7 @@ Task("test:server")
 Task("version")
 	.Description("Updates the version number in the sources.")
 	.Does(() => ReplaceInFile("package.json", @"""version"": ""\d+(\.\d+){2}""", $"\"version\": \"{version}\""))
-	.Does(() => ReplaceInFile("ReadMe.md", @"projet/v\d+(\.\d+){2}", $"projet/v{version}"))
+	.Does(() => ReplaceInFile("ReadMe.md", @"project/v\d+(\.\d+){2}", $"project/v{version}"))
 	.DoesForEach(GetFiles("**/*.csproj"), file => ReplaceInFile(file, @"<Version>\d+(\.\d+){2}</Version>", $"<Version>{version}</Version>"));
 
 Task("watch")

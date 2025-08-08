@@ -1,6 +1,5 @@
 # Belin.io Base
-![.NET](https://badgen.net/badge/.net/%3E%3D9.0/green) ![NuGet](https://badgen.net/nuget/v/Belin.Base) ![License](https://badgen.net/badge/license/MIT/blue) ![Downloads](https://badgen.net/nuget/dt/Belin.Base)  
-![Node.js](https://badgen.net/npm/node/@cedx/base) ![npm](https://badgen.net/npm/v/@cedx/base) ![License](https://badgen.net/npm/license/@cedx/base) ![Downloads](https://badgen.net/npm/dt/@cedx/base)
+![.NET](https://badgen.net/badge/.net/%3E%3D9.0/green) ![Version](https://badgen.net/badge/project/v0.2.0/blue) ![Licence](https://badgen.net/badge/licence/MIT/blue)
 
 Base library by [Cédric Belin](https://belin.io), full stack developer,
 implemented in [C#](https://learn.microsoft.com/en-us/dotnet/csharp) and [TypeScript](https://www.typescriptlang.org).
