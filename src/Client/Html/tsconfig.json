@@ -9,5 +9,8 @@
 		"outDir": "../../../lib/Html",
 		"rootDir": ".",
 		"tsBuildInfoFile": "../../../var/Html.tsbuildinfo"
-	}
+	},
+	"references": [
+		{"path": "../Base/tsconfig.json"}
+	]
 }
