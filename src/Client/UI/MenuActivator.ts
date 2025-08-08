@@ -4,11 +4,16 @@
 export class MenuActivator extends HTMLElement {
 
 	/**
+	 * The child content template.
+	 */
+	readonly #slot;
+
+	/**
 	 * Creates a new menu activator.
 	 */
 	constructor() {
 		super();
-		this.attachShadow({mode: "open"}).appendChild(document.createElement("slot"));
+		this.attachShadow({mode: "open"}).appendChild(this.#slot = document.createElement("slot"));
 	}
 
 	/**
@@ -22,7 +27,7 @@ export class MenuActivator extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
-		const menu = this.shadowRoot!.querySelector("slot")!.assignedElements().at(0);
+		const menu = this.#slot.assignedElements().at(0);
 		if (menu) for (const anchor of menu.getElementsByTagName("a"))
 			if (anchor.href != location.href) anchor.classList.remove("active");
 			else {
