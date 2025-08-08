@@ -1,0 +1,11 @@
+@namespace Belin.Base.UI
+
+<menu-activator>
+	@Slot
+</menu-activator>
+
+@code {
+	// The child content template.
+	[Parameter]
+	public required RenderFragment Slot { get; set; }
+}
