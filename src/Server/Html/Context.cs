@@ -25,3 +25,21 @@ public enum Context {
 	/// </summary>
 	Success
 }
+
+/// <summary>
+/// Provides extension methods for contextual modifiers.
+/// </summary>
+public static class ContextExtensions {
+
+	/// <summary>
+	/// Gets the label corresponding to the specified context.
+	/// </summary>
+	/// <param name="context">The context.</param>
+	/// <returns>The label corresponding to the specified context.</returns>
+	public static string GetLabel(this Context context) => context switch {
+		Context.Danger => "error",
+		Context.Warning => "check_circle",
+		Context.Info => "warning",
+		Context.Success => "info"
+	};
+}
