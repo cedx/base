@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<Company>Belin.io</Company>
 		<Copyright>© Cédric Belin</Copyright>
@@ -23,7 +23,6 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<OutDir>../../../bin</OutDir>
-		<OutputType>Library</OutputType>
 		<TargetFramework>net9.0</TargetFramework>
 	</PropertyGroup>
 
@@ -32,6 +31,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 		<ProjectReference Include="../Html/Html.csproj" />
 	</ItemGroup>
 </Project>
