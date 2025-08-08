@@ -23,6 +23,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<OutDir>../../../bin</OutDir>
+		<OutputType>Library</OutputType>
 		<TargetFramework>net9.0</TargetFramework>
 	</PropertyGroup>
 
