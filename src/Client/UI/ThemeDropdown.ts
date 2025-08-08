@@ -1,74 +1,60 @@
-import {AppTheme, themeIcon, themeLabel} from "#Html/AppTheme.js";
-import {MenuAlignment} from "#Html/MenuAlignment.js";
-import {html, LitElement, type TemplateResult} from "lit";
-import {customElement, property, state} from "lit/decorators.js";
-import {classMap} from "lit/directives/class-map.js";
-import {when} from "lit/directives/when.js";
+import {AppTheme, getIcon} from "#Html/AppTheme.js";
 
 /**
- * A dropdown menu for switching the color mode.
+ * A dropdown menu for switching the application theme.
  */
-@customElement("theme-dropdown")
-export class ThemeDropdown extends LitElement {
+export class ThemeDropdown extends HTMLElement {
 
 	/**
-	 * The alignment of the dropdown menu.
+	 * The media query used to check the application theme.
 	 */
-	@property() alignment: MenuAlignment = MenuAlignment.End;
+	readonly #mediaQuery = matchMedia("(prefers-color-scheme: dark)");
 
 	/**
-	 * The label of the dropdown menu.
+	 * The root element.
 	 */
-	@property() label = "";
+	readonly #root = this.shadowRoot!.querySelector("slot")!.assignedElements().at(0)!;
 
 	/**
-	 * The key of the storage entry providing the saved theme.
+	 * The key of the storage entry providing the saved theme mode.
 	 */
-	@property() storageKey = "AppTheme";
+	readonly #storageKey = this.getAttribute("storageKey") ?? "AppTheme";
 
 	/**
 	 * The current application theme.
 	 */
-	@state() private appTheme: AppTheme;
-
-	/**
-	 * The media query used to check the system theme.
-	 */
-	readonly #mediaQuery = matchMedia("(prefers-color-scheme: dark)");
+	#theme: AppTheme;
 
 	/**
 	 * Creates a new theme dropdown.
 	 */
 	constructor() {
 		super();
-		const theme = localStorage.getItem(this.storageKey) as AppTheme;
-		this.appTheme = Object.values(AppTheme).includes(theme) ? theme : AppTheme.System;
+		const theme = localStorage.getItem(this.#storageKey) as AppTheme;
+		this.#theme = Object.values(AppTheme).includes(theme) ? theme : AppTheme.System;
+		for (const button of this.#root.querySelectorAll("button")) button.addEventListener("click", this.#setTheme.bind(this));
 	}
 
 	/**
-	 * The current theme mode.
+	 * Registers the component.
 	 */
-	get theme(): AppTheme { return this.appTheme; }
-	set theme(value: AppTheme) {
-		localStorage.setItem(this.storageKey, this.appTheme = value);
-		this.#applyTheme();
+	static {
+		customElements.define("theme-dropdown", this);
 	}
 
 	/**
 	 * Method invoked when this component is connected.
 	 */
-	override connectedCallback(): void {
-		super.connectedCallback();
-		this.#applyTheme();
+	connectedCallback(): void {
 		this.#mediaQuery.addEventListener("change", this);
+		this.#applyTheme();
 	}
 
 	/**
 	 * Method invoked when this component is disconnected.
 	 */
-	override disconnectedCallback(): void {
+	disconnectedCallback(): void {
 		this.#mediaQuery.removeEventListener("change", this);
-		super.disconnectedCallback();
 	}
 
 	/**
@@ -79,44 +65,27 @@ export class ThemeDropdown extends LitElement {
 	}
 
 	/**
-	 * Returns the node into which this component should render.
-	 * @returns The node into which this component should render.
-	 */
-	protected override createRenderRoot(): DocumentFragment|HTMLElement {
-		return this;
-	}
-
-	/**
-	 * Renders this component.
-	 * @returns The view template.
-	 */
-	protected override render(): TemplateResult {
-		return html`
-			<li class="nav-item dropdown">
-				<a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
-					<i class="icon icon-fill">${themeIcon(this.appTheme)}</i>
-					${when(this.label, () => html`<span class="ms-1">${this.label}</span>`)}
-				</a>
-				<ul class="dropdown-menu ${classMap({"dropdown-menu-end": this.alignment == MenuAlignment.End})}">
-					${Object.values(AppTheme).map(value => html`
-						<li>
-							<button class="dropdown-item d-flex align-items-center justify-content-between" @click=${() => this.theme = value}>
-								<span><i class="icon icon-fill me-1">${themeIcon(value)}</i> ${themeLabel(value)}</span>
-								${when(value == this.appTheme, () => html`<i class="icon ms-2">check</i>`)}
-							</button>
-						</li>
-					`)}
-				</ul>
-			</li>
-		`;
-	}
-
-	/**
 	 * Applies the theme to the document.
 	 */
 	#applyTheme(): void {
-		const theme = this.appTheme == AppTheme.System ? (this.#mediaQuery.matches ? AppTheme.Dark : AppTheme.Light) : this.appTheme;
+		const theme = this.#theme == AppTheme.System ? (this.#mediaQuery.matches ? AppTheme.Dark : AppTheme.Light) : this.#theme;
 		document.documentElement.dataset.bsTheme = theme.toLowerCase();
+
+		const checkIcon = this.#root.querySelector(".dropdown-item > .icon")!;
+		checkIcon.remove();
+		const button = this.#root.querySelector(`button[data-theme="${this.#theme}"]`)!
+		button.appendChild(checkIcon);
+		this.#root.querySelector(".dropdown-toggle > .icon")!.textContent = getIcon(this.#theme);
+	}
+
+	/**
+	 * Changes the current theme.
+	 * @param event The dispatched event.
+	 */
+	#setTheme(event: Event): void {
+		const button = (event.target as HTMLElement).closest("button")!;
+		localStorage.setItem(this.#storageKey, this.#theme = button.dataset.theme as AppTheme);
+		this.#applyTheme();
 	}
 }
 

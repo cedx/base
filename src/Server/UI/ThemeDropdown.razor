@@ -1,7 +1,28 @@
 @namespace Belin.Base.UI
 @using Belin.Base.Html
 
-<theme-dropdown alignment="@Alignment.ToString()" label="@Label" storageKey="@StorageKey"></theme-dropdown>
+<theme-dropdown storageKey="@StorageKey">
+	<template shadowRootMode="open">
+		<slot></slot>
+	</template>
+
+	<li class="nav-item dropdown">
+		<a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
+			<i class="icon icon-fill">@AppTheme.System.GetIcon()</i>
+			@if (Label.Length > 0) { <span class="ms-2">@Label</span> }
+		</a>
+		<ul class="dropdown-menu @(Alignment == MenuAlignment.End ? "dropdown-menu-end" : string.Empty)">
+			@foreach (var theme in Enum.GetValues<AppTheme>()) {
+				<li>
+					<button class="dropdown-item d-flex align-items-center justify-content-between" data-theme="@theme">
+						<span><i class="icon icon-fill me-1">@theme.GetIcon()</i> @theme.GetLabel()</span>
+						@if (theme == AppTheme.System) { <i class="icon ms-3">check</i> }
+					</button>
+				</li>
+			}
+		</ul>
+	</li>
+</theme-dropdown>
 
 @code {
 	// The alignment of the dropdown menu.
