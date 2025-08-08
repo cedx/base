@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 	<PropertyGroup>
 		<Company>Belin.io</Company>
 		<Copyright>© Cédric Belin</Copyright>
@@ -28,11 +28,9 @@
 
 	<ItemGroup>
 		<None Include="../../../ReadMe.md" Pack="true" PackagePath="/" />
-		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components" Version="9.*" />
 		<ProjectReference Include="../Html/Html.csproj" />
 	</ItemGroup>
 </Project>
