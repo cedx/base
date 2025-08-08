@@ -1,11 +1,15 @@
 @namespace Belin.Base.UI
 
 <offline-indicator hidden>
+	<template shadowRootMode="open">
+		<slot></slot>
+	</template>
+
 	@Slot
 </offline-indicator>
 
 @code {
-	// The child content template.
+	// The child content.
 	[Parameter]
 	public required RenderFragment Slot { get; set; }
 }

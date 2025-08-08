@@ -9,7 +9,6 @@ export class OfflineIndicator extends HTMLElement {
 	constructor() {
 		super();
 		this.hidden = navigator.onLine;
-		this.attachShadow({mode: "open"}).appendChild(document.createElement("slot"));
 	}
 
 	/**

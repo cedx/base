@@ -16,7 +16,6 @@ export class LoadingIndicator extends HTMLElement implements ILoadingIndicator {
 	constructor() {
 		super();
 		this.hidden = true;
-		this.attachShadow({mode: "open"}).appendChild(document.createElement("slot"));
 	}
 
 	/**
