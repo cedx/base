@@ -52,7 +52,7 @@ Task("publish")
 	.DoesForEach(["tag", "push origin"], action => StartProcess("git", $"{action} v{version}"))
 	.DoesForEach(["https://registry.npmjs.org", "https://npm.pkg.github.com"], registry => StartShell("npm", $"publish --registry={registry}"))
 	.DoesForEach(() => GetFiles("var/*.nupkg"), file => DotNetNuGetPush(file, new() { ApiKey = EnvironmentVariable("NUGET_API_KEY"), Source = "https://api.nuget.org/v3/index.json" }))
-	.DoesForEach(() => GetFiles("var/*.nupkg"), file => DotNetNuGetPush(file, new() { ApiKey = EnvironmentVariable("GITHUB_TOKEN"), Source = "https://nuget.pkg.github.com/mc2it/index.json" }));
+	.DoesForEach(() => GetFiles("var/*.nupkg"), file => DotNetNuGetPush(file, new() { ApiKey = EnvironmentVariable("GITHUB_TOKEN"), Source = "https://nuget.pkg.github.com/cedx/index.json" }));
 
 Task("test")
 	.Description("Runs the test suite.")
