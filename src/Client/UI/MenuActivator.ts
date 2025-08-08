@@ -4,11 +4,6 @@
 export class MenuActivator extends HTMLElement {
 
 	/**
-	 * The root element.
-	 */
-	readonly #root = this.firstElementChild!;
-
-	/**
 	 * Registers the component.
 	 */
 	static {
@@ -19,7 +14,7 @@ export class MenuActivator extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
-		for (const anchor of this.#root.getElementsByTagName("a"))
+		for (const anchor of this.firstElementChild!.getElementsByTagName("a"))
 			if (anchor.href != location.href) anchor.classList.remove("active");
 			else {
 				anchor.classList.add("active");
