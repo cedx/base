@@ -5,12 +5,10 @@
 		"composite": true,
 		"declaration": true,
 		"declarationMap": true,
-		"importHelpers": true,
 		"noEmit": false,
 		"outDir": "../../../lib/UI",
 		"rootDir": ".",
-		"tsBuildInfoFile": "../../../var/UI.tsbuildinfo",
-		"useDefineForClassFields": false
+		"tsBuildInfoFile": "../../../var/UI.tsbuildinfo"
 	},
 	"references": [
 		{"path": "../Abstractions/tsconfig.json"},

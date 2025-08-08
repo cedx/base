@@ -5,7 +5,6 @@
 		"baseUrl": ".",
 		"checkJs": true,
 		"erasableSyntaxOnly": true,
-		"experimentalDecorators": true,
 		"incremental": true,
 		"module": "NodeNext",
 		"noEmit": true,
