@@ -74,8 +74,8 @@ export class ThemeDropdown extends HTMLElement {
 
 		const checkIcon = this.#root.querySelector(".dropdown-item > .icon")!;
 		checkIcon.remove();
-		const button = this.#root.querySelector(`button[data-theme="${this.#theme}"]`)!
-		button.appendChild(checkIcon);
+		const activeButton = this.#root.querySelector(`button[data-theme="${this.#theme}"]`)!
+		activeButton.appendChild(checkIcon);
 	}
 
 	/**
