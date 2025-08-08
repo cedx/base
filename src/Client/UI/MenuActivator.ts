@@ -6,7 +6,7 @@ export class MenuActivator extends HTMLElement {
 	/**
 	 * The root element.
 	 */
-	readonly #root = this.shadowRoot!.querySelector("slot")!.assignedElements().at(0)!;
+	readonly #root = this.firstElementChild!;
 
 	/**
 	 * Registers the component.

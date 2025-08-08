@@ -13,7 +13,7 @@ export class ThemeDropdown extends HTMLElement {
 	/**
 	 * The root element.
 	 */
-	readonly #root = this.shadowRoot!.querySelector("slot")!.assignedElements().at(0)!;
+	readonly #root = this.firstElementChild!;
 
 	/**
 	 * The key of the storage entry providing the saved theme mode.
