@@ -15,7 +15,7 @@ export class ActionBar extends HTMLElement {
 	 */
 	connectedCallback(): void {
 		const navbarHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--navbar-height"));
-		const mainOffset = this.querySelector("aside")!.offsetHeight + (Number.isNaN(navbarHeight) ? 0 : navbarHeight);
+		const mainOffset = this.offsetHeight + (Number.isNaN(navbarHeight) ? 0 : navbarHeight);
 		document.documentElement.style.setProperty("--main-offset", `${mainOffset}px`);
 	}
 
