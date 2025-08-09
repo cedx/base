@@ -1,0 +1,13 @@
+@namespace Belin.Base.UI
+
+<action-bar>
+	<aside class="container-fluid d-flex align-items-center justify-content-between">
+		@Slot
+	</aside>
+</action-bar>
+
+@code {
+	// The child content.
+	[Parameter]
+	public required RenderFragment Slot { get; set; }
+}
