@@ -14,7 +14,7 @@ export class MenuActivator extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
-		for (const anchor of this.firstElementChild!.getElementsByTagName("a"))
+		for (const anchor of this.querySelectorAll("a"))
 			if (anchor.href != location.href) anchor.classList.remove("active");
 			else {
 				anchor.classList.add("active");

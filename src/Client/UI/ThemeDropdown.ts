@@ -11,11 +11,6 @@ export class ThemeDropdown extends HTMLElement {
 	readonly #mediaQuery = matchMedia("(prefers-color-scheme: dark)");
 
 	/**
-	 * The root element.
-	 */
-	readonly #root = this.firstElementChild!;
-
-	/**
 	 * The key of the storage entry providing the saved theme mode.
 	 */
 	readonly #storageKey = this.getAttribute("storageKey") ?? "AppTheme";
@@ -32,7 +27,7 @@ export class ThemeDropdown extends HTMLElement {
 		super();
 		const theme = localStorage.getItem(this.#storageKey) as AppTheme;
 		this.#theme = Object.values(AppTheme).includes(theme) ? theme : AppTheme.System;
-		for (const button of this.#root.querySelectorAll("button")) button.addEventListener("click", this.#setTheme.bind(this));
+		for (const button of this.querySelectorAll("button")) button.addEventListener("click", this.#setTheme.bind(this));
 	}
 
 	/**
@@ -70,12 +65,11 @@ export class ThemeDropdown extends HTMLElement {
 	#applyTheme(): void {
 		const theme = this.#theme == AppTheme.System ? (this.#mediaQuery.matches ? AppTheme.Dark : AppTheme.Light) : this.#theme;
 		document.documentElement.dataset.bsTheme = theme.toLowerCase();
-		this.#root.querySelector(".dropdown-toggle > .icon")!.textContent = getIcon(this.#theme);
+		this.querySelector(".dropdown-toggle > .icon")!.textContent = getIcon(this.#theme);
 
-		const checkIcon = this.#root.querySelector(".dropdown-item > .icon")!;
+		const checkIcon = this.querySelector(".dropdown-item > .icon")!;
 		checkIcon.remove();
-		const activeButton = this.#root.querySelector(`button[data-theme="${this.#theme}"]`)!
-		activeButton.appendChild(checkIcon);
+		this.querySelector(`button[data-theme="${this.#theme}"]`)!.appendChild(checkIcon);
 	}
 
 	/**
