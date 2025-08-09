@@ -66,10 +66,7 @@ export class ThemeDropdown extends HTMLElement {
 		const theme = this.#theme == AppTheme.System ? (this.#mediaQuery.matches ? AppTheme.Dark : AppTheme.Light) : this.#theme;
 		document.documentElement.dataset.bsTheme = theme.toLowerCase();
 		this.querySelector(".dropdown-toggle > .icon")!.textContent = getIcon(this.#theme);
-
-		const checkIcon = this.querySelector(".dropdown-item > .icon")!;
-		checkIcon.remove();
-		this.querySelector(`button[data-theme="${this.#theme}"]`)!.appendChild(checkIcon);
+		this.querySelector(`button[data-theme="${this.#theme}"]`)!.appendChild(this.querySelector(".dropdown-item > .icon")!);
 	}
 
 	/**
