@@ -38,6 +38,17 @@ export class ThemeDropdown extends HTMLElement {
 	}
 
 	/**
+	 * The current application theme.
+	 */
+	get theme(): AppTheme {
+		return this.#theme;
+	}
+	set theme(value: AppTheme) {
+		localStorage.setItem(this.#storageKey, this.#theme = value);
+		this.#applyTheme();
+	}
+
+	/**
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
@@ -75,8 +86,7 @@ export class ThemeDropdown extends HTMLElement {
 	 */
 	#setTheme(event: Event): void {
 		const button = (event.target as HTMLElement).closest("button")!;
-		localStorage.setItem(this.#storageKey, this.#theme = button.dataset.theme as AppTheme);
-		this.#applyTheme();
+		this.theme = button.dataset.theme as AppTheme;
 	}
 }
 
