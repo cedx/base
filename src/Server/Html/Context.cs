@@ -32,11 +32,11 @@ public enum Context {
 public static class ContextExtensions {
 
 	/// <summary>
-	/// Gets the label corresponding to the specified context.
+	/// Gets the icon corresponding to the specified context.
 	/// </summary>
 	/// <param name="context">The context.</param>
-	/// <returns>The label corresponding to the specified context.</returns>
-	public static string GetLabel(this Context context) => context switch {
+	/// <returns>The icon corresponding to the specified context.</returns>
+	public static string GetIcon(this Context context) => context switch {
 		Context.Danger => "error",
 		Context.Warning => "check_circle",
 		Context.Info => "warning",
