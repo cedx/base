@@ -12,11 +12,11 @@ Task("build")
 	.IsDependentOn("build:server");
 
 Task("build:client")
-	.Description("[Client] Builds the project.")
+	.Description("Builds the client project.")
 	.Does(() => StartShell("npx", $"tsc --build src/Client/tsconfig.json {(release ? string.Empty : "--sourceMap")}".TrimEnd()));
 
 Task("build:server")
-	.Description("[Server] Builds the project.")
+	.Description("Builds the server project.")
 	.Does(() => DotNetBuild("Base.slnx", new() { Configuration = release ? "Release" : "Debug" }));
 
 Task("clean")
@@ -60,13 +60,13 @@ Task("test")
 	.IsDependentOn("test:server");
 
 Task("test:client")
-	.Description("[Client] Runs the test suite.")
+	.Description("Runs the client test suite.")
 	.Does(() => StartShell("npx", "tsc --build src/Client/tsconfig.json --sourceMap"))
 	.Does(() => StartShell("npx", "esbuild --bundle --legal-comments=none --log-level=warning --outfile=var/Tests.js test/Client/Main.js"))
 	.Does(() => StartProcess("node", "test/Client/Playwright.js"));
 
 Task("test:server")
-	.Description("[Server] Runs the test suite.")
+	.Description("Runs the server test suite.")
 	.Does(() => DotNetTest("Base.slnx", new() { Settings = ".runsettings" }));
 
 Task("version")
