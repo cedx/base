@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.5.0](https://github.com/cedx/base/compare/v0.4.1...v0.5.0)
+- Added the `UI.ActionBar` component.
+
 ## Version [0.4.1](https://github.com/cedx/base/compare/v0.4.0...v0.4.1)
 - Fixed the [NuGet](https://www.nuget.org) packaging.
 
