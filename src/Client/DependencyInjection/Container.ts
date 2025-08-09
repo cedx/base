@@ -30,7 +30,7 @@ export class Container {
 	 */
 	get<T>(id: ContainerToken): T { // eslint-disable-line @typescript-eslint/no-unnecessary-type-parameters
 		if (!this.#services.has(id))
-			if (this.#factories.has(id)) this.set(id, this.#factories.get(id)!());
+			if (this.#factories.has(id)) this.set(id, this.#factories.get(id)!.call(this));
 			else if (typeof id == "function") this.set(id, Reflect.construct(id, []));
 			else throw Error("There is no factory registered with the specified identifier.");
 
