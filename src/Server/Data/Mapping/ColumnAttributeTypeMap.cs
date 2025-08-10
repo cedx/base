@@ -1,4 +1,4 @@
-namespace Belin.Base.Data;
+namespace Belin.Base.Data.Mapping;
 
 using Dapper;
 using System.ComponentModel.DataAnnotations.Schema;
