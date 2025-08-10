@@ -203,13 +203,7 @@ export default ts.config(
 		}
 	},
 	{
-		files: ["src/UI/*.ts"],
-		rules: {
-			"@typescript-eslint/unbound-method": "off"
-		}
-	},
-	{
-		files: ["gulpfile.js", "test/**/*.js"],
+		files: ["test/**/*.js"],
 		rules: {
 			"prefer-arrow-callback": "off",
 			"@typescript-eslint/explicit-function-return-type": "off",

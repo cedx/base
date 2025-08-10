@@ -3,7 +3,7 @@ namespace Belin.Base.Data;
 /// <summary>
 /// Represents information relevant to the pagination of data items.
 /// </summary>
-public class Pagination {
+public sealed class Pagination {
 
 	/// <summary>
 	/// The one-based current page number.
@@ -13,7 +13,7 @@ public class Pagination {
 	/// <summary>
 	/// Value indicating whether a next page exists.
 	/// </summary>
-	public bool HasNextPage => CurrentPageIndex < TotalItemCount;
+	public bool HasNextPage => CurrentPageIndex < LastPageIndex;
 
 	/// <summary>
 	/// Value indicating whether a previous page exists.
@@ -27,6 +27,7 @@ public class Pagination {
 
 	/// <summary>
 	/// The one-based last page number.
+	/// The value will be zero if the total item count is zero.
 	/// </summary>
 	public int LastPageIndex => (int) Math.Ceiling(TotalItemCount / (double) ItemsPerPage);
 

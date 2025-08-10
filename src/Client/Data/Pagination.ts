@@ -6,68 +6,99 @@ export class Pagination {
 	/**
 	 * The one-based current page number.
 	 */
-	currentPageIndex: number;
+	#currentPageIndex!: number;
 
 	/**
 	 * The number of items per page.
 	 */
-	itemsPerPage: number;
+	#itemsPerPage!: number;
 
 	/**
 	 * The total number of items.
 	 */
-	totalItemCount: number;
+	#totalItemCount!: number;
 
 	/**
 	 * Creates a new pagination.
 	 * @param options An object providing values to initialize this instance.
 	 */
 	constructor(options: PaginationOptions = {}) {
-		this.currentPageIndex = Math.max(1, options.currentPageIndex ?? 1);
-		this.itemsPerPage = Math.max(1, Math.min(1000, options.itemsPerPage ?? 25));
-		this.totalItemCount = Math.max(0, options.totalItemCount ?? 0);
+		this.currentPageIndex = options.currentPageIndex ?? 1;
+		this.itemsPerPage = options.itemsPerPage ?? 25;
+		this.totalItemCount = options.totalItemCount ?? 0;
+	}
+
+	/**
+	 * The one-based current page number.
+	 */
+	get currentPageIndex(): number {
+		return this.#currentPageIndex;
+	}
+	set currentPageIndex(value: number) {
+		this.#currentPageIndex = Math.max(1, value);
 	}
 
 	/**
 	 * Value indicating whether a next page exists.
 	 */
 	get hasNextPage(): boolean {
-		return this.currentPageIndex < this.totalItemCount;
+		return this.#currentPageIndex < this.lastPageIndex;
 	}
 
 	/**
 	 * Value indicating whether a previous page exists.
 	 */
 	get hasPreviousPage(): boolean {
-		return this.currentPageIndex > 1;
+		return this.#currentPageIndex > 1;
+	}
+
+	/**
+	 * The number of items per page.
+	 */
+	get itemsPerPage(): number {
+		return this.#itemsPerPage;
+	}
+	set itemsPerPage(value: number) {
+		this.#itemsPerPage = Math.max(1, Math.min(1000, value));
 	}
 
 	/**
 	 * The one-based last page number.
+	 * The value will be zero if the total item count is zero.
 	 */
 	get lastPageIndex(): number {
-		return Math.ceil(this.totalItemCount / this.itemsPerPage);
+		return Math.ceil(this.#totalItemCount / this.#itemsPerPage);
 	}
 
 	/**
 	 * The data limit.
 	 */
 	get limit(): number {
-		return this.itemsPerPage;
+		return this.#itemsPerPage;
 	}
 
 	/**
 	 * The data offset.
 	 */
 	get offset(): number {
-		return (this.currentPageIndex - 1) * this.itemsPerPage;
+		return (this.#currentPageIndex - 1) * this.#itemsPerPage;
 	}
 
 	/**
 	 * The search parameters corresponding to this object.
 	 */
 	get searchParams(): URLSearchParams {
-		return new URLSearchParams({page: this.currentPageIndex.toString(), perPage: this.itemsPerPage.toString()});
+		return new URLSearchParams({page: this.#currentPageIndex.toString(), perPage: this.#itemsPerPage.toString()});
+	}
+
+	/**
+	 * The total number of items.
+	 */
+	get totalItemCount(): number {
+		return this.#totalItemCount;
+	}
+	set totalItemCount(value: number) {
+		this.#totalItemCount = Math.max(0, value);
 	}
 
 	/**
@@ -87,4 +118,20 @@ export class Pagination {
 /**
  * Defines the options of a {@link Pagination} instance.
  */
-export type PaginationOptions = Partial<Pick<Pagination, "currentPageIndex"|"itemsPerPage"|"totalItemCount">>;
+export type PaginationOptions = Partial<{
+
+	/**
+	 * The one-based current page number.
+	 */
+	currentPageIndex: number;
+
+	/**
+	 * The number of items per page.
+	 */
+	itemsPerPage: number;
+
+	/**
+	 * The total number of items.
+	 */
+	totalItemCount: number;
+}>;
