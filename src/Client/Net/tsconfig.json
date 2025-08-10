@@ -1,13 +1,13 @@
 {
 	"extends": "../../../tsconfig.json",
-	"include": ["*.ts"],
+	"include": ["**/*.ts"],
 	"compilerOptions": {
 		"composite": true,
 		"declaration": true,
 		"declarationMap": true,
 		"noEmit": false,
-		"outDir": "../../../lib/Http",
+		"outDir": "../../../lib/Net",
 		"rootDir": ".",
-		"tsBuildInfoFile": "../../../var/Http.tsbuildinfo"
+		"tsBuildInfoFile": "../../../var/Net.tsbuildinfo"
 	}
 }
