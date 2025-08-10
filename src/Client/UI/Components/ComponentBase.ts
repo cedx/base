@@ -3,7 +3,7 @@ import {LitElement, type CSSResultGroup} from "lit";
 /**
  * Optional base class for UI components. Alternatively, components may extend {@link LitElement} directly.
  */
-export abstract class Component extends LitElement {
+export abstract class ComponentBase extends LitElement {
 
 	/**
 	 * The component styles.
@@ -11,17 +11,17 @@ export abstract class Component extends LitElement {
 	static override styles: CSSResultGroup = [document.adoptedStyleSheets];
 
 	/**
-	 * Value indicating whether this component uses a shadow root.
+	 * Value indicating whether a shadow DOM tree should be attached to this component.
 	 */
-	readonly #useShadowRoot: boolean;
+	readonly #attachShadow: boolean;
 
 	/**
 	 * Creates a new component.
-	 * @param options Value indicating whether this component uses a shadow root.
+	 * @param options Value indicating whether a shadow DOM tree should be attached to this component.
 	 */
-	constructor(options: {shadowRoot?: boolean} = {}) {
+	constructor(options: {attachShadow?: boolean} = {}) {
 		super();
-		this.#useShadowRoot = options.shadowRoot ?? false;
+		this.#attachShadow = options.attachShadow ?? false;
 	}
 
 	/**
@@ -29,6 +29,6 @@ export abstract class Component extends LitElement {
 	 * @returns The node into which this component should render.
 	 */
 	protected override createRenderRoot(): DocumentFragment|HTMLElement {
-		return this.#useShadowRoot ? super.createRenderRoot() : this;
+		return this.#attachShadow ? super.createRenderRoot() : this;
 	}
 }
