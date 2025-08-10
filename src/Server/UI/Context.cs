@@ -1,4 +1,4 @@
-namespace Belin.Base.Html;
+namespace Belin.Base.UI;
 
 /// <summary>
 /// Defines contextual modifiers.

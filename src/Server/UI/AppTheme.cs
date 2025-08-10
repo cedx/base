@@ -1,4 +1,4 @@
-namespace Belin.Base.Html;
+namespace Belin.Base.UI;
 
 /// <summary>
 /// Enumerates different themes an operating system or application can show.
@@ -6,17 +6,17 @@ namespace Belin.Base.Html;
 public enum AppTheme {
 
 	/// <summary>
-	/// The system predefined theme mode.
+	/// The system theme.
 	/// </summary>
 	System,
 
 	/// <summary>
-	/// The light predefined theme mode.
+	/// The light theme.
 	/// </summary>
 	Light,
 
 	/// <summary>
-	/// The dark predefined theme mode.
+	/// The dark theme.
 	/// </summary>
 	Dark
 }

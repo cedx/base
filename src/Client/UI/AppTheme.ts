@@ -4,17 +4,17 @@
 export const AppTheme = Object.freeze({
 
 	/**
-	 * The system predefined theme mode.
+	 * The system theme.
 	 */
 	System: "System",
 
 	/**
-	 * The light predefined theme mode.
+	 * The light theme.
 	 */
 	Light: "Light",
 
 	/**
-	 * The dark predefined theme mode.
+	 * The dark theme.
 	 */
 	Dark: "Dark"
 });
