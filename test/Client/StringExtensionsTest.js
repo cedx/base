@@ -1,51 +1,49 @@
-import {capitalize, newLineToBr, reverse, split, stripTags, trimArray, trimObject, truncate, xmlEscape} from "@cedx/base/String.js";
+import * as StringExtensions from "@cedx/base/StringExtensions.js";
 import {assert} from "chai";
 
 /**
- * Tests the features of the string utilities.
+ * Tests the features of the string extensions.
  */
-describe("String utilities", () => {
-	// eslint-disable-next-line @typescript-eslint/unbound-method
-	const {deepEqual, equal} = assert;
+describe("StringExtensions", () => {
 	const locale = "en-US";
 
 	describe("capitalize()", () => {
 		it("should convert in uppercase the first character of the specified string", () => {
-			equal(capitalize("", locale), "");
-			equal(capitalize("foo bAr baZ", locale), "Foo bAr baZ");
+			assert.equal(StringExtensions.capitalize("", locale), "");
+			assert.equal(StringExtensions.capitalize("foo bAr baZ", locale), "Foo bAr baZ");
 		});
 	});
 
 	describe("newLineToBr()", () => {
 		it("should replace all new lines by HTML line breaks", () => {
-			equal(newLineToBr(""), "");
-			equal(newLineToBr("foo isn't\r\n bar"), "foo isn't<br> bar");
+			assert.equal(StringExtensions.newLineToBr(""), "");
+			assert.equal(StringExtensions.newLineToBr("foo isn't\r\n bar"), "foo isn't<br> bar");
 		});
 	});
 
 	describe("reverse()", () => {
 		it("should reverse the characters of the specified string", () => {
-			equal(reverse(""), "");
-			equal(reverse("foo bar"), "rab oof");
-			equal(reverse("Cédric"), "cirdéC");
+			assert.equal(StringExtensions.reverse(""), "");
+			assert.equal(StringExtensions.reverse("foo bar"), "rab oof");
+			assert.equal(StringExtensions.reverse("Cédric"), "cirdéC");
 		});
 	});
 
 	describe("split()", () => {
 		it("should split the string into chunks of the specified length", () => {
-			deepEqual(split(""), []);
-			deepEqual(split("héhé", 1), ["h", "é", "h", "é"]);
-			deepEqual(split("foo", 2), ["fo", "o"]);
-			deepEqual(split("foobar", 3), ["foo", "bar"]);
-			deepEqual(split("foo", 4), ["foo"]);
+			assert.deepEqual(StringExtensions.split(""), []);
+			assert.deepEqual(StringExtensions.split("héhé", 1), ["h", "é", "h", "é"]);
+			assert.deepEqual(StringExtensions.split("foo", 2), ["fo", "o"]);
+			assert.deepEqual(StringExtensions.split("foobar", 3), ["foo", "bar"]);
+			assert.deepEqual(StringExtensions.split("foo", 4), ["foo"]);
 		});
 	});
 
 	describe("stripTags()", () => {
 		it("should remove the HTML tags from the specified string", () => {
-			equal(stripTags(""), "");
-			equal(stripTags("> foo / bar <"), "> foo / bar <");
-			equal(stripTags('<p>Test paragraph.</p><!-- Comment --> <a href="#fragment">Other text</a>.'), "Test paragraph. Other text.");
+			assert.equal(StringExtensions.stripTags(""), "");
+			assert.equal(StringExtensions.stripTags("> foo / bar <"), "> foo / bar <");
+			assert.equal(StringExtensions.stripTags('<p>Test paragraph.</p><!-- Comment --> <a href="#fragment">Other text</a>.'), "Test paragraph. Other text.");
 		});
 	});
 
@@ -53,10 +51,10 @@ describe("String utilities", () => {
 		it("should trim the items of the specified array", () => {
 			/** @type {unknown[]} */
 			let array = [];
-			deepEqual(trimArray(array), []);
+			assert.deepEqual(StringExtensions.trimArray(array), []);
 
 			array = [123, " foo ", 456, "  bar  "];
-			deepEqual(trimArray(array), [123, "foo", 456, "bar"]);
+			assert.deepEqual(StringExtensions.trimArray(array), [123, "foo", 456, "bar"]);
 		});
 	});
 
@@ -64,32 +62,32 @@ describe("String utilities", () => {
 		it("should trim the properties of the specified object", () => {
 			/** @type {Record<string, unknown>} */
 			let object = {};
-			deepEqual(trimObject(object), {});
+			assert.deepEqual(StringExtensions.trimObject(object), {});
 
 			object = {prop1: 123, prop2: " foo ", prop3: 456, prop4: "  bar  "};
-			deepEqual(trimObject(object), {prop1: 123, prop2: "foo", prop3: 456, prop4: "bar"});
+			assert.deepEqual(StringExtensions.trimObject(object), {prop1: 123, prop2: "foo", prop3: 456, prop4: "bar"});
 		});
 	});
 
 	describe("truncate()", () => {
 		it("should truncate the string to the specified length", () => {
-			equal(truncate("", 0), "");
-			equal(truncate("foo bar", 7), "foo bar");
-			equal(truncate("foo bar", 0), "...");
-			equal(truncate("foo bar", 4), "foo ...");
+			assert.equal(StringExtensions.truncate("", 0), "");
+			assert.equal(StringExtensions.truncate("foo bar", 7), "foo bar");
+			assert.equal(StringExtensions.truncate("foo bar", 0), "...");
+			assert.equal(StringExtensions.truncate("foo bar", 4), "foo ...");
 		});
 
 		it("should append the specified ellipsis to the truncated string", () => {
-			equal(truncate("foo bar", 0, "--"), "--");
-			equal(truncate("foo bar", 4, "--"), "foo --");
+			assert.equal(StringExtensions.truncate("foo bar", 0, "--"), "--");
+			assert.equal(StringExtensions.truncate("foo bar", 4, "--"), "foo --");
 		});
 	});
 
 	describe("xmlEscape()", () => {
 		it("should replace invalid XML characters with their valid XML equivalent", () => {
-			equal(xmlEscape(""), "");
-			equal(xmlEscape('"Hey!"'), "&quot;Hey!&quot;");
-			equal(xmlEscape(" <foo> & <bar> "), " &lt;foo&gt; &amp; &lt;bar&gt; ");
+			assert.equal(StringExtensions.xmlEscape(""), "");
+			assert.equal(StringExtensions.xmlEscape('"Hey!"'), "&quot;Hey!&quot;");
+			assert.equal(StringExtensions.xmlEscape(" <foo> & <bar> "), " &lt;foo&gt; &amp; &lt;bar&gt; ");
 		});
 	});
 });

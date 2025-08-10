@@ -4,7 +4,7 @@ import {Duration} from "#Base/Duration.js";
  * Downloads the specified file.
  * @param file The file to be downloaded.
  */
-export function downloadFile(file: File): void {
+export function download(file: File): void {
 	const url = URL.createObjectURL(file);
 	const anchor = document.createElement("a");
 	anchor.download = file.name;
@@ -17,21 +17,11 @@ export function downloadFile(file: File): void {
 }
 
 /**
- * Downloads the specified text content.
- * @param text The text content.
- * @param fileName The file name.
- * @param options The optional attributes for the file.
- */
-export function downloadString(text: string, fileName: string, options: FilePropertyBag = {}): void {
-	downloadFile(new File([text], fileName, options));
-}
-
-/**
  * Opens the specified file.
  * @param file The file to be opened.
  * @param options Value indicating whether to open the file in a new tab.
  */
-export function openFile(file: File, options: {newTab?: boolean} = {}): void {
+export function open(file: File, options: {newTab?: boolean} = {}): void {
 	const url = URL.createObjectURL(file);
 	if (!options.newTab) {
 		location.assign(url);
@@ -55,7 +45,7 @@ export function openFile(file: File, options: {newTab?: boolean} = {}): void {
  * Prints the specified file.
  * @param file The file to be printed.
  */
-export function printFile(file: File): void {
+export function print(file: File): void {
 	const url = URL.createObjectURL(file);
 	const frame = document.createElement("iframe");
 	frame.addEventListener("load", () => frame.contentWindow?.print());
