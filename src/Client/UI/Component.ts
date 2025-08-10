@@ -1,7 +1,7 @@
 import {LitElement, type CSSResultGroup} from "lit";
 
 /**
- * The optional base class for custom elements.
+ * The optional base class for UI components. Alternatively, components may extend {@link LitElement} directly.
  */
 export abstract class Component extends LitElement {
 
@@ -16,7 +16,7 @@ export abstract class Component extends LitElement {
 	readonly #useShadowRoot: boolean;
 
 	/**
-	 * Creates a new custom element.
+	 * Creates a new component.
 	 * @param options Value indicating whether this component uses a shadow root.
 	 */
 	constructor(options: {shadowRoot?: boolean} = {}) {

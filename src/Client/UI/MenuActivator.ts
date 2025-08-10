@@ -1,5 +1,5 @@
 /**
- * A component that activates the items of a menu based on the current document URL.
+ * A component that activates the items of a menu, based on the current document URL.
  */
 export class MenuActivator extends HTMLElement {
 
