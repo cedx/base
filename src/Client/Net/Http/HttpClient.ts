@@ -24,7 +24,7 @@ export class HttpClient {
 	constructor(options: HttpClientOptions = {}) {
 		const url = options.baseUrl ? (options.baseUrl instanceof URL ? options.baseUrl.href : options.baseUrl) : document.baseURI;
 		this.baseUrl = new URL(url.endsWith("/") ? url : `${url}/`);
-		this.#loadingIndicator = options.loadingIndicator ?? (() => document.body.querySelector("loading-indicator") as ILoadingIndicator|null);
+		this.#loadingIndicator = options.loadingIndicator ?? (() => document.body.querySelector("loading-indicator, .loading-indicator") as ILoadingIndicator|null);
 	}
 
 	/**

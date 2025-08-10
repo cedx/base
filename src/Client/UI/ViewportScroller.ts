@@ -40,11 +40,11 @@ export class ViewportScroller {
 			const fontSize = parseInt(getComputedStyle(document.body).fontSize);
 			this.#scrollOffset = Number.isNaN(fontSize) ? 0 : fontSize * 2;
 
-			const navbarHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--navbar-height"));
-			this.#scrollOffset += Number.isNaN(navbarHeight) ? 0 : navbarHeight;
+			const navbar = document.body.querySelector<HTMLElement>(".navbar");
+			this.#scrollOffset += (navbar?.offsetHeight ?? 0);
 		}
 
-		const actionBar = document.body.querySelector<HTMLElement>("action-bar");
+		const actionBar = document.body.querySelector<HTMLElement>("action-bar, .action-bar");
 		return this.#scrollOffset + (actionBar?.offsetHeight ?? 0);
 	}
 
