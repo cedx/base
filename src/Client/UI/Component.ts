@@ -1,7 +1,7 @@
 import {LitElement, type CSSResultGroup} from "lit";
 
 /**
- * The optional base class for UI components. Alternatively, components may extend {@link LitElement} directly.
+ * Optional base class for UI components. Alternatively, components may extend {@link LitElement} directly.
  */
 export abstract class Component extends LitElement {
 
