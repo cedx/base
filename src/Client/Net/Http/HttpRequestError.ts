@@ -1,9 +1,9 @@
 import {StatusCodes} from "./StatusCodes.js";
 
 /**
- * An object thrown when an HTTP error occurs.
+ * An error thrown by the HTTP client.
  */
-export class HttpError extends globalThis.Error {
+export class HttpRequestError extends globalThis.Error {
 
 	/**
 	 * The validation errors.
@@ -12,15 +12,15 @@ export class HttpError extends globalThis.Error {
 
 	/**
 	 * Creates a new HTTP error.
-	 * @param response The server response.
+	 * @param response The HTTP response.
 	 */
 	constructor(response: Response) {
 		super(`${response.status} ${response.statusText}`, {cause: response});
-		this.name = "HttpError";
+		this.name = "HttpRequestError";
 	}
 
 	/**
-	 * The server response.
+	 * The HTTP response.
 	 */
 	override get cause(): Response {
 		return super.cause as Response;
@@ -43,7 +43,7 @@ export class HttpError extends globalThis.Error {
 	}
 
 	/**
-	 * The response's status code.
+	 * The HTTP status code.
 	 */
 	get status(): StatusCodes {
 		return this.cause.status as StatusCodes;
@@ -64,8 +64,8 @@ export class HttpError extends globalThis.Error {
 	 */
 	async #parseValidationErrors(): Promise<Map<string, string>> {
 		try {
-			const statuses = new Set<StatusCodes>([StatusCodes.BadRequest, StatusCodes.UnprocessableContent]);
-			const ignoreBody = this.cause.bodyUsed || !statuses.has(this.status);
+			const statuses: StatusCodes[] = [StatusCodes.BadRequest, StatusCodes.UnprocessableContent];
+			const ignoreBody = this.cause.bodyUsed || !statuses.includes(this.status);
 			return new Map(ignoreBody ? [] : Object.entries(await this.cause.json() as Record<string, string>));
 		}
 		catch {
