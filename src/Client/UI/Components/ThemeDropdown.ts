@@ -1,4 +1,4 @@
-import {AppTheme, getIcon} from "#Html/AppTheme.js";
+import {AppTheme, getIcon} from "../AppTheme.js";
 
 /**
  * A dropdown menu for switching the application theme.

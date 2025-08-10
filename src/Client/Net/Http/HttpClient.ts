@@ -1,3 +1,4 @@
+import {MediaTypeNames} from "../Mime/MediaTypeNames.js";
 import {HttpMethods} from "./HttpMethods.js";
 import {HttpRequestError} from "./HttpRequestError.js";
 
@@ -89,11 +90,11 @@ export class HttpClient {
 	 */
 	async #fetch(method: string, url: string|URL = "", body: unknown = null, options: RequestInit = {}): Promise<Response> {
 		const headers = new Headers(options.headers);
-		if (!headers.has("Accept")) headers.set("Accept", "application/json");
+		if (!headers.has("Accept")) headers.set("Accept", MediaTypeNames.Application.Json);
 
 		if (body && !(body instanceof Blob || body instanceof FormData || body instanceof URLSearchParams)) {
 			if (typeof body != "string") body = JSON.stringify(body);
-			if (!headers.has("Content-Type")) headers.set("Content-Type", "application/json");
+			if (!headers.has("Content-Type")) headers.set("Content-Type", MediaTypeNames.Application.Json);
 		}
 
 		const loadingIndicator = this.#loadingIndicator();
