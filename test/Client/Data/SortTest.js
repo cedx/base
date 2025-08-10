@@ -10,14 +10,14 @@ describe("Sort", () => {
 		const sort = new Sort;
 
 		it("should increment when adding an entry", () => {
-			lengthOf(sort, 0);
-			lengthOf(sort.append("foo", SortOrder.Ascending), 1);
-			lengthOf(sort.append("bar", SortOrder.Descending), 2);
+			assert.lengthOf(sort, 0);
+			assert.lengthOf(sort.append("foo", SortOrder.Ascending), 1);
+			assert.lengthOf(sort.append("bar", SortOrder.Descending), 2);
 		});
 
 		it("should decrement when removing an entry", () => {
 			sort.delete("foo");
-			lengthOf(sort, 1);
+			assert.lengthOf(sort, 1);
 		});
 	});
 
@@ -69,15 +69,15 @@ describe("Sort", () => {
 		});
 
 		it("should return a negative number if the first object is before the second", () => {
-			isBelow(Sort.of("index").compare(x, y), 0);
-			isBelow(Sort.of("name").compare(x, y), 0);
-			isBelow(new Sort([["type", SortOrder.Ascending], ["index", SortOrder.Ascending]]).compare(x, y), 0);
+			assert.isBelow(Sort.of("index").compare(x, y), 0);
+			assert.isBelow(Sort.of("name").compare(x, y), 0);
+			assert.isBelow(new Sort([["type", SortOrder.Ascending], ["index", SortOrder.Ascending]]).compare(x, y), 0);
 		});
 
 		it("should return a positive number if the first object is after the second", () => {
-			isAbove(Sort.of("index", SortOrder.Descending).compare(x, y), 0);
-			isAbove(Sort.of("name", SortOrder.Descending).compare(x, y), 0);
-			isAbove(new Sort([["type", SortOrder.Descending], ["index", SortOrder.Descending]]).compare(x, y), 0);
+			assert.isAbove(Sort.of("index", SortOrder.Descending).compare(x, y), 0);
+			assert.isAbove(Sort.of("name", SortOrder.Descending).compare(x, y), 0);
+			assert.isAbove(new Sort([["type", SortOrder.Descending], ["index", SortOrder.Descending]]).compare(x, y), 0);
 		});
 	});
 
@@ -87,7 +87,7 @@ describe("Sort", () => {
 			sort.delete("foo");
 			assert.deepEqual(Array.from(sort), [["bar", SortOrder.Descending]]);
 			sort.delete("bar");
-			isEmpty(Array.from(sort));
+			assert.isEmpty(Array.from(sort));
 		});
 	});
 
@@ -124,7 +124,7 @@ describe("Sort", () => {
 
 	describe("parse()", () => {
 		it("should return an empty sort for an empty string", () =>
-			isEmpty(Array.from(Sort.parse(""))));
+			assert.isEmpty(Array.from(Sort.parse(""))));
 
 		it("should return an ascending order for a property without prefix", () =>
 			assert.deepEqual(Array.from(Sort.parse("foo")), [["foo", SortOrder.Ascending]]));
@@ -176,7 +176,7 @@ describe("Sort", () => {
 
 	describe("toSql()", () => {
 		it("should return an empty string for an empty sort", () =>
-			isEmpty(new Sort().toSql()));
+			assert.isEmpty(new Sort().toSql()));
 
 		it("should return the property with an 'ASC' suffix for an ascending order", () =>
 			assert.equal(Sort.of("foo").toSql(), "foo ASC"));
@@ -192,7 +192,7 @@ describe("Sort", () => {
 
 	describe("toString()", () => {
 		it("should return an empty string for an empty sort", () =>
-			isEmpty(String(new Sort)));
+			assert.isEmpty(String(new Sort)));
 
 		it("should return the property for an ascending order", () =>
 			assert.equal(String(Sort.of("foo")), "foo"));

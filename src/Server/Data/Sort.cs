@@ -1,10 +1,22 @@
 namespace Belin.Base.Data;
 
+using System.Text.Json.Serialization;
+
 /// <summary>
 /// Represents information relevant to the sorting of data items.
 /// </summary>
 /// <param name="properties">The list of properties to be sorted.</param>
-public class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? properties = null): List<KeyValuePair<string, SortOrder>>(properties ?? []) {
+public sealed class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? properties = null) {
+
+	/// <summary>
+	/// The list of sort properties.
+	/// </summary>
+	private readonly List<KeyValuePair<string, SortOrder>> properties = [.. properties ?? []];
+
+	/// <summary>
+	/// The number of properties in this sort.
+	/// </summary>
+	public int Count => properties.Count;
 
 	/// <summary>
 	/// Creates a new sort from the specified property and order.
@@ -26,8 +38,9 @@ public class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? properties = nul
 }
 
 /// <summary>
-/// Specifies the order of a sorted property.
+/// Specifies the order of a sort property.
 /// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum SortOrder {
 
 	/// <summary>

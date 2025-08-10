@@ -1,5 +1,5 @@
 /**
- * Specifies the order of a sorted property.
+ * Specifies the order of a sort property.
  */
 export const SortOrder = Object.freeze({
 
@@ -15,7 +15,7 @@ export const SortOrder = Object.freeze({
 });
 
 /**
- * Specifies the order of a sorted property.
+ * Specifies the order of a sort property.
  */
 export type SortOrder = typeof SortOrder[keyof typeof SortOrder];
 
@@ -30,7 +30,7 @@ export type SortProperty = [string, SortOrder];
 export class Sort implements Iterable<SortProperty> {
 
 	/**
-	 * The list of sorted properties.
+	 * The list of sort properties.
 	 */
 	#properties: SortProperty[];
 
@@ -43,9 +43,9 @@ export class Sort implements Iterable<SortProperty> {
 	}
 
 	/**
-	 * The number of properties.
+	 * The number of properties in this sort.
 	 */
-	get length(): number {
+	get count(): number {
 		return this.#properties.length;
 	}
 
@@ -73,10 +73,10 @@ export class Sort implements Iterable<SortProperty> {
 
 	/**
 	 * Returns a new iterator that allows iterating the entries of this sort.
-	 * @returns An iterator over the sorted properties.
+	 * @returns An iterator over the sort properties.
 	 */
-	*[Symbol.iterator](): Generator<SortProperty, void, void> {
-		for (const entry of this.#properties) yield entry;
+	[Symbol.iterator](): ArrayIterator<SortProperty> {
+		return this.#properties[Symbol.iterator]();
 	}
 
 	/**
@@ -92,9 +92,9 @@ export class Sort implements Iterable<SortProperty> {
 	}
 
 	/**
-	 * Gets the sorted property at the specified index.
+	 * Gets the sort property at the specified index.
 	 * @param index The position in this sort.
-	 * @returns The sorted property at the specified index, or `null` if it doesn't exist.
+	 * @returns The sort property at the specified index, or `null` if it doesn't exist.
 	 */
 	at(index: number): SortProperty|null {
 		return this.#properties.at(index) ?? null;
@@ -186,10 +186,10 @@ export class Sort implements Iterable<SortProperty> {
 	 */
 	satisfies(conditions: Partial<{min: number, max: number, properties: string[]}> = {}): boolean {
 		const min = conditions.min ?? -1;
-		if (min >= 0) return this.length >= min;
+		if (min >= 0) return this.count >= min;
 
 		const max = conditions.max ?? -1;
-		if (max >= 0) return this.length <= max;
+		if (max >= 0) return this.count <= max;
 
 		const properties = conditions.properties ?? [];
 		return properties.length ? this.#properties.every(([key]) => properties.includes(key)) : true;
