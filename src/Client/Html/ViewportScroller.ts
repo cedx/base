@@ -50,11 +50,11 @@ export class ViewportScroller {
 
 	/**
 	 * Scrolls to the specified anchor.
-	 * @param anchor The identifier or name of an elment.
+	 * @param anchor The identifier or name of an element.
 	 * @param options Value indicating whether scrolling is instant or animates smoothly.
 	 */
 	scrollToAnchor(anchor: string, options: ScrollOptions = {}): void {
-		const element = document.getElementById(anchor) ?? document.body.querySelector(`[name="${anchor}"]`);
+		const element = document.getElementById(anchor) ?? this.#viewport().querySelector(`[name="${anchor}"]`);
 		if (element) this.scrollToElement(element, options);
 	}
 
