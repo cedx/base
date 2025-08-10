@@ -2,6 +2,7 @@
 
 ## Version [0.6.0](https://github.com/cedx/base/compare/v0.5.0...v0.6.0)
 - Added the `Data.Pagination` and `Data.PaginatedList` classes.
+- Added the `UI.Component` class.
 
 ## Version [0.5.0](https://github.com/cedx/base/compare/v0.4.1...v0.5.0)
 - Added the `Data.Sort` class.
