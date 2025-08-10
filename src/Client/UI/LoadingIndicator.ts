@@ -1,9 +1,7 @@
-import type {ILoadingIndicator} from "#Abstractions/ILoadingIndicator.js";
-
 /**
  * A component that shows up when an HTTP request starts, and hides when all concurrent HTTP requests are completed.
  */
-export class LoadingIndicator extends HTMLElement implements ILoadingIndicator {
+export class LoadingIndicator extends HTMLElement {
 
 	/**
 	 * The number of concurrent HTTP requests.
