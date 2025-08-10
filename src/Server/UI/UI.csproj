@@ -4,7 +4,7 @@
 		<Copyright>© Cédric Belin</Copyright>
 		<Description>Base library by Cédric Belin, full stack developer.</Description>
 		<Product>Belin.io Base</Product>
-		<Version>0.6.0</Version>
+		<Version>0.7.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>

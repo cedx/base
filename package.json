@@ -7,7 +7,7 @@
 	"name": "@cedx/base",
 	"repository": "cedx/base",
 	"type": "module",
-	"version": "0.6.0",
+	"version": "0.7.0",
 	"devDependencies": {
 		"@playwright/browser-chromium": "^1.54.2",
 		"@types/bootstrap": "^5.2.10",
@@ -39,9 +39,7 @@
 		"src/Client/"
 	],
 	"imports": {
-		"#Abstractions/*.js": "./lib/Abstractions/*.js",
-		"#Base/*.js": "./lib/*.js",
-		"#Html/*.js": "./lib/Html/*.js"
+		"#Base/*.js": "./lib/*.js"
 	},
 	"keywords": [
 		"belin",
