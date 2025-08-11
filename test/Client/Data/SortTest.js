@@ -21,7 +21,7 @@ describe("Sort", () => {
 		});
 	});
 
-	describe("*[Symbol.iterator]()", () => {
+	describe("[Symbol.iterator]()", () => {
 		it("should end iteration immediately if the sort is empty", () => {
 			const iterator = new Sort()[Symbol.iterator]();
 			assert.isTrue(iterator.next().done);
@@ -172,22 +172,6 @@ describe("Sort", () => {
 
 		it("should keep the order of entries when setting a known property", () =>
 			assert.deepEqual(Array.from(sort.set("bar", SortOrder.Ascending).set("foo", SortOrder.Descending)), [["foo", SortOrder.Descending], ["bar", SortOrder.Ascending]]));
-	});
-
-	describe("toSql()", () => {
-		it("should return an empty string for an empty sort", () =>
-			assert.isEmpty(new Sort().toSql()));
-
-		it("should return the property with an 'ASC' suffix for an ascending order", () =>
-			assert.equal(Sort.of("foo").toSql(), "foo ASC"));
-
-		it("should return the property with a 'DESC' suffix for a descending order", () =>
-			assert.equal(new Sort([["foo", SortOrder.Ascending], ["bar", SortOrder.Descending]]).toSql(), "foo ASC, bar DESC"));
-
-		it("should allow custom escaping of properties", () => {
-			const sort = new Sort([["foo", SortOrder.Ascending], ["bar", SortOrder.Descending]]);
-			assert.equal(sort.toSql((/** @type {string} */ value) => `[${value}]`), "[foo] ASC, [bar] DESC");
-		});
 	});
 
 	describe("toString()", () => {
