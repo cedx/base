@@ -35,6 +35,13 @@ public sealed class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? propertie
 		var order = token.StartsWith('-') ? SortOrder.Descending : SortOrder.Ascending;
 		return new KeyValuePair<string, SortOrder>(order == SortOrder.Ascending ? token : token[1..], order);
 	}));
+
+	/// <summary>
+	/// Returns a string representation of this object.
+	/// </summary>
+	/// <returns>The string representation of this object.</returns>
+	public override string ToString() =>
+		string.Join(',', properties.Select((property) => $"{(property.Value == SortOrder.Descending ? "-" : string.Empty)}{property.Key}"));
 }
 
 /// <summary>

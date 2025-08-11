@@ -3,8 +3,8 @@
 <theme-dropdown alignment="@Alignment" appTheme="@AppTheme" label="@Label" storageKey="@StorageKey">
 	<li class="nav-item dropdown">
 		<a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
-			<i class="icon icon-fill me-1">@AppTheme.GetIcon()</i>
-			<span class="mx-1" hidden="@(Label.Length > 0)">@Label</span>
+			<i class="icon icon-fill">@AppTheme.GetIcon()</i>
+			<span class="mx-1">@Label</span>
 		</a>
 		<ul class="dropdown-menu @(Alignment == MenuAlignment.End ? "dropdown-menu-end" : string.Empty)">
 			@foreach (var theme in Enum.GetValues<AppTheme>()) {

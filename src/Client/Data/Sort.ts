@@ -6,12 +6,12 @@ export const SortOrder = Object.freeze({
 	/**
 	 * The sort is ascending.
 	 */
-	Ascending: "ASC",
+	Ascending: "Ascending",
 
 	/**
 	 * The sort is descending.
 	 */
-	Descending: "DESC"
+	Descending: "Descending"
 });
 
 /**
@@ -45,7 +45,7 @@ export class Sort implements Iterable<SortProperty> {
 	/**
 	 * The number of properties in this sort.
 	 */
-	get count(): number {
+	get length(): number {
 		return this.#properties.length;
 	}
 
@@ -186,10 +186,10 @@ export class Sort implements Iterable<SortProperty> {
 	 */
 	satisfies(conditions: Partial<{min: number, max: number, properties: string[]}> = {}): boolean {
 		const min = conditions.min ?? -1;
-		if (min >= 0) return this.count >= min;
+		if (min >= 0) return this.length >= min;
 
 		const max = conditions.max ?? -1;
-		if (max >= 0) return this.count <= max;
+		if (max >= 0) return this.length <= max;
 
 		const properties = conditions.properties ?? [];
 		return properties.length ? this.#properties.every(([key]) => properties.includes(key)) : true;
@@ -219,19 +219,10 @@ export class Sort implements Iterable<SortProperty> {
 	}
 
 	/**
-	 * Converts this sort to an SQL clause.
-	 * @param escape A function used to escape the SQL identifiers.
-	 * @returns The SQL clause corresponding to this object.
-	 */
-	toSql(escape: (identifier: string) => string = id => id): string {
-		return this.#properties.map(([property, order]) => `${escape(property)} ${order}`).join(", ");
-	}
-
-	/**
 	 * Returns a string representation of this object.
 	 * @returns The string representation of this object.
 	 */
 	toString(): string {
-		return this.#properties.map(([property, order]) => `${order == SortOrder.Descending ? "-" : ""}${property}`).join();
+		return this.#properties.map(([property, order]) => `${order == SortOrder.Descending ? "-" : ""}${property}`).join(",");
 	}
 }
