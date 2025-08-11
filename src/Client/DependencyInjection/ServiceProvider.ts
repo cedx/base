@@ -60,7 +60,7 @@ export class ServiceProvider {
 		if (!this.#services.has(key))
 			if (this.#factories.has(key)) this.add(key, this.#factories.get(key)!.call(this));
 			else if (typeof key == "function") this.add(key, Reflect.construct(key, []));
-			else throw Error("There is no factory registered with the specified key.");
+			else throw new Error("There is no factory registered with the specified key.");
 
 		return this.#services.get(key) as T;
 	}
