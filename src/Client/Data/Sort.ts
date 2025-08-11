@@ -75,7 +75,7 @@ export class Sort implements Iterable<SortProperty> {
 	 * Returns a new iterator that allows iterating the entries of this sort.
 	 * @returns An iterator over the sort properties.
 	 */
-	[Symbol.iterator](): ArrayIterator<SortProperty> {
+	[Symbol.iterator](): Iterator<SortProperty> {
 		return this.#properties[Symbol.iterator]();
 	}
 

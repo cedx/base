@@ -44,5 +44,5 @@ public sealed class Pagination {
 	/// <summary>
 	/// The total number of items.
 	/// </summary>
-	public int TotalItemCount { get; set => field = Math.Max(0, value); } = 0;
+	public int TotalItemCount { get; set => field = Math.Max(0, value); }
 }
