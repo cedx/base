@@ -16,4 +16,16 @@ public sealed class SortTest {
 		var expected = new KeyValuePair<string, SortOrder>[] { new("foo", SortOrder.Ascending), new("bar", SortOrder.Descending) };
 		CollectionAssert.AreEqual(expected, Sort.Parse("foo,-bar").ToArray());
 	}
+
+	[TestMethod("ToString")]
+	public void TestToString() {
+		// It should return an empty string for an empty sort.
+		IsEmpty(new Sort().ToString());
+
+		// It should return the property for an ascending order.
+		AreEqual("foo", Sort.Of("foo").ToString());
+
+		// It should return the property with a "-" prefix for a descending order.
+		AreEqual("foo,-bar", Sort.Of("foo,-bar").ToString());
+	}
 }

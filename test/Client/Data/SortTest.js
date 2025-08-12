@@ -182,6 +182,6 @@ describe("Sort", () => {
 			assert.equal(String(Sort.of("foo")), "foo"));
 
 		it("should return the property with a '-' prefix for a descending order", () =>
-			assert.equal(String(new Sort([["foo", SortOrder.Ascending], ["bar", SortOrder.Descending]])), "foo,-bar"));
+			assert.equal(String(Sort.parse("foo,-bar")), "foo,-bar"));
 	});
 });
