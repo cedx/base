@@ -10,7 +10,7 @@ export class HttpClient {
 	/**
 	 * The base URL of the remote service.
 	 */
-	readonly baseUrl: URL;
+	readonly baseAddress: URL;
 
 	/**
 	 * The function returning the component used as loading indicator.
@@ -23,7 +23,7 @@ export class HttpClient {
 	 */
 	constructor(options: HttpClientOptions = {}) {
 		const url = options.baseUrl ? (options.baseUrl instanceof URL ? options.baseUrl.href : options.baseUrl) : document.baseURI;
-		this.baseUrl = new URL(url.endsWith("/") ? url : `${url}/`);
+		this.baseAddress = new URL(url.endsWith("/") ? url : `${url}/`);
 		this.#loadingIndicator = options.loadingIndicator ?? (() => document.body.querySelector("loading-indicator, .loading-indicator") as ILoadingIndicator|null);
 	}
 
@@ -100,7 +100,7 @@ export class HttpClient {
 		const loadingIndicator = this.#loadingIndicator();
 		try {
 			loadingIndicator?.start();
-			const request = new Request(new URL(url, this.baseUrl), {...options, method, headers, body} as RequestInit);
+			const request = new Request(new URL(url, this.baseAddress), {...options, method, headers, body} as RequestInit);
 			const response = await fetch(request);
 			if (!response.ok) throw new HttpRequestError(response);
 			return response;
