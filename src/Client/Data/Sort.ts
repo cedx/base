@@ -46,6 +46,7 @@ export class Sort implements Iterable<SortProperty> {
 	 * The number of properties in this sort.
 	 */
 	get length(): number {
+		// TODO rename to count() ???
 		return this.#properties.length;
 	}
 
@@ -83,12 +84,10 @@ export class Sort implements Iterable<SortProperty> {
 	 * Appends the specified property to this sort.
 	 * @param property The property name.
 	 * @param order The sort order.
-	 * @returns This instance.
 	 */
-	append(property: string, order: SortOrder): this {
+	add(property: string, order: SortOrder): void {
 		this.delete(property);
 		this.#properties.push([property, order]);
-		return this;
 	}
 
 	/**
@@ -207,7 +206,7 @@ export class Sort implements Iterable<SortProperty> {
 			return this;
 		}
 
-		return this.append(property, order);
+		return this.add(property, order);
 	}
 
 	/**

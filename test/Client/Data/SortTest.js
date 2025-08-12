@@ -11,8 +11,8 @@ describe("Sort", () => {
 
 		it("should increment when adding an entry", () => {
 			assert.lengthOf(sort, 0);
-			assert.lengthOf(sort.append("foo", SortOrder.Ascending), 1);
-			assert.lengthOf(sort.append("bar", SortOrder.Descending), 2);
+			assert.lengthOf(sort.add("foo", SortOrder.Ascending), 1);
+			assert.lengthOf(sort.add("bar", SortOrder.Descending), 2);
 		});
 
 		it("should decrement when removing an entry", () => {
@@ -39,16 +39,16 @@ describe("Sort", () => {
 		});
 	});
 
-	describe("append()", () => {
+	describe("add()", () => {
 		const sort = Sort.of("foo");
 
 		it("should append a new entry to the end", () => {
-			sort.append("bar", SortOrder.Ascending);
+			sort.add("bar", SortOrder.Ascending);
 			assert.deepEqual(Array.from(sort), [["foo", SortOrder.Ascending], ["bar", SortOrder.Ascending]]);
 		});
 
 		it("should move an existing entry to the end and update its value", () => {
-			sort.append("foo", SortOrder.Descending);
+			sort.add("foo", SortOrder.Descending);
 			assert.deepEqual(Array.from(sort), [["bar", SortOrder.Ascending], ["foo", SortOrder.Descending]]);
 		});
 	});

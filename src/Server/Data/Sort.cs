@@ -1,23 +1,18 @@
 namespace Belin.Base.Data;
 
-using System.Collections;
+using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 
 /// <summary>
 /// Represents information relevant to the sorting of data items.
 /// </summary>
 /// <param name="properties">The list of properties to be sorted.</param>
-public sealed class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? properties = null): IEnumerable<KeyValuePair<string, SortOrder>> {
+public sealed class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? properties = null): KeyedCollection<string, KeyValuePair<string, SortOrder>> {
 
 	/// <summary>
 	/// The list of sort properties.
 	/// </summary>
 	private readonly List<KeyValuePair<string, SortOrder>> properties = [.. properties ?? []];
-
-	/// <summary>
-	/// The number of properties in this sort.
-	/// </summary>
-	public int Count => properties.Count;
 
 	/// <summary>
 	/// Creates a new sort from the specified property and order.
@@ -38,16 +33,11 @@ public sealed class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? propertie
 	}));
 
 	/// <summary>
-	/// Returns an enumerator that iterates through the sort properties.
+	/// Appends the specified property to this sort.
 	/// </summary>
-	/// <returns>An enumerator that can be used to iterate through the sort properties.</returns>
-	public IEnumerator<KeyValuePair<string, SortOrder>> GetEnumerator() => properties.GetEnumerator();
-
-	/// <summary>
-	/// Returns an enumerator that iterates through the sort properties.
-	/// </summary>
-	/// <returns>An enumerator that can be used to iterate through the sort properties.</returns>
-	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+	/// <param name="property">The property name.</param>
+	/// <param name="order">The sort order.</param>
+	public void Add(string property, SortOrder order) => Add(new KeyValuePair<string, SortOrder>(property, order));
 
 	/// <summary>
 	/// Returns a string representation of this object.
@@ -55,6 +45,13 @@ public sealed class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? propertie
 	/// <returns>The string representation of this object.</returns>
 	public override string ToString() =>
 		string.Join(',', properties.Select((property) => $"{(property.Value == SortOrder.Descending ? "-" : string.Empty)}{property.Key}"));
+
+	/// <summary>
+	/// Extracts the key from the specified element.
+	/// </summary>
+	/// <param name="item">The element from which to extract the key.</param>
+	/// <returns>The key for the specified element.</returns>
+	protected override string GetKeyForItem(KeyValuePair<string, SortOrder> item) => item.Key;
 }
 
 /// <summary>
