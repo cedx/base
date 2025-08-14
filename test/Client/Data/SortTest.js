@@ -6,13 +6,28 @@ import {assert} from "chai";
  * Tests the features of the {@link Sort} class.
  */
 describe("Sort", () => {
+	describe("keys", () => {
+		const sort = new Sort;
+
+		it("should return an empty array for an empty sort", () =>
+			assert.isEmpty(sort.keys));
+
+		it("should return the property list for a non-empty sort", () => {
+			sort.add("foo", SortOrder.Ascending);
+			sort.add("bar", SortOrder.Descending);
+			assert.sameOrderedMembers(sort.keys, ["foo", "bar"]);
+		});
+	});
+
 	describe("length", () => {
 		const sort = new Sort;
 
 		it("should increment when adding an entry", () => {
 			assert.lengthOf(sort, 0);
-			assert.lengthOf(sort.add("foo", SortOrder.Ascending), 1);
-			assert.lengthOf(sort.add("bar", SortOrder.Descending), 2);
+			sort.add("foo", SortOrder.Ascending);
+			assert.lengthOf(sort, 1);
+			sort.add("bar", SortOrder.Descending);
+			assert.lengthOf(sort, 2);
 		});
 
 		it("should decrement when removing an entry", () => {
@@ -81,6 +96,12 @@ describe("Sort", () => {
 		});
 	});
 
+	describe("containsKey()", () => {
+		const sort = Sort.of("foo");
+		it("should return `true` for an existing entry", () => assert.isTrue(sort.containsKey("foo")));
+		it("should return `false` for an unknown entry", () => assert.isFalse(sort.containsKey("bar")));
+	});
+
 	describe("delete()", () => {
 		it("should properly remove entries", () => {
 			const sort = new Sort([["foo", SortOrder.Ascending], ["bar", SortOrder.Descending]]);
@@ -103,12 +124,6 @@ describe("Sort", () => {
 			assert.equal(Sort.of("foo", SortOrder.Descending).getIcon("foo"), "arrow_downward");
 			assert.equal(new Sort().getIcon("foo"), "swap_vert");
 		});
-	});
-
-	describe("has()", () => {
-		const sort = Sort.of("foo");
-		it("should return `true` an existing entry", () => assert.isTrue(sort.has("foo")));
-		it("should return `false` for an unknown entry", () => assert.isFalse(sort.has("bar")));
 	});
 
 	describe("indexOf()", () => {

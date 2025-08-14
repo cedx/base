@@ -43,6 +43,13 @@ export class Sort implements Iterable<SortProperty> {
 	}
 
 	/**
+	 * The list of sort properties.
+	 */
+	get keys(): string[] {
+		return this.#properties.map(item => item[0]);
+	}
+
+	/**
 	 * The number of properties in this sort.
 	 */
 	get length(): number {
@@ -84,9 +91,10 @@ export class Sort implements Iterable<SortProperty> {
 	 * Appends the specified property to this sort.
 	 * @param property The property name.
 	 * @param order The sort order.
+	 * @throws `Error` when an item with the property name already exists.
 	 */
 	add(property: string, order: SortOrder): void {
-		this.delete(property);
+		if (this.containsKey(property)) throw new Error("An item with the property name has already been added.");
 		this.#properties.push([property, order]);
 	}
 
@@ -97,6 +105,13 @@ export class Sort implements Iterable<SortProperty> {
 	 */
 	at(index: number): SortProperty|null {
 		return this.#properties.at(index) ?? null;
+	}
+
+	/**
+	 * Removes all properties from this sort.
+	 */
+	clear(): void {
+		this.#properties = [];
 	}
 
 	/**
@@ -114,6 +129,15 @@ export class Sort implements Iterable<SortProperty> {
 		}
 
 		return 0;
+	}
+
+	/**
+	 * Returns a value indicating whether the specified property exists in this sort.
+	 * @param property The property name.
+	 * @returns `true` if the specified property exists in this sort, otherwise `false`.
+	 */
+	containsKey(property: string): boolean {
+		return this.#properties.some(([key]) => key == property);
 	}
 
 	/**
@@ -145,15 +169,6 @@ export class Sort implements Iterable<SortProperty> {
 			case SortOrder.Descending: return "arrow_downward";
 			default: return "swap_vert";
 		}
-	}
-
-	/**
-	 * Returns a value indicating whether the specified property exists in this sort.
-	 * @param property The property name.
-	 * @returns `true` if the specified property exists in this sort, otherwise `false`.
-	 */
-	has(property: string): boolean {
-		return this.#properties.some(([key]) => key == property);
 	}
 
 	/**
@@ -206,7 +221,8 @@ export class Sort implements Iterable<SortProperty> {
 			return this;
 		}
 
-		return this.add(property, order);
+		this.add(property, order);
+		return this;
 	}
 
 	/**

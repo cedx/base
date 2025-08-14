@@ -1,13 +1,12 @@
 namespace Belin.Base.Data;
 
-using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 
 /// <summary>
 /// Represents information relevant to the sorting of data items.
 /// </summary>
 /// <param name="properties">The list of properties to be sorted.</param>
-public sealed class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? properties = null): KeyedCollection<string, KeyValuePair<string, SortOrder>> {
+public sealed class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? properties = null): OrderedDictionary<string, SortOrder> {
 
 	/// <summary>
 	/// The list of sort properties.
@@ -33,25 +32,11 @@ public sealed class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? propertie
 	}));
 
 	/// <summary>
-	/// Appends the specified property to this sort.
-	/// </summary>
-	/// <param name="property">The property name.</param>
-	/// <param name="order">The sort order.</param>
-	public void Add(string property, SortOrder order) => Add(new KeyValuePair<string, SortOrder>(property, order));
-
-	/// <summary>
 	/// Returns a string representation of this object.
 	/// </summary>
 	/// <returns>The string representation of this object.</returns>
 	public override string ToString() =>
 		string.Join(',', properties.Select((property) => $"{(property.Value == SortOrder.Descending ? "-" : string.Empty)}{property.Key}"));
-
-	/// <summary>
-	/// Extracts the key from the specified element.
-	/// </summary>
-	/// <param name="item">The element from which to extract the key.</param>
-	/// <returns>The key for the specified element.</returns>
-	protected override string GetKeyForItem(KeyValuePair<string, SortOrder> item) => item.Key;
 }
 
 /// <summary>

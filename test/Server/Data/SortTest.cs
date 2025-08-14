@@ -11,8 +11,7 @@ public sealed class SortTest {
 		// It should return an empty sort for an empty string.
 		IsEmpty(Sort.Parse(string.Empty));
 
-		// It should return an ascending order for a property without prefix.
-		// It should return a descending order for a property with a "-" prefix.
+		// It should return an ascending order for a property without prefix, a descending order for a property with a "-" prefix.
 		var expected = new KeyValuePair<string, SortOrder>[] { new("foo", SortOrder.Ascending), new("bar", SortOrder.Descending) };
 		CollectionAssert.AreEqual(expected, Sort.Parse("foo,-bar").ToArray());
 	}
@@ -26,6 +25,6 @@ public sealed class SortTest {
 		AreEqual("foo", Sort.Of("foo").ToString());
 
 		// It should return the property with a "-" prefix for a descending order.
-		AreEqual("foo,-bar", Sort.Of("foo,-bar").ToString());
+		AreEqual("foo,-bar", Sort.Parse("foo,-bar").ToString());
 	}
 }
