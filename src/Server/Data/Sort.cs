@@ -6,12 +6,7 @@ using System.Text.Json.Serialization;
 /// Represents information relevant to the sorting of data items.
 /// </summary>
 /// <param name="properties">The list of properties to be sorted.</param>
-public sealed class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? properties = null): OrderedDictionary<string, SortOrder> {
-
-	/// <summary>
-	/// The list of sort properties.
-	/// </summary>
-	private readonly List<KeyValuePair<string, SortOrder>> properties = [.. properties ?? []];
+public sealed class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? properties = null): OrderedDictionary<string, SortOrder>(properties ?? []) {
 
 	/// <summary>
 	/// Creates a new sort from the specified property and order.
@@ -19,7 +14,9 @@ public sealed class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? propertie
 	/// <param name="property">The property name.</param>
 	/// <param name="order">The sort order.</param>
 	/// <returns>The sort corresponding to the property and order.</returns>
-	public static Sort Of(string property, SortOrder order = SortOrder.Ascending) => new([new(property, order)]);
+	public static Sort Of(string property, SortOrder order = SortOrder.Ascending) => new([
+		new(property, order)
+	]);
 
 	/// <summary>
 	/// Creates a new sort from the specified string.
@@ -36,7 +33,7 @@ public sealed class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? propertie
 	/// </summary>
 	/// <returns>The string representation of this object.</returns>
 	public override string ToString() =>
-		string.Join(',', properties.Select((property) => $"{(property.Value == SortOrder.Descending ? "-" : string.Empty)}{property.Key}"));
+		string.Join(',', this.Select((property) => $"{(property.Value == SortOrder.Descending ? "-" : string.Empty)}{property.Key}"));
 }
 
 /// <summary>
