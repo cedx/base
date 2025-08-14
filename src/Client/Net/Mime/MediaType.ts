@@ -1,7 +1,7 @@
 /**
  * Provides the strings used to specify the media type.
  */
-export const MediaTypes = Object.freeze({
+export const MediaType = Object.freeze({
 
 	/**
 	 * Specifies the kind of application data.

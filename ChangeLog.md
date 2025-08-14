@@ -1,8 +1,7 @@
 # Changelog
 
 ## Version [0.7.0](https://github.com/cedx/base/compare/v0.6.0...v0.7.0)
-- Renamed the `DependencyInjection.Container` class to `ServiceProvider`.
-- Renamed the `DependencyInjection.ContainerToken` type to `ServiceKey`.
+- Removed the `DependencyInjection` module.
 - Renamed the `Html` module to `UI`.
 - Renamed the `Http` module to `Net.Http`.
 - Renamed the `Http.HttpError` class to `Net.Http.HttpRequestError`.

@@ -1,4 +1,4 @@
-import {StatusCodes} from "./StatusCodes.js";
+import {StatusCode} from "./StatusCode.js";
 
 /**
  * An error thrown by the HTTP client.
@@ -30,23 +30,23 @@ export class HttpRequestError extends globalThis.Error {
 	 * Value indicating whether the response's status code is between 400 and 499.
 	 */
 	get isClientError(): boolean {
-		const {status} = this;
-		return status >= 400 && status < 500;
+		const {statusCode} = this;
+		return statusCode >= 400 && statusCode < 500;
 	}
 
 	/**
 	 * Value indicating whether the response's status code is between 500 and 599.
 	 */
 	get isServerError(): boolean {
-		const {status} = this;
-		return status >= 500 && status < 600;
+		const {statusCode} = this;
+		return statusCode >= 500 && statusCode < 600;
 	}
 
 	/**
 	 * The HTTP status code.
 	 */
-	get status(): StatusCodes {
-		return this.cause.status as StatusCodes;
+	get statusCode(): StatusCode {
+		return this.cause.status as StatusCode;
 	}
 
 	/**
@@ -64,8 +64,8 @@ export class HttpRequestError extends globalThis.Error {
 	 */
 	async #parseValidationErrors(): Promise<Map<string, string>> {
 		try {
-			const statuses: StatusCodes[] = [StatusCodes.BadRequest, StatusCodes.UnprocessableContent];
-			const ignoreBody = this.cause.bodyUsed || !statuses.includes(this.status);
+			const statuses: StatusCode[] = [StatusCode.BadRequest, StatusCode.UnprocessableContent];
+			const ignoreBody = this.cause.bodyUsed || !statuses.includes(this.statusCode);
 			return new Map(ignoreBody ? [] : Object.entries(await this.cause.json() as Record<string, string>));
 		}
 		catch {

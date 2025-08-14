@@ -1,5 +1,5 @@
-import {MediaTypeNames} from "../Mime/MediaTypeNames.js";
-import {HttpMethods} from "./HttpMethods.js";
+import {MediaType} from "../Mime/MediaType.js";
+import {HttpMethod} from "./HttpMethod.js";
 import {HttpRequestError} from "./HttpRequestError.js";
 
 /**
@@ -34,7 +34,7 @@ export class HttpClient {
 	 * @returns The server response.
 	 */
 	delete(url?: string|URL, options?: RequestInit): Promise<Response> {
-		return this.#fetch(HttpMethods.Delete, url, null, options);
+		return this.#fetch(HttpMethod.Delete, url, null, options);
 	}
 
 	/**
@@ -44,7 +44,7 @@ export class HttpClient {
 	 * @returns The server response.
 	 */
 	get(url?: string|URL, options?: RequestInit): Promise<Response> {
-		return this.#fetch(HttpMethods.Get, url, null, options);
+		return this.#fetch(HttpMethod.Get, url, null, options);
 	}
 
 	/**
@@ -55,7 +55,7 @@ export class HttpClient {
 	 * @returns The server response.
 	 */
 	patch(url?: string|URL, body?: unknown, options?: RequestInit): Promise<Response> {
-		return this.#fetch(HttpMethods.Patch, url, body, options);
+		return this.#fetch(HttpMethod.Patch, url, body, options);
 	}
 
 	/**
@@ -66,7 +66,7 @@ export class HttpClient {
 	 * @returns The server response.
 	 */
 	post(url?: string|URL, body?: unknown, options?: RequestInit): Promise<Response> {
-		return this.#fetch(HttpMethods.Post, url, body, options);
+		return this.#fetch(HttpMethod.Post, url, body, options);
 	}
 
 	/**
@@ -77,7 +77,7 @@ export class HttpClient {
 	 * @returns The server response.
 	 */
 	put(url?: string|URL, body?: unknown, options?: RequestInit): Promise<Response> {
-		return this.#fetch(HttpMethods.Put, url, body, options);
+		return this.#fetch(HttpMethod.Put, url, body, options);
 	}
 
 	/**
@@ -90,11 +90,11 @@ export class HttpClient {
 	 */
 	async #fetch(method: string, url: string|URL = "", body: unknown = null, options: RequestInit = {}): Promise<Response> {
 		const headers = new Headers(options.headers);
-		if (!headers.has("Accept")) headers.set("Accept", MediaTypeNames.Application.Json);
+		if (!headers.has("Accept")) headers.set("Accept", MediaType.Application.Json);
 
 		if (body && !(body instanceof Blob || body instanceof FormData || body instanceof URLSearchParams)) {
 			if (typeof body != "string") body = JSON.stringify(body);
-			if (!headers.has("Content-Type")) headers.set("Content-Type", MediaTypeNames.Application.Json);
+			if (!headers.has("Content-Type")) headers.set("Content-Type", MediaType.Application.Json);
 		}
 
 		const loadingIndicator = this.#loadingIndicator();
