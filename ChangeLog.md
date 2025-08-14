@@ -8,6 +8,7 @@
 - Renamed the `Http.HttpError` class to `Net.Http.HttpRequestError`.
 - Renamed the `UI.Component` class to `UI.Components.ComponentBase`.
 - Moved the UI components to the `UI.Components` module.
+- Added the `JsonArrayTypeHandler` and `JsonObjectTypeHandler` classes to the `Data.Mapping` namespace.
 - Added the `Net.Http.HttpMethods` enumeration.
 - Added the `Net.Mime.DispositionTypeNames` and `Net.Mime.MediaTypeNames` enumerations.
 
