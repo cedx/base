@@ -1,7 +1,7 @@
 /**
  * Provides HTTP methods.
  */
-export const HttpMethods = Object.freeze({
+export const HttpMethod = Object.freeze({
 
 	/**
 	 * The `CONNECT` HTTP method.
@@ -52,4 +52,4 @@ export const HttpMethods = Object.freeze({
 /**
  * Provides HTTP methods.
  */
-export type HttpMethods = typeof HttpMethods[keyof typeof HttpMethods];
+export type HttpMethod = typeof HttpMethod[keyof typeof HttpMethod];
