@@ -64,10 +64,9 @@ export class Pagination {
 
 	/**
 	 * The one-based last page number.
-	 * The value will be zero if the total item count is zero.
 	 */
 	get lastPageIndex(): number {
-		return Math.ceil(this.#totalItemCount / this.#itemsPerPage);
+		return this.#totalItemCount > 0 ? Math.ceil(this.#totalItemCount / this.#itemsPerPage) : 1;
 	}
 
 	/**

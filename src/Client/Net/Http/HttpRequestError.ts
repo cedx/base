@@ -27,7 +27,7 @@ export class HttpRequestError extends globalThis.Error {
 	}
 
 	/**
-	 * Value indicating whether the response's status code is between 400 and 499.
+	 * Value indicating whether the HTTP status code is between 400 and 499.
 	 */
 	get isClientError(): boolean {
 		const {statusCode} = this;
@@ -35,7 +35,7 @@ export class HttpRequestError extends globalThis.Error {
 	}
 
 	/**
-	 * Value indicating whether the response's status code is between 500 and 599.
+	 * Value indicating whether the HTTP status code is between 500 and 599.
 	 */
 	get isServerError(): boolean {
 		const {statusCode} = this;

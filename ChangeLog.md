@@ -1,15 +1,16 @@
 # Changelog
 
 ## Version [0.7.0](https://github.com/cedx/base/compare/v0.6.0...v0.7.0)
-- Removed the `DependencyInjection` module.
+- Removed the `Abstractions` and `DependencyInjection` modules.
 - Renamed the `Html` module to `UI`.
 - Renamed the `Http` module to `Net.Http`.
 - Renamed the `Http.HttpError` class to `Net.Http.HttpRequestError`.
+- Renamed the `Http.StatusCodes` enumeration to `Net.Http.StatusCode`.
 - Renamed the `UI.Component` class to `UI.Components.ComponentBase`.
 - Moved the UI components to the `UI.Components` module.
-- Added the `JsonArrayTypeHandler` and `JsonObjectTypeHandler` classes to the `Data.Mapping` namespace.
-- Added the `Net.Http.HttpMethods` enumeration.
-- Added the `Net.Mime.DispositionTypeNames` and `Net.Mime.MediaTypeNames` enumerations.
+- Added the `Data.Mapping.JsonArrayTypeHandler` and `Data.Mapping.JsonObjectTypeHandler` classes.
+- Added the `Net.Http.HttpMethod` enumeration.
+- Added the `Net.Mime.DispositionType` and `Net.Mime.MediaType` enumerations.
 
 ## Version [0.6.0](https://github.com/cedx/base/compare/v0.5.0...v0.6.0)
 - Added the `Data.Pagination` and `Data.PaginatedList` classes.

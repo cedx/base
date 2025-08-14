@@ -39,7 +39,7 @@ describe("Pagination", () => {
 
 	describe("lastPageIndex", () => {
 		it("should return the total count divided by the page size rounded up", () => {
-			assert.equal(new Pagination({totalItemCount: 0}).lastPageIndex, 0);
+			assert.equal(new Pagination({totalItemCount: 0}).lastPageIndex, 1);
 			assert.equal(new Pagination({itemsPerPage: 1, totalItemCount: 123}).lastPageIndex, 123);
 			assert.equal(new Pagination({itemsPerPage: 10, totalItemCount: 25}).lastPageIndex, 3);
 		});
