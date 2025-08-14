@@ -58,8 +58,8 @@ export class ThemeDropdown extends HTMLElement {
 	 * The label of the dropdown menu.
 	 */
 	get label(): string {
-		const value = this.getAttribute("label");
-		return value?.trim() || "Thème";
+		const value = this.getAttribute("label") ?? "";
+		return value.trim() || "Thème";
 	}
 	set label(value: string) {
 		this.setAttribute("label", value);
@@ -69,8 +69,8 @@ export class ThemeDropdown extends HTMLElement {
 	 * The key of the storage entry providing the saved application theme.
 	 */
 	get storageKey(): string {
-		const value = this.getAttribute("storagekey");
-		return value?.trim() || "AppTheme";
+		const value = this.getAttribute("storagekey") ?? "";
+		return value.trim() || "AppTheme";
 	}
 	set storageKey(value: string) {
 		this.setAttribute("storagekey", value);
@@ -84,23 +84,25 @@ export class ThemeDropdown extends HTMLElement {
 	 */
 	attributeChangedCallback(attribute: string, oldValue: string|null, newValue: string|null): void {
 		if (newValue != oldValue) switch (attribute) {
-			case "alignment":
+			case "alignment": {
 				const alignment = Object.values(MenuAlignment).includes(newValue as MenuAlignment) ? newValue as MenuAlignment : MenuAlignment.End;
 				const {classList} = this.querySelector(".dropdown-menu")!;
 				if (alignment == MenuAlignment.End) classList.add("dropdown-menu-end");
 				else classList.remove("dropdown-menu-end");
 				break;
-
-			case "apptheme":
+			}
+			case "apptheme": {
 				const appTheme = Object.values(AppTheme).includes(newValue as AppTheme) ? newValue as AppTheme : AppTheme.System;
 				this.querySelector(".dropdown-toggle > .icon")!.textContent = getIcon(appTheme);
 				this.querySelector(`button[data-theme="${appTheme}"]`)!.appendChild(this.querySelector(".dropdown-item > .icon")!);
 				this.#applyTheme();
 				break;
-
-			case "label":
+			}
+			case "label": {
 				this.querySelector(".dropdown-toggle > span")!.textContent = (newValue ?? "").trim() || "Thème";
 				break;
+			}
+			// No default
 		}
 	}
 

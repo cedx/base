@@ -53,7 +53,6 @@ export class Sort implements Iterable<SortProperty> {
 	 * The number of properties in this sort.
 	 */
 	get length(): number {
-		// TODO rename to count() ???
 		return this.#properties.length;
 	}
 
