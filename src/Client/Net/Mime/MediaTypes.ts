@@ -1,7 +1,7 @@
 /**
  * Provides the strings used to specify the media type.
  */
-export const MediaTypeNames = Object.freeze({
+export const MediaTypes = Object.freeze({
 
 	/**
 	 * Specifies the kind of application data.
@@ -127,12 +127,12 @@ export const MediaTypeNames = Object.freeze({
 	Multipart: Object.freeze({
 
 		/**
-		 * Specifies that the <see cref="MediaTypeNames.Multipart"/> data is in form data format.
+		 * Specifies that the multipart data is in form data format.
 		 */
 		FormData: "multipart/form-data",
 
 		/**
-		 * Specifies that the <see cref="MediaTypeNames.Multipart"/> data is in mixed format.
+		 * Specifies that the multipart data is in mixed format.
 		 */
 		Mixed: "multipart/mixed"
 	}),

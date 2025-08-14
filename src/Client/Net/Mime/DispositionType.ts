@@ -1,7 +1,7 @@
 /**
  * Provides the strings used to specify the disposition type.
  */
-export const DispositionTypeNames = Object.freeze({
+export const DispositionType = Object.freeze({
 
 	/**
 	 * The `attachment` disposition type.
@@ -17,4 +17,4 @@ export const DispositionTypeNames = Object.freeze({
 /**
  * Provides the strings used to specify the disposition type.
  */
-export type DispositionTypeNames = typeof DispositionTypeNames[keyof typeof DispositionTypeNames];
+export type DispositionType = typeof DispositionType[keyof typeof DispositionType];
