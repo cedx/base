@@ -9,8 +9,5 @@
 		"outDir": "../../../lib/UI",
 		"rootDir": ".",
 		"tsBuildInfoFile": "../../../var/UI.tsbuildinfo"
-	},
-	"references": [
-		{"path": "../Base/tsconfig.json"}
-	]
+	}
 }

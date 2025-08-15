@@ -1,4 +1,4 @@
-import {Duration} from "#Base/Duration.js";
+import {Duration} from "./Duration.js";
 
 /**
  * Downloads the specified file.
