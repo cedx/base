@@ -1,5 +1,10 @@
 # Changelog
 
+## Version [0.8.0](https://github.com/cedx/base/compare/v0.7.0...v0.8.0)
+- Added the `Hosting.Environment` enumeration.
+- Added the `Hosting.HostEnvironment` class.
+- Removed the `Net.Http.HttpClient` and `Net.Http.HttpRequestError` classes.
+
 ## Version [0.7.0](https://github.com/cedx/base/compare/v0.6.0...v0.7.0)
 - Removed the `Abstractions` and `DependencyInjection` modules.
 - Renamed the `Html` module to `UI`.
