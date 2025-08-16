@@ -9,6 +9,14 @@ export class LoadingIndicator extends HTMLElement {
 	#requestCount = 0;
 
 	/**
+	 * Creates a new loading indicator.
+	 */
+	constructor() {
+		super();
+		this.hidden = true;
+	}
+
+	/**
 	 * Registers the component.
 	 */
 	static {
