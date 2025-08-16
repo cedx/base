@@ -49,7 +49,7 @@ export class OfflineIndicator extends HTMLElement {
 	/**
 	 * Updates the hidden state of this component according to the {@link navigator.onLine} property.
 	 */
-	#updateHiddenState: () => void = () =>
+	readonly #updateHiddenState: () => void = () =>
 		this.hidden = navigator.onLine;
 }
 
