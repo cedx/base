@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.9.0](https://github.com/cedx/base/compare/v0.8.0...v0.9.0)
+- Added the `Hide()` and `Show()` methods to the `LoadingIndicator` and `OfflineIndicator` UI components.
+
 ## Version [0.8.0](https://github.com/cedx/base/compare/v0.7.0...v0.8.0)
 - Added the `Hosting.Environment` enumeration.
 - Added the `Hosting.HostEnvironment` class.
