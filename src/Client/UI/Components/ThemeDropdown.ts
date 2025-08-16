@@ -17,14 +17,6 @@ export class ThemeDropdown extends HTMLElement {
 	readonly #mediaQuery = matchMedia("(prefers-color-scheme: dark)");
 
 	/**
-	 * Creates a new theme dropdown.
-	 */
-	constructor() {
-		super();
-		for (const button of this.querySelectorAll("button")) button.addEventListener("click", this.#setTheme.bind(this));
-	}
-
-	/**
 	 * Registers the component.
 	 */
 	static {
@@ -110,7 +102,9 @@ export class ThemeDropdown extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
-		this.#mediaQuery.addEventListener("change", this);
+		for (const button of this.querySelectorAll("button")) button.addEventListener("click", this.#setTheme);
+		this.#mediaQuery.addEventListener("change", this.#applyTheme);
+
 		const appTheme = localStorage.getItem(this.storageKey) as AppTheme|null;
 		if (appTheme) this.setAttribute("apptheme", appTheme);
 	}
@@ -119,34 +113,28 @@ export class ThemeDropdown extends HTMLElement {
 	 * Method invoked when this component is disconnected.
 	 */
 	disconnectedCallback(): void {
-		this.#mediaQuery.removeEventListener("change", this);
-	}
-
-	/**
-	 * Handles the events.
-	 */
-	handleEvent(): void {
-		this.#applyTheme();
+		for (const button of this.querySelectorAll("button")) button.removeEventListener("click", this.#setTheme);
+		this.#mediaQuery.removeEventListener("change", this.#applyTheme);
 	}
 
 	/**
 	 * Applies the application theme to the document.
 	 */
-	#applyTheme(): void {
+ 	readonly #applyTheme: () => void = () => {
 		const {appTheme} = this;
 		const bsTheme = appTheme == AppTheme.System ? (this.#mediaQuery.matches ? AppTheme.Dark : AppTheme.Light) : appTheme;
 		document.documentElement.dataset.bsTheme = bsTheme.toLowerCase();
-	}
+	};
 
 	/**
 	 * Changes the current application theme.
 	 * @param event The dispatched event.
 	 */
-	#setTheme(event: Event): void {
+	readonly #setTheme: (event: Event) => void = event => {
 		event.preventDefault();
 		const button = (event.target as HTMLElement).closest("button")!;
 		this.appTheme = button.dataset.theme! as AppTheme;
-	}
+	};
 }
 
 /**
