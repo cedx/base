@@ -1,6 +1,6 @@
 @namespace Belin.Base.UI.Components
 
-<loading-indicator hidden>
+<loading-indicator hidden="@Hidden">
 	@ChildContent
 </loading-indicator>
 
@@ -8,4 +8,14 @@
 	// The child content.
 	[Parameter]
 	public RenderFragment? ChildContent { get; set; }
+
+	// Value indicating whether this component is hidden.
+	[Parameter]
+	public bool Hidden { get; set; } = true;
+
+	// Hides this component.
+	public void Hide() => Hidden = true;
+
+	// Shows this component.
+	public void Show() => Hidden = false;
 }

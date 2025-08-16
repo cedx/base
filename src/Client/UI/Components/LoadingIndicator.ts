@@ -9,14 +9,6 @@ export class LoadingIndicator extends HTMLElement {
 	#requestCount = 0;
 
 	/**
-	 * Creates a new loading indicator.
-	 */
-	constructor() {
-		super();
-		this.hidden = true;
-	}
-
-	/**
 	 * Registers the component.
 	 */
 	static {
@@ -24,12 +16,27 @@ export class LoadingIndicator extends HTMLElement {
 	}
 
 	/**
+	 * Hides this component.
+	 */
+	hide(): void {
+		this.hidden = true;
+		document.body.classList.remove("loading");
+	}
+
+	/**
+	 * Shows this component.
+	 */
+	show(): void {
+		this.hidden = false;
+		document.body.classList.add("loading");
+	}
+
+	/**
 	 * Starts the loading indicator.
 	 */
 	start(): void {
 		this.#requestCount++;
-		this.hidden = false;
-		document.body.classList.add("loading");
+		this.show();
 	}
 
 	/**
@@ -40,8 +47,7 @@ export class LoadingIndicator extends HTMLElement {
 		this.#requestCount--;
 		if (options.force || this.#requestCount <= 0) {
 			this.#requestCount = 0;
-			this.hidden = true;
-			document.body.classList.remove("loading");
+			this.hide();
 		}
 	}
 }
