@@ -2,12 +2,12 @@
 
 <aside class="action-bar">
 	<div class="container-fluid d-flex align-items-center justify-content-between">
-		@Slot
+		@ChildContent
 	</div>
 </aside>
 
 @code {
 	// The child content.
 	[Parameter]
-	public required RenderFragment Slot { get; set; }
+	public RenderFragment? ChildContent { get; set; }
 }
