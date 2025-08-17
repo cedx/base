@@ -2,6 +2,8 @@
 
 ## Version [0.10.0](https://github.com/cedx/base/compare/v0.9.0...v0.10.0)
 - Added the `UI.KeyboardModifiers` enumeration.
+- Added the `UI.Components.KeyboardAccelerator` component.
+- Removed the `Hide()` and `Show()` methods from the `LoadingIndicator` and `OfflineIndicator` UI components.
 
 ## Version [0.9.0](https://github.com/cedx/base/compare/v0.8.0...v0.9.0)
 - Added the `Hide()` and `Show()` methods to the `LoadingIndicator` and `OfflineIndicator` UI components.
