@@ -1,0 +1,25 @@
+@namespace Belin.Base.UI.Components
+
+<tab-activator storageArea="@StorageArea" storageKey="@StorageKey">
+	@ChildContent
+</tab-activator>
+
+@code {
+	/// <summary>
+	/// The child content.
+	/// </summary>
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	/// <summary>
+	/// The storage area to use.
+	/// </summary>
+	[Parameter]
+	public StorageArea StorageArea { get; set; } = StorageArea.Session;
+
+	/// <summary>
+	/// The key of the storage entry providing the active tab index.
+	/// </summary>
+	[Parameter]
+	public string StorageKey { get; set; } = "ActiveTabIndex";
+}
