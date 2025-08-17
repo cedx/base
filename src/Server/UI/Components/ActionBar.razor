@@ -1,4 +1,5 @@
 @namespace Belin.Base.UI.Components
+@* An action bar located under the navigation bar. *@
 
 <aside class="action-bar">
 	<div class="container-fluid d-flex align-items-center justify-content-between">
@@ -7,7 +8,9 @@
 </aside>
 
 @code {
-	// The child content.
+	/// <summary>
+	/// The child content.
+	/// </summary>
 	[Parameter]
 	public RenderFragment? ChildContent { get; set; }
 }

@@ -1,21 +1,30 @@
 @namespace Belin.Base.UI.Components
+@* A component that shows up when the network is unavailable, and hides when connectivity is restored. *@
 
 <offline-indicator hidden="@Hidden">
 	@ChildContent
 </offline-indicator>
 
 @code {
-	// The child content.
+	/// <summary>
+	/// The child content.
+	/// </summary>
 	[Parameter]
 	public RenderFragment? ChildContent { get; set; }
 
-	// Value indicating whether this component is hidden.
+	/// <summary>
+	/// Value indicating whether this component is hidden.
+	/// </summary>
 	[Parameter]
 	public bool Hidden { get; set; } = true;
 
-	// Hides this component.
+	/// <summary>
+	/// Hides this component.
+	/// </summary>
 	public void Hide() => Hidden = true;
 
-	// Shows this component.
+	/// <summary>
+	/// Shows this component.
+	/// </summary>
 	public void Show() => Hidden = false;
 }

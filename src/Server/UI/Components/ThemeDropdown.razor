@@ -1,4 +1,5 @@
 @namespace Belin.Base.UI.Components
+@* A dropdown menu for switching the application theme. *@
 
 <theme-dropdown alignment="@Alignment" appTheme="@AppTheme" label="@Label" storageKey="@StorageKey">
 	<li class="nav-item dropdown">
@@ -20,19 +21,27 @@
 </theme-dropdown>
 
 @code {
-	// The alignment of the dropdown menu.
+	/// <summary>
+	/// The alignment of the dropdown menu.
+	/// </summary>
 	[Parameter]
 	public MenuAlignment Alignment { get; set; } = MenuAlignment.End;
 
-	// The current application theme.
+	/// <summary>
+	/// The current application theme.
+	/// </summary>
 	[Parameter]
 	public AppTheme AppTheme { get; set; } = AppTheme.System;
 
-	// The label of the dropdown menu.
+	/// <summary>
+	/// The label of the dropdown menu.
+	/// </summary>
 	[Parameter]
 	public string Label { get; set; } = "Thème";
 
-	// The key of the storage entry providing the saved application theme.
+	/// <summary>
+	/// The key of the storage entry providing the saved application theme.
+	/// </summary>
 	[Parameter]
 	public string StorageKey { get; set; } = "AppTheme";
 }
