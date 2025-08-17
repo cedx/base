@@ -68,7 +68,7 @@ export class TabActivator extends HTMLElement {
 		for (let index = 1; index <= tabs.length; index++) {
 			const tab = tabs.item(index - 1);
 			tab.addEventListener("click", () => this.activeTabIndex = index);
-			if (activeTabIndex == index) Tab.getOrCreateInstance(tab).show();
+			if (index == activeTabIndex) Tab.getOrCreateInstance(tab).show();
 		}
 	}
 }
