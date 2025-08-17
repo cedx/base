@@ -16,27 +16,11 @@ export class LoadingIndicator extends HTMLElement {
 	}
 
 	/**
-	 * Hides this component.
-	 */
-	hide(): void {
-		this.hidden = true;
-		document.body.classList.remove("loading");
-	}
-
-	/**
-	 * Shows this component.
-	 */
-	show(): void {
-		this.hidden = false;
-		document.body.classList.add("loading");
-	}
-
-	/**
 	 * Starts the loading indicator.
 	 */
 	start(): void {
 		this.#requestCount++;
-		this.show();
+		this.hidden = false;
 	}
 
 	/**
@@ -47,7 +31,7 @@ export class LoadingIndicator extends HTMLElement {
 		this.#requestCount--;
 		if (options.force || this.#requestCount <= 0) {
 			this.#requestCount = 0;
-			this.hide();
+			this.hidden = true;
 		}
 	}
 }
