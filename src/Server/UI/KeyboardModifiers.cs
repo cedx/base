@@ -22,7 +22,7 @@ public enum KeyboardModifiers {
 	Shift = 2,
 
 	/// <summary>
-	/// Indicates the <c>Alt</c> modifier (<c>Option</c> key on macOS).
+	/// Indicates the <c>Alt</c> modifier (<c>Option</c> key on macOS, <c>Menu</c> key on Windows).
 	/// </summary>
 	Alt = 4,
 

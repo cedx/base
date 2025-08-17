@@ -19,7 +19,7 @@ export const KeyboardModifiers = Object.freeze({
 	Shift: 2,
 
 	/**
-	 * Indicates the `Alt` modifier (`Option` key on macOS).
+	 * Indicates the `Alt` modifier (`Option` key on macOS, `Menu` key on Windows).
 	 */
 	Alt: 4,
 
