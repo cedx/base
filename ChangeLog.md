@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.10.0](https://github.com/cedx/base/compare/v0.9.0...v0.10.0)
+- Added the `UI.KeyboardModifiers` enumeration.
+
 ## Version [0.9.0](https://github.com/cedx/base/compare/v0.8.0...v0.9.0)
 - Added the `Hide()` and `Show()` methods to the `LoadingIndicator` and `OfflineIndicator` UI components.
 - Added the `UI.StorageArea` enumeration.
