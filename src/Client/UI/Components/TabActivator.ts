@@ -71,6 +71,13 @@ export class TabActivator extends HTMLElement {
 			if (index == activeTabIndex) Tab.getOrCreateInstance(tab).show();
 		}
 	}
+
+	/**
+	 * Method invoked when this component is disconnected.
+	 */
+	disconnectedCallback(): void {
+		if (this.storageArea == StorageArea.Session) this.storage.removeItem(this.storageKey);
+	}
 }
 
 /**
