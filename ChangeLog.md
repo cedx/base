@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.10.1](https://github.com/cedx/base/compare/v0.10.0...v0.10.1)
+- Fixed the `UI.Components.KeyboardAccelerator` component.
+
 ## Version [0.10.0](https://github.com/cedx/base/compare/v0.9.0...v0.10.0)
 - Added the `UI.KeyboardModifiers` enumeration.
 - Added the `UI.Components.KeyboardAccelerator` component.
