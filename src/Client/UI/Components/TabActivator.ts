@@ -57,7 +57,7 @@ export class TabActivator extends HTMLElement {
 	 * The tab list.
 	 */
 	get tabs(): NodeListOf<HTMLButtonElement> {
-		return this.querySelectorAll(".nav-tabs button");
+		return this.querySelectorAll('[data-bs-toggle="tab"]');
 	}
 
 	/**

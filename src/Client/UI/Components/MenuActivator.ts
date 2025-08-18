@@ -18,7 +18,7 @@ export class MenuActivator extends HTMLElement {
 			if (anchor.href != location.href) anchor.classList.remove("active");
 			else {
 				anchor.classList.add("active");
-				anchor.closest(".nav-item.dropdown")?.querySelector(".nav-link")?.classList.add("active");
+				anchor.closest(".dropdown")?.querySelector('[data-bs-toggle="dropdown"]')?.classList.add("active");
 			}
 	}
 }
