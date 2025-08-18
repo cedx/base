@@ -67,10 +67,10 @@ export class KeyboardAccelerator extends HTMLElement {
 		if (activeElement instanceof HTMLInputElement || activeElement instanceof HTMLTextAreaElement) return;
 
 		const {modifiers} = this;
-		if ((modifiers & KeyboardModifiers.Ctrl) != 0 && !event.ctrlKey) return;
-		if ((modifiers & KeyboardModifiers.Shift) != 0 && !event.shiftKey) return;
-		if ((modifiers & KeyboardModifiers.Alt) != 0 && !event.altKey) return;
-		if ((modifiers & KeyboardModifiers.Meta) != 0 && !event.metaKey) return;
+		if (!(modifiers & KeyboardModifiers.Ctrl) && event.ctrlKey) return;
+		if (!(modifiers & KeyboardModifiers.Shift) && event.shiftKey) return;
+		if (!(modifiers & KeyboardModifiers.Alt) && event.altKey) return;
+		if (!(modifiers & KeyboardModifiers.Meta) && event.metaKey) return;
 
 		event.preventDefault();
 		(this.firstElementChild as HTMLElement).click();
