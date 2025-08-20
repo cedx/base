@@ -4,14 +4,6 @@
 export class OfflineIndicator extends HTMLElement {
 
 	/**
-	 * Creates a new offline indicator.
-	 */
-	constructor() {
-		super();
-		this.#updateHiddenState();
-	}
-
-	/**
 	 * Registers the component.
 	 */
 	static {
@@ -22,6 +14,7 @@ export class OfflineIndicator extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
+		this.#updateHiddenState();
 		for (const event of ["online", "offline"]) addEventListener(event, this.#updateHiddenState);
 	}
 
