@@ -17,6 +17,14 @@ export class ThemeDropdown extends HTMLElement {
 	readonly #mediaQuery = matchMedia("(prefers-color-scheme: dark)");
 
 	/**
+	 * Creates a new theme dropdown.
+	 */
+	constructor() {
+		super();
+		for (const button of this.querySelectorAll("button")) button.addEventListener("click", this.#setTheme);
+	}
+
+	/**
 	 * Registers the component.
 	 */
 	static {
@@ -102,18 +110,15 @@ export class ThemeDropdown extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
-		for (const button of this.querySelectorAll("button")) button.addEventListener("click", this.#setTheme);
-		this.#mediaQuery.addEventListener("change", this.#applyTheme);
-
 		const appTheme = localStorage.getItem(this.storageKey) as AppTheme|null;
 		if (appTheme) this.setAttribute("apptheme", appTheme);
+		this.#mediaQuery.addEventListener("change", this.#applyTheme);
 	}
 
 	/**
 	 * Method invoked when this component is disconnected.
 	 */
 	disconnectedCallback(): void {
-		for (const button of this.querySelectorAll("button")) button.removeEventListener("click", this.#setTheme);
 		this.#mediaQuery.removeEventListener("change", this.#applyTheme);
 	}
 
