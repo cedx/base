@@ -24,6 +24,7 @@
 		<Nullable>enable</Nullable>
 		<OutDir>../../../bin</OutDir>
 		<TargetFramework>net9.0</TargetFramework>
+		<WarningsAsErrors>RZ2012</WarningsAsErrors>
 	</PropertyGroup>
 
 	<ItemGroup>
