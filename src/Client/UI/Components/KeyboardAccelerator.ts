@@ -76,3 +76,16 @@ export class KeyboardAccelerator extends HTMLElement {
 		(this.firstElementChild as HTMLElement).click();
 	}
 }
+
+/**
+ * Declaration merging.
+ */
+declare global {
+
+	/**
+	 * The map of HTML tag names.
+	 */
+	interface HTMLElementTagNameMap {
+		"keyboard-accelerator": KeyboardAccelerator;
+	}
+}
