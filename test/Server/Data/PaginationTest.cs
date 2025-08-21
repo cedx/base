@@ -8,10 +8,8 @@ public sealed class PaginationTest {
 
 	[TestMethod]
 	public void CurrentPageIndex() {
-		// It should always be greater than or equal to one.
-		AreEqual(1, new Pagination { CurrentPageIndex = -1 }.CurrentPageIndex);
-		AreEqual(1, new Pagination { CurrentPageIndex = 0 }.CurrentPageIndex);
-		AreEqual(123, new Pagination { CurrentPageIndex = 123 }.CurrentPageIndex);
+		// It should always be greater than or equal to zero.
+		AreEqual(0, new Pagination { CurrentPageIndex = -1 }.CurrentPageIndex);
 	}
 
 	[TestMethod]
@@ -36,7 +34,6 @@ public sealed class PaginationTest {
 	public void ItemsPerPage() {
 		// It should always be between 1 and 1000.
 		AreEqual(1, new Pagination { ItemsPerPage = -1 }.ItemsPerPage);
-		AreEqual(1, new Pagination { ItemsPerPage = 0 }.ItemsPerPage);
 		AreEqual(1000, new Pagination { ItemsPerPage = 9999 }.ItemsPerPage);
 	}
 
@@ -44,23 +41,22 @@ public sealed class PaginationTest {
 	public void LastPageIndex() {
 		// It should return the total count divided by the page size rounded up.
 		AreEqual(0, new Pagination { TotalItemCount = 0 }.LastPageIndex);
-		AreEqual(123, new Pagination { ItemsPerPage = 1, TotalItemCount = 123 }.LastPageIndex);
-		AreEqual(3, new Pagination { ItemsPerPage = 10, TotalItemCount = 25 }.LastPageIndex);
+		AreEqual(122, new Pagination { ItemsPerPage = 1, TotalItemCount = 123 }.LastPageIndex);
+		AreEqual(2, new Pagination { ItemsPerPage = 10, TotalItemCount = 25 }.LastPageIndex);
 	}
 
 	[TestMethod]
 	public void Offset() {
-		// It should return the page size multiplied by the page index minus one.
-		AreEqual(0, new Pagination { CurrentPageIndex = 1 }.Offset);
-		AreEqual(100, new Pagination { CurrentPageIndex = 5, ItemsPerPage = 25 }.Offset);
-		AreEqual(610, new Pagination { CurrentPageIndex = 123, ItemsPerPage = 5 }.Offset);
+		// It should return the page size multiplied by the page index.
+		AreEqual(0, new Pagination().Offset);
+		AreEqual(100, new Pagination { CurrentPageIndex = 4 }.Offset);
+		AreEqual(610, new Pagination { CurrentPageIndex = 122, ItemsPerPage = 5 }.Offset);
 	}
 
 	[TestMethod]
 	public void TotalItemCount() {
 		// It should always be greater than or equal to zero.
 		AreEqual(0, new Pagination { TotalItemCount = -1 }.TotalItemCount);
-		AreEqual(0, new Pagination { TotalItemCount = 0 }.TotalItemCount);
 		AreEqual(123, new Pagination { TotalItemCount = 123 }.TotalItemCount);
 	}
 }

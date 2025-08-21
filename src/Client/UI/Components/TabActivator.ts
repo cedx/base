@@ -14,14 +14,14 @@ export class TabActivator extends HTMLElement {
 	}
 
 	/**
-	 * The one-based index of the active tab.
+	 * The index of the active tab.
 	 */
 	get activeTabIndex(): number {
-		const index = Number.parseInt(this.storage.getItem(this.storageKey) ?? "1");
-		return Math.max(1, Math.min(this.tabs.length, Number.isNaN(index) ? 1 : index));
+		const index = Number(this.storage.getItem(this.storageKey) ?? "1");
+		return Math.max(0, Math.min(this.tabs.length, Number.isNaN(index) ? 0 : index - 1));
 	}
 	set activeTabIndex(value: number) {
-		this.storage.setItem(this.storageKey, value.toString());
+		this.storage.setItem(this.storageKey, (value + 1).toString());
 	}
 
 	/**
@@ -65,8 +65,8 @@ export class TabActivator extends HTMLElement {
 	 */
 	connectedCallback(): void {
 		const {activeTabIndex, tabs} = this;
-		for (let index = 1; index <= tabs.length; index++) {
-			const tab = tabs.item(index - 1);
+		for (let index = 0; index < tabs.length - 1; index++) {
+			const tab = tabs.item(index);
 			tab.addEventListener("click", () => this.activeTabIndex = index);
 			if (index == activeTabIndex) Tab.getOrCreateInstance(tab).show();
 		}

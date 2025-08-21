@@ -4,7 +4,7 @@
 export class Pagination {
 
 	/**
-	 * The one-based current page number.
+	 * The current page index.
 	 */
 	#currentPageIndex!: number;
 
@@ -23,19 +23,19 @@ export class Pagination {
 	 * @param options An object providing values to initialize this instance.
 	 */
 	constructor(options: PaginationOptions = {}) {
-		this.currentPageIndex = options.currentPageIndex ?? 1;
+		this.currentPageIndex = options.currentPageIndex ?? 0;
 		this.itemsPerPage = options.itemsPerPage ?? 25;
 		this.totalItemCount = options.totalItemCount ?? 0;
 	}
 
 	/**
-	 * The one-based current page number.
+	 * The current page index.
 	 */
 	get currentPageIndex(): number {
 		return this.#currentPageIndex;
 	}
 	set currentPageIndex(value: number) {
-		this.#currentPageIndex = Math.max(1, value);
+		this.#currentPageIndex = Math.max(0, value);
 	}
 
 	/**
@@ -49,7 +49,7 @@ export class Pagination {
 	 * Value indicating whether a previous page exists.
 	 */
 	get hasPreviousPage(): boolean {
-		return this.#currentPageIndex > 1;
+		return this.#currentPageIndex > 0;
 	}
 
 	/**
@@ -63,10 +63,10 @@ export class Pagination {
 	}
 
 	/**
-	 * The one-based last page number.
+	 * The last page index.
 	 */
 	get lastPageIndex(): number {
-		return this.#totalItemCount > 0 ? Math.ceil(this.#totalItemCount / this.#itemsPerPage) : 1;
+		return this.#totalItemCount > 0 ? Math.ceil(this.#totalItemCount / this.#itemsPerPage) - 1 : 0;
 	}
 
 	/**
@@ -80,14 +80,14 @@ export class Pagination {
 	 * The data offset.
 	 */
 	get offset(): number {
-		return (this.#currentPageIndex - 1) * this.#itemsPerPage;
+		return this.#currentPageIndex * this.#itemsPerPage;
 	}
 
 	/**
 	 * The search parameters corresponding to this object.
 	 */
 	get searchParams(): URLSearchParams {
-		return new URLSearchParams({page: this.#currentPageIndex.toString(), perPage: this.#itemsPerPage.toString()});
+		return new URLSearchParams({page: (this.#currentPageIndex + 1).toString(), perPage: this.#itemsPerPage.toString()});
 	}
 
 	/**
@@ -107,7 +107,7 @@ export class Pagination {
 	 */
 	static fromResponse(response: Response): Pagination {
 		return new this({
-			currentPageIndex: Number(response.headers.get("X-Pagination-Current-Page") ?? "1"),
+			currentPageIndex: Number(response.headers.get("X-Pagination-Current-Page") ?? "1") - 1,
 			itemsPerPage: Number(response.headers.get("X-Pagination-Per-Page") ?? "25"),
 			totalItemCount: Number(response.headers.get("X-Pagination-Total-Count") ?? "0")
 		});
@@ -120,7 +120,7 @@ export class Pagination {
 export type PaginationOptions = Partial<{
 
 	/**
-	 * The one-based current page number.
+	 * The current page index.
 	 */
 	currentPageIndex: number;
 

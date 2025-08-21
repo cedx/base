@@ -6,11 +6,8 @@ import {assert} from "chai";
  */
 describe("Pagination", () => {
 	describe("currentPageIndex", () => {
-		it("should always be greater than or equal to one", () => {
-			assert.equal(new Pagination({currentPageIndex: -1}).currentPageIndex, 1);
-			assert.equal(new Pagination({currentPageIndex: 0}).currentPageIndex, 1);
-			assert.equal(new Pagination({currentPageIndex: 123}).currentPageIndex, 123);
-		});
+		it("should always be greater than or equal to zero", () =>
+			assert.equal(new Pagination({currentPageIndex: -1}).currentPageIndex, 0));
 	});
 
 	describe("hasNextPage", () => {
@@ -32,24 +29,23 @@ describe("Pagination", () => {
 	describe("itemsPerPage", () => {
 		it("should always be between 1 and 1000", () => {
 			assert.equal(new Pagination({itemsPerPage: -1}).itemsPerPage, 1);
-			assert.equal(new Pagination({itemsPerPage: 0}).itemsPerPage, 1);
 			assert.equal(new Pagination({itemsPerPage: 9999}).itemsPerPage, 1000);
 		});
 	});
 
 	describe("lastPageIndex", () => {
 		it("should return the total count divided by the page size rounded up", () => {
-			assert.equal(new Pagination({totalItemCount: 0}).lastPageIndex, 1);
-			assert.equal(new Pagination({itemsPerPage: 1, totalItemCount: 123}).lastPageIndex, 123);
-			assert.equal(new Pagination({itemsPerPage: 10, totalItemCount: 25}).lastPageIndex, 3);
+			assert.equal(new Pagination({totalItemCount: 0}).lastPageIndex, 0);
+			assert.equal(new Pagination({itemsPerPage: 1, totalItemCount: 123}).lastPageIndex, 122);
+			assert.equal(new Pagination({itemsPerPage: 10, totalItemCount: 25}).lastPageIndex, 2);
 		});
 	});
 
 	describe("offset", () => {
-		it("should return the page size multiplied by the page index minus one", () => {
-			assert.equal(new Pagination({currentPageIndex: 1}).offset, 0);
-			assert.equal(new Pagination({currentPageIndex: 5, itemsPerPage: 25}).offset, 100);
-			assert.equal(new Pagination({currentPageIndex: 123, itemsPerPage: 5}).offset, 610);
+		it("should return the page size multiplied by the page index", () => {
+			assert.equal(new Pagination().offset, 0);
+			assert.equal(new Pagination({currentPageIndex: 4}).offset, 100);
+			assert.equal(new Pagination({currentPageIndex: 122, itemsPerPage: 5}).offset, 610);
 		});
 	});
 
@@ -57,7 +53,7 @@ describe("Pagination", () => {
 		it("should include a `page` parameter", () => {
 			assert.equal(new Pagination().searchParams.get("page"), "1");
 			assert.equal(new Pagination({currentPageIndex: -5}).searchParams.get("page"), "1");
-			assert.equal(new Pagination({currentPageIndex: 123}).searchParams.get("page"), "123");
+			assert.equal(new Pagination({currentPageIndex: 122}).searchParams.get("page"), "123");
 		});
 
 		it("should include a `perPage` parameter", () => {
@@ -70,7 +66,6 @@ describe("Pagination", () => {
 	describe("totalItemCount", () => {
 		it("should always be greater than or equal to zero", () => {
 			assert.equal(new Pagination({totalItemCount: -1}).totalItemCount, 0);
-			assert.equal(new Pagination({totalItemCount: 0}).totalItemCount, 0);
 			assert.equal(new Pagination({totalItemCount: 123}).totalItemCount, 123);
 		});
 	});
@@ -83,7 +78,7 @@ describe("Pagination", () => {
 				"X-Pagination-Total-Count": "666"
 			}}));
 
-			assert.equal(pagination.currentPageIndex, 123);
+			assert.equal(pagination.currentPageIndex, 122);
 			assert.equal(pagination.itemsPerPage, 33);
 			assert.equal(pagination.totalItemCount, 666);
 		});

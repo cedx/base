@@ -6,9 +6,9 @@ namespace Belin.Base.Data;
 public sealed class Pagination {
 
 	/// <summary>
-	/// The one-based current page number.
+	/// The current page index.
 	/// </summary>
-	public int CurrentPageIndex { get; set => field = Math.Max(1, value); } = 1;
+	public int CurrentPageIndex { get; set => field = Math.Max(0, value); }
 
 	/// <summary>
 	/// Value indicating whether a next page exists.
@@ -18,7 +18,7 @@ public sealed class Pagination {
 	/// <summary>
 	/// Value indicating whether a previous page exists.
 	/// </summary>
-	public bool HasPreviousPage => CurrentPageIndex > 1;
+	public bool HasPreviousPage => CurrentPageIndex > 0;
 
 	/// <summary>
 	/// The number of items per page.
@@ -26,10 +26,9 @@ public sealed class Pagination {
 	public int ItemsPerPage { get; set => field = Math.Max(1, Math.Min(1000, value)); } = 25;
 
 	/// <summary>
-	/// The one-based last page number.
-	/// The value will be zero if the total item count is zero.
+	/// The last page index.
 	/// </summary>
-	public int LastPageIndex => (int) Math.Ceiling(TotalItemCount / (double) ItemsPerPage);
+	public int LastPageIndex => TotalItemCount > 0 ? (int) Math.Ceiling(TotalItemCount / (double) ItemsPerPage) - 1 : 0;
 
 	/// <summary>
 	/// The data limit.
@@ -39,7 +38,7 @@ public sealed class Pagination {
 	/// <summary>
 	/// The data offset.
 	/// </summary>
-	public int Offset => (CurrentPageIndex - 1) * ItemsPerPage;
+	public int Offset => CurrentPageIndex * ItemsPerPage;
 
 	/// <summary>
 	/// The total number of items.
