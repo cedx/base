@@ -1,5 +1,9 @@
 # Changelog
 
+## Version [0.11.0](https://github.com/cedx/base/compare/v0.10.1...v0.11.0)
+- Added the `UI.Size` and `UI.Variant` enumerations.
+- Replaced the one-based indexes by zero-based indexes in `Data.Pagination` and `UI.Components.TabActivator` classes.
+
 ## Version [0.10.1](https://github.com/cedx/base/compare/v0.10.0...v0.10.1)
 - Fixed the `UI.Components.KeyboardAccelerator` component.
 
