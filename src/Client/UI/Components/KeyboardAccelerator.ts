@@ -73,7 +73,7 @@ export class KeyboardAccelerator extends HTMLElement {
 		if (!(modifiers & KeyboardModifiers.Meta) && event.metaKey) return;
 
 		event.preventDefault();
-		(this.firstElementChild as HTMLElement).click();
+		(this.firstElementChild as HTMLElement|null)?.click();
 	}
 }
 
