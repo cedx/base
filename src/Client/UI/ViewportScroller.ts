@@ -44,7 +44,7 @@ export class ViewportScroller {
 			this.#scrollOffset += (navbar?.offsetHeight ?? 0);
 		}
 
-		const actionBar = document.body.querySelector<HTMLElement>("action-bar, .action-bar");
+		const actionBar = document.body.querySelector<HTMLElement>("action-bar");
 		return this.#scrollOffset + (actionBar?.offsetHeight ?? 0);
 	}
 
