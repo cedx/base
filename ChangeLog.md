@@ -1,7 +1,8 @@
 # Changelog
 
 ## Version [0.13.0](https://github.com/cedx/base/compare/v0.12.0...v0.13.0)
-- Renamed the `ToBoostrap()` methods to `ToCss()`.
+- Renamed the `ToBoostrap()` enumeration methods to `ToCss()`.
+- Replaced `Left` and `Right` values by `Start` and `End` in the `UI.Position` enumeration.
 
 ## Version [0.12.0](https://github.com/cedx/base/compare/v0.11.0...v0.12.0)
 - Added the `close()`, `open()` and `save()` methods to the `UI.Components.ThemeDropdown` component.
