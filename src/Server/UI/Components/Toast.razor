@@ -1,0 +1,66 @@
+@namespace Belin.Base.UI.Components
+@using System.Globalization
+
+<toaster-item animation="@Animation" autoHide="@AutoHide" caption="@Caption" context="@Context.ToBoostrap()" culture="@Culture" delay="@Delay" icon="@Icon">
+	<div class="toast">
+		<div class="toast-header toast-header-@Context.ToBoostrap()">
+			<i class="icon icon-fill me-2 text-@Context.ToBoostrap()">@Icon</i>
+			<b class="me-auto">@Caption</b>
+			<small class="text-secondary"><!-- Toast.ElapsedTime --></small>
+			<button class="btn-close" data-bs-dismiss="toast"></button>
+		</div>
+		<div class="toast-body">
+			@ChildContent
+		</div>
+	</div>
+</toaster-item>
+
+@code {
+	/// <summary>
+	/// Value indicating whether to apply a fade transition.
+	/// </summary>
+	[Parameter]
+	public bool Animation { get; set; } = true;
+
+	/// <summary>
+	/// Value indicating whether to automatically hide the notification.
+	/// </summary>
+	[Parameter]
+	public bool AutoHide { get; set; } = true;
+
+	/// <summary>
+	/// The title displayed in the header.
+	/// </summary>
+	[Parameter]
+	public string Caption { get; set; } = string.Empty;
+
+	/// <summary>
+	/// The child content displayed in the body.
+	/// </summary>
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	/// <summary>
+	/// A contextual modifier.
+	/// </summary>
+	[Parameter]
+	public Context Context { get; set; } = Context.Info;
+
+	/// <summary>
+	/// The culture used to format the relative time.
+	/// </summary>
+	[Parameter]
+	public CultureInfo Culture { get; set; } = CultureInfo.CurrentUICulture;
+
+	/// <summary>
+	/// The delay, in milliseconds, to hide the notification.
+	/// </summary>
+	[Parameter]
+	public int Delay { get; set; } = 5_000;
+
+	/// <summary>
+	/// The icon displayed next to the caption.
+	/// </summary>
+	[Parameter]
+	public string Icon { get; set; } = Context.Info.GetIcon();
+}
