@@ -3,7 +3,7 @@ import {Context, getIcon, toCss} from "@cedx/base/UI/Context.js";
 import {Toast as BootstrapToast} from "bootstrap";
 
 /**
- * Manages the notification messages.
+ * Represents a notification message.
  */
 export class Toast extends HTMLElement {
 
@@ -61,7 +61,7 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
-	 * Value indicating whether to automatically hide the notification.
+	 * Value indicating whether to automatically hide the toast.
 	 */
 	get autoHide(): boolean {
 		return this.hasAttribute("autohide");
@@ -104,7 +104,7 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
-	 * The delay, in milliseconds, to hide the notification.
+	 * The delay, in milliseconds, to hide the toast.
 	 */
 	get delay(): number {
 		const value = Number(this.getAttribute("delay"));
