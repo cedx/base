@@ -28,7 +28,7 @@ export class Toast extends HTMLElement {
 	readonly #header = this.querySelector(".toast-header")!;
 
 	/**
-	 * The time at which the component was initially shown.
+	 * The time at which this component was initially shown.
 	 */
 	#initialTime = Date.now();
 
@@ -112,6 +112,13 @@ export class Toast extends HTMLElement {
 	}
 	set delay(value: number) {
 		this.setAttribute("delay", value.toString());
+	}
+
+	/**
+	 * The time elapsed since this component was initially shown, in milliseconds.
+	 */
+	get elapsedTime(): number {
+		return Date.now() - this.#initialTime;
 	}
 
 	/**
@@ -231,8 +238,8 @@ export class Toast extends HTMLElement {
 	 * Updates the label corresponding to the elapsed time.
 	 */
 	readonly #updateElapsedTime: () => void = () => {
-		const elapsedTime = (Date.now() - this.#initialTime) / Duration.Second;
-		this.#header.querySelector("small")!.textContent = elapsedTime > 0 ? this.#formatTime(elapsedTime) : "";
+		const {elapsedTime} = this;
+		this.#header.querySelector("small")!.textContent = elapsedTime > 0 ? this.#formatTime(elapsedTime / Duration.Second) : "";
 	};
 
 	/**
