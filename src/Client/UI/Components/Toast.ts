@@ -28,14 +28,14 @@ export class Toast extends HTMLElement {
 	readonly #header = this.querySelector(".toast-header")!;
 
 	/**
+	 * The time at which the component was initially shown.
+	 */
+	#initialTime = Date.now();
+
+	/**
 	 * The timer identifier.
 	 */
 	#timer = 0;
-
-	/**
-	 * TODO
-	 */
-	#timestamp = Date.now();
 
 	/**
 	 * The underlying Bootstrap toast.
@@ -153,9 +153,12 @@ export class Toast extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
+		const toast = this.querySelector(".toast")!;
+		toast.addEventListener("hidden.bs.toast", () => clearInterval(this.#timer));
+		toast.addEventListener("show.bs.toast", () => this.#timer = window.setInterval(this.#updateElapsedTime, Duration.Second));
+
 		const {animation, autoHide: autohide, delay} = this;
-		this.#timer = window.setInterval(this.#updateElapsedTime, Duration.Second);
-		this.#toast = new BootstrapToast(this.querySelector(".toast")!, {animation, autohide, delay});
+		this.#toast = new BootstrapToast(toast, {animation, autohide, delay});
 	}
 
 	/**
@@ -178,7 +181,7 @@ export class Toast extends HTMLElement {
 	 */
 	show(): void {
 		if (!this.#toast.isShown()) {
-			this.#timestamp = Date.now();
+			this.#initialTime = Date.now();
 			this.#updateElapsedTime();
 		}
 
@@ -197,7 +200,7 @@ export class Toast extends HTMLElement {
 			index++;
 		}
 
-		return this.#formatter.format(Math.floor(-elapsed), Toast.#timeUnits[index]);
+		return this.#formatter.format(Math.ceil(-elapsed), Toast.#timeUnits[index]);
 	}
 
 	/**
@@ -228,8 +231,8 @@ export class Toast extends HTMLElement {
 	 * Updates the label corresponding to the elapsed time.
 	 */
 	readonly #updateElapsedTime: () => void = () => {
-		const elapsedTime = Date.now() - this.#timestamp;
-		this.#header.querySelector("small")!.textContent = elapsedTime > 0 ? this.#formatTime(elapsedTime / Duration.Second) : "";
+		const elapsedTime = (Date.now() - this.#initialTime) / Duration.Second;
+		this.#header.querySelector("small")!.textContent = elapsedTime > 0 ? this.#formatTime(elapsedTime) : "";
 	};
 
 	/**
