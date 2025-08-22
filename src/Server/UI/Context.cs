@@ -47,9 +47,9 @@ public static class ContextExtensions {
 	};
 
 	/// <summary>
-	/// Returns the Bootstrap representation of the specified context.
+	/// Returns the CSS representation of the specified context.
 	/// </summary>
 	/// <param name="context">The context.</param>
-	/// <returns>The Bootstrap representation of the specified context.</returns>
-	public static string ToBoostrap(this Context context) => context.ToString().ToLowerInvariant();
+	/// <returns>The CSS representation of the specified context.</returns>
+	public static string ToCss(this Context context) => context.ToString().ToLowerInvariant();
 }

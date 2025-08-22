@@ -1,40 +1,56 @@
 /**
- * Defines the size of a component.
+ * Defines the size of an element.
  */
 export const Size = Object.freeze({
 
 	/**
 	 * An extra small size.
 	 */
-	ExtraSmall: "xs",
+	ExtraSmall: "ExtraSmall",
 
 	/**
 	 * A small size.
 	 */
-	Small: "sm",
+	Small: "Small",
 
 	/**
 	 * A medium size.
 	 */
-	Medium: "md",
+	Medium: "Medium",
 
 	/**
 	 * A large size.
 	 */
-	Large: "lg",
+	Large: "Large",
 
 	/**
 	 * An extra large size.
 	 */
-	ExtraLarge: "xl",
+	ExtraLarge: "ExtraLarge",
 
 	/**
 	 * An extra extra large size.
 	 */
-	ExtraExtraLarge: "xxl"
+	ExtraExtraLarge: "ExtraExtraLarge"
 });
 
 /**
- * Defines the size of a component.
+ * Defines the size of an element.
  */
 export type Size = typeof Size[keyof typeof Size];
+
+/**
+ * Returns the CSS representation of the specified size.
+ * @param size The size.
+ * @returns The CSS representation of the specified size.
+ */
+export function toCss(size: Size): string {
+	switch (size) {
+		case Size.ExtraSmall: return "xs";
+		case Size.Small: return "sm";
+		case Size.Large: return "lg";
+		case Size.ExtraLarge: return "xl";
+		case Size.ExtraExtraLarge: return "xxl";
+		default: return "md";
+	}
+}

@@ -1,5 +1,5 @@
 import {Duration} from "@cedx/base/Duration.js";
-import {Context, getIcon} from "@cedx/base/UI/Context.js";
+import {Context, getIcon, toCss} from "@cedx/base/UI/Context.js";
 import {Toast as BootstrapToast} from "bootstrap";
 
 /**
@@ -226,11 +226,11 @@ export class Toast extends HTMLElement {
 		const contexts = Object.values(Context);
 
 		let {classList} = this.#header;
-		classList.remove(...contexts.map(context => `toast-header-${context}`));
+		classList.remove(...contexts.map(context => `toast-header-${toCss(context)}`));
 		classList.add(`toast-header-${value}`);
 
 		({classList} = this.#header.querySelector(".icon")!);
-		classList.remove(...contexts.map(context => `text-${context}`));
+		classList.remove(...contexts.map(context => `text-${toCss(context)}`));
 		classList.add(`text-${value}`);
 	}
 

@@ -6,22 +6,22 @@ export const Context = Object.freeze({
 	/**
 	 * A danger.
 	 */
-	Danger: "danger",
+	Danger: "Danger",
 
 	/**
 	 * A warning.
 	 */
-	Warning: "warning",
+	Warning: "Warning",
 
 	/**
 	 * An information.
 	 */
-	Info: "info",
+	Info: "Info",
 
 	/**
 	 * A success.
 	 */
-	Success: "success"
+	Success: "Success"
 });
 
 /**
@@ -41,4 +41,13 @@ export function getIcon(context: Context): string {
 		case Context.Warning: return "warning";
 		default: return "info";
 	}
+}
+
+/**
+ * Returns the CSS representation of the specified context.
+ * @param context The context.
+ * @returns The CSS representation of the specified context.
+ */
+export function toCss(context: Context): string {
+	return context.toLowerCase();
 }

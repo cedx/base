@@ -3,7 +3,7 @@ namespace Belin.Base.UI;
 using System.Text.Json.Serialization;
 
 /// <summary>
-/// Defines the size of a component.
+/// Defines the size of an element.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Size {
@@ -40,16 +40,16 @@ public enum Size {
 }
 
 /// <summary>
-/// Provides extension methods for component sizes.
+/// Provides extension methods for element sizes.
 /// </summary>
 public static class SizeExtensions {
 
 	/// <summary>
-	/// Returns the Bootstrap representation of the specified size.
+	/// Returns the CSS representation of the specified size.
 	/// </summary>
 	/// <param name="size">The size.</param>
-	/// <returns>The Bootstrap representation of the specified size.</returns>
-	public static string ToBoostrap(this Size size) => size switch {
+	/// <returns>The CSS representation of the specified size.</returns>
+	public static string ToCss(this Size size) => size switch {
 		Size.ExtraSmall => "xs",
 		Size.Small => "sm",
 		Size.Medium => "md",
