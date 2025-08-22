@@ -9,7 +9,7 @@ public enum KeyboardModifiers {
 	/// <summary>
 	/// Indicates no modifier.
 	/// </summary>
-	None = 0,
+	None,
 
 	/// <summary>
 	/// Indicates the <c>Control</c> modifier.

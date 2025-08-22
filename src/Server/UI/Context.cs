@@ -45,4 +45,11 @@ public static class ContextExtensions {
 		Context.Info => "warning",
 		Context.Success => "info"
 	};
+
+	/// <summary>
+	/// Returns the Bootstrap representation of the specified context.
+	/// </summary>
+	/// <param name="context">The context.</param>
+	/// <returns>The Bootstrap representation of the specified context.</returns>
+	public static string ToBoostrap(this Context context) => context.ToString().ToLowerInvariant();
 }
