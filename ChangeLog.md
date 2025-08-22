@@ -2,6 +2,7 @@
 
 ## Version [0.12.0](https://github.com/cedx/base/compare/v0.11.0...v0.12.0)
 - Added the `close()`, `open()` and `save()` methods to the `UI.Components.ThemeDropdown` component.
+- Added the `UI.Position` enumeration.
 - Added the `UI.Components.Toast` component.
 
 ## Version [0.11.0](https://github.com/cedx/base/compare/v0.10.1...v0.11.0)
