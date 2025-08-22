@@ -3,7 +3,7 @@ namespace Belin.Base.UI;
 using System.Text.Json.Serialization;
 
 /// <summary>
-/// Defines the placement of an element.
+/// Defines the position of an element.
 /// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Position {
@@ -11,7 +11,7 @@ public enum Position {
 	/// <summary>
 	/// Top left.
 	/// </summary>
-	TopLeft,
+	TopStart,
 
 	/// <summary>
 	/// Top center.
@@ -21,12 +21,12 @@ public enum Position {
 	/// <summary>
 	/// Top right.
 	/// </summary>
-	TopRight,
+	TopEnd,
 
 	/// <summary>
 	/// Middle left.
 	/// </summary>
-	MiddleLeft,
+	MiddleStart,
 
 	/// <summary>
 	/// Middle center.
@@ -36,12 +36,12 @@ public enum Position {
 	/// <summary>
 	/// Middle right.
 	/// </summary>
-	MiddleRight,
+	MiddleEnd,
 
 	/// <summary>
 	/// Bottom left.
 	/// </summary>
-	BottomLeft,
+	BottomStart,
 
 	/// <summary>
 	/// Bottom center.
@@ -51,5 +51,28 @@ public enum Position {
 	/// <summary>
 	/// Bottom right.
 	/// </summary>
-	BottomRight
+	BottomEnd
+}
+
+/// <summary>
+/// Provides extension methods for element positions.
+/// </summary>
+public static class PositionExtensions {
+
+	/// <summary>
+	/// Returns the CSS representation of the specified position.
+	/// </summary>
+	/// <param name="position">The position.</param>
+	/// <returns>The CSS representation of the specified position.</returns>
+	public static string ToCss(this Position position) => position switch {
+		Position.TopStart => "top-0 start-0",
+		Position.TopCenter => "top-0 start-50 translate-middle-x",
+		Position.TopEnd => "top-0 end-0",
+		Position.MiddleStart => "top-50 start-0 translate-middle-y",
+		Position.MiddleCenter => "top-50 start-50 translate-middle",
+		Position.MiddleEnd => "top-50 end-0 translate-middle-y",
+		Position.BottomStart => "bottom-0 start-0",
+		Position.BottomCenter => "bottom-0 start-50 translate-middle-x",
+		Position.BottomEnd => "bottom-0 end-0"
+	};
 }
