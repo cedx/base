@@ -3,7 +3,7 @@ import {Context, getIcon, toCss} from "@cedx/base/UI/Context.js";
 import {Toast as BootstrapToast} from "bootstrap";
 
 /**
- * Represents a notification message.
+ * Represents a notification.
  */
 export class Toast extends HTMLElement {
 
