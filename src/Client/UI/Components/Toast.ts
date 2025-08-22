@@ -250,3 +250,16 @@ export class Toast extends HTMLElement {
 		this.#header.querySelector(".icon")!.textContent = value.trim() || getIcon(Context.Info);
 	}
 }
+
+/**
+ * Declaration merging.
+ */
+declare global {
+
+	/**
+	 * The map of HTML tag names.
+	 */
+	interface HTMLElementTagNameMap {
+		"toaster-item": Toast;
+	}
+}
