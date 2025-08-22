@@ -14,22 +14,21 @@ export class OfflineIndicator extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
-		this.#updateHiddenState();
-		for (const event of ["online", "offline"]) addEventListener(event, this.#updateHiddenState);
+		this.#update();
+		for (const event of ["online", "offline"]) addEventListener(event, this.#update);
 	}
 
 	/**
 	 * Method invoked when this component is disconnected.
 	 */
 	disconnectedCallback(): void {
-		for (const event of ["online", "offline"]) removeEventListener(event, this.#updateHiddenState);
+		for (const event of ["online", "offline"]) removeEventListener(event, this.#update);
 	}
 
 	/**
-	 * Updates the hidden state of this component according to the {@link navigator.onLine} property.
+	 * Updates this component.
 	 */
-	readonly #updateHiddenState: () => void = () =>
-		this.hidden = navigator.onLine;
+	readonly #update: () => void = () => this.hidden = navigator.onLine;
 }
 
 /**

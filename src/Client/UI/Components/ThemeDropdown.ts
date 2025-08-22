@@ -21,7 +21,7 @@ export class ThemeDropdown extends HTMLElement {
 	 */
 	constructor() {
 		super();
-		for (const button of this.querySelectorAll("button")) button.addEventListener("click", this.#setTheme);
+		for (const button of this.querySelectorAll("button")) button.addEventListener("click", this.#setAppTheme);
 	}
 
 	/**
@@ -51,7 +51,6 @@ export class ThemeDropdown extends HTMLElement {
 	}
 	set appTheme(value: AppTheme) {
 		this.setAttribute("apptheme", value);
-		localStorage.setItem(this.storageKey, this.appTheme);
 	}
 
 	/**
@@ -84,24 +83,15 @@ export class ThemeDropdown extends HTMLElement {
 	 */
 	attributeChangedCallback(attribute: string, oldValue: string|null, newValue: string|null): void {
 		if (newValue != oldValue) switch (attribute) {
-			case "alignment": {
-				const alignment = Object.values(MenuAlignment).includes(newValue as MenuAlignment) ? newValue as MenuAlignment : MenuAlignment.End;
-				const {classList} = this.querySelector(".dropdown-menu")!;
-				if (alignment == MenuAlignment.End) classList.add("dropdown-menu-end");
-				else classList.remove("dropdown-menu-end");
+			case "alignment":
+				this.#updateAlignment(Object.values(MenuAlignment).includes(newValue as MenuAlignment) ? newValue as MenuAlignment : MenuAlignment.End);
 				break;
-			}
-			case "apptheme": {
-				const appTheme = Object.values(AppTheme).includes(newValue as AppTheme) ? newValue as AppTheme : AppTheme.System;
-				this.querySelector(".dropdown-toggle > .icon")!.textContent = getIcon(appTheme);
-				this.querySelector(`button[data-theme="${appTheme}"]`)!.appendChild(this.querySelector(".dropdown-item > .icon")!);
-				this.#applyTheme();
+			case "apptheme":
+				this.#updateAppTheme(Object.values(AppTheme).includes(newValue as AppTheme) ? newValue as AppTheme : AppTheme.System);
 				break;
-			}
-			case "label": {
-				this.querySelector(".dropdown-toggle > span")!.textContent = (newValue ?? "").trim() || "Thème";
+			case "label":
+				this.#updateLabel(newValue ?? "");
 				break;
-			}
 			// No default
 		}
 	}
@@ -111,21 +101,28 @@ export class ThemeDropdown extends HTMLElement {
 	 */
 	connectedCallback(): void {
 		const appTheme = localStorage.getItem(this.storageKey) as AppTheme|null;
-		if (appTheme) this.setAttribute("apptheme", appTheme);
-		this.#mediaQuery.addEventListener("change", this.#applyTheme);
+		if (appTheme) this.appTheme = appTheme;
+		this.#mediaQuery.addEventListener("change", this.#applyToDocument);
 	}
 
 	/**
 	 * Method invoked when this component is disconnected.
 	 */
 	disconnectedCallback(): void {
-		this.#mediaQuery.removeEventListener("change", this.#applyTheme);
+		this.#mediaQuery.removeEventListener("change", this.#applyToDocument);
+	}
+
+	/**
+	 * Saves the current application theme into the local storage.
+	 */
+	save(): void {
+		localStorage.setItem(this.storageKey, this.appTheme);
 	}
 
 	/**
 	 * Applies the application theme to the document.
 	 */
- 	readonly #applyTheme: () => void = () => {
+ 	readonly #applyToDocument: () => void = () => {
 		const {appTheme} = this;
 		const bsTheme = appTheme == AppTheme.System ? (this.#mediaQuery.matches ? AppTheme.Dark : AppTheme.Light) : appTheme;
 		document.documentElement.dataset.bsTheme = bsTheme.toLowerCase();
@@ -135,11 +132,39 @@ export class ThemeDropdown extends HTMLElement {
 	 * Changes the current application theme.
 	 * @param event The dispatched event.
 	 */
-	readonly #setTheme: (event: Event) => void = event => {
+	readonly #setAppTheme: (event: Event) => void = event => {
 		event.preventDefault();
-		const button = (event.target as HTMLElement).closest("button")!;
-		this.appTheme = button.dataset.theme! as AppTheme;
+		this.appTheme = (event.target as Element).closest("button")!.dataset.theme! as AppTheme;
+		this.save();
 	};
+
+	/**
+	 * Updates the alignment of the dropdown menu.
+	 * @param value The new value.
+	 */
+	#updateAlignment(value: MenuAlignment): void {
+		const {classList} = this.querySelector(".dropdown-menu")!;
+		if (value == MenuAlignment.End) classList.add("dropdown-menu-end");
+		else classList.remove("dropdown-menu-end");
+	}
+
+	/**
+	 * Updates the application theme.
+	 * @param value The new value.
+	 */
+	#updateAppTheme(value: AppTheme): void {
+		this.querySelector(".dropdown-toggle > .icon")!.textContent = getIcon(value);
+		this.querySelector(`button[data-theme="${value}"]`)!.appendChild(this.querySelector(".dropdown-item > .icon")!);
+		this.#applyToDocument();
+	}
+
+	/**
+	 * Updates the label of the dropdown menu.
+	 * @param value The new value.
+	 */
+	#updateLabel(value: string): void {
+		this.querySelector(".dropdown-toggle > span")!.textContent = value.trim() || "Thème";
+	}
 }
 
 /**
