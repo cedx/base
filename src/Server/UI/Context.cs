@@ -41,9 +41,9 @@ public static class ContextExtensions {
 	/// <returns>The icon corresponding to the specified context.</returns>
 	public static string GetIcon(this Context context) => context switch {
 		Context.Danger => "error",
-		Context.Warning => "check_circle",
-		Context.Info => "warning",
-		Context.Success => "info"
+		Context.Warning => "warning",
+		Context.Info => "info",
+		Context.Success => "check_circle"
 	};
 
 	/// <summary>
