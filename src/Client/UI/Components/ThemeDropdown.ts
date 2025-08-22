@@ -1,3 +1,4 @@
+import {Dropdown} from "bootstrap";
 import {AppTheme, getIcon} from "../AppTheme.js";
 import {MenuAlignment} from "../MenuAlignment.js";
 
@@ -10,6 +11,11 @@ export class ThemeDropdown extends HTMLElement {
 	 * The list of observed attributes.
 	 */
 	static readonly observedAttributes = ["alignment", "apptheme", "label"];
+
+	/**
+	 * The dropdown menu.
+	 */
+	#dropdown!: Dropdown;
 
 	/**
 	 * The media query used to check the application theme.
@@ -97,11 +103,20 @@ export class ThemeDropdown extends HTMLElement {
 	}
 
 	/**
+	 * Closes the dropdown menu.
+	 */
+	close(): void {
+		this.#dropdown.hide();
+	}
+
+	/**
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
 		const appTheme = localStorage.getItem(this.storageKey) as AppTheme|null;
 		if (appTheme) this.appTheme = appTheme;
+
+		this.#dropdown = new Dropdown(this.querySelector(".dropdown-toggle")!);
 		this.#mediaQuery.addEventListener("change", this.#applyToDocument);
 	}
 
@@ -109,7 +124,15 @@ export class ThemeDropdown extends HTMLElement {
 	 * Method invoked when this component is disconnected.
 	 */
 	disconnectedCallback(): void {
+		this.#dropdown.dispose();
 		this.#mediaQuery.removeEventListener("change", this.#applyToDocument);
+	}
+
+	/**
+	 * Opens the dropdown menu.
+	 */
+	open(): void {
+		this.#dropdown.show();
 	}
 
 	/**
