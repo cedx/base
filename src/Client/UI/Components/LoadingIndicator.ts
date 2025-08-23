@@ -16,23 +16,23 @@ export class LoadingIndicator extends HTMLElement {
 	}
 
 	/**
-	 * Starts the loading indicator.
+	 * Hides the loading indicator.
+	 * @param options Value indicating whether to force the loading indicator to hide.
 	 */
-	start(): void {
-		this.#requestCount++;
-		this.hidden = false;
-	}
-
-	/**
-	 * Stops the loading indicator.
-	 * @param options Value indicating whether to force the loading indicator to stop.
-	 */
-	stop(options: {force?: boolean} = {}): void {
+	hide(options: {force?: boolean} = {}): void {
 		this.#requestCount--;
 		if (this.#requestCount <= 0 || options.force) {
 			this.#requestCount = 0;
 			this.hidden = true;
 		}
+	}
+
+	/**
+	 * Shows the loading indicator.
+	 */
+	show(): void {
+		this.#requestCount++;
+		this.hidden = false;
 	}
 }
 

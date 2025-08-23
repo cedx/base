@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.15.0](https://github.com/cedx/base/compare/v0.14.1...v0.15.0)
+- Renamed the `start()` and `stop()` methods of the `UI.Components.LoadingIndicator` component to `show()` and `hide()`.
+
 ## Version [0.14.1](https://github.com/cedx/base/compare/v0.14.0...v0.14.1)
 - Fixed the `UI.Components.Toast` and `UI.Components.Toaster` components not respecting the default `Icon` based on their `Context`.
 
