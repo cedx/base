@@ -8,7 +8,7 @@ export class BackButton extends HTMLElement {
 	 */
 	constructor() {
 		super();
-		this.addEventListener("click", this.#goBack);
+		this.addEventListener("click", () => history.go(-this.steps));
 	}
 
 	/**
@@ -19,12 +19,14 @@ export class BackButton extends HTMLElement {
 	}
 
 	/**
-	 * Moves back one page in the session history.
-	 * @param event The dispatched event.
+	 * The number of pages to go back.
 	 */
-	#goBack: (event: Event) => void = event => {
-		event.preventDefault();
-		history.back();
+	get steps(): number {
+		const value = Number(this.getAttribute("steps"));
+		return Math.max(0, Number.isNaN(value) ? 1 : value);
+	}
+	set steps(value: number) {
+		this.setAttribute("steps", value.toString());
 	}
 }
 

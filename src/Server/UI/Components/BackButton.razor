@@ -1,6 +1,6 @@
 @namespace Belin.Base.UI.Components
 
-<back-button>
+<back-button steps="@Steps">
 	@ChildContent
 </back-button>
 
@@ -10,4 +10,10 @@
 	/// </summary>
 	[Parameter]
 	public RenderFragment? ChildContent { get; set; }
+
+	/// <summary>
+	/// The number of pages to go back.
+	/// </summary>
+	[Parameter]
+	public int Steps { get; set; } = 1;
 }

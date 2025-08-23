@@ -108,7 +108,7 @@ export class Toast extends HTMLElement {
 	 */
 	get delay(): number {
 		const value = Number(this.getAttribute("delay"));
-		return Math.max(1, Number.isNaN(value) ? 5_000 : value);
+		return Math.max(0, Number.isNaN(value) ? 5_000 : value);
 	}
 	set delay(value: number) {
 		this.setAttribute("delay", value.toString());
