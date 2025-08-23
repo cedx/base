@@ -1,7 +1,7 @@
 # Belin.io Base
 ![.NET](https://badgen.net/badge/.net/%3E%3D9.0/green) ![Version](https://badgen.net/badge/project/v0.15.3/blue) ![Licence](https://badgen.net/badge/licence/MIT/blue)
 
-Base library by [Cédric Belin](https://belin.io), full stack developer,
+Base library by [Cédric Belin](https://cedric-belin.fr), full stack developer,
 implemented in [C#](https://learn.microsoft.com/en-us/dotnet/csharp) and [TypeScript](https://www.typescriptlang.org).
 
 > This library is dedicated to personal/side projects.  
