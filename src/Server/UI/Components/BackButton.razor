@@ -1,0 +1,13 @@
+@namespace Belin.Base.UI.Components
+
+<back-button>
+	@ChildContent
+</back-button>
+
+@code {
+	/// <summary>
+	/// The child content.
+	/// </summary>
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+}
