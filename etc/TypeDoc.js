@@ -7,7 +7,7 @@ export default {
 	excludePrivate: true,
 	gitRevision: "main",
 	hideGenerator: true,
-	name: "Belin.io Base",
+	name: "Cédric Belin's Base",
 	out: "../docs/Client",
 	readme: "none",
 	tsconfig: "../src/Client/tsconfig.json"

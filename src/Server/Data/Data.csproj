@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<Company>Belin.io</Company>
+		<Company>Cedric-Belin.fr</Company>
 		<Copyright>© Cédric Belin</Copyright>
 		<Description>Base library by Cédric Belin, full stack developer.</Description>
-		<Product>Belin.io Base</Product>
+		<Product>Cédric Belin's Base</Product>
 		<Version>0.15.3</Version>
 	</PropertyGroup>
 

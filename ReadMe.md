@@ -1,4 +1,4 @@
-# Belin.io Base
+# Cédric Belin's Base
 ![.NET](https://badgen.net/badge/.net/%3E%3D9.0/green) ![Version](https://badgen.net/badge/project/v0.15.3/blue) ![Licence](https://badgen.net/badge/licence/MIT/blue)
 
 Base library by [Cédric Belin](https://cedric-belin.fr), full stack developer,
@@ -17,4 +17,4 @@ implemented in [C#](https://learn.microsoft.com/en-us/dotnet/csharp) and [TypeSc
 - [Submit an issue](https://github.com/cedx/base/issues)
 
 ## Licence
-[Belin.io Base](https://github.com/cedx/base) is distributed under the MIT License.
+[Cédric Belin's Base](https://github.com/cedx/base) is distributed under the MIT License.
