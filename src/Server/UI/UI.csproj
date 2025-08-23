@@ -21,6 +21,7 @@
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<AssemblyName>Belin.Base.UI</AssemblyName>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>preview</LangVersion> <!-- Remove when .NET 10 / C# 14 will be released. -->
 		<Nullable>enable</Nullable>
 		<OutDir>../../../bin</OutDir>
 		<TargetFramework>net9.0</TargetFramework>
