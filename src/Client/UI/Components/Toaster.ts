@@ -178,7 +178,7 @@ export class Toaster extends HTMLElement {
 	show(toast: IToast): void {
 		const item = document.createElement("toaster-item");
 		item.addEventListener("hidden.bs.toast", () => item.remove());
-		item.appendChild((this.#toastTemplate.cloneNode(true) as DocumentFragment).firstElementChild!);
+		item.appendChild((this.#toastTemplate.cloneNode(true) as DocumentFragment).querySelector(".toast")!);
 
 		item.animation = toast.animation ?? this.animation;
 		item.autoHide = toast.autoHide ?? this.autoHide;
