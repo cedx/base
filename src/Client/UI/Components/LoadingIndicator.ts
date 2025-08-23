@@ -29,7 +29,7 @@ export class LoadingIndicator extends HTMLElement {
 	 */
 	stop(options: {force?: boolean} = {}): void {
 		this.#requestCount--;
-		if (options.force || this.#requestCount <= 0) {
+		if (this.#requestCount <= 0 || options.force) {
 			this.#requestCount = 0;
 			this.hidden = true;
 		}
