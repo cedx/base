@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.15.2](https://github.com/cedx/base/compare/v0.15.1...v0.15.2)
+- Fixed a regression in the `UI.Components.TabActivator` component.
+
 ## Version [0.15.1](https://github.com/cedx/base/compare/v0.15.0...v0.15.1)
 - Fixed a regression in the `UI.Components.Toaster` component.
 
