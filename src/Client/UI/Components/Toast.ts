@@ -1,6 +1,5 @@
-import {Duration} from "@cedx/base/Duration.js";
-import {Context, getIcon, toCss} from "@cedx/base/UI/Context.js";
 import {Toast as BootstrapToast} from "bootstrap";
+import {Context, getIcon, toCss} from "../Context.js";
 
 /**
  * Represents a notification.
@@ -21,11 +20,6 @@ export class Toast extends HTMLElement {
 	 * The formatter used to format the relative time.
 	 */
 	#formatter!: Intl.RelativeTimeFormat;
-
-	/**
-	 * The toast header.
-	 */
-	readonly #header = this.querySelector(".toast-header")!;
 
 	/**
 	 * The time at which this component was initially shown.
@@ -79,6 +73,13 @@ export class Toast extends HTMLElement {
 	}
 	set caption(value: string) {
 		this.setAttribute("caption", value);
+	}
+
+	/**
+	 * The child content displayed in the body.
+	 */
+	set childContent(value: DocumentFragment) { // eslint-disable-line accessor-pairs
+		this.querySelector(".toast-body")!.replaceChildren(...value.childNodes);
 	}
 
 	/**
@@ -139,7 +140,7 @@ export class Toast extends HTMLElement {
 	 * @param newValue The new attribute value.
 	 */
 	attributeChangedCallback(attribute: string, oldValue: string|null, newValue: string|null): void {
-		if (newValue != oldValue && this.firstElementChild) switch (attribute) {
+		if (newValue != oldValue) switch (attribute) {
 			case "caption":
 				this.#updateCaption(newValue ?? "");
 				break;
@@ -162,7 +163,7 @@ export class Toast extends HTMLElement {
 	connectedCallback(): void {
 		const toast = this.querySelector(".toast")!;
 		toast.addEventListener("hidden.bs.toast", () => clearInterval(this.#timer));
-		toast.addEventListener("show.bs.toast", () => this.#timer = window.setInterval(this.#updateElapsedTime, Duration.Second));
+		toast.addEventListener("show.bs.toast", () => this.#timer = window.setInterval(this.#updateElapsedTime, 1_000));
 
 		const {animation, autoHide: autohide, delay} = this;
 		this.#toast = new BootstrapToast(toast, {animation, autohide, delay});
@@ -215,7 +216,7 @@ export class Toast extends HTMLElement {
 	 * @param value The new value.
 	 */
 	#updateCaption(value: string): void {
-		this.#header.querySelector("b")!.textContent = value.trim();
+		this.querySelector(".toast-header b")!.textContent = value.trim();
 	}
 
 	/**
@@ -225,13 +226,13 @@ export class Toast extends HTMLElement {
 	#updateContext(value: Context): void {
 		const contexts = Object.values(Context);
 
-		let {classList} = this.#header;
+		let {classList} = this.querySelector(".toast-header")!;
 		classList.remove(...contexts.map(context => `toast-header-${toCss(context)}`));
-		classList.add(`toast-header-${value}`);
+		classList.add(`toast-header-${toCss(value)}`);
 
-		({classList} = this.#header.querySelector(".icon")!);
+		({classList} = this.querySelector(".toast-header .icon")!);
 		classList.remove(...contexts.map(context => `text-${toCss(context)}`));
-		classList.add(`text-${value}`);
+		classList.add(`text-${toCss(value)}`);
 	}
 
 	/**
@@ -239,7 +240,7 @@ export class Toast extends HTMLElement {
 	 */
 	readonly #updateElapsedTime: () => void = () => {
 		const {elapsedTime} = this;
-		this.#header.querySelector("small")!.textContent = elapsedTime > 0 ? this.#formatTime(elapsedTime / Duration.Second) : "";
+		this.querySelector(".toast-header small")!.textContent = elapsedTime > 0 ? this.#formatTime(elapsedTime / 1_000) : "";
 	};
 
 	/**
@@ -247,7 +248,7 @@ export class Toast extends HTMLElement {
 	 * @param value The new value.
 	 */
 	#updateIcon(value: string): void {
-		this.#header.querySelector(".icon")!.textContent = value.trim() || getIcon(Context.Info);
+		this.querySelector(".toast-header .icon")!.textContent = value.trim() || getIcon(Context.Info);
 	}
 }
 

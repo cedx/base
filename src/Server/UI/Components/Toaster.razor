@@ -1,0 +1,56 @@
+@namespace Belin.Base.UI.Components
+@using System.Globalization
+
+<toaster-container animation="@Animation" autoHide="@AutoHide" context="@Context" culture="@Culture" delay="@Delay" icon="@Icon" position="@Position">
+	<div class="toast-container p-3 @(Position.ToCss())">
+		<!-- Toasts -->
+	</div>
+
+	<template>
+		<Toast />
+	</template>
+</toaster-container>
+
+@code {
+	/// <summary>
+	/// Value indicating whether to apply a fade transition.
+	/// </summary>
+	[Parameter]
+	public bool Animation { get; set; } = true;
+
+	/// <summary>
+	/// Value indicating whether to automatically hide the toasts.
+	/// </summary>
+	[Parameter]
+	public bool AutoHide { get; set; } = true;
+
+	/// <summary>
+	/// The default contextual modifier.
+	/// </summary>
+	[Parameter]
+	public Context Context { get; set; } = Context.Info;
+
+	/// <summary>
+	/// The default culture used to format the relative times.
+	/// </summary>
+	[Parameter]
+	public CultureInfo Culture { get; set; } = CultureInfo.CurrentUICulture;
+
+	/// <summary>
+	/// The default delay, in milliseconds, to hide the toasts.
+	/// </summary>
+	[Parameter]
+	public int Delay { get; set; } = 5_000;
+
+	/// <summary>
+	/// The default icon displayed next to the captions.
+	/// </summary>
+	[Parameter]
+	public string? Icon { get; set; }
+
+	/// <summary>
+	/// The toaster placement.
+	/// </summary>
+	[Parameter]
+	public Position Position { get; set; } = Position.BottomEnd;
+}
