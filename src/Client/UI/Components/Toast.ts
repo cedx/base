@@ -9,7 +9,7 @@ export class Toast extends HTMLElement {
 	/**
 	 * The list of observed attributes.
 	 */
-	static readonly observedAttributes = ["caption", "context", "culture", "icon", "open"];
+	static readonly observedAttributes = ["animation", "caption", "context", "culture", "icon", "open"];
 
 	/**
 	 * The time units.
@@ -152,6 +152,9 @@ export class Toast extends HTMLElement {
 	 */
 	attributeChangedCallback(attribute: string, oldValue: string|null, newValue: string|null): void {
 		if (newValue != oldValue) switch (attribute) {
+			case "animation":
+				this.#updateAnimation(newValue != null);
+				break;
 			case "caption":
 				this.#updateCaption(newValue ?? "");
 				break;
@@ -165,7 +168,7 @@ export class Toast extends HTMLElement {
 				this.#updateIcon(newValue ?? "");
 				break;
 			case "open":
-				this.#updateVisibility();
+				this.#updateVisibility(newValue != null);
 			// No default
 		}
 	}
@@ -225,6 +228,16 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
+	 * Updates the toast animation.
+	 * @param value The new value.
+	 */
+	#updateAnimation(value: boolean): void {
+		const {classList} = this.firstElementChild!;
+		if (value) classList.add("fade");
+		else classList.remove("fade");
+	}
+
+	/**
 	 * Updates the title displayed in the header.
 	 * @param value The new value.
 	 */
@@ -266,14 +279,12 @@ export class Toast extends HTMLElement {
 
 	/**
 	 * Updates the toast visibility.
+	 * @param value The new value.
 	 */
-	#updateVisibility(): void {
+	#updateVisibility(value: boolean): void {
 		const {classList} = this.firstElementChild!;
-		if (!this.open) classList.remove("show");
-		else {
-			if (this.animation) classList.add("fade");
-			classList.add("show");
-		}
+		if (value) classList.add("show");
+		else classList.remove("show");
 	}
 }
 
