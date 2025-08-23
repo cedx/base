@@ -1,4 +1,4 @@
-import {Context, getIcon} from "../Context.js";
+import {Context} from "../Context.js";
 import {createDocumentFragment} from "../ElementExtensions.js";
 import {Position, toCss} from "../Position.js";
 
@@ -162,17 +162,17 @@ export class Toaster extends HTMLElement {
 	}
 
 	/**
-	 * Shows a toast with the specified message.
-	 * @param caption The title displayed in the header.
-	 * @param message The message to show.
-	 * @param options The toast options.
+	 * Shows a toast.
+	 * @param context The contextual modifier.
+	 * @param caption The title displayed in the toast header.
+	 * @param childContent The child content displayed in the toast body.
 	 */
 	notify(context: Context, caption: string, childContent: DocumentFragment|string): void {
 		this.show({context, caption, childContent});
 	}
 
 	/**
-	 * Shows a toast with the specified toast.
+	 * Shows the specified toast.
 	 * @param toast The toast to show.
 	 */
 	show(toast: IToast): void {
