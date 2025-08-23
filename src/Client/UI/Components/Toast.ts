@@ -9,7 +9,7 @@ export class Toast extends HTMLElement {
 	/**
 	 * The list of observed attributes.
 	 */
-	static readonly observedAttributes = ["caption", "context", "culture", "icon"];
+	static readonly observedAttributes = ["caption", "context", "culture", "icon", "open"];
 
 	/**
 	 * The time units.
@@ -55,7 +55,7 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
-	 * Value indicating whether to automatically hide the toast.
+	 * Value indicating whether to automatically hide this toast.
 	 */
 	get autoHide(): boolean {
 		return this.hasAttribute("autohide");
@@ -105,7 +105,7 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
-	 * The delay, in milliseconds, to hide the toast.
+	 * The delay, in milliseconds, to hide this toast.
 	 */
 	get delay(): number {
 		const value = Number(this.getAttribute("delay"));
@@ -134,6 +134,17 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
+	 * Value indicating whether to initially show this toast.
+	 */
+	get open(): boolean {
+		return this.hasAttribute("open");
+	}
+	set open(value: boolean) {
+		if (value) this.setAttribute("open", "");
+		else this.removeAttribute("open");
+	}
+
+	/**
 	 * Method invoked when an attribute has been changed.
 	 * @param attribute The attribute name.
 	 * @param oldValue The previous attribute value.
@@ -153,6 +164,8 @@ export class Toast extends HTMLElement {
 			case "icon":
 				this.#updateIcon(newValue ?? "");
 				break;
+			case "open":
+				this.#updateVisibility();
 			// No default
 		}
 	}
@@ -249,6 +262,18 @@ export class Toast extends HTMLElement {
 	 */
 	#updateIcon(value: string): void {
 		this.querySelector(".toast-header .icon")!.textContent = value.trim() || getIcon(this.context);
+	}
+
+	/**
+	 * Updates the toast visibility.
+	 */
+	#updateVisibility(): void {
+		const {classList} = this.firstElementChild!;
+		if (!this.open) classList.remove("show");
+		else {
+			if (this.animation) classList.add("fade");
+			classList.add("show");
+		}
 	}
 }
 
