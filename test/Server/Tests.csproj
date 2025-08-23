@@ -3,7 +3,7 @@
 		<Company>Belin.io</Company>
 		<Copyright>© Cédric Belin</Copyright>
 		<Product>Belin.io Base</Product>
-		<Version>0.14.1</Version>
+		<Version>0.15.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
