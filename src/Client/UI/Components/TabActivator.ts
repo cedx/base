@@ -18,7 +18,7 @@ export class TabActivator extends HTMLElement {
 	 */
 	get activeTabIndex(): number {
 		const index = Number(this.storage.getItem(this.storageKey) ?? "1");
-		return Math.max(0, Math.min(this.tabs.length, Number.isNaN(index) ? 0 : index - 1));
+		return Math.max(0, Math.min(this.tabs.length - 1, Number.isNaN(index) ? 0 : index - 1));
 	}
 	set activeTabIndex(value: number) {
 		this.storage.setItem(this.storageKey, (value + 1).toString());
@@ -65,7 +65,7 @@ export class TabActivator extends HTMLElement {
 	 */
 	connectedCallback(): void {
 		const {activeTabIndex, tabs} = this;
-		for (let index = 0; index < tabs.length - 1; index++) {
+		for (let index = 0; index < tabs.length; index++) {
 			const tab = tabs.item(index);
 			tab.addEventListener("click", () => this.activeTabIndex = index);
 			if (index == activeTabIndex) Tab.getOrCreateInstance(tab).show();
