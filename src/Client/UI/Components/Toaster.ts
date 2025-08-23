@@ -129,8 +129,7 @@ export class Toaster extends HTMLElement {
 	 * The default icon displayed next to the captions.
 	 */
 	get icon(): string {
-		const value = this.getAttribute("icon") ?? "";
-		return value.trim() || getIcon(this.context);
+		return (this.getAttribute("icon") ?? "").trim();
 	}
 	set icon(value: string) {
 		this.setAttribute("icon", value);

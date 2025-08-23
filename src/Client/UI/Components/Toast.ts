@@ -248,7 +248,7 @@ export class Toast extends HTMLElement {
 	 * @param value The new value.
 	 */
 	#updateIcon(value: string): void {
-		this.querySelector(".toast-header .icon")!.textContent = value.trim() || getIcon(Context.Info);
+		this.querySelector(".toast-header .icon")!.textContent = value.trim() || getIcon(this.context);
 	}
 }
 
