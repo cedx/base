@@ -126,7 +126,7 @@ export class Toast extends HTMLElement {
 	 */
 	get icon(): string {
 		const value = this.getAttribute("icon") ?? "";
-		return value.trim() || getIcon(Context.Info);
+		return value.trim() || getIcon(this.context);
 	}
 	set icon(value: string) {
 		this.setAttribute("icon", value);
@@ -139,11 +139,19 @@ export class Toast extends HTMLElement {
 	 * @param newValue The new attribute value.
 	 */
 	attributeChangedCallback(attribute: string, oldValue: string|null, newValue: string|null): void {
-		if (newValue != oldValue) switch (attribute) {
-			case "caption": this.#updateCaption(newValue ?? ""); break;
-			case "context": this.#updateContext(Object.values(Context).includes(newValue as Context) ? newValue as Context : Context.Info); break;
-			case "culture": this.#formatter = new Intl.RelativeTimeFormat((newValue ?? "").trim() || navigator.language, {style: "long"}); break;
-			case "icon": this.#updateIcon(newValue ?? ""); break;
+		if (newValue != oldValue && this.firstElementChild) switch (attribute) {
+			case "caption":
+				this.#updateCaption(newValue ?? "");
+				break;
+			case "context":
+				this.#updateContext(Object.values(Context).includes(newValue as Context) ? newValue as Context : Context.Info);
+				break;
+			case "culture":
+				this.#formatter = new Intl.RelativeTimeFormat((newValue ?? "").trim() || navigator.language, {style: "long"});
+				break;
+			case "icon":
+				this.#updateIcon(newValue ?? "");
+				break;
 			// No default
 		}
 	}
