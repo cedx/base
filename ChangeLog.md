@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.14.0](https://github.com/cedx/base/compare/v0.13.1...v0.14.0)
+- Added the `UI.Components.BackButton` component.
+
 ## Version [0.13.1](https://github.com/cedx/base/compare/v0.13.0...v0.13.1)
 - Added the `UI.Components.Toast` component to the global `HTMLElementTagNameMap` interface.
 
