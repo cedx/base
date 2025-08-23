@@ -62,10 +62,7 @@
 	/// The icon displayed next to the caption.
 	/// </summary>
 	[Parameter]
-	public string? Icon {
-		get => field is null ? Context.GetIcon() : field;
-		set;
-	}
+	public string? Icon { get; set; }
 
 	/// <summary>
 	/// Value indicating whether to initially show this toast.
