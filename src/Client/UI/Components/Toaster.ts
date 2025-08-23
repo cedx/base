@@ -49,7 +49,7 @@ export interface IToast {
 }
 
 /**
- * Manages the notification messages.
+ * Manages the notifications.
  */
 export class Toaster extends HTMLElement {
 
