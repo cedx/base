@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.15.3](https://github.com/cedx/base/compare/v0.15.2...v0.15.3)
+- Fixed a regression in the `UI.Components.ThemeDropdown` component.
+
 ## Version [0.15.2](https://github.com/cedx/base/compare/v0.15.1...v0.15.2)
 - Fixed a regression in the `UI.Components.TabActivator` component.
 
