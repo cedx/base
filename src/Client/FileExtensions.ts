@@ -1,5 +1,3 @@
-import {Duration} from "./Duration.js";
-
 /**
  * Downloads the specified file.
  * @param file The file to be downloaded.
@@ -38,7 +36,7 @@ export function open(file: File, options: {newTab?: boolean} = {}): void {
 		if (!handle.closed) return;
 		clearInterval(timer);
 		URL.revokeObjectURL(url);
-	}, 5 * Duration.Second);
+	}, 5_000);
 }
 
 /**
