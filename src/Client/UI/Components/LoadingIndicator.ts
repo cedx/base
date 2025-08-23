@@ -6,7 +6,7 @@ export class LoadingIndicator extends HTMLElement {
 	/**
 	 * The number of concurrent HTTP requests.
 	 */
-	#requestCount = 0;
+	#requestCount = this.hidden ? 0 : 1;
 
 	/**
 	 * Registers the component.
