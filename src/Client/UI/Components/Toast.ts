@@ -206,6 +206,13 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
+	 * Closes this toast.
+	 */
+	close(): void {
+		this.#toast.hide();
+	}
+
+	/**
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
@@ -223,13 +230,6 @@ export class Toast extends HTMLElement {
 	disconnectedCallback(): void {
 		clearInterval(this.#timer);
 		this.#toast.dispose();
-	}
-
-	/**
-	 * Closes this toast.
-	 */
-	close(): void {
-		this.#toast.hide();
 	}
 
 	/**
