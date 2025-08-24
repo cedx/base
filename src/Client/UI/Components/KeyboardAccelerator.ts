@@ -36,7 +36,7 @@ export class KeyboardAccelerator extends HTMLElement {
 			.reduce<number>((modifiers, value) => modifiers | (KeyboardAccelerator.#modifiers.get(value) ?? 0), KeyboardModifiers.None);
 	}
 	set modifiers(value: number) {
-		this.setAttribute("modifiers", KeyboardAccelerator.#modifiers.entries()
+		this.setAttribute("modifiers", !value ? "None" : KeyboardAccelerator.#modifiers.entries()
 			.filter(([, flag]) => (value & flag) != 0)
 			.map(([key]) => key)
 			.toArray().join(", "));
