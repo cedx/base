@@ -45,7 +45,7 @@ export interface IToast {
 	/**
 	 * The icon displayed next to the caption.
 	 */
-	icon?: string;
+	icon?: string|null;
 }
 
 /**
