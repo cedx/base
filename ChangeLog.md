@@ -1,5 +1,9 @@
 # Changelog
 
+## Version [0.16.0](https://github.com/cedx/base/compare/v0.15.3...v0.16.0)
+- Added the `UI.DialogResult` enumeration.
+- Added the `UI.Components.DialogButton` and `UI.Components.MessageBox` components.
+
 ## Version [0.15.3](https://github.com/cedx/base/compare/v0.15.2...v0.15.3)
 - Fixed a regression in the `UI.Components.ThemeDropdown` component.
 
