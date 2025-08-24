@@ -77,8 +77,7 @@ export class Toaster extends HTMLElement {
 		return this.hasAttribute("animation");
 	}
 	set animation(value: boolean) {
-		if (value) this.setAttribute("animation", "");
-		else this.removeAttribute("animation");
+		this.toggleAttribute("animation", value);
 	}
 
 	/**
@@ -88,8 +87,7 @@ export class Toaster extends HTMLElement {
 		return this.hasAttribute("autohide");
 	}
 	set autoHide(value: boolean) {
-		if (value) this.setAttribute("autohide", "");
-		else this.removeAttribute("autohide");
+		this.toggleAttribute("autohide", value);
 	}
 
 	/**
@@ -133,8 +131,7 @@ export class Toaster extends HTMLElement {
 		return value.trim() || null;
 	}
 	set icon(value: string|null) {
-		if (value) this.setAttribute("icon", value);
-		else this.removeAttribute("icon");
+		this.toggleAttribute("icon", Boolean(value));
 	}
 
 	/**

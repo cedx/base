@@ -27,8 +27,7 @@ export class DialogButton extends HTMLElement {
 		return Object.values(Context).includes(value) ? value : null;
 	}
 	set context(value: Context|null) {
-		if (value) this.setAttribute("context", value);
-		else this.removeAttribute("context");
+		this.toggleAttribute("context", Boolean(value));
 	}
 
 	/**
@@ -39,8 +38,7 @@ export class DialogButton extends HTMLElement {
 		return value.trim() || null;
 	}
 	set icon(value: string|null) {
-		if (value) this.setAttribute("icon", value);
-		else this.removeAttribute("icon");
+		this.toggleAttribute("icon", Boolean(value));
 	}
 
 	/**
@@ -72,8 +70,7 @@ export class DialogButton extends HTMLElement {
 		return Object.values(Variant).includes(value) ? value : null;
 	}
 	set variant(value: Variant|null) {
-		if (value) this.setAttribute("variant", value);
-		else this.removeAttribute("variant");
+		this.toggleAttribute("context", Boolean(value));
 	}
 
 	/**
