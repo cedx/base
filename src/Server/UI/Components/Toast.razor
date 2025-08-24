@@ -4,7 +4,7 @@
 <toaster-item animation="@Animation" autoHide="@AutoHide" caption="@Caption" context="@Context" culture="@Culture" delay="@Delay" icon="@Icon" open="@Open">
 	<div class="toast @(Animation ? "fade" : string.Empty) @(Open ? "show" : string.Empty)">
 		<div class="toast-header toast-header-@Context.ToCss()">
-			<i class="icon me-2 text-@Context.ToCss()">@(Icon is null ? Context.GetIcon() : Icon)</i>
+			<i class="icon me-2 text-@Context.ToCss()">@(string.IsNullOrEmpty(Icon) ? Context.GetIcon() : Icon)</i>
 			<b class="me-auto">@Caption</b>
 			<small class="text-secondary"><!-- Toast.ElapsedTime --></small>
 			<button class="btn-close" data-bs-dismiss="toast"></button>
