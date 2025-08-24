@@ -19,29 +19,29 @@ export const DialogResult = Object.freeze({
 	Cancel: 2,
 
 	/**
-	 * The return value of the dialog box is "Yes".
-	 */
-	Yes: 3,
-
-	/**
-	 * The return value of the dialog box is "No".
-	 */
-	No: 4,
-
-	/**
 	 * The return value of the dialog box is "Abort".
 	 */
-	Abort: 5,
+	Abort: 3,
 
 	/**
 	 * The return value of the dialog box is "Retry".
 	 */
-	Retry: 6,
+	Retry: 4,
 
 	/**
 	 * The return value of the dialog box is "Ignore".
 	 */
-	Ignore: 7
+	Ignore: 5,
+
+	/**
+	 * The return value of the dialog box is "Yes".
+	 */
+	Yes: 6,
+
+	/**
+	 * The return value of the dialog box is "No".
+	 */
+	No: 7
 });
 
 /**

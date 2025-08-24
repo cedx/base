@@ -21,16 +21,6 @@ public enum DialogResult {
 	Cancel,
 
 	/// <summary>
-	/// The return value of the dialog box is "Yes".
-	/// </summary>
-	Yes,
-
-	/// <summary>
-	/// The return value of the dialog box is "No".
-	/// </summary>
-	No,
-
-	/// <summary>
 	/// The return value of the dialog box is "Abort".
 	/// </summary>
 	Abort,
@@ -43,5 +33,15 @@ public enum DialogResult {
 	/// <summary>
 	/// The return value of the dialog box is "Ignore".
 	/// </summary>
-	Ignore
+	Ignore,
+
+	/// <summary>
+	/// The return value of the dialog box is "Yes".
+	/// </summary>
+	Yes,
+
+	/// <summary>
+	/// The return value of the dialog box is "No".
+	/// </summary>
+	No
 }
