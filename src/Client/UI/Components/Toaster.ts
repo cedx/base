@@ -19,6 +19,14 @@ export class Toaster extends HTMLElement {
 	readonly #toastTemplate: DocumentFragment = this.querySelector("template")!.content;
 
 	/**
+	 * Creates a new toaster.
+	 */
+	constructor() {
+		super();
+		for (const toast of this.querySelectorAll("toaster-item")) toast.addEventListener("hidden.bs.toast", () => toast.remove());
+	}
+
+	/**
 	 * Registers the component.
 	 */
 	static {
