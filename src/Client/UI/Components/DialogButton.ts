@@ -123,6 +123,7 @@ export class DialogButton extends HTMLElement {
 		const label = value.trim();
 		element.textContent = label;
 		element.hidden = !label;
+		this.querySelector(".icon")!.classList.toggle("me-1", !element.hidden);
 	}
 
 	/**

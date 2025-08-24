@@ -222,9 +222,7 @@ export class Toast extends HTMLElement {
 	 * @param value The new value.
 	 */
 	#updateAnimation(value: boolean): void {
-		const {classList} = this.firstElementChild!;
-		if (value) classList.add("fade");
-		else classList.remove("fade");
+		this.firstElementChild!.classList.toggle("fade", value);
 	}
 
 	/**
@@ -272,9 +270,7 @@ export class Toast extends HTMLElement {
 	 * @param value The new value.
 	 */
 	#updateVisibility(value: boolean): void {
-		const {classList} = this.firstElementChild!;
-		if (value) classList.add("show");
-		else classList.remove("show");
+		this.firstElementChild!.classList.toggle("show", value);
 	}
 }
 

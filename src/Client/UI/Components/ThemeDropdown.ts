@@ -166,9 +166,7 @@ export class ThemeDropdown extends HTMLElement {
 	 * @param value The new value.
 	 */
 	#updateAlignment(value: MenuAlignment): void {
-		const {classList} = this.querySelector(".dropdown-menu")!;
-		if (value == MenuAlignment.End) classList.add("dropdown-menu-end");
-		else classList.remove("dropdown-menu-end");
+		this.querySelector(".dropdown-menu")!.classList.toggle("dropdown-menu-end", value == MenuAlignment.End);
 	}
 
 	/**
