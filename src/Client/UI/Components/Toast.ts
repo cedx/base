@@ -163,7 +163,7 @@ export class Toast extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
-		const toast = this.querySelector(".toast")!;
+		const toast = this.firstElementChild!;
 		toast.addEventListener("hidden.bs.toast", () => clearInterval(this.#timer));
 		toast.addEventListener("show.bs.toast", () => this.#timer = window.setInterval(this.#updateElapsedTime, 1_000));
 
