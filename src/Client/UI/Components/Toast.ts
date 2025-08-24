@@ -17,14 +17,14 @@ export interface IToast {
 	autoHide?: boolean;
 
 	/**
+	 * The child content displayed in the body.
+	 */
+	body: DocumentFragment|string;
+
+	/**
 	 * The title displayed in the header.
 	 */
 	caption: string;
-
-	/**
-	 * The child content displayed in the body.
-	 */
-	childContent: DocumentFragment|string;
 
 	/**
 	 * The default contextual modifier.
@@ -110,6 +110,13 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
+	 * The child content displayed in the body.
+	 */
+	set body(value: DocumentFragment) { // eslint-disable-line accessor-pairs
+		this.querySelector(".toast-body")!.replaceChildren(...value.childNodes);
+	}
+
+	/**
 	 * The title displayed in the header.
 	 */
 	get caption(): string {
@@ -117,13 +124,6 @@ export class Toast extends HTMLElement {
 	}
 	set caption(value: string) {
 		this.setAttribute("caption", value);
-	}
-
-	/**
-	 * The child content displayed in the body.
-	 */
-	set childContent(value: DocumentFragment) { // eslint-disable-line accessor-pairs
-		this.querySelector(".toast-body")!.replaceChildren(...value.childNodes);
 	}
 
 	/**

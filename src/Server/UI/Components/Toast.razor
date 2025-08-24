@@ -10,7 +10,7 @@
 			<button class="btn-close" data-bs-dismiss="toast"></button>
 		</div>
 		<div class="toast-body">
-			@ChildContent
+			@Body
 		</div>
 	</div>
 </toaster-item>
@@ -29,16 +29,22 @@
 	public bool AutoHide { get; set; } = true;
 
 	/// <summary>
+	/// The child content displayed in the body.
+	/// </summary>
+	[Parameter]
+	public RenderFragment? Body { get; set; }
+
+	/// <summary>
 	/// The title displayed in the header.
 	/// </summary>
 	[Parameter]
 	public string Caption { get; set => field = value.Trim(); } = string.Empty;
 
 	/// <summary>
-	/// The child content displayed in the body.
+	/// The child content.
 	/// </summary>
 	[Parameter]
-	public RenderFragment? ChildContent { get; set; }
+	public RenderFragment? ChildContent { get => Body; set => Body = value; }
 
 	/// <summary>
 	/// A contextual modifier.

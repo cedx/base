@@ -119,10 +119,10 @@ export class Toaster extends HTMLElement {
 	 * Shows a toast.
 	 * @param context The contextual modifier.
 	 * @param caption The title displayed in the toast header.
-	 * @param childContent The child content displayed in the toast body.
+	 * @param body The child content displayed in the toast body.
 	 */
-	notify(context: Context, caption: string, childContent: DocumentFragment|string): void {
-		this.show({context, caption, childContent});
+	notify(context: Context, caption: string, body: DocumentFragment|string): void {
+		this.show({context, caption, body});
 	}
 
 	/**
@@ -136,8 +136,8 @@ export class Toaster extends HTMLElement {
 
 		item.animation = toast.animation ?? this.animation;
 		item.autoHide = toast.autoHide ?? this.autoHide;
+		item.body = typeof toast.body == "string" ? createDocumentFragment(toast.body) : toast.body;
 		item.caption = toast.caption;
-		item.childContent = typeof toast.childContent == "string" ? createDocumentFragment(toast.childContent) : toast.childContent;
 		item.context = toast.context ?? this.context;
 		item.culture = toast.culture ?? this.culture;
 		item.delay = toast.delay ?? this.delay;
