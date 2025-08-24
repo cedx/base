@@ -6,42 +6,42 @@ export const DialogResult = Object.freeze({
 	/**
 	 * The dialog box does not return any value.
 	 */
-	None: 0,
+	None: "None",
 
 	/**
 	 * The return value of the dialog box is "OK".
 	 */
-	OK: 1,
+	OK: "OK",
 
 	/**
 	 * The return value of the dialog box is "Cancel".
 	 */
-	Cancel: 2,
+	Cancel: "Cancel",
 
 	/**
 	 * The return value of the dialog box is "Abort".
 	 */
-	Abort: 3,
+	Abort: "Abort",
 
 	/**
 	 * The return value of the dialog box is "Retry".
 	 */
-	Retry: 4,
+	Retry: "Retry",
 
 	/**
 	 * The return value of the dialog box is "Ignore".
 	 */
-	Ignore: 5,
+	Ignore: "Ignore",
 
 	/**
 	 * The return value of the dialog box is "Yes".
 	 */
-	Yes: 6,
+	Yes: "Yes",
 
 	/**
 	 * The return value of the dialog box is "No".
 	 */
-	No: 7
+	No: "No"
 });
 
 /**

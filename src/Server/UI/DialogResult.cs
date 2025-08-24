@@ -1,8 +1,11 @@
 namespace Belin.Base.UI;
 
+using System.Text.Json.Serialization;
+
 /// <summary>
 /// Specifies the return value of a dialog box.
 /// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum DialogResult {
 
 	/// <summary>
