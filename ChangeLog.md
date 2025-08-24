@@ -1,6 +1,7 @@
 # Changelog
 
 ## Version [0.16.0](https://github.com/cedx/base/compare/v0.15.3...v0.16.0)
+- Removed the `UI.Components.ComponentBase` class and the dependency on [Lit](https://lit.dev).
 - Renamed the `UI.MenuAlignment` enumeration to `Alignment`.
 - Added the `Center` value to the `UI.Alignment` enumeration.
 - Added the `UI.DialogResult` enumeration.
