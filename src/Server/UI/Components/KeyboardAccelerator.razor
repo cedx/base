@@ -15,7 +15,7 @@
 	/// Identifies the key for the keyboard accelerator.
 	/// </summary>
 	[Parameter, EditorRequired]
-	public required string Key { get; set; }
+	public required string Key { get; set => field = value.Trim(); }
 
 	/// <summary>
 	/// Identifies the modifiers for the keyboard accelerator.

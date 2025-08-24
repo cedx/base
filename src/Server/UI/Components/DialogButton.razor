@@ -25,7 +25,7 @@
 	/// The button label.
 	/// </summary>
 	[Parameter]
-	public string Label { get; set; } = string.Empty;
+	public string Label { get; set => field = value.Trim(); } = string.Empty;
 
 	/// <summary>
 	/// The button value.

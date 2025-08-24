@@ -32,7 +32,7 @@
 	/// The title displayed in the header.
 	/// </summary>
 	[Parameter]
-	public string Caption { get; set; } = string.Empty;
+	public string Caption { get; set => field = value.Trim(); } = string.Empty;
 
 	/// <summary>
 	/// The child content displayed in the body.

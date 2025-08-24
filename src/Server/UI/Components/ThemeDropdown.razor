@@ -36,11 +36,11 @@
 	/// The label of the dropdown menu.
 	/// </summary>
 	[Parameter]
-	public string Label { get; set; } = "Thème";
+	public string Label { get; set => field = value.Trim(); } = "Thème";
 
 	/// <summary>
 	/// The key of the storage entry providing the saved application theme.
 	/// </summary>
 	[Parameter]
-	public string StorageKey { get; set; } = "AppTheme";
+	public string StorageKey { get; set => field = value.Trim(); } = "AppTheme";
 }
