@@ -1,6 +1,6 @@
 import {Dropdown} from "bootstrap";
+import {Alignment} from "../Alignment.js";
 import {AppTheme, getIcon} from "../AppTheme.js";
-import {MenuAlignment} from "../MenuAlignment.js";
 
 /**
  * A dropdown menu for switching the application theme.
@@ -40,11 +40,11 @@ export class ThemeDropdown extends HTMLElement {
 	/**
 	 * The alignment of the dropdown menu.
 	 */
-	get alignment(): MenuAlignment {
-		const value = this.getAttribute("alignment") as MenuAlignment;
-		return Object.values(MenuAlignment).includes(value) ? value : MenuAlignment.End;
+	get alignment(): Alignment {
+		const value = this.getAttribute("alignment") as Alignment;
+		return Object.values(Alignment).includes(value) ? value : Alignment.End;
 	}
-	set alignment(value: MenuAlignment) {
+	set alignment(value: Alignment) {
 		this.setAttribute("alignment", value);
 	}
 
@@ -90,7 +90,7 @@ export class ThemeDropdown extends HTMLElement {
 	attributeChangedCallback(attribute: string, oldValue: string|null, newValue: string|null): void {
 		if (newValue != oldValue) switch (attribute) {
 			case "alignment":
-				this.#updateAlignment(Object.values(MenuAlignment).includes(newValue as MenuAlignment) ? newValue as MenuAlignment : MenuAlignment.End);
+				this.#updateAlignment(Object.values(Alignment).includes(newValue as Alignment) ? newValue as Alignment : Alignment.End);
 				break;
 			case "apptheme":
 				this.#updateAppTheme(Object.values(AppTheme).includes(newValue as AppTheme) ? newValue as AppTheme : AppTheme.System);
@@ -165,8 +165,8 @@ export class ThemeDropdown extends HTMLElement {
 	 * Updates the alignment of the dropdown menu.
 	 * @param value The new value.
 	 */
-	#updateAlignment(value: MenuAlignment): void {
-		this.querySelector(".dropdown-menu")!.classList.toggle("dropdown-menu-end", value == MenuAlignment.End);
+	#updateAlignment(value: Alignment): void {
+		this.querySelector(".dropdown-menu")!.classList.toggle("dropdown-menu-end", value == Alignment.End);
 	}
 
 	/**

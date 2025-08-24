@@ -6,7 +6,7 @@
 			<i class="icon icon-fill">@AppTheme.GetIcon()</i>
 			<span class="mx-1">@Label</span>
 		</button>
-		<ul class="dropdown-menu @(Alignment == MenuAlignment.End ? "dropdown-menu-end" : string.Empty)">
+		<ul class="dropdown-menu @(Alignment == Alignment.End ? "dropdown-menu-end" : string.Empty)">
 			@foreach (var theme in Enum.GetValues<AppTheme>()) {
 				<li>
 					<button class="dropdown-item d-flex align-items-center justify-content-between" data-theme="@theme">
@@ -24,7 +24,7 @@
 	/// The alignment of the dropdown menu.
 	/// </summary>
 	[Parameter]
-	public MenuAlignment Alignment { get; set; } = MenuAlignment.End;
+	public Alignment Alignment { get; set; } = Alignment.End;
 
 	/// <summary>
 	/// The current application theme.

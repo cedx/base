@@ -1,6 +1,8 @@
 # Changelog
 
 ## Version [0.16.0](https://github.com/cedx/base/compare/v0.15.3...v0.16.0)
+- Renamed the `UI.MenuAlignment` enumeration to `Alignment`.
+- Added the `Center` value to the `UI.Alignment` enumeration.
 - Added the `UI.DialogResult` enumeration.
 - Added the `UI.Components.DialogButton` and `UI.Components.MessageBox` components.
 
