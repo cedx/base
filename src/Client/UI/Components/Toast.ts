@@ -125,12 +125,13 @@ export class Toast extends HTMLElement {
 	/**
 	 * The icon displayed next to the caption.
 	 */
-	get icon(): string {
+	get icon(): string|null {
 		const value = this.getAttribute("icon") ?? "";
-		return value.trim() || getIcon(this.context);
+		return value.trim() || null;
 	}
-	set icon(value: string) {
-		this.setAttribute("icon", value);
+	set icon(value: string|null) {
+		if (value) this.setAttribute("icon", value);
+		else this.removeAttribute("icon");
 	}
 
 	/**
@@ -156,7 +157,7 @@ export class Toast extends HTMLElement {
 			case "caption": this.#updateCaption(newValue ?? ""); break;
 			case "context": this.#updateContext(Object.values(Context).includes(newValue as Context) ? newValue as Context : Context.Info); break;
 			case "culture": this.#formatter = new Intl.RelativeTimeFormat((newValue ?? "").trim() || navigator.language, {style: "long"}); break;
-			case "icon": this.#updateIcon(newValue ?? ""); break;
+			case "icon": this.#updateIcon(newValue); break;
 			case "open": this.#updateVisibility(newValue != null); break;
 			// No default
 		}
@@ -262,8 +263,8 @@ export class Toast extends HTMLElement {
 	 * Updates the icon displayed next to the caption.
 	 * @param value The new value.
 	 */
-	#updateIcon(value: string): void {
-		this.querySelector(".toast-header .icon")!.textContent = value.trim() || getIcon(this.context);
+	#updateIcon(value: string|null): void {
+		this.querySelector(".toast-header .icon")!.textContent = (value ?? "").trim() || getIcon(this.context);
 	}
 
 	/**

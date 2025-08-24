@@ -128,11 +128,13 @@ export class Toaster extends HTMLElement {
 	/**
 	 * The default icon displayed next to the captions.
 	 */
-	get icon(): string {
-		return (this.getAttribute("icon") ?? "").trim();
+	get icon(): string|null {
+		const value = this.getAttribute("icon") ?? "";
+		return value.trim() || null;
 	}
-	set icon(value: string) {
-		this.setAttribute("icon", value);
+	set icon(value: string|null) {
+		if (value) this.setAttribute("icon", value);
+		else this.removeAttribute("icon");
 	}
 
 	/**
