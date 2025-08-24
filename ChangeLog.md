@@ -4,6 +4,7 @@
 - Added the `UI.Components.IDialogButton` interface.
 - Added the `UI.Components.MessageBox` component.
 - Renamed the `UI.Components.Toast.ChildContent` property to `Body`.
+- Renamed the `UI.Components.Toast.hide()` method to `close()`.
 
 ## Version [0.16.0](https://github.com/cedx/base/compare/v0.15.3...v0.16.0)
 - Added the `Center` value to the `UI.Alignment` enumeration.

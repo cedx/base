@@ -226,9 +226,9 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
-	 * Hides this toast.
+	 * Closes this toast.
 	 */
-	hide(): void {
+	close(): void {
 		this.#toast.hide();
 	}
 
