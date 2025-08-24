@@ -3,7 +3,7 @@
 
 <toaster-container animation="@Animation" autoHide="@AutoHide" context="@Context" culture="@Culture" delay="@Delay" icon="@Icon" position="@Position">
 	<div class="toast-container p-3 @(Position.ToCss())">
-		<!-- Toasts -->
+		@ChildContent
 	</div>
 
 	<template>
@@ -23,6 +23,12 @@
 	/// </summary>
 	[Parameter]
 	public bool AutoHide { get; set; } = true;
+
+	/// <summary>
+	/// The child content.
+	/// </summary>
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
 
 	/// <summary>
 	/// The default contextual modifier.
