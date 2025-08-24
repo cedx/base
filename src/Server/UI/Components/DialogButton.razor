@@ -1,0 +1,41 @@
+@namespace Belin.Base.UI.Components
+@using Belin.Base.UI
+
+<dialog-button context="@Context" icon="@Icon" label="@Label" value="@Value" variant="@Variant">
+	<button class="btn @(Context is Context context ? $"btn-{context.ToCss()}" : string.Empty) @(Variant is Variant variant ? $"btn-{variant.ToCss()}" : string.Empty)" value="@Value">
+		<i class="icon @(Label.Length > 0 ? "me-1" : string.Empty)" hidden="@(Icon is null)">@Icon</i>
+		<span>@Label</span>
+	</button>
+</dialog-button>
+
+@code {
+	/// <summary>
+	/// A contextual modifier.
+	/// </summary>
+	[Parameter]
+	public Context? Context { get; set; }
+
+	/// <summary>
+	/// The button icon.
+	/// </summary>
+	[Parameter]
+	public string? Icon { get; set; }
+
+	/// <summary>
+	/// The button label.
+	/// </summary>
+	[Parameter]
+	public string Label { get; set; } = string.Empty;
+
+	/// <summary>
+	/// The button value.
+	/// </summary>
+	[Parameter, EditorRequired]
+	public required DialogResult Value { get; set; }
+
+	/// <summary>
+	/// A tone variant.
+	/// </summary>
+	[Parameter]
+	public Variant? Variant { get; set; }
+}
