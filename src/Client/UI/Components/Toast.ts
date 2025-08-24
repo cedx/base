@@ -235,7 +235,7 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
-	 * Updates the title displayed in the header.
+	 * Updates the contextual modifier.
 	 * @param value The new value.
 	 */
 	#updateContext(value: Context): void {
