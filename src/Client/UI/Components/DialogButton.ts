@@ -5,6 +5,37 @@ import {Variant, toCss as variantCss} from "../Variant.js";
 /**
  * Represents a dialog box button.
  */
+export interface IDialogButton {
+
+	/**
+	 * A contextual modifier.
+	 */
+	context?: Context|null;
+
+	/**
+	 * The button icon.
+	 */
+	icon?: string|null;
+
+	/**
+	 * The button label.
+	 */
+	label?: string;
+
+	/**
+	 * The button value.
+	 */
+	value?: DialogResult;
+
+	/**
+	 * A tone variant.
+	 */
+	variant?: Variant|null;
+}
+
+/**
+ * Represents a dialog box button.
+ */
 export class DialogButton extends HTMLElement {
 
 	/**

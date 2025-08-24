@@ -4,6 +4,52 @@ import {Context, getIcon, toCss} from "../Context.js";
 /**
  * Represents a notification.
  */
+export interface IToast {
+
+	/**
+	 * Value indicating whether to apply a fade transition.
+	 */
+	animation?: boolean;
+
+	/**
+	 * Value indicating whether to automatically hide the toast.
+	 */
+	autoHide?: boolean;
+
+	/**
+	 * The title displayed in the header.
+	 */
+	caption: string;
+
+	/**
+	 * The child content displayed in the body.
+	 */
+	childContent: DocumentFragment|string;
+
+	/**
+	 * The default contextual modifier.
+	 */
+	context?: Context;
+
+	/**
+	 * The culture used to format the relative time.
+	 */
+	culture?: Intl.Locale;
+
+	/**
+	 * The delay, in milliseconds, to hide the toast.
+	 */
+	delay?: number;
+
+	/**
+	 * The icon displayed next to the caption.
+	 */
+	icon?: string|null;
+}
+
+/**
+ * Represents a notification.
+ */
 export class Toast extends HTMLElement {
 
 	/**
