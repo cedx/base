@@ -1,4 +1,5 @@
 import {Context, toCss as contextCss} from "../Context.js";
+import {DialogResult} from "../DialogResult.js";
 import {Variant, toCss as variantCss} from "../Variant.js";
 
 /**
@@ -9,7 +10,7 @@ export class DialogButton extends HTMLElement {
 	/**
 	 * The list of observed attributes.
 	 */
-	static readonly observedAttributes = ["context", "icon", "label", "variant"];
+	static readonly observedAttributes = ["context", "icon", "label", "value", "variant"];
 
 	/**
 	 * Registers the component.
@@ -53,6 +54,17 @@ export class DialogButton extends HTMLElement {
 	}
 
 	/**
+	 * The button value.
+	 */
+	get value(): DialogResult {
+		const value = this.getAttribute("value") as DialogResult;
+		return Object.values(DialogResult).includes(value) ? value : DialogResult.None;
+	}
+	set value(value: DialogResult) {
+		this.setAttribute("value", value);
+	}
+
+	/**
 	 * A tone variant.
 	 */
 	get variant(): Variant|null {
@@ -75,6 +87,7 @@ export class DialogButton extends HTMLElement {
 			case "context": this.#updateContext(Object.values(Context).includes(newValue as Context) ? newValue as Context : null); break;
 			case "icon": this.#updateIcon(newValue); break;
 			case "label": this.#updateLabel(newValue ?? ""); break;
+			case "value": this.#updateValue(Object.values(DialogResult).includes(newValue as DialogResult) ? newValue as DialogResult : DialogResult.None); break;
 			case "variant": this.#updateVariant(Object.values(Variant).includes(newValue as Variant) ? newValue as Variant : null); break;
 			// No default
 		}
@@ -106,7 +119,18 @@ export class DialogButton extends HTMLElement {
 	 * @param value The new value.
 	 */
 	#updateLabel(value: string): void {
-		this.querySelector("span")!.textContent = value.trim();
+		const element = this.querySelector("span")!;
+		const label = value.trim();
+		element.textContent = label;
+		element.hidden = !label;
+	}
+
+	/**
+	 * Updates the button value.
+	 * @param value The new value.
+	 */
+	#updateValue(value: DialogResult): void {
+		this.querySelector("button")!.value = value;
 	}
 
 	/**
