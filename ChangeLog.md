@@ -1,9 +1,12 @@
 # Changelog
 
+## Version [0.18.0](https://github.com/cedx/base/compare/v0.17.0...v0.18.0)
+- Added the `UI.Components.MessageBox` component.
+
 ## Version [0.17.0](https://github.com/cedx/base/compare/v0.16.0...v0.17.0)
 - Added the `UI.Components.IDialogButton` interface.
-- Added the `UI.Components.MessageBox` component.
-- Renamed the `UI.Components.Toast.ChildContent` property to `Body`.
+- Added the `Body` property to the `UI.Components.Toast` component.
+- Added the `ChildContent` property to the `UI.Components.Toaster` component.
 - Renamed the `UI.Components.Toast.hide()` method to `close()`.
 
 ## Version [0.16.0](https://github.com/cedx/base/compare/v0.15.3...v0.16.0)
