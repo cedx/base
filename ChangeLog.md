@@ -1,11 +1,14 @@
 # Changelog
 
+## Version [0.17.0](https://github.com/cedx/base/compare/v0.16.0...v0.17.0)
+- Added the `UI.Components.MessageBox` component.
+
 ## Version [0.16.0](https://github.com/cedx/base/compare/v0.15.3...v0.16.0)
 - Removed the `UI.Components.ComponentBase` class and the dependency on [Lit](https://lit.dev).
 - Renamed the `UI.MenuAlignment` enumeration to `Alignment`.
 - Added the `Center` value to the `UI.Alignment` enumeration.
 - Added the `UI.DialogResult` enumeration.
-- Added the `UI.Components.DialogButton` and `UI.Components.MessageBox` components.
+- Added the `UI.Components.DialogButton` component.
 
 ## Version [0.15.3](https://github.com/cedx/base/compare/v0.15.2...v0.15.3)
 - Fixed a regression in the `UI.Components.ThemeDropdown` component.
