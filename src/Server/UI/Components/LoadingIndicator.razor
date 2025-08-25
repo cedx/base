@@ -1,6 +1,6 @@
 @namespace Belin.Base.UI.Components
 
-<loading-indicator hidden="@Hidden">
+<loading-indicator class="@(Hidden ? "hide" : "show")">
 	@ChildContent
 </loading-indicator>
 

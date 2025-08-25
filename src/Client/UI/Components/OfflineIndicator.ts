@@ -28,7 +28,10 @@ export class OfflineIndicator extends HTMLElement {
 	/**
 	 * Updates this component.
 	 */
-	readonly #update: () => void = () => this.hidden = navigator.onLine;
+	readonly #update: () => void = () => {
+		this.classList.toggle("hide", navigator.onLine);
+		this.classList.toggle("show", !navigator.onLine);
+	}
 }
 
 /**

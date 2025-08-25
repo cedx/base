@@ -23,7 +23,8 @@ export class LoadingIndicator extends HTMLElement {
 		this.#requestCount--;
 		if (this.#requestCount <= 0 || options.force) {
 			this.#requestCount = 0;
-			this.hidden = true;
+			this.classList.add("hide");
+			this.classList.remove("show");
 		}
 	}
 
@@ -32,7 +33,8 @@ export class LoadingIndicator extends HTMLElement {
 	 */
 	show(): void {
 		this.#requestCount++;
-		this.hidden = false;
+		this.classList.remove("hide");
+		this.classList.add("show");
 	}
 }
 
