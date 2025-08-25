@@ -117,9 +117,7 @@ export class Toaster extends HTMLElement {
 	 */
 	attributeChangedCallback(attribute: string, oldValue: string|null, newValue: string|null): void {
 		if (newValue != oldValue) switch (attribute) {
-			case "position":
-				this.#updatePosition(Object.values(Position).includes(newValue as Position) ? newValue as Position : Position.BottomEnd);
-				break;
+			case "position": this.#updatePosition(Object.values(Position).includes(newValue as Position) ? newValue as Position : Position.BottomEnd); break;
 			// No default
 		}
 	}

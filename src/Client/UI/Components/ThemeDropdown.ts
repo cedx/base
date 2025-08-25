@@ -89,15 +89,9 @@ export class ThemeDropdown extends HTMLElement {
 	 */
 	attributeChangedCallback(attribute: string, oldValue: string|null, newValue: string|null): void {
 		if (newValue != oldValue) switch (attribute) {
-			case "alignment":
-				this.#updateAlignment(Object.values(Alignment).includes(newValue as Alignment) ? newValue as Alignment : Alignment.End);
-				break;
-			case "apptheme":
-				this.#updateAppTheme(Object.values(AppTheme).includes(newValue as AppTheme) ? newValue as AppTheme : AppTheme.System);
-				break;
-			case "label":
-				this.#updateLabel(newValue ?? "");
-				break;
+			case "alignment": this.#updateAlignment(Object.values(Alignment).includes(newValue as Alignment) ? newValue as Alignment : Alignment.End); break;
+			case "apptheme": this.#updateAppTheme(Object.values(AppTheme).includes(newValue as AppTheme) ? newValue as AppTheme : AppTheme.System); break;
+			case "label": this.#updateLabel(newValue ?? ""); break;
 			// No default
 		}
 	}
