@@ -144,8 +144,8 @@ export class Toaster extends HTMLElement {
 	 * @param caption The title displayed in the toast header.
 	 * @param body The child content displayed in the toast body.
 	 */
-	show(toast: IToast|Context, caption?: string, body?: DocumentFragment|string): void {
-		if (typeof toast == "string") toast = {context: toast, caption, body} as IToast;
+	show(toast: IToast|Context, caption = "", body: DocumentFragment|string = ""): void {
+		if (typeof toast == "string") toast = {context: toast, caption, body};
 
 		const item = document.createElement("toaster-item");
 		const childContent = (this.#toastTemplate.cloneNode(true) as DocumentFragment).querySelector(".toast")!;
