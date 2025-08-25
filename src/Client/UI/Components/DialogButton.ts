@@ -58,7 +58,8 @@ export class DialogButton extends HTMLElement {
 		return Object.values(Context).includes(value) ? value : null;
 	}
 	set context(value: Context|null) {
-		this.toggleAttribute("context", Boolean(value));
+		if (value) this.setAttribute("context", value);
+		else this.removeAttribute("context");
 	}
 
 	/**
@@ -101,7 +102,8 @@ export class DialogButton extends HTMLElement {
 		return Object.values(Variant).includes(value) ? value : null;
 	}
 	set variant(value: Variant|null) {
-		this.toggleAttribute("context", Boolean(value));
+		if (value) this.setAttribute("variant", value);
+		else this.removeAttribute("variant");
 	}
 
 	/**
