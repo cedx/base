@@ -55,7 +55,7 @@ export class Toast extends HTMLElement {
 	/**
 	 * The list of observed attributes.
 	 */
-	static readonly observedAttributes = ["animation", "caption", "context", "culture", "icon", "open"];
+	static readonly observedAttributes = ["animation", "autohide", "caption", "context", "culture", "delay", "icon"];
 
 	/**
 	 * The time units.
@@ -197,11 +197,12 @@ export class Toast extends HTMLElement {
 	attributeChangedCallback(attribute: string, oldValue: string|null, newValue: string|null): void {
 		if (newValue != oldValue) switch (attribute) {
 			case "animation": this.#updateAnimation(newValue != null); break;
+			case "autohide": this.#updateAutoHide(newValue != null); break;
 			case "caption": this.#updateCaption(newValue ?? ""); break;
 			case "context": this.#updateContext(Object.values(Context).includes(newValue as Context) ? newValue as Context : Context.Info); break;
 			case "culture": this.#formatter = new Intl.RelativeTimeFormat((newValue ?? "").trim() || navigator.language, {style: "long"}); break;
+			case "delay": this.#updateDelay(Number(newValue)); break;
 			case "icon": this.#updateIcon(newValue); break;
-			case "open": this.#updateVisibility(newValue != null); break;
 			// No default
 		}
 	}
@@ -221,8 +222,8 @@ export class Toast extends HTMLElement {
 		toast.addEventListener("hidden.bs.toast", () => clearInterval(this.#timer));
 		toast.addEventListener("show.bs.toast", () => this.#timer = window.setInterval(this.#updateElapsedTime, 1_000));
 
-		const {animation, autoHide: autohide, delay} = this;
-		this.#toast = new BootstrapToast(toast, {animation, autohide, delay});
+		this.#toast = new BootstrapToast(toast);
+		if (this.open) this.show();
 	}
 
 	/**
@@ -261,11 +262,19 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
-	 * Updates the toast animation.
+	 * Updates the value indicating whether to apply a fade transition.
 	 * @param value The new value.
 	 */
 	#updateAnimation(value: boolean): void {
-		this.firstElementChild!.classList.toggle("fade", value);
+		(this.firstElementChild! as HTMLElement).dataset.bsAnimation = value ? "true" : "false";
+	}
+
+	/**
+	 * Updates the value indicating whether to automatically hide this toast.
+	 * @param value The new value.
+	 */
+	#updateAutoHide(value: boolean): void {
+		(this.firstElementChild! as HTMLElement).dataset.bsAutohide = value ? "true" : "false";
 	}
 
 	/**
@@ -293,6 +302,15 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
+	 * Updates the delay to hide the toast.
+	 * @param value The new value.
+	 */
+	#updateDelay(value: number): void {
+		const delay = Math.max(0, Number.isNaN(value) ? 5_000 : value);
+		(this.firstElementChild! as HTMLElement).dataset.bsDelay = delay.toString();
+	}
+
+	/**
 	 * Updates the label corresponding to the elapsed time.
 	 */
 	readonly #updateElapsedTime: () => void = () => {
@@ -306,14 +324,6 @@ export class Toast extends HTMLElement {
 	 */
 	#updateIcon(value: string|null): void {
 		this.querySelector(".toast-header .icon")!.textContent = (value ?? "").trim() || getIcon(this.context);
-	}
-
-	/**
-	 * Updates the toast visibility.
-	 * @param value The new value.
-	 */
-	#updateVisibility(value: boolean): void {
-		this.firstElementChild!.classList.toggle("show", value);
 	}
 }
 

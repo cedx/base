@@ -1,7 +1,7 @@
 @namespace Belin.Base.UI.Components
 @using System.Globalization
 
-<toaster-container animation="@Animation" autoHide="@AutoHide" context="@Context" culture="@Culture" delay="@Delay" icon="@Icon" position="@Position">
+<toaster-container animation="@Animation" autohide="@AutoHide" context="@Context" culture="@Culture" delay="@Delay" icon="@Icon" position="@Position">
 	<div class="toast-container p-3 @(Position.ToCss())">
 		@ChildContent
 	</div>
@@ -16,13 +16,13 @@
 	/// Value indicating whether to apply a fade transition.
 	/// </summary>
 	[Parameter]
-	public bool Animation { get; set; } = true;
+	public bool Animation { get; set; }
 
 	/// <summary>
 	/// Value indicating whether to automatically hide the toasts.
 	/// </summary>
 	[Parameter]
-	public bool AutoHide { get; set; } = true;
+	public bool AutoHide { get; set; }
 
 	/// <summary>
 	/// The child content.

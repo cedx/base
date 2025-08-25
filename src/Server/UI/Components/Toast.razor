@@ -1,8 +1,8 @@
 @namespace Belin.Base.UI.Components
 @using System.Globalization
 
-<toaster-item animation="@Animation" autoHide="@AutoHide" caption="@Caption" context="@Context" culture="@Culture" delay="@Delay" icon="@Icon" open="@Open">
-	<div class="toast @(Animation ? "fade" : string.Empty) @(Open ? "show" : string.Empty)">
+<toaster-item animation="@Animation" autohide="@AutoHide" caption="@Caption" context="@Context" culture="@Culture" delay="@Delay" icon="@Icon" open="@Open">
+	<div class="toast" data-bs-animation="@(Animation ? "true" : "false")" data-bs-autohide="@(AutoHide ? "true" : "false")" data-bs-delay="@Delay">
 		<div class="toast-header toast-header-@Context.ToCss()">
 			<i class="icon me-2 text-@Context.ToCss()">@(string.IsNullOrEmpty(Icon) ? Context.GetIcon() : Icon)</i>
 			<b class="me-auto">@Caption</b>
@@ -26,7 +26,7 @@
 	/// Value indicating whether to automatically hide this toast.
 	/// </summary>
 	[Parameter]
-	public bool AutoHide { get; set; } = true;
+	public bool AutoHide { get; set; }
 
 	/// <summary>
 	/// The child content displayed in the body.
