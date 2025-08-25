@@ -126,19 +126,13 @@ export class Toaster extends HTMLElement {
 
 	/**
 	 * Shows a toast.
-	 * @param context The contextual modifier.
+	 * @param toast The toast to show, or the contextual modifier.
 	 * @param caption The title displayed in the toast header.
 	 * @param body The child content displayed in the toast body.
 	 */
-	notify(context: Context, caption: string, body: DocumentFragment|string): void {
-		this.show({context, caption, body});
-	}
+	show(toast: IToast|Context, caption?: string, body?: DocumentFragment|string): void {
+		if (typeof toast == "string") toast = {context: toast, caption, body} as IToast;
 
-	/**
-	 * Shows the specified toast.
-	 * @param toast The toast to show.
-	 */
-	show(toast: IToast): void {
 		const item = document.createElement("toaster-item");
 		const childContent = (this.#toastTemplate.cloneNode(true) as DocumentFragment).querySelector(".toast")!;
 		childContent.addEventListener("hidden.bs.toast", () => item.remove());

@@ -2,6 +2,7 @@
 
 ## Version [0.18.0](https://github.com/cedx/base/compare/v0.17.0...v0.18.0)
 - Added the `UI.Components.MessageBox` component.
+- Removed the `notify()` method of the `UI.Components.Toaster` component.
 
 ## Version [0.17.0](https://github.com/cedx/base/compare/v0.16.0...v0.17.0)
 - Added the `UI.Components.IDialogButton` interface.
