@@ -2,14 +2,14 @@
 
 <theme-dropdown alignment="@Alignment" appTheme="@AppTheme" label="@Label" storageKey="@StorageKey">
 	<li class="nav-item dropdown">
-		<button class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+		<button class="dropdown-toggle nav-link" data-bs-toggle="dropdown" type="button">
 			<i class="icon icon-fill">@AppTheme.GetIcon()</i>
 			<span class="mx-1">@Label</span>
 		</button>
 		<ul class="dropdown-menu @(Alignment == Alignment.End ? "dropdown-menu-end" : string.Empty)">
 			@foreach (var theme in Enum.GetValues<AppTheme>()) {
 				<li>
-					<button class="dropdown-item d-flex align-items-center justify-content-between" data-theme="@theme">
+					<button class="dropdown-item d-flex align-items-center justify-content-between" data-theme="@theme" type="button">
 						<span><i class="icon icon-fill me-1">@theme.GetIcon()</i> @theme.GetLabel()</span>
 						@if (theme == AppTheme) { <i class="icon ms-3">check</i> }
 					</button>
