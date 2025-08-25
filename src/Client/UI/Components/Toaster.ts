@@ -126,6 +126,20 @@ export class Toaster extends HTMLElement {
 
 	/**
 	 * Shows a toast.
+	 * @param context The contextual modifier.
+	 * @param caption The title displayed in the toast header.
+	 * @param body The child content displayed in the toast body.
+	 */
+	show(context: Context, caption: string, body: DocumentFragment|string): void;
+
+	/**
+	 * Shows a toast.
+	 * @param toast The toast to show.
+	 */
+	show(toast: IToast): void;
+
+	/**
+	 * Shows a toast.
 	 * @param toast The toast to show, or the contextual modifier.
 	 * @param caption The title displayed in the toast header.
 	 * @param body The child content displayed in the toast body.
