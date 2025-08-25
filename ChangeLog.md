@@ -2,7 +2,7 @@
 
 ## Version [0.19.0](https://github.com/cedx/base/compare/v0.18.0...v0.19.0)
 - By default, the `LoadingIndicator` and `OfflineIndicator` UI components are no longer hidden.
-- Use CSS classes instead of the `hidden` attribute to show/hide the `LoadingIndicator` and `OfflineIndicator` UI components.
+- Use CSS classes instead of the `hidden` HTML attribute to show/hide the `LoadingIndicator` and `OfflineIndicator` UI components.
 
 ## Version [0.18.0](https://github.com/cedx/base/compare/v0.17.0...v0.18.0)
 - Added the `UI.Components.MessageBox` component.
