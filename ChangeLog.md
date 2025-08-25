@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.19.0](https://github.com/cedx/base/compare/v0.18.0...v0.19.0)
+- By default, the `LoadingIndicator` and `OfflineIndicator` UI components are no longer hidden.
+
 ## Version [0.18.0](https://github.com/cedx/base/compare/v0.17.0...v0.18.0)
 - Added the `UI.Components.MessageBox` component.
 - Removed the `notify()` method of the `UI.Components.Toaster` component.
