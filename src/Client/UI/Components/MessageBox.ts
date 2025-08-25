@@ -59,7 +59,7 @@ export class MessageBox extends HTMLElement {
 	/**
 	 * The list of observed attributes.
 	 */
-	static readonly observedAttributes = ["animation", "caption", "centered", "context", "icon", "scrollable"];
+	static readonly observedAttributes = ["animation", "caption", "centered", "context", "icon", "modal", "scrollable"];
 
 	/**
 	 * The template for a button.
@@ -167,6 +167,26 @@ export class MessageBox extends HTMLElement {
 	}
 
 	/**
+	 * Value indicating whether to this message box will not close when clicking outside of it.
+	 */
+	get modal(): boolean {
+		return this.hasAttribute("modal");
+	}
+	set modal(value: boolean) {
+		this.toggleAttribute("modal", value);
+	}
+
+	/**
+	 * Value indicating whether to initially show this message box.
+	 */
+	get open(): boolean {
+		return this.hasAttribute("open");
+	}
+	set open(value: boolean) {
+		this.toggleAttribute("open", value);
+	}
+
+	/**
 	 * Value indicating whether the body is scrollable.
 	 */
 	get scrollable(): boolean {
@@ -186,9 +206,10 @@ export class MessageBox extends HTMLElement {
 		if (newValue != oldValue) switch (attribute) {
 			case "animation": this.#updateAnimation(newValue != null); break;
 			case "caption": this.#updateCaption(newValue ?? ""); break;
-			case "centered": this.#updateCentering(newValue != null); break;
+			case "centered": this.#updateCentered(newValue != null); break;
 			case "context": this.#updateContext(Object.values(Context).includes(newValue as Context) ? newValue as Context : Context.Info); break;
 			case "icon": this.#updateIcon(newValue); break;
+			case "modal": this.#updateModal(newValue != null); break;
 			case "scrollable": this.#updateScrolling(newValue != null); break;
 			// No default
 		}
@@ -235,6 +256,7 @@ export class MessageBox extends HTMLElement {
 	 */
 	connectedCallback(): void {
 		this.#modal = new Modal(this.firstElementChild!);
+		if (this.open) void this.show();
 	}
 
 	/**
@@ -243,6 +265,13 @@ export class MessageBox extends HTMLElement {
 	disconnectedCallback(): void {
 		this.#modal.dispose();
 	}
+
+	/**
+	 * Shows a message.
+	 * @param message The message to show.
+	 * @returns The dialog box result.
+	 */
+	show(message?: IMessage): Promise<DialogResult>;
 
 	/**
 	 * Shows a message.
@@ -256,34 +285,29 @@ export class MessageBox extends HTMLElement {
 
 	/**
 	 * Shows a message.
-	 * @param message The message to show.
-	 * @returns The dialog box result.
-	 */
-	show(message: IMessage): Promise<DialogResult>;
-
-	/**
-	 * Shows a message.
 	 * @param message The message to show, or the contextual modifier.
 	 * @param caption The title displayed in the header.
 	 * @param body The child content displayed in the body.
 	 * @param buttons The buttons displayed in the footer.
 	 * @returns The dialog box result.
 	 */
-	show(message: IMessage|Context, caption = "", body: DocumentFragment|string = "", buttons: IDialogButton[] = []): Promise<DialogResult> {
+	show(message: IMessage|Context|null = null, caption = "", body: DocumentFragment|string = "", buttons: IDialogButton[] = []): Promise<DialogResult> {
 		if (typeof message == "string") {
 			const footer = document.createDocumentFragment();
 			footer.append(...buttons.map(button => this.#createButton(button)));
 			message = {context: message, caption, body, footer};
 		}
 
-		this.body = typeof message.body == "string" ? createDocumentFragment(message.body) : message.body;
-		this.caption = message.caption;
-		this.context = message.context ?? Context.Info;
-		this.icon = message.icon ?? getIcon(this.context);
+		if (typeof message == "object" && message) {
+			this.body = typeof message.body == "string" ? createDocumentFragment(message.body) : message.body;
+			this.caption = message.caption;
+			this.context = message.context ?? Context.Info;
+			this.icon = message.icon ?? getIcon(this.context);
 
-		const footer = typeof message.footer == "string" ? createDocumentFragment(message.footer) : (message.footer ?? document.createDocumentFragment());
-		for (const button of footer.querySelectorAll("button")) button.addEventListener("click", this.#close);
-		this.footer = footer;
+			const footer = typeof message.footer == "string" ? createDocumentFragment(message.footer) : (message.footer ?? document.createDocumentFragment());
+			for (const button of footer.querySelectorAll("button")) button.addEventListener("click", this.#close);
+			this.footer = footer;
+		}
 
 		const {promise, resolve} = Promise.withResolvers<DialogResult>();
 		this.#resolve = resolve;
@@ -298,7 +322,7 @@ export class MessageBox extends HTMLElement {
 	 */
 	readonly #close: (event: Event) => void = event => {
 		const button = (event.target as Element).closest("button")!;
-		this.close(Object.values(DialogResult).includes(button.value as DialogResult) ? button.value as DialogResult : DialogResult.None)
+		this.close(Object.values(DialogResult).includes(button.value as DialogResult) ? button.value as DialogResult : DialogResult.None);
 	}
 
 	/**
@@ -337,10 +361,10 @@ export class MessageBox extends HTMLElement {
 	}
 
 	/**
-	 * Updates the centering of this message box.
+	 * Updates the value indicating whether to vertically center this message box.
 	 * @param value The new value.
 	 */
-	#updateCentering(value: boolean): void {
+	#updateCentered(value: boolean): void {
 		this.querySelector(".modal-dialog")!.classList.toggle("modal-dialog-centered", value);
 	}
 
@@ -360,6 +384,14 @@ export class MessageBox extends HTMLElement {
 	 */
 	#updateIcon(value: string|null): void {
 		this.querySelector(".modal-body > .icon")!.textContent = (value ?? "").trim() || getIcon(this.context);
+	}
+
+	/**
+	 * Updates the value indicating whether to this message box will not close when clicking outside of it.
+	 * @param value The new value.
+	 */
+	#updateModal(value: boolean): void {
+		(this.firstElementChild! as HTMLElement).dataset.bsBackdrop = value ? "static" : "true";
 	}
 
 	/**

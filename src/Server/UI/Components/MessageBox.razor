@@ -1,7 +1,7 @@
 @namespace Belin.Base.UI.Components
 
-<message-box animation="@Animation" caption="@Caption" centered="@Centered" context="@Context" icon="@Icon">
-	<div class="modal @(Animation ? "fade" : string.Empty)" tabindex="-1">
+<message-box animation="@Animation" caption="@Caption" centered="@Centered" context="@Context" icon="@Icon" modal="@Modal" open="@Open">
+	<div class="modal @(Animation ? "fade" : string.Empty)" data-bs-backdrop="@(Modal ? "static" : "true")" tabindex="-1">
 		<div class="modal-dialog @(Centered ? "modal-dialog-centered" : string.Empty) @(Scrollable ? "modal-dialog-scrollable" : string.Empty)">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -72,6 +72,18 @@
 	/// </summary>
 	[Parameter]
 	public string? Icon { get; set; }
+
+	/// <summary>
+	/// Value indicating whether to this message box will not close when clicking outside of it.
+	/// </summary>
+	[Parameter]
+	public bool Modal { get; set; }
+
+	/// <summary>
+	/// Value indicating whether to initially show this message box.
+	/// </summary>
+	[Parameter]
+	public bool Open { get; set; }
 
 	/// <summary>
 	/// Value indicating whether the body is scrollable.
