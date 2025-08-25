@@ -174,7 +174,8 @@ export class Toast extends HTMLElement {
 		return value.trim() || null;
 	}
 	set icon(value: string|null) {
-		this.toggleAttribute("icon", Boolean(value));
+		if (value) this.setAttribute("icon", value);
+		else this.removeAttribute("icon");
 	}
 
 	/**
