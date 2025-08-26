@@ -77,7 +77,7 @@ export class DialogBox extends HTMLElement {
 	 * The child content displayed in the body.
 	 */
 	set body(value: DocumentFragment) { // eslint-disable-line accessor-pairs
-		this.querySelector(".modal-body > div")!.replaceChildren(...value.childNodes);
+		this.querySelector(".modal-body")!.replaceChildren(...value.childNodes);
 	}
 
 	/**
