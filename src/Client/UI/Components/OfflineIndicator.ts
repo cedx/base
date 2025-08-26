@@ -6,7 +6,7 @@ export class OfflineIndicator extends HTMLElement {
 	/**
 	 * The list of observed attributes.
 	 */
-	static readonly observedAttributes = ["animation"];
+	static readonly observedAttributes = ["fade"];
 
 	/**
 	 * Registers the component.
@@ -18,11 +18,11 @@ export class OfflineIndicator extends HTMLElement {
 	/**
 	 * Value indicating whether to apply a transition.
 	 */
-	get animation(): boolean {
-		return this.hasAttribute("animation");
+	get fade(): boolean {
+		return this.hasAttribute("fade");
 	}
-	set animation(value: boolean) {
-		this.toggleAttribute("animation", value);
+	set fade(value: boolean) {
+		this.toggleAttribute("fade", value);
 	}
 
 	/**
@@ -33,7 +33,7 @@ export class OfflineIndicator extends HTMLElement {
 	 */
 	attributeChangedCallback(attribute: string, oldValue: string|null, newValue: string|null): void {
 		if (newValue != oldValue) switch (attribute) {
-			case "animation": this.#updateAnimation(newValue != null); break;
+			case "fade": this.#updateFade(newValue != null); break;
 			// No default
 		}
 	}
@@ -42,29 +42,29 @@ export class OfflineIndicator extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
-		this.#update();
-		for (const event of ["online", "offline"]) addEventListener(event, this.#update);
+		this.#updateVisibility();
+		for (const event of ["online", "offline"]) addEventListener(event, this.#updateVisibility);
 	}
 
 	/**
 	 * Method invoked when this component is disconnected.
 	 */
 	disconnectedCallback(): void {
-		for (const event of ["online", "offline"]) removeEventListener(event, this.#update);
+		for (const event of ["online", "offline"]) removeEventListener(event, this.#updateVisibility);
 	}
 
 	/**
 	 * Updates the value indicating whether to apply a transition.
 	 * @param value The new value.
 	 */
-	#updateAnimation(value: boolean): void {
+	#updateFade(value: boolean): void {
 		this.classList.toggle("fade", value);
 	}
 
 	/**
-	 * Updates this component.
+	 * Updates the visibility of this component.
 	 */
-	readonly #update: () => void = () => {
+	readonly #updateVisibility: () => void = () => {
 		this.classList.toggle("hide", navigator.onLine);
 		this.classList.toggle("show", !navigator.onLine);
 	}

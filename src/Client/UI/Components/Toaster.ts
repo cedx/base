@@ -33,16 +33,6 @@ export class Toaster extends HTMLElement {
 	}
 
 	/**
-	 * Value indicating whether to apply a transition.
-	 */
-	get animation(): boolean {
-		return this.hasAttribute("animation");
-	}
-	set animation(value: boolean) {
-		this.toggleAttribute("animation", value);
-	}
-
-	/**
 	 * Value indicating whether to automatically hide the toasts.
 	 */
 	get autoHide(): boolean {
@@ -83,6 +73,16 @@ export class Toaster extends HTMLElement {
 	}
 	set delay(value: number) {
 		this.setAttribute("delay", value.toString());
+	}
+
+	/**
+	 * Value indicating whether to apply a transition.
+	 */
+	get fade(): boolean {
+		return this.hasAttribute("fade");
+	}
+	set fade(value: boolean) {
+		this.toggleAttribute("fade", value);
 	}
 
 	/**
@@ -149,13 +149,13 @@ export class Toaster extends HTMLElement {
 		childContent.addEventListener("hidden.bs.toast", () => item.remove());
 		item.appendChild(childContent);
 
-		item.animation = toast.animation ?? this.animation;
 		item.autoHide = toast.autoHide ?? this.autoHide;
 		item.body = toast.body;
 		item.caption = toast.caption;
 		item.context = toast.context ?? this.context;
 		item.culture = toast.culture ?? this.culture;
 		item.delay = toast.delay ?? this.delay;
+		item.fade = toast.fade ?? this.fade;
 		item.icon = toast.icon ?? this.icon;
 
 		this.firstElementChild!.appendChild(item);

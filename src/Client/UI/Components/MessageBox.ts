@@ -10,11 +10,6 @@ import type {DialogButton, IDialogButton} from "./DialogButton.js";
 export interface IMessage {
 
 	/**
-	 * Value indicating whether to apply a transition.
-	 */
-	animation?: boolean;
-
-	/**
 	 * The child content displayed in the body.
 	 */
 	body: DocumentFragment;
@@ -33,6 +28,11 @@ export interface IMessage {
 	 * A contextual modifier.
 	 */
 	context?: Context;
+
+	/**
+	 * Value indicating whether to apply a transition.
+	 */
+	fade?: boolean;
 
 	/**
 	 * The child content displayed in the footer.
@@ -58,7 +58,7 @@ export class MessageBox extends HTMLElement {
 	/**
 	 * The list of observed attributes.
 	 */
-	static readonly observedAttributes = ["animation", "caption", "centered", "context", "icon", "modal", "scrollable"];
+	static readonly observedAttributes = ["caption", "centered", "context", "fade", "icon", "modal", "scrollable"];
 
 	/**
 	 * The template for a button.
@@ -98,16 +98,6 @@ export class MessageBox extends HTMLElement {
 	}
 
 	/**
-	 * Value indicating whether to apply a transition.
-	 */
-	get animation(): boolean {
-		return this.hasAttribute("animation");
-	}
-	set animation(value: boolean) {
-		this.toggleAttribute("animation", value);
-	}
-
-	/**
 	 * The child content displayed in the body.
 	 */
 	set body(value: DocumentFragment) { // eslint-disable-line accessor-pairs
@@ -143,6 +133,16 @@ export class MessageBox extends HTMLElement {
 	}
 	set context(value: Context) {
 		this.setAttribute("context", value);
+	}
+
+	/**
+	 * Value indicating whether to apply a transition.
+	 */
+	get fade(): boolean {
+		return this.hasAttribute("fade");
+	}
+	set fade(value: boolean) {
+		this.toggleAttribute("fade", value);
 	}
 
 	/**
@@ -203,13 +203,13 @@ export class MessageBox extends HTMLElement {
 	 */
 	attributeChangedCallback(attribute: string, oldValue: string|null, newValue: string|null): void {
 		if (newValue != oldValue) switch (attribute) {
-			case "animation": this.#updateAnimation(newValue != null); break;
 			case "caption": this.#updateCaption(newValue ?? ""); break;
 			case "centered": this.#updateCentered(newValue != null); break;
 			case "context": this.#updateContext(Object.values(Context).includes(newValue as Context) ? newValue as Context : Context.Info); break;
 			case "icon": this.#updateIcon(newValue); break;
 			case "modal": this.#updateModal(newValue != null); break;
-			case "scrollable": this.#updateScrolling(newValue != null); break;
+			case "fade": this.#updateFade(newValue != null); break;
+			case "scrollable": this.#updateScrollable(newValue != null); break;
 			// No default
 		}
 	}
@@ -344,14 +344,6 @@ export class MessageBox extends HTMLElement {
 	}
 
 	/**
-	 * Updates the message box animation.
-	 * @param value The new value.
-	 */
-	#updateAnimation(value: boolean): void {
-		this.firstElementChild!.classList.toggle("fade", value);
-	}
-
-	/**
 	 * Updates the title displayed in the header.
 	 * @param value The new value.
 	 */
@@ -378,6 +370,14 @@ export class MessageBox extends HTMLElement {
 	}
 
 	/**
+	 * Updates the value indicating whether to apply a transition.
+	 * @param value The new value.
+	 */
+	#updateFade(value: boolean): void {
+		this.firstElementChild!.classList.toggle("fade", value);
+	}
+
+	/**
 	 * Updates the icon displayed next to the body.
 	 * @param value The new value.
 	 */
@@ -394,10 +394,10 @@ export class MessageBox extends HTMLElement {
 	}
 
 	/**
-	 * Updates the body scrolling.
+	 * Updates the value indicating whether the body is scrollable.
 	 * @param value The new value.
 	 */
-	#updateScrolling(value: boolean): void {
+	#updateScrollable(value: boolean): void {
 		this.querySelector(".modal-dialog")!.classList.toggle("modal-dialog-scrollable", value);
 	}
 }

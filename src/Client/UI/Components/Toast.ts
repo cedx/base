@@ -7,11 +7,6 @@ import {Context, getIcon, toCss} from "../Context.js";
 export interface IToast {
 
 	/**
-	 * Value indicating whether to apply a transition.
-	 */
-	animation?: boolean;
-
-	/**
 	 * Value indicating whether to automatically hide the toast.
 	 */
 	autoHide?: boolean;
@@ -42,6 +37,11 @@ export interface IToast {
 	delay?: number;
 
 	/**
+	 * Value indicating whether to apply a transition.
+	 */
+	fade?: boolean;
+
+	/**
 	 * The icon displayed next to the caption.
 	 */
 	icon?: string|null;
@@ -55,7 +55,7 @@ export class Toast extends HTMLElement {
 	/**
 	 * The list of observed attributes.
 	 */
-	static readonly observedAttributes = ["animation", "autohide", "caption", "context", "culture", "delay", "icon"];
+	static readonly observedAttributes = ["autohide", "caption", "context", "culture", "delay", "fade", "icon"];
 
 	/**
 	 * The time units.
@@ -87,16 +87,6 @@ export class Toast extends HTMLElement {
 	 */
 	static {
 		customElements.define("toaster-item", this);
-	}
-
-	/**
-	 * Value indicating whether to apply a transition.
-	 */
-	get animation(): boolean {
-		return this.hasAttribute("animation");
-	}
-	set animation(value: boolean) {
-		this.toggleAttribute("animation", value);
 	}
 
 	/**
@@ -167,6 +157,16 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
+	 * Value indicating whether to apply a transition.
+	 */
+	get fade(): boolean {
+		return this.hasAttribute("fade");
+	}
+	set fade(value: boolean) {
+		this.toggleAttribute("fade", value);
+	}
+
+	/**
 	 * The icon displayed next to the caption.
 	 */
 	get icon(): string|null {
@@ -196,12 +196,12 @@ export class Toast extends HTMLElement {
 	 */
 	attributeChangedCallback(attribute: string, oldValue: string|null, newValue: string|null): void {
 		if (newValue != oldValue) switch (attribute) {
-			case "animation": this.#updateAnimation(newValue != null); break;
 			case "autohide": this.#updateAutoHide(newValue != null); break;
 			case "caption": this.#updateCaption(newValue ?? ""); break;
 			case "context": this.#updateContext(Object.values(Context).includes(newValue as Context) ? newValue as Context : Context.Info); break;
 			case "culture": this.#formatter = new Intl.RelativeTimeFormat((newValue ?? "").trim() || navigator.language, {style: "long"}); break;
 			case "delay": this.#updateDelay(Number(newValue)); break;
+			case "fade": this.#updateFade(newValue != null); break;
 			case "icon": this.#updateIcon(newValue); break;
 			// No default
 		}
@@ -262,14 +262,6 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
-	 * Updates the value indicating whether to apply a transition.
-	 * @param value The new value.
-	 */
-	#updateAnimation(value: boolean): void {
-		(this.firstElementChild! as HTMLElement).dataset.bsAnimation = value ? "true" : "false";
-	}
-
-	/**
 	 * Updates the value indicating whether to automatically hide this toast.
 	 * @param value The new value.
 	 */
@@ -317,6 +309,14 @@ export class Toast extends HTMLElement {
 		const {elapsedTime} = this;
 		this.querySelector(".toast-header small")!.textContent = elapsedTime > 0 ? this.#formatTime(elapsedTime / 1_000) : "";
 	};
+
+	/**
+	 * Updates the value indicating whether to apply a transition.
+	 * @param value The new value.
+	 */
+	#updateFade(value: boolean): void {
+		(this.firstElementChild! as HTMLElement).dataset.bsAnimation = value ? "true" : "false";
+	}
 
 	/**
 	 * Updates the icon displayed next to the caption.

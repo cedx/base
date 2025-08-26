@@ -1,8 +1,8 @@
 @namespace Belin.Base.UI.Components
 @using System.Globalization
 
-<toaster-item animation="@Animation" autohide="@AutoHide" caption="@Caption" context="@Context" culture="@Culture" delay="@Delay" icon="@Icon" open="@Open">
-	<div class="toast" data-bs-animation="@(Animation ? "true" : "false")" data-bs-autohide="@(AutoHide ? "true" : "false")" data-bs-delay="@Delay">
+<toaster-item autohide="@AutoHide" caption="@Caption" context="@Context" culture="@Culture" delay="@Delay" fade="@Fade" icon="@Icon" open="@Open">
+	<div class="toast" data-bs-animation="@(Fade ? "true" : "false")" data-bs-autohide="@(AutoHide ? "true" : "false")" data-bs-delay="@Delay">
 		<div class="toast-header toast-header-@Context.ToCss()">
 			<i class="icon me-2 text-@Context.ToCss()">@(string.IsNullOrEmpty(Icon) ? Context.GetIcon() : Icon)</i>
 			<b class="me-auto">@Caption</b>
@@ -16,12 +16,6 @@
 </toaster-item>
 
 @code {
-	/// <summary>
-	/// Value indicating whether to apply a transition.
-	/// </summary>
-	[Parameter]
-	public bool Animation { get; set; }
-
 	/// <summary>
 	/// Value indicating whether to automatically hide this toast.
 	/// </summary>
@@ -63,6 +57,12 @@
 	/// </summary>
 	[Parameter]
 	public int Delay { get; set; } = 5_000;
+
+	/// <summary>
+	/// Value indicating whether to apply a transition.
+	/// </summary>
+	[Parameter]
+	public bool Fade { get; set; }
 
 	/// <summary>
 	/// The icon displayed next to the caption.

@@ -1,7 +1,7 @@
 @namespace Belin.Base.UI.Components
 
-<message-box animation="@Animation" caption="@Caption" centered="@Centered" context="@Context" icon="@Icon" modal="@Modal" open="@Open">
-	<div class="modal @(Animation ? "fade" : string.Empty)" data-bs-backdrop="@(Modal ? "static" : "true")" tabindex="-1">
+<message-box caption="@Caption" centered="@Centered" context="@Context" fade="@Fade" icon="@Icon" modal="@Modal" open="@Open">
+	<div class="modal @(Fade ? "fade" : string.Empty)" data-bs-backdrop="@(Modal ? "static" : "true")" tabindex="-1">
 		<div class="modal-dialog @(Centered ? "modal-dialog-centered" : string.Empty) @(Scrollable ? "modal-dialog-scrollable" : string.Empty)">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -25,12 +25,6 @@
 </message-box>
 
 @code {
-	/// <summary>
-	/// Value indicating whether to apply a transition.
-	/// </summary>
-	[Parameter]
-	public bool Animation { get; set; }
-
 	/// <summary>
 	/// The child content displayed in the body.
 	/// </summary>
@@ -60,6 +54,12 @@
 	/// </summary>
 	[Parameter]
 	public Context Context { get; set; } = Context.Info;
+
+	/// <summary>
+	/// Value indicating whether to apply a transition.
+	/// </summary>
+	[Parameter]
+	public bool Fade { get; set; }
 
 	/// <summary>
 	/// The child content displayed in the footer.
