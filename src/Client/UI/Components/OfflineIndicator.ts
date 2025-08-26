@@ -65,6 +65,22 @@ export class OfflineIndicator extends HTMLElement {
 	}
 
 	/**
+	 * Hides this offline indicator.
+	 */
+	hide(): void {
+		this.classList.remove("show");
+		this.classList.add("hide");
+	}
+
+	/**
+	 * Shows this offline indicator.
+	 */
+	show(): void {
+		this.classList.remove("hide");
+		this.classList.add("show");
+	}
+
+	/**
 	 * Updates the value indicating whether to apply a transition.
 	 * @param value The new value.
 	 */
