@@ -179,7 +179,7 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
-	 * Value indicating whether to initially show this toast.
+	 * Value indicating whether to initially show this component.
 	 */
 	get open(): boolean {
 		return this.hasAttribute("open");

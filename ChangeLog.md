@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.21.0](https://github.com/cedx/base/compare/v0.20.0...v0.21.0)
+- Renamed the `Animation` property of UI components to `Fade`.
+
 ## Version [0.20.0](https://github.com/cedx/base/compare/v0.19.0...v0.20.0)
 - Added the `Animation` property to the `LoadingIndicator` and `OfflineIndicator` UI components.
 - Added the `css()` and `html()` tag functions.

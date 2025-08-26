@@ -176,7 +176,7 @@ export class MessageBox extends HTMLElement {
 	}
 
 	/**
-	 * Value indicating whether to initially show this message box.
+	 * Value indicating whether to initially show this component.
 	 */
 	get open(): boolean {
 		return this.hasAttribute("open");
