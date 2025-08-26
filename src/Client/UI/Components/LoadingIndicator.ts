@@ -25,6 +25,7 @@ export class LoadingIndicator extends HTMLElement {
 			this.#requestCount = 0;
 			this.classList.add("hide");
 			this.classList.remove("show");
+			document.body.classList.remove("loading");
 		}
 	}
 
@@ -35,6 +36,7 @@ export class LoadingIndicator extends HTMLElement {
 		this.#requestCount++;
 		this.classList.remove("hide");
 		this.classList.add("show");
+		document.body.classList.add("loading");
 	}
 }
 
