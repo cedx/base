@@ -38,12 +38,3 @@ export function html(fragments: TemplateStringsArray, ...values: unknown[]): Doc
 	parts.push(fragments.at(-1));
 	return document.createRange().createContextualFragment(parts.join(""));
 }
-
-/**
- * Returns a promise that resolves when the specified element has finished all its animations.
- * @param element The target element.
- * @returns The element animations.
- */
-export function waitForAnimations(element: Element): Promise<Array<PromiseSettledResult<Animation>>> {
-	return Promise.allSettled(element.getAnimations().map(animation => animation.finished));
-}
