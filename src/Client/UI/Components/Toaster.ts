@@ -1,5 +1,4 @@
 import {Context} from "../Context.js";
-import {createDocumentFragment} from "../ElementExtensions.js";
 import {Position, toCss} from "../Position.js";
 import type {IToast} from "./Toast.js";
 
@@ -128,7 +127,7 @@ export class Toaster extends HTMLElement {
 	 * @param caption The title displayed in the toast header.
 	 * @param body The child content displayed in the toast body.
 	 */
-	show(context: Context, caption: string, body: DocumentFragment|string): void;
+	show(context: Context, caption: string, body: DocumentFragment): void;
 
 	/**
 	 * Shows a toast.
@@ -142,7 +141,7 @@ export class Toaster extends HTMLElement {
 	 * @param caption The title displayed in the toast header.
 	 * @param body The child content displayed in the toast body.
 	 */
-	show(toast: IToast|Context, caption = "", body: DocumentFragment|string = ""): void {
+	show(toast: IToast|Context, caption = "", body = document.createDocumentFragment()): void {
 		if (typeof toast == "string") toast = {context: toast, caption, body};
 
 		const item = document.createElement("toaster-item");
@@ -152,7 +151,7 @@ export class Toaster extends HTMLElement {
 
 		item.animation = toast.animation ?? this.animation;
 		item.autoHide = toast.autoHide ?? this.autoHide;
-		item.body = typeof toast.body == "string" ? createDocumentFragment(toast.body) : toast.body;
+		item.body = toast.body;
 		item.caption = toast.caption;
 		item.context = toast.context ?? this.context;
 		item.culture = toast.culture ?? this.culture;

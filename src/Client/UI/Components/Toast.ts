@@ -19,7 +19,7 @@ export interface IToast {
 	/**
 	 * The child content displayed in the body.
 	 */
-	body: DocumentFragment|string;
+	body: DocumentFragment;
 
 	/**
 	 * The title displayed in the header.

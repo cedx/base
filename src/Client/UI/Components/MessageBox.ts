@@ -1,7 +1,6 @@
 import {Modal} from "bootstrap";
 import {Context, getIcon, toCss} from "../Context.js";
 import {DialogResult} from "../DialogResult.js";
-import {createDocumentFragment} from "../ElementExtensions.js";
 import {Variant} from "../Variant.js";
 import type {DialogButton, IDialogButton} from "./DialogButton.js";
 
@@ -18,7 +17,7 @@ export interface IMessage {
 	/**
 	 * The child content displayed in the body.
 	 */
-	body: DocumentFragment|string;
+	body: DocumentFragment;
 
 	/**
 	 * The title displayed in the header.
@@ -38,7 +37,7 @@ export interface IMessage {
 	/**
 	 * The child content displayed in the footer.
 	 */
-	footer?: DocumentFragment|string;
+	footer?: DocumentFragment;
 
 	/**
 	 * The icon displayed next to the body.
@@ -222,7 +221,7 @@ export class MessageBox extends HTMLElement {
 	 * @param body The child content displayed in the body.
 	 * @returns The dialog box result.
 	 */
-	async alert(context: Context, caption: string, body: DocumentFragment|string): Promise<DialogResult> {
+	async alert(context: Context, caption: string, body: DocumentFragment): Promise<DialogResult> {
 		return await this.show(context, caption, body, [
 			{label: "OK", value: DialogResult.OK, variant: Variant.Primary}
 		]);
@@ -244,7 +243,7 @@ export class MessageBox extends HTMLElement {
 	 * @param body The child content displayed in the body.
 	 * @returns The dialog box result.
 	 */
-	async confirm(context: Context, caption: string, body: DocumentFragment|string): Promise<DialogResult> {
+	async confirm(context: Context, caption: string, body: DocumentFragment): Promise<DialogResult> {
 		return await this.show(context, caption, body, [
 			{label: "OK", value: DialogResult.OK, variant: Variant.Primary},
 			{label: "Annuler", value: DialogResult.Cancel, variant: Variant.Secondary}
@@ -281,7 +280,7 @@ export class MessageBox extends HTMLElement {
 	 * @param buttons The buttons displayed in the footer.
 	 * @returns The dialog box result.
 	 */
-	show(context: Context, caption: string, body: DocumentFragment|string, buttons?: IDialogButton[]): Promise<DialogResult>;
+	show(context: Context, caption: string, body: DocumentFragment, buttons?: IDialogButton[]): Promise<DialogResult>;
 
 	/**
 	 * Shows a message.
@@ -291,7 +290,7 @@ export class MessageBox extends HTMLElement {
 	 * @param buttons The buttons displayed in the footer.
 	 * @returns The dialog box result.
 	 */
-	show(message: IMessage|Context|null = null, caption = "", body: DocumentFragment|string = "", buttons: IDialogButton[] = []): Promise<DialogResult> {
+	show(message: IMessage|Context|null = null, caption = "", body = document.createDocumentFragment(), buttons: IDialogButton[] = []): Promise<DialogResult> {
 		if (typeof message == "string") {
 			const footer = document.createDocumentFragment();
 			footer.append(...buttons.map(button => this.#createButton(button)));
@@ -299,12 +298,12 @@ export class MessageBox extends HTMLElement {
 		}
 
 		if (typeof message == "object" && message) {
-			this.body = typeof message.body == "string" ? createDocumentFragment(message.body) : message.body;
+			this.body = message.body;
 			this.caption = message.caption;
 			this.context = message.context ?? Context.Info;
 			this.icon = message.icon ?? getIcon(this.context);
 
-			const footer = typeof message.footer == "string" ? createDocumentFragment(message.footer) : (message.footer ?? document.createDocumentFragment());
+			const footer = message.footer ?? document.createDocumentFragment();
 			for (const button of footer.querySelectorAll("button")) button.addEventListener("click", this.#close);
 			this.footer = footer;
 		}
