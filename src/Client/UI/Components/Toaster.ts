@@ -34,7 +34,7 @@ export class Toaster extends HTMLElement {
 	}
 
 	/**
-	 * Value indicating whether to apply a fade transition.
+	 * Value indicating whether to apply a transition.
 	 */
 	get animation(): boolean {
 		return this.hasAttribute("animation");

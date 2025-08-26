@@ -11,7 +11,7 @@ import type {DialogButton, IDialogButton} from "./DialogButton.js";
 export interface IMessage {
 
 	/**
-	 * Value indicating whether to apply a fade transition.
+	 * Value indicating whether to apply a transition.
 	 */
 	animation?: boolean;
 
@@ -99,7 +99,7 @@ export class MessageBox extends HTMLElement {
 	}
 
 	/**
-	 * Value indicating whether to apply a fade transition.
+	 * Value indicating whether to apply a transition.
 	 */
 	get animation(): boolean {
 		return this.hasAttribute("animation");

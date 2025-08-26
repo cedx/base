@@ -7,7 +7,7 @@ import {Context, getIcon, toCss} from "../Context.js";
 export interface IToast {
 
 	/**
-	 * Value indicating whether to apply a fade transition.
+	 * Value indicating whether to apply a transition.
 	 */
 	animation?: boolean;
 
@@ -90,7 +90,7 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
-	 * Value indicating whether to apply a fade transition.
+	 * Value indicating whether to apply a transition.
 	 */
 	get animation(): boolean {
 		return this.hasAttribute("animation");
@@ -262,7 +262,7 @@ export class Toast extends HTMLElement {
 	}
 
 	/**
-	 * Updates the value indicating whether to apply a fade transition.
+	 * Updates the value indicating whether to apply a transition.
 	 * @param value The new value.
 	 */
 	#updateAnimation(value: boolean): void {
