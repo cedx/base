@@ -31,6 +31,16 @@ export class LoadingIndicator extends HTMLElement {
 	}
 
 	/**
+	 * Value indicating whether to initially show this component.
+	 */
+	get open(): boolean {
+		return this.hasAttribute("open");
+	}
+	set open(value: boolean) {
+		this.toggleAttribute("open", value);
+	}
+
+	/**
 	 * Method invoked when an attribute has been changed.
 	 * @param attribute The attribute name.
 	 * @param oldValue The previous attribute value.
@@ -44,7 +54,14 @@ export class LoadingIndicator extends HTMLElement {
 	}
 
 	/**
-	 * Hides the loading indicator.
+	 * Method invoked when this component is connected.
+	 */
+	connectedCallback(): void {
+		if (this.open) this.show();
+	}
+
+	/**
+	 * Hides this loading indicator.
 	 * @param options Value indicating whether to force the loading indicator to hide.
 	 */
 	hide(options: {force?: boolean} = {}): void {
@@ -58,7 +75,7 @@ export class LoadingIndicator extends HTMLElement {
 	}
 
 	/**
-	 * Shows the loading indicator.
+	 * Shows this loading indicator.
 	 */
 	show(): void {
 		this.#requestCount++;

@@ -26,6 +26,16 @@ export class OfflineIndicator extends HTMLElement {
 	}
 
 	/**
+	 * Value indicating whether to initially show this component.
+	 */
+	get open(): boolean {
+		return this.hasAttribute("open");
+	}
+	set open(value: boolean) {
+		this.toggleAttribute("open", value);
+	}
+
+	/**
 	 * Method invoked when an attribute has been changed.
 	 * @param attribute The attribute name.
 	 * @param oldValue The previous attribute value.
@@ -42,8 +52,9 @@ export class OfflineIndicator extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
-		this.#updateVisibility();
 		for (const event of ["online", "offline"]) addEventListener(event, this.#updateVisibility);
+		if (this.open) this.show();
+		else this.#updateVisibility();
 	}
 
 	/**
@@ -65,8 +76,8 @@ export class OfflineIndicator extends HTMLElement {
 	 * Updates the visibility of this component.
 	 */
 	readonly #updateVisibility: () => void = () => {
-		this.classList.toggle("hide", navigator.onLine);
-		this.classList.toggle("show", !navigator.onLine);
+		if (navigator.onLine) this.hide();
+		else this.show();
 	}
 }
 

@@ -1,6 +1,6 @@
 @namespace Belin.Base.UI.Components
 
-<loading-indicator class="@(Fade ? "fade" : string.Empty) @(Hidden ? "hide" : "show")" fade="@Fade">
+<loading-indicator class="@(Fade ? "fade" : string.Empty) @(Open ? "show" : "hide")" fade="@Fade" open="@Open">
 	@ChildContent
 </loading-indicator>
 
@@ -18,8 +18,8 @@
 	public bool Fade { get; set; }
 
 	/// <summary>
-	/// Value indicating whether this component is hidden.
+	/// Value indicating whether to initially show this component.
 	/// </summary>
 	[Parameter]
-	public bool Hidden { get; set; }
+	public bool Open { get; set; }
 }
