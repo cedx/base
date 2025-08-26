@@ -1,4 +1,4 @@
-import * as FileExtensions from "@cedx/base/FileExtensions.js";
+import {toDataUrl} from "@cedx/base/FileExtensions.js";
 import {assert} from "chai";
 
 /**
@@ -8,7 +8,7 @@ describe("FileExtensions", () => {
 	describe("toDataUrl()", () => {
 		it("should convert the specified file to a data URL", async () => {
 			const file = new File(["Hello World!"], "hello.txt", {type: "text/plain"});
-			assert.equal((await FileExtensions.toDataUrl(file)).href, "data:text/plain;base64,SGVsbG8gV29ybGQh");
+			assert.equal((await toDataUrl(file)).href, "data:text/plain;base64,SGVsbG8gV29ybGQh");
 		});
 	});
 });
