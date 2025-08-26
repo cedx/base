@@ -4,6 +4,11 @@
 export class LoadingIndicator extends HTMLElement {
 
 	/**
+	 * The list of observed attributes.
+	 */
+	static readonly observedAttributes = ["animation"];
+
+	/**
 	 * The number of concurrent HTTP requests.
 	 */
 	#requestCount = 0;
@@ -13,6 +18,29 @@ export class LoadingIndicator extends HTMLElement {
 	 */
 	static {
 		customElements.define("loading-indicator", this);
+	}
+
+	/**
+	 * Value indicating whether to apply a transition.
+	 */
+	get animation(): boolean {
+		return this.hasAttribute("animation");
+	}
+	set animation(value: boolean) {
+		this.toggleAttribute("animation", value);
+	}
+
+	/**
+	 * Method invoked when an attribute has been changed.
+	 * @param attribute The attribute name.
+	 * @param oldValue The previous attribute value.
+	 * @param newValue The new attribute value.
+	 */
+	attributeChangedCallback(attribute: string, oldValue: string|null, newValue: string|null): void {
+		if (newValue != oldValue) switch (attribute) {
+			case "animation": this.#updateAnimation(newValue != null); break;
+			// No default
+		}
 	}
 
 	/**
@@ -37,6 +65,14 @@ export class LoadingIndicator extends HTMLElement {
 		this.classList.remove("hide");
 		this.classList.add("show");
 		document.body.classList.add("loading");
+	}
+
+	/**
+	 * Updates the value indicating whether to apply a transition.
+	 * @param value The new value.
+	 */
+	#updateAnimation(value: boolean): void {
+		this.classList.toggle("fade", value);
 	}
 }
 

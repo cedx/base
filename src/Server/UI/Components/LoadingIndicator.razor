@@ -1,10 +1,16 @@
 @namespace Belin.Base.UI.Components
 
-<loading-indicator class="@(Hidden ? "hide" : "show")">
+<loading-indicator animation="@Animation" class="@(Animation ? "fade" : string.Empty) @(Hidden ? "hide" : "show")">
 	@ChildContent
 </loading-indicator>
 
 @code {
+	/// <summary>
+	/// Value indicating whether to apply a transition.
+	/// </summary>
+	[Parameter]
+	public bool Animation { get; set; }
+
 	/// <summary>
 	/// The child content.
 	/// </summary>

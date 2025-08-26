@@ -4,10 +4,38 @@
 export class OfflineIndicator extends HTMLElement {
 
 	/**
+	 * The list of observed attributes.
+	 */
+	static readonly observedAttributes = ["animation"];
+
+	/**
 	 * Registers the component.
 	 */
 	static {
 		customElements.define("offline-indicator", this);
+	}
+
+	/**
+	 * Value indicating whether to apply a transition.
+	 */
+	get animation(): boolean {
+		return this.hasAttribute("animation");
+	}
+	set animation(value: boolean) {
+		this.toggleAttribute("animation", value);
+	}
+
+	/**
+	 * Method invoked when an attribute has been changed.
+	 * @param attribute The attribute name.
+	 * @param oldValue The previous attribute value.
+	 * @param newValue The new attribute value.
+	 */
+	attributeChangedCallback(attribute: string, oldValue: string|null, newValue: string|null): void {
+		if (newValue != oldValue) switch (attribute) {
+			case "animation": this.#updateAnimation(newValue != null); break;
+			// No default
+		}
 	}
 
 	/**
@@ -23,6 +51,14 @@ export class OfflineIndicator extends HTMLElement {
 	 */
 	disconnectedCallback(): void {
 		for (const event of ["online", "offline"]) removeEventListener(event, this.#update);
+	}
+
+	/**
+	 * Updates the value indicating whether to apply a transition.
+	 * @param value The new value.
+	 */
+	#updateAnimation(value: boolean): void {
+		this.classList.toggle("fade", value);
 	}
 
 	/**
