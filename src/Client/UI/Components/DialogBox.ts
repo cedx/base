@@ -62,8 +62,8 @@ export class DialogBox extends HTMLElement {
 	constructor() {
 		super();
 		this.firstElementChild!.addEventListener("hidden.bs.modal", () => this.#resolve(this.#result));
-		this.querySelector(".btn-close")!.addEventListener("click", this.#close);
-		for (const button of this.querySelectorAll(".modal-footer button")) button.addEventListener("click", this.#close);
+		this.querySelector(".btn-close")!.addEventListener("click", event => this.#close(event));
+		for (const button of this.querySelectorAll(".modal-footer button")) button.addEventListener("click", event => this.#close(event));
 	}
 
 	/**
@@ -251,7 +251,7 @@ export class DialogBox extends HTMLElement {
 
 		if (message) {
 			const footer = message.footer ?? document.createDocumentFragment();
-			for (const button of footer.querySelectorAll("button")) button.addEventListener("click", this.#close);
+			for (const button of footer.querySelectorAll("button")) button.addEventListener("click", event => this.#close(event));
 			this.body = message.body;
 			this.caption = message.caption;
 			this.footer = footer;
@@ -268,7 +268,7 @@ export class DialogBox extends HTMLElement {
 	 * Closes this dialog box.
 	 * @param event The dispatched event.
 	 */
-	readonly #close: (event: Event) => void = event => {
+	#close(event: Event): void {
 		const button = (event.target as Element).closest("button")!;
 		this.close(Object.values(DialogResult).includes(button.value as DialogResult) ? button.value as DialogResult : DialogResult.None);
 	}
@@ -281,7 +281,7 @@ export class DialogBox extends HTMLElement {
 	#createButton(button: IDialogButton): DialogButton {
 		const element = document.createElement("dialog-button");
 		const childContent = (this.#buttonTemplate.cloneNode(true) as DocumentFragment).querySelector("button")!;
-		childContent.addEventListener("click", this.#close);
+		childContent.addEventListener("click", event => this.#close(event));
 		element.appendChild(childContent);
 
 		element.context = button.context ?? null;
