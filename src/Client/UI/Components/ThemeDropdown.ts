@@ -27,7 +27,7 @@ export class ThemeDropdown extends HTMLElement {
 	 */
 	constructor() {
 		super();
-		for (const button of this.querySelectorAll(".dropdown-menu button")) button.addEventListener("click", this.#setAppTheme);
+		for (const button of this.querySelectorAll(".dropdown-menu button")) button.addEventListener("click", event => this.#setAppTheme(event));
 	}
 
 	/**
@@ -149,11 +149,11 @@ export class ThemeDropdown extends HTMLElement {
 	 * Changes the current application theme.
 	 * @param event The dispatched event.
 	 */
-	readonly #setAppTheme: (event: Event) => void = event => {
+	#setAppTheme(event: Event): void {
 		event.preventDefault();
 		this.appTheme = (event.target as Element).closest("button")!.dataset.theme! as AppTheme;
 		this.save();
-	};
+	}
 
 	/**
 	 * Updates the alignment of the dropdown menu.
