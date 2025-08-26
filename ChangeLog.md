@@ -4,7 +4,7 @@
 - Added the `Animation` property to the `LoadingIndicator` and `OfflineIndicator` UI components.
 - Added the `css()` and `html()` tag functions.
 - Removed the `createDocumentFragment()`, `trimArray()`, `trimObject()`, `waitForAnimations()` and `xmlEscape()` functions.
-- Removed the `Hosting` module.
+- Removed the `Hosting` and `Net` modules.
 - The `getEaster()` and `getHolidays()` functions now take a `Date` object as parameter instead of a number.
 
 ## Version [0.19.0](https://github.com/cedx/base/compare/v0.18.0...v0.19.0)
