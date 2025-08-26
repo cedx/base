@@ -4,7 +4,7 @@
 <dialog-button context="@Context" icon="@Icon" label="@Label" value="@Value" variant="@Variant">
 	<button class="@classList" type="button" value="@Value">
 		<i class="icon @(Label.Length > 0 ? "me-1" : string.Empty)" hidden="@string.IsNullOrEmpty(Icon)">@Icon</i>
-		<span hidden="@Label.Length == 0">@Label</span>
+		<span hidden="@(Label.Length == 0)">@Label</span>
 	</button>
 </dialog-button>
 
