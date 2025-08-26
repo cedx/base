@@ -220,7 +220,7 @@ export class Toast extends HTMLElement {
 	connectedCallback(): void {
 		const toast = this.firstElementChild!;
 		toast.addEventListener("hidden.bs.toast", () => clearInterval(this.#timer));
-		toast.addEventListener("show.bs.toast", () => this.#timer = window.setInterval(this.#updateElapsedTime, 1_000));
+		toast.addEventListener("show.bs.toast", () => this.#timer = window.setInterval(() => this.#updateElapsedTime(), 1_000));
 
 		this.#toast = new BootstrapToast(toast);
 		if (this.open) this.show();
@@ -305,10 +305,10 @@ export class Toast extends HTMLElement {
 	/**
 	 * Updates the label corresponding to the elapsed time.
 	 */
-	readonly #updateElapsedTime: () => void = () => {
+	#updateElapsedTime(): void {
 		const {elapsedTime} = this;
 		this.querySelector(".toast-header small")!.textContent = elapsedTime > 0 ? this.#formatTime(elapsedTime / 1_000) : "";
-	};
+	}
 
 	/**
 	 * Updates the value indicating whether to apply a transition.
