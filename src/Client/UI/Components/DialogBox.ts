@@ -1,6 +1,7 @@
 import {Modal} from "bootstrap";
-import {Context, getIcon, toCss} from "../Context.js";
+import {type Context, getIcon, toCss} from "../Context.js";
 import {DialogResult} from "../DialogResult.js";
+import {html} from "../Tag.js";
 import {Variant} from "../Variant.js";
 import type {DialogButton, IDialogButton} from "./DialogButton.js";
 
@@ -20,34 +21,9 @@ export interface IMessage {
 	caption: string;
 
 	/**
-	 * Value indicating whether to vertically center this dialog box.
-	 */
-	centered?: boolean;
-
-	/**
-	 * A contextual modifier.
-	 */
-	context?: Context;
-
-	/**
-	 * Value indicating whether to apply a transition.
-	 */
-	fade?: boolean;
-
-	/**
 	 * The child content displayed in the footer.
 	 */
 	footer?: DocumentFragment;
-
-	/**
-	 * The icon displayed next to the body.
-	 */
-	icon?: string|null;
-
-	/**
-	 * Value indicating whether the body is scrollable.
-	 */
-	scrollable?: boolean;
 }
 
 /**
@@ -58,7 +34,7 @@ export class DialogBox extends HTMLElement {
 	/**
 	 * The list of observed attributes.
 	 */
-	static readonly observedAttributes = ["caption", "centered", "context", "fade", "icon", "modal", "scrollable"];
+	static readonly observedAttributes = ["caption", "centered", "fade", "modal", "scrollable"];
 
 	/**
 	 * The template for a button.
@@ -125,17 +101,6 @@ export class DialogBox extends HTMLElement {
 	}
 
 	/**
-	 * A contextual modifier.
-	 */
-	get context(): Context {
-		const value = this.getAttribute("context") as Context;
-		return Object.values(Context).includes(value) ? value : Context.Info;
-	}
-	set context(value: Context) {
-		this.setAttribute("context", value);
-	}
-
-	/**
 	 * Value indicating whether to apply a transition.
 	 */
 	get fade(): boolean {
@@ -152,17 +117,6 @@ export class DialogBox extends HTMLElement {
 		const footer = this.querySelector<HTMLElement>(".modal-footer")!;
 		footer.hidden = !value.hasChildNodes();
 		footer.replaceChildren(...value.childNodes);
-	}
-
-	/**
-	 * The icon displayed next to the body.
-	 */
-	get icon(): string|null {
-		const value = this.getAttribute("icon") ?? "";
-		return value.trim() || null;
-	}
-	set icon(value: string|null) {
-		this.toggleAttribute("icon", Boolean(value));
 	}
 
 	/**
@@ -205,8 +159,6 @@ export class DialogBox extends HTMLElement {
 		if (newValue != oldValue) switch (attribute) {
 			case "caption": this.#updateCaption(newValue ?? ""); break;
 			case "centered": this.#updateCentered(newValue != null); break;
-			case "context": this.#updateContext(Object.values(Context).includes(newValue as Context) ? newValue as Context : Context.Info); break;
-			case "icon": this.#updateIcon(newValue); break;
 			case "modal": this.#updateModal(newValue != null); break;
 			case "fade": this.#updateFade(newValue != null); break;
 			case "scrollable": this.#updateScrollable(newValue != null); break;
@@ -221,8 +173,8 @@ export class DialogBox extends HTMLElement {
 	 * @param body The child content displayed in the body.
 	 * @returns The dialog box result.
 	 */
-	async alert(context: Context, caption: string, body: DocumentFragment): Promise<DialogResult> {
-		return await this.show(context, caption, body, [
+	alert(context: Context, caption: string, body: DocumentFragment): Promise<DialogResult> {
+		return this.show(context, caption, this.#getBodyTemplate(context, body), [
 			{label: "OK", value: DialogResult.OK, variant: Variant.Primary}
 		]);
 	}
@@ -243,8 +195,8 @@ export class DialogBox extends HTMLElement {
 	 * @param body The child content displayed in the body.
 	 * @returns The dialog box result.
 	 */
-	async confirm(context: Context, caption: string, body: DocumentFragment): Promise<DialogResult> {
-		return await this.show(context, caption, body, [
+	confirm(context: Context, caption: string, body: DocumentFragment): Promise<DialogResult> {
+		return this.show(context, caption, this.#getBodyTemplate(context, body), [
 			{label: "OK", value: DialogResult.OK, variant: Variant.Primary},
 			{label: "Annuler", value: DialogResult.Cancel, variant: Variant.Secondary}
 		]);
@@ -294,17 +246,14 @@ export class DialogBox extends HTMLElement {
 		if (typeof message == "string") {
 			const footer = document.createDocumentFragment();
 			footer.append(...buttons.map(button => this.#createButton(button)));
-			message = {context: message, caption, body, footer};
+			message = {body, caption, footer};
 		}
 
-		if (typeof message == "object" && message) {
-			this.body = message.body;
-			this.caption = message.caption;
-			this.context = message.context ?? Context.Info;
-			this.icon = message.icon ?? getIcon(this.context);
-
+		if (message) {
 			const footer = message.footer ?? document.createDocumentFragment();
 			for (const button of footer.querySelectorAll("button")) button.addEventListener("click", this.#close);
+			this.body = message.body;
+			this.caption = message.caption;
 			this.footer = footer;
 		}
 
@@ -344,6 +293,21 @@ export class DialogBox extends HTMLElement {
 	}
 
 	/**
+	 * Gets the body template corresponding to the specified context and message.
+	 * @param context The contextual modifier.
+	 * @param message The child content displayed in the body.
+	 * @returns The body template corresponding to the specified context and message.
+	 */
+	#getBodyTemplate(context: Context, message: DocumentFragment): DocumentFragment {
+		return html`
+			<div class="d-flex gap-2">
+				<i class="icon icon-fill fs-1 text-${toCss(context)}"> ${getIcon(context)}</i>
+				<div class="flex-grow-1">${message}</div>
+			</div>
+		`;
+	}
+
+	/**
 	 * Updates the title displayed in the header.
 	 * @param value The new value.
 	 */
@@ -360,29 +324,11 @@ export class DialogBox extends HTMLElement {
 	}
 
 	/**
-	 * Updates the contextual modifier.
-	 * @param value The new value.
-	 */
-	#updateContext(value: Context): void {
-		const {classList} = this.querySelector(".modal-body > .icon")!;
-		classList.remove(...Object.values(Context).map(context => `text-${toCss(context)}`));
-		classList.add(`text-${toCss(value)}`);
-	}
-
-	/**
 	 * Updates the value indicating whether to apply a transition.
 	 * @param value The new value.
 	 */
 	#updateFade(value: boolean): void {
 		this.firstElementChild!.classList.toggle("fade", value);
-	}
-
-	/**
-	 * Updates the icon displayed next to the body.
-	 * @param value The new value.
-	 */
-	#updateIcon(value: string|null): void {
-		this.querySelector(".modal-body > .icon")!.textContent = (value ?? "").trim() || getIcon(this.context);
 	}
 
 	/**
