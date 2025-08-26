@@ -1,4 +1,4 @@
-import {capitalize, newLineToBr, reverse, split, stripTags, trimArray, trimObject, truncate, xmlEscape} from "@cedx/base/StringExtensions.js";
+import {capitalize, newLineToBr, reverse, split, stripTags, truncate} from "@cedx/base/StringExtensions.js";
 import {assert} from "chai";
 
 /**
@@ -47,28 +47,6 @@ describe("StringExtensions", () => {
 		});
 	});
 
-	describe("trimArray()", () => {
-		it("should trim the items of the specified array", () => {
-			/** @type {unknown[]} */
-			let array = [];
-			assert.deepEqual(trimArray(array), []);
-
-			array = [123, " foo ", 456, "  bar  "];
-			assert.deepEqual(trimArray(array), [123, "foo", 456, "bar"]);
-		});
-	});
-
-	describe("trimObject()", () => {
-		it("should trim the properties of the specified object", () => {
-			/** @type {Record<string, unknown>} */
-			let object = {};
-			assert.deepEqual(trimObject(object), {});
-
-			object = {prop1: 123, prop2: " foo ", prop3: 456, prop4: "  bar  "};
-			assert.deepEqual(trimObject(object), {prop1: 123, prop2: "foo", prop3: 456, prop4: "bar"});
-		});
-	});
-
 	describe("truncate()", () => {
 		it("should truncate the string to the specified length", () => {
 			assert.equal(truncate("", 0), "");
@@ -80,14 +58,6 @@ describe("StringExtensions", () => {
 		it("should append the specified ellipsis to the truncated string", () => {
 			assert.equal(truncate("foo bar", 0, "--"), "--");
 			assert.equal(truncate("foo bar", 4, "--"), "foo --");
-		});
-	});
-
-	describe("xmlEscape()", () => {
-		it("should replace invalid XML characters with their valid XML equivalent", () => {
-			assert.equal(xmlEscape(""), "");
-			assert.equal(xmlEscape('"Hey!"'), "&quot;Hey!&quot;");
-			assert.equal(xmlEscape(" <foo> & <bar> "), " &lt;foo&gt; &amp; &lt;bar&gt; ");
 		});
 	});
 });

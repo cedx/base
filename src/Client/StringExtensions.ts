@@ -1,15 +1,4 @@
 /**
- * The mapping between special characters and the corresponding XML entities.
- */
-const xmlEntities = new Map([
-	["&", "&amp;"],
-	["<", "&lt;"],
-	[">", "&gt;"],
-	['"', "&quot;"],
-	["'", "&#39;"]
-]);
-
-/**
  * Converts the first character to uppercase.
  * @param value The string to process.
  * @param locale The current locale.
@@ -57,26 +46,6 @@ export function stripTags(value: string): string {
 }
 
 /**
- * Removes whitespace from both ends of the items of the specified array.
- * @param array The array to process.
- * @returns The input array.
- */
-export function trimArray<T>(array: T[]): T[] {
-	for (const [index, value] of array.entries()) if (typeof value == "string") Reflect.set(array, index, value.trim());
-	return array;
-}
-
-/**
- * Removes whitespace from both ends of the properties of the specified object.
- * @param object The object to process.
- * @returns The input object.
- */
-export function trimObject<T>(object: Record<string, T>): Record<string, T> {
-	for (const [key, value] of Object.entries(object)) if (typeof value == "string") Reflect.set(object, key, value.trim());
-	return object;
-}
-
-/**
  * Truncates the specified string to the given number of characters.
  * @param value The string to be truncated.
  * @param length The maximum length.
@@ -85,13 +54,4 @@ export function trimObject<T>(object: Record<string, T>): Record<string, T> {
  */
 export function truncate(value: string, length: number, ellipsis = "..."): string {
 	return value.length > length ? value.slice(0, length) + ellipsis : value;
-}
-
-/**
- * Replaces invalid XML characters in a string with their valid XML equivalent.
- * @param value The string to process.
- * @returns The processed string.
- */
-export function xmlEscape(value: string): string {
-	return value.replace(/[&<>"']/g, character => xmlEntities.get(character) ?? character);
 }
