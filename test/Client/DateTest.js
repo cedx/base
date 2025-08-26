@@ -1,11 +1,11 @@
 /* eslint-disable max-lines-per-function */
-import {atMidnight, daysInMonth, getEaster, getQuarter, getWeekOfYear, inLeapYear, isHoliday, isWorkingDay, toIsoWeek, toYmdHms} from "@cedx/base/DateExtensions.js";
+import {atMidnight, daysInMonth, getEaster, getQuarter, getWeekOfYear, inLeapYear, isHoliday, isWorkingDay, toIsoWeek, toYmdHms} from "@cedx/base/Date.js";
 import {assert} from "chai";
 
 /**
- * Tests the features of the date extensions.
+ * Tests the features of the date functions.
  */
-describe("DateExtensions", () => {
+describe("Date", () => {
 	describe("atMidnight()", () => {
 		it("should return the specified date whose time has been set at midnight", () => {
 			assert.equal(atMidnight(new Date("2000-01-01 00:00:00")).valueOf(), new Date("2000-01-01 00:00:00").valueOf());

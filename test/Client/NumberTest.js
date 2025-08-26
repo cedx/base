@@ -1,10 +1,10 @@
-import {round} from "@cedx/base/NumberExtensions.js";
+import {round} from "@cedx/base/Number.js";
 import {assert} from "chai";
 
 /**
- * Tests the features of the number extensions.
+ * Tests the features of the number functions.
  */
-describe("NumberExtensions", () => {
+describe("Number", () => {
 	describe("round()", () => {
 		it("should round the specified value to the given precision", () => {
 			assert.equal(round(123.456, 0), 123);

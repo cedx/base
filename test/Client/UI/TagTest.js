@@ -1,10 +1,10 @@
-import {css, html} from "@cedx/base/UI/ElementExtensions.js";
+import {css, html} from "@cedx/base/UI/Tag.js";
 import {assert} from "chai";
 
 /**
- * Tests the features of the element extensions.
+ * Tests the features of the tag functions.
  */
-describe.only("ElementExtensions", () => {
+describe("Tag", () => {
 	describe("css()", () => {
 		it("should create a CSS stylesheet", () => {
 			const cssStyleSheet = css`p { display: block; } /* A comment. */ button.btn { color: black; }`;

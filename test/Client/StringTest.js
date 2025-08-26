@@ -1,10 +1,10 @@
-import {capitalize, newLineToBr, reverse, split, stripTags, truncate} from "@cedx/base/StringExtensions.js";
+import {capitalize, newLineToBr, reverse, split, stripTags, truncate} from "@cedx/base/String.js";
 import {assert} from "chai";
 
 /**
- * Tests the features of the string extensions.
+ * Tests the features of the string functions.
  */
-describe("StringExtensions", () => {
+describe("String", () => {
 	const locale = "en-US";
 
 	describe("capitalize()", () => {

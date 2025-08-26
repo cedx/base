@@ -1,10 +1,10 @@
-import {toDataUrl} from "@cedx/base/FileExtensions.js";
+import {toDataUrl} from "@cedx/base/File.js";
 import {assert} from "chai";
 
 /**
- * Tests the features of the file extensions.
+ * Tests the features of the file functions.
  */
-describe("FileExtensions", () => {
+describe("File", () => {
 	describe("toDataUrl()", () => {
 		it("should convert the specified file to a data URL", async () => {
 			const file = new File(["Hello World!"], "hello.txt", {type: "text/plain"});

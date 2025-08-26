@@ -1,10 +1,10 @@
-import {invalidControl, isFormControl, resetValidity, trimControl} from "@cedx/base/UI/FormExtensions.js";
+import {invalidControl, isFormControl, resetValidity, trimControl} from "@cedx/base/UI/Form.js";
 import {assert} from "chai";
 
 /**
- * Tests the features of the form extensions.
+ * Tests the features of the form functions.
  */
-describe("FormExtensions", () => {
+describe("Form", () => {
 	describe("invalidControl()", () => {
 		const form = document.createElement("form");
 		const input = document.createElement("input");

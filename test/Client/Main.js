@@ -1,8 +1,8 @@
-import "./DateExtensionsTest.js";
-import "./FileExtensionsTest.js";
-import "./NumberExtensionsTest.js";
-import "./StringExtensionsTest.js";
+import "./DateTest.js";
+import "./FileTest.js";
+import "./NumberTest.js";
+import "./StringTest.js";
 import "./Data/PaginationTest.js";
 // import "./Data/SortTest.js";
-import "./UI/ElementExtensionsTest.js";
-import "./UI/FormExtensionsTest.js";
+import "./UI/FormTest.js";
+import "./UI/TagTest.js";
