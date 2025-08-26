@@ -19,11 +19,13 @@ export function daysInMonth(date: Date): number {
 }
 
 /**
- * Gets the date of Easter for a given year.
- * @param year The year.
- * @returns The date of Easter for the specified year.
+ * Gets the date of Easter for the year corresponding to the specified date.
+ * @param date The date.
+ * @returns The date of Easter for the year corresponding to the specified date.
  */
-export function getEaster(year = new Date().getFullYear()): Date {
+export function getEaster(date: Date): Date {
+	const year = date.getFullYear();
+
 	/* eslint-disable id-length */
 	const n = year % 19;
 	const c = Math.trunc(year / 100);
@@ -38,12 +40,13 @@ export function getEaster(year = new Date().getFullYear()): Date {
 }
 
 /**
- * Gets the list of holidays for a given year.
- * @param year The year.
- * @returns The list of holidays for the specified year.
+ * Gets the list of holidays for the year corresponding to the specified date.
+ * @param date The date.
+ * @returns The list of holidays for the year corresponding to the specified date.
  */
-export function getHolidays(year = new Date().getFullYear()): Date[] {
+export function getHolidays(date: Date): Date[] {
 	const holidays = [];
+	const year = date.getFullYear();
 
 	// Fixed holidays.
 	holidays.push(new Date(year, 0, 1)); // New year.
@@ -56,7 +59,7 @@ export function getHolidays(year = new Date().getFullYear()): Date[] {
 	holidays.push(new Date(year, 11, 25)); // Christmas.
 
 	// Holidays depending on Easter.
-	const easter = getEaster(year);
+	const easter = getEaster(date);
 	holidays.push(new Date(easter.getTime() + Duration.Day)); // Easter monday.
 	holidays.push(new Date(easter.getTime() + (39 * Duration.Day))); // Ascension thursday.
 	holidays.push(new Date(easter.getTime() + (50 * Duration.Day))); // Pentecost monday.
@@ -101,7 +104,7 @@ export function inLeapYear(date: Date): boolean {
  */
 export function isHoliday(date: Date): boolean {
 	const timestamp = atMidnight(date).getTime();
-	return getHolidays(date.getFullYear()).some(holiday => holiday.getTime() == timestamp);
+	return getHolidays(date).some(holiday => holiday.getTime() == timestamp);
 }
 
 /**

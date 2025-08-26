@@ -2,6 +2,7 @@
 
 ## Version [0.20.0](https://github.com/cedx/base/compare/v0.19.0...v0.20.0)
 - Added the `Animation` property to the `LoadingIndicator` and `OfflineIndicator` UI components.
+- The `getEaster()` and `getHolidays()` functions now take a `Date` object as parameter instead of a number.
 
 ## Version [0.19.0](https://github.com/cedx/base/compare/v0.18.0...v0.19.0)
 - By default, the `LoadingIndicator` and `OfflineIndicator` UI components are no longer hidden.

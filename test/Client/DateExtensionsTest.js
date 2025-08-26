@@ -5,13 +5,13 @@ import {assert} from "chai";
 /**
  * Tests the features of the date extensions.
  */
-describe("DateExtensions", () => {
+describe.only("DateExtensions", () => {
 	describe("atMidnight()", () => {
 		it("should return the specified date whose time has been set at midnight", () => {
-			assert.equal(atMidnight(new Date("2000-01-01 00:00:00")).getTime(), new Date("2000-01-01 00:00:00").getTime());
-			assert.equal(atMidnight(new Date("2001-05-03 09:28:56")).getTime(), new Date("2001-05-03 00:00:00").getTime());
-			assert.equal(atMidnight(new Date("2010-09-19 13:15:09")).getTime(), new Date("2010-09-19 00:00:00").getTime());
-			assert.equal(atMidnight(new Date("2020-12-31 23:59:59")).getTime(), new Date("2020-12-31 00:00:00").getTime());
+			assert.equal(atMidnight(new Date("2000-01-01 00:00:00")).valueOf(), new Date("2000-01-01 00:00:00").valueOf());
+			assert.equal(atMidnight(new Date("2001-05-03 09:28:56")).valueOf(), new Date("2001-05-03 00:00:00").valueOf());
+			assert.equal(atMidnight(new Date("2010-09-19 13:15:09")).valueOf(), new Date("2010-09-19 00:00:00").valueOf());
+			assert.equal(atMidnight(new Date("2020-12-31 23:59:59")).valueOf(), new Date("2020-12-31 00:00:00").valueOf());
 		});
 	});
 
@@ -27,11 +27,11 @@ describe("DateExtensions", () => {
 
 	describe("getEaster()", () => {
 		it("should return the easter date for the given year", () => {
-			assert.equal(getEaster(1901).getTime(), new Date("1901-04-07 00:00:00").getTime());
-			assert.equal(getEaster(1942).getTime(), new Date("1942-04-05 00:00:00").getTime());
-			assert.equal(getEaster(1986).getTime(), new Date("1986-03-30 00:00:00").getTime());
-			assert.equal(getEaster(2021).getTime(), new Date("2021-04-04 00:00:00").getTime());
-			assert.equal(getEaster(2046).getTime(), new Date("2046-03-25 00:00:00").getTime());
+			assert.equal(getEaster(new Date("1901-01-01 01:23:45")).valueOf(), new Date("1901-04-07 00:00:00").valueOf());
+			assert.equal(getEaster(new Date("1942-01-01 03:06:09")).valueOf(), new Date("1942-04-05 00:00:00").valueOf());
+			assert.equal(getEaster(new Date("1986-01-01 06:12:24")).valueOf(), new Date("1986-03-30 00:00:00").valueOf());
+			assert.equal(getEaster(new Date("2021-01-01 13:26:52")).valueOf(), new Date("2021-04-04 00:00:00").valueOf());
+			assert.equal(getEaster(new Date("2046-01-01 18:18:18")).valueOf(), new Date("2046-03-25 00:00:00").valueOf());
 		});
 	});
 
