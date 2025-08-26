@@ -1,14 +1,17 @@
 /**
- * Creates a document fragment from the specified HTML string.
- * @param html The HTML string providing the child content.
- * @returns The document fragment corresponding to the specified HTML string.
+ * Creates a CSS stylesheet from the specified template literal.
+ * @param fragments The string fragments.
+ * @param values The interpolated values.
+ * @returns The CSS stylesheet corresponding to the specified template literal.
  */
-export function createDocumentFragment(html: string): DocumentFragment {
-	return document.createRange().createContextualFragment(html);
+export function css(fragments: TemplateStringsArray, ...values: unknown[]): CSSStyleSheet {
+	const styleSheet = new CSSStyleSheet;
+	styleSheet.replaceSync(fragments.length == 1 ? fragments[0] : values.reduce(
+		(fragment: string, value: unknown, index: number) => fragment + stringFromCss(value) + fragments[index + 1],
+		fragments[0]
+	));
 
-	const template = document.createElement("template");
-	template.innerHTML = html;
-	return template.content;
+	return styleSheet;
 }
 
 /**
@@ -18,23 +21,30 @@ export function createDocumentFragment(html: string): DocumentFragment {
  * @returns The document fragment corresponding to the specified template literal.
  */
 export function html(fragments: TemplateStringsArray, ...values: unknown[]): DocumentFragment {
-	// const documentFragment = document.createDocumentFragment();
-	// for (const node of documentFragment.childNodes)
+	return document.createRange().createContextualFragment(fragments.length == 1 ? fragments[0] : values.reduce(
+		(fragment: string, value: unknown, index: number) => fragment + stringFromHtml(value) + fragments[index + 1],
+		fragments[0]
+	));
+}
 
+/**
+ * Converts the specified value to a CSS string.
+ * @param value A value representing a CSS fragment.
+ * @returns The CSS string corresponding to the specified value.
+ */
+function stringFromCss(value: unknown): string {
+	if (!(value instanceof CSSStyleSheet)) return String(value);
+	return Array.from(value.cssRules).map(cssRule => cssRule.cssText).join("\n");
+}
 
-	const parts = [];
-	for (let index = 0; index < values.length; index++) {
-		parts.push(fragments[index]);
-
-		const value = values[index];
-		if (!(value instanceof DocumentFragment)) parts.push(String(value));
-		else {
-			const element = document.createElement("div");
-			element.appendChild(value);
-			parts.push(element.innerHTML);
-		}
-	}
-
-	parts.push(fragments.at(-1));
-	return document.createRange().createContextualFragment(parts.join(""));
+/**
+ * Converts the specified value to an HTML string.
+ * @param value A value representing an HTML fragment.
+ * @returns The HTML string corresponding to the specified value.
+ */
+function stringFromHtml(value: unknown): string {
+	if (!(value instanceof DocumentFragment)) return String(value);
+	const element = document.createElement("div");
+	element.appendChild(value);
+	return element.innerHTML;
 }
