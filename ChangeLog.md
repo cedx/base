@@ -1,7 +1,8 @@
 # Changelog
 
 ## Version [0.21.0](https://github.com/cedx/base/compare/v0.20.0...v0.21.0)
-- Added the `show()` and `hide()` methods to the `UI.Components.OfflineIndicator` component. 
+- Added the `show()` and `hide()` methods to the `UI.Components.OfflineIndicator` component.
+- Renamed the `UI.Components.MessageBox` component to `DialogBox`.
 - Renamed the `Animation` property of UI components to `Fade`.
 - Replaced the `Hidden` property of UI components by the `Open` property.
 

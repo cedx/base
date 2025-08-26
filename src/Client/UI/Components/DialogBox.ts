@@ -20,7 +20,7 @@ export interface IMessage {
 	caption: string;
 
 	/**
-	 * Value indicating whether to vertically center this message box.
+	 * Value indicating whether to vertically center this dialog box.
 	 */
 	centered?: boolean;
 
@@ -51,9 +51,9 @@ export interface IMessage {
 }
 
 /**
- * Displays a message window, also known as dialog box, which presents a message to the user.
+ * Displays a dialog box, which presents a message to the user.
  */
-export class MessageBox extends HTMLElement {
+export class DialogBox extends HTMLElement {
 
 	/**
 	 * The list of observed attributes.
@@ -81,7 +81,7 @@ export class MessageBox extends HTMLElement {
 	#result: DialogResult = DialogResult.None;
 
 	/**
-	 * Creates a new message box.
+	 * Creates a new dialog box.
 	 */
 	constructor() {
 		super();
@@ -94,7 +94,7 @@ export class MessageBox extends HTMLElement {
 	 * Registers the component.
 	 */
 	static {
-		customElements.define("message-box", this);
+		customElements.define("dialog-box", this);
 	}
 
 	/**
@@ -115,7 +115,7 @@ export class MessageBox extends HTMLElement {
 	}
 
 	/**
-	 * Value indicating whether to vertically center this message box.
+	 * Value indicating whether to vertically center this dialog box.
 	 */
 	get centered(): boolean {
 		return this.hasAttribute("centered");
@@ -166,7 +166,7 @@ export class MessageBox extends HTMLElement {
 	}
 
 	/**
-	 * Value indicating whether to this message box will not close when clicking outside of it.
+	 * Value indicating whether to this dialog box will not close when clicking outside of it.
 	 */
 	get modal(): boolean {
 		return this.hasAttribute("modal");
@@ -228,7 +228,7 @@ export class MessageBox extends HTMLElement {
 	}
 
 	/**
-	 * Closes this message box.
+	 * Closes this dialog box.
 	 * @param result The dialog box result.
 	 */
 	close(result: DialogResult = DialogResult.None): void {
@@ -316,7 +316,7 @@ export class MessageBox extends HTMLElement {
 	}
 
 	/**
-	 * Closes this message box.
+	 * Closes this dialog box.
 	 * @param event The dispatched event.
 	 */
 	readonly #close: (event: Event) => void = event => {
@@ -352,7 +352,7 @@ export class MessageBox extends HTMLElement {
 	}
 
 	/**
-	 * Updates the value indicating whether to vertically center this message box.
+	 * Updates the value indicating whether to vertically center this dialog box.
 	 * @param value The new value.
 	 */
 	#updateCentered(value: boolean): void {
@@ -386,7 +386,7 @@ export class MessageBox extends HTMLElement {
 	}
 
 	/**
-	 * Updates the value indicating whether to this message box will not close when clicking outside of it.
+	 * Updates the value indicating whether to this dialog box will not close when clicking outside of it.
 	 * @param value The new value.
 	 */
 	#updateModal(value: boolean): void {
@@ -411,6 +411,6 @@ declare global {
 	 * The map of HTML tag names.
 	 */
 	interface HTMLElementTagNameMap {
-		"message-box": MessageBox;
+		"dialog-box": DialogBox;
 	}
 }
