@@ -47,14 +47,14 @@ export class DialogBox extends HTMLElement {
 	#modal!: Modal;
 
 	/**
-	 * The function invoked to return the dialog box result.
+	 * The promise providing the dialog result.
 	 */
-	#resolve: (value: string) => void = () => { /* Noop */ };
+	#promise: Promise<string> = Promise.resolve(DialogResult.None);
 
 	/**
-	 * The dialog result.
+	 * The function invoked to resolve the dialog result.
 	 */
-	#result: string = DialogResult.None;
+	#resolve!: (value: string) => void;
 
 	/**
 	 * Creates a new dialog box.
@@ -137,6 +137,13 @@ export class DialogBox extends HTMLElement {
 	}
 	set open(value: boolean) {
 		this.toggleAttribute("open", value);
+	}
+
+	/**
+	 * The dialog result.
+	 */
+	get result(): Promise<string> {
+		return this.#promise;
 	}
 
 	/**
