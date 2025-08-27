@@ -1,6 +1,51 @@
 import {Context} from "../Context.js";
 import {Position, toCss} from "../Position.js";
-import type {IToast} from "./Toast.js";
+
+/**
+ * Represents a notification.
+ */
+export interface IToast {
+
+	/**
+	 * Value indicating whether to automatically hide the toast.
+	 */
+	autoHide?: boolean;
+
+	/**
+	 * The child content displayed in the body.
+	 */
+	body: DocumentFragment;
+
+	/**
+	 * The title displayed in the header.
+	 */
+	caption: string;
+
+	/**
+	 * The default contextual modifier.
+	 */
+	context?: Context;
+
+	/**
+	 * The culture used to format the relative time.
+	 */
+	culture?: Intl.Locale;
+
+	/**
+	 * The delay, in milliseconds, to hide the toast.
+	 */
+	delay?: number;
+
+	/**
+	 * Value indicating whether to apply a transition.
+	 */
+	fade?: boolean;
+
+	/**
+	 * The icon displayed next to the caption.
+	 */
+	icon?: string;
+}
 
 /**
  * Manages the notifications.
