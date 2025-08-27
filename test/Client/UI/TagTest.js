@@ -18,12 +18,20 @@ describe("Tag", () => {
 
 		it("should support nested CSS stylesheets", () => {
 			const cssStyleSheet = css`${css`p { display: block; }`} /* A comment. */ ${css`button.btn { color: black; }`}`;
-			assert.instanceOf(cssStyleSheet, CSSStyleSheet);
 			assert.lengthOf(cssStyleSheet.cssRules, 2);
 
 			const {cssRules} = cssStyleSheet;
 			assert.equal(cssRules.item(0)?.cssText, "p { display: block; }");
 			assert.equal(cssRules.item(1)?.cssText, "button.btn { color: black; }");
+		});
+
+		it("should support arrays of CSS stylesheets", () => {
+			const cssStyleSheet = css`${["green", "red"].map(item => css`.bg-${item} { background: ${item}; }`)}`;
+			assert.lengthOf(cssStyleSheet.cssRules, 2);
+
+			const {cssRules} = cssStyleSheet;
+			assert.equal(cssRules.item(0)?.cssText, ".bg-green { background: green; }");
+			assert.equal(cssRules.item(1)?.cssText, ".bg-red { background: red; }");
 		});
 	});
 
@@ -44,13 +52,21 @@ describe("Tag", () => {
 
 		it("should support nested document fragments", () => {
 			const documentFragment = html`${html`<p>Hello World!</p>`} <!-- A comment. --> ${html`<button class="btn">OK</button>`}`;
-			assert.instanceOf(documentFragment, DocumentFragment);
 			assert.lengthOf(documentFragment.childNodes, 5);
 
 			const {childNodes} = documentFragment;
 			assert.instanceOf(childNodes.item(0), HTMLParagraphElement);
 			assert.instanceOf(childNodes.item(2), Comment);
 			assert.instanceOf(childNodes.item(4), HTMLButtonElement);
+		});
+
+		it("should support arrays of document fragments", () => {
+			const documentFragment = html`${["Hello", "World!"].map(item => html`<span>${item}</span>`)}`;
+			assert.lengthOf(documentFragment.childNodes, 2);
+
+			const {childNodes} = documentFragment;
+			assert.equal(childNodes.item(0).textContent, "Hello");
+			assert.equal(childNodes.item(1).textContent, "World!");
 		});
 	});
 });

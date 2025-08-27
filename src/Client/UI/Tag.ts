@@ -33,8 +33,11 @@ export function html(fragments: TemplateStringsArray, ...values: unknown[]): Doc
  * @returns The CSS string corresponding to the specified value.
  */
 function stringFromCss(value: unknown): string {
-	// eslint-disable-next-line @typescript-eslint/no-base-to-string
-	if (!(value instanceof CSSStyleSheet)) return value === null || typeof value == "undefined" ? "" : String(value);
+	if (!(value instanceof CSSStyleSheet)) {
+		if (Array.isArray(value)) return value.map(stringFromCss).join("\n");
+		return value === null || typeof value == "undefined" ? "" : String(value); // eslint-disable-line @typescript-eslint/no-base-to-string
+	}
+
 	return Array.from(value.cssRules).map(cssRule => cssRule.cssText).join("\n");
 }
 
@@ -44,8 +47,11 @@ function stringFromCss(value: unknown): string {
  * @returns The HTML string corresponding to the specified value.
  */
 function stringFromHtml(value: unknown): string {
-	// eslint-disable-next-line @typescript-eslint/no-base-to-string
-	if (!(value instanceof DocumentFragment)) return value === null || typeof value == "undefined" ? "" : String(value);
+	if (!(value instanceof DocumentFragment)) {
+		if (Array.isArray(value)) return value.map(stringFromHtml).join("");
+		return value === null || typeof value == "undefined" ? "" : String(value); // eslint-disable-line @typescript-eslint/no-base-to-string
+	}
+
 	const element = document.createElement("div");
 	element.appendChild(value);
 	return element.innerHTML;

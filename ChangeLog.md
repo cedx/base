@@ -1,6 +1,7 @@
 # Changelog
 
 ## Version [0.22.0](https://github.com/cedx/base/compare/v0.21.1...v0.22.0)
+- Fixed the `css()` and `html()` tag functions to handle arrays.
 - Removed the `UI.Components.DialogButton` component.
 - Renamed the `UI.Components.IMessage` interface to `IDialogMessage`.
 - Restored the `notify()` method of the `UI.Components.Toaster` component.
