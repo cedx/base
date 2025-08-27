@@ -8,7 +8,7 @@ import type {DialogButton, IDialogButton} from "./DialogButton.js";
 /**
  * Represents a message to display in a dialog box.
  */
-export interface IMessage {
+export interface IDialogMessage {
 
 	/**
 	 * The child content displayed in the body.
