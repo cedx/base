@@ -49,12 +49,12 @@ export class DialogBox extends HTMLElement {
 	/**
 	 * The function invoked to return the dialog box result.
 	 */
-	#resolve: (value: DialogResult) => void = () => { /* Noop */ };
+	#resolve: (value: string) => void = () => { /* Noop */ };
 
 	/**
 	 * The dialog result.
 	 */
-	#result: DialogResult = DialogResult.None;
+	#result: string = DialogResult.None;
 
 	/**
 	 * Creates a new dialog box.
@@ -183,7 +183,7 @@ export class DialogBox extends HTMLElement {
 	 * Closes this dialog box.
 	 * @param result The dialog box result.
 	 */
-	close(result: DialogResult = DialogResult.None): void {
+	close(result: string = DialogResult.None): void {
 		this.#result = result;
 		this.#modal.hide();
 	}
@@ -257,7 +257,7 @@ export class DialogBox extends HTMLElement {
 			this.footer = footer;
 		}
 
-		const {promise, resolve} = Promise.withResolvers<DialogResult>();
+		const {promise, resolve} = Promise.withResolvers<string>();
 		this.#resolve = resolve;
 		this.#result = DialogResult.None;
 		this.#modal.show();
@@ -269,8 +269,8 @@ export class DialogBox extends HTMLElement {
 	 * @param event The dispatched event.
 	 */
 	#close(event: Event): void {
-		const button = (event.target as Element).closest("button")!;
-		this.close(Object.values(DialogResult).includes(button.value as DialogResult) ? button.value as DialogResult : DialogResult.None);
+		event.preventDefault();
+		this.close((event.target as Element).closest("button")!.value);
 	}
 
 	/**

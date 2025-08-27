@@ -1,50 +1,37 @@
 namespace Belin.Base.UI;
 
-using System.Text.Json.Serialization;
-
 /// <summary>
-/// Specifies the return value of a dialog box.
+/// Specifies common return values of a dialog box.
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum DialogResult {
+public static class DialogResult {
 
 	/// <summary>
 	/// The dialog box does not return any value.
 	/// </summary>
-	None,
+	public const string None = "";
 
 	/// <summary>
 	/// The return value of the dialog box is "OK".
 	/// </summary>
-	OK,
+	public const string OK = "OK";
 
 	/// <summary>
 	/// The return value of the dialog box is "Cancel".
 	/// </summary>
-	Cancel,
+	public const string Cancel = "Cancel";
 
 	/// <summary>
 	/// The return value of the dialog box is "Abort".
 	/// </summary>
-	Abort,
+	public const string Abort = "Abort";
 
 	/// <summary>
 	/// The return value of the dialog box is "Retry".
 	/// </summary>
-	Retry,
+	public const string Retry = "Retry";
 
 	/// <summary>
 	/// The return value of the dialog box is "Ignore".
 	/// </summary>
-	Ignore,
-
-	/// <summary>
-	/// The return value of the dialog box is "Yes".
-	/// </summary>
-	Yes,
-
-	/// <summary>
-	/// The return value of the dialog box is "No".
-	/// </summary>
-	No
+	public const string Ignore = "Ignore";
 }

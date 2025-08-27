@@ -2,6 +2,7 @@
 
 ## Version [0.22.0](https://github.com/cedx/base/compare/v0.21.1...v0.22.0)
 - Restored the `notify()` method of the `UI.Components.Toaster` component.
+- The return value of a `UI.Components.DialogBox` component is now a string instead of a `DialogResult` value.
 
 ## Version [0.21.1](https://github.com/cedx/base/compare/v0.21.0...v0.21.1)
 - Fixed issues in the `UI.Components.DialogButton` and `UI.Components.DialogBox` components.

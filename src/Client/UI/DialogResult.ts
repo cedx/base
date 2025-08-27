@@ -1,12 +1,12 @@
 /**
- * Specifies the return value of a dialog box.
+ * Specifies common return values of a dialog box.
  */
 export const DialogResult = Object.freeze({
 
 	/**
 	 * The dialog box does not return any value.
 	 */
-	None: "None",
+	None: "",
 
 	/**
 	 * The return value of the dialog box is "OK".
@@ -31,17 +31,7 @@ export const DialogResult = Object.freeze({
 	/**
 	 * The return value of the dialog box is "Ignore".
 	 */
-	Ignore: "Ignore",
-
-	/**
-	 * The return value of the dialog box is "Yes".
-	 */
-	Yes: "Yes",
-
-	/**
-	 * The return value of the dialog box is "No".
-	 */
-	No: "No"
+	Ignore: "Ignore"
 });
 
 /**
