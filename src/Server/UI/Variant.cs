@@ -9,24 +9,44 @@ using System.Text.Json.Serialization;
 public enum Variant {
 
 	/// <summary>
-	/// A dark variant.
+	/// A danger.
 	/// </summary>
-	Dark,
+	Danger = Context.Danger,
 
 	/// <summary>
-	/// A light variant.
+	/// A warning.
 	/// </summary>
-	Light,
+	Warning = Context.Warning,
 
 	/// <summary>
-	/// A primary variant.
+	/// An information.
+	/// </summary>
+	Info = Context.Info,
+
+	/// <summary>
+	/// A success.
+	/// </summary>
+	Success = Context.Success,
+
+	/// <summary>
+	/// A primary tone.
 	/// </summary>
 	Primary,
 
 	/// <summary>
-	/// A secondary variant.
+	/// A secondary tone.
 	/// </summary>
-	Secondary
+	Secondary,
+
+	/// <summary>
+	/// A light tone.
+	/// </summary>
+	Light,
+
+	/// <summary>
+	/// A dark tone.
+	/// </summary>
+	Dark
 }
 
 /// <summary>

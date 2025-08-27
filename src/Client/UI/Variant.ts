@@ -1,27 +1,30 @@
+import {Context} from "./Context.js";
+
 /**
  * Defines tone variants.
  */
 export const Variant = Object.freeze({
+	...Context,
 
 	/**
-	 * A dark variant.
-	 */
-	Dark: "Dark",
-
-	/**
-	 * A light variant.
-	 */
-	Light: "Light",
-
-	/**
-	 * A primary variant.
+	 * A primary tone.
 	 */
 	Primary: "Primary",
 
 	/**
-	 * A secondary variant.
+	 * A secondary tone.
 	 */
-	Secondary: "Secondary"
+	Secondary: "Secondary",
+
+	/**
+	 * A light tone.
+	 */
+	Light: "Light",
+
+	/**
+	 * A dark tone.
+	 */
+	Dark: "Dark"
 });
 
 /**

@@ -6,7 +6,7 @@
 - Removed the `UI.Components.DialogButton` component.
 - Renamed the `UI.Components.IMessage` interface to `IDialogMessage`.
 - Restored the `notify()` method of the `UI.Components.Toaster` component.
-- The return value of a `UI.Components.DialogBox` component is now a string instead of a `DialogResult` value.
+- The `UI.Variant` enumeration now extends from `UI.Context`.
 
 ## Version [0.21.1](https://github.com/cedx/base/compare/v0.21.0...v0.21.1)
 - Fixed issues in the `UI.Components.DialogButton` and `UI.Components.DialogBox` components.

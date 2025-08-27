@@ -3,6 +3,5 @@ import "./FileTest.js";
 import "./NumberTest.js";
 import "./StringTest.js";
 import "./Data/PaginationTest.js";
-// import "./Data/SortTest.js";
 import "./UI/FormTest.js";
 import "./UI/TagTest.js";

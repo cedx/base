@@ -170,10 +170,10 @@ export class Toaster extends HTMLElement {
 	 * Shows a toast.
 	 * @param context The contextual modifier.
 	 * @param caption The title displayed in the toast header.
-	 * @param body The child content displayed in the toast body.
+	 * @param message The child content displayed in the toast body.
 	 */
-	notify(context: Context, caption: string, body: DocumentFragment): void {
-		return this.show({context, caption, body});
+	notify(context: Context, caption: string, message: DocumentFragment): void {
+		return this.show({body: message, caption, context});
 	}
 
 	/**
