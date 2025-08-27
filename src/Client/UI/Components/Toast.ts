@@ -173,7 +173,7 @@ export class Toast extends HTMLElement {
 	 */
 	connectedCallback(): void {
 		const toast = this.firstElementChild!;
-		toast.addEventListener("hidden.bs.toast", () => clearInterval(this.#timer));
+		toast.addEventListener("hide.bs.toast", () => clearInterval(this.#timer));
 		toast.addEventListener("show.bs.toast", () => this.#timer = window.setInterval(() => this.#updateElapsedTime(), 1_000));
 
 		this.#toast = new BootstrapToast(toast);

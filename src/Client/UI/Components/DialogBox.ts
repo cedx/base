@@ -81,7 +81,7 @@ export class DialogBox extends HTMLElement {
 	 */
 	constructor() {
 		super();
-		this.firstElementChild!.addEventListener("hidden.bs.modal", () => this.#resolve(this.#result));
+		this.firstElementChild!.addEventListener("hide.bs.modal", () => this.#resolve(this.#result));
 		this.querySelector(".btn-close")!.addEventListener("click", event => this.#close(event));
 		for (const button of this.querySelectorAll(".modal-footer button")) button.addEventListener("click", event => this.#close(event));
 	}
