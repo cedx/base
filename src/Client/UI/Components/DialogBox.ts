@@ -1,9 +1,34 @@
 import {Modal} from "bootstrap";
-import {type Context, getIcon, toCss} from "../Context.js";
+import {type Context, toCss as contextCss, getIcon} from "../Context.js";
 import {DialogResult} from "../DialogResult.js";
 import {html} from "../Tag.js";
-import {Variant} from "../Variant.js";
-import type {DialogButton, IDialogButton} from "./DialogButton.js";
+import {Variant, toCss as variantCss} from "../Variant.js";
+
+/**
+ * Represents a dialog box button.
+ */
+export interface IDialogButton {
+
+	/**
+	 * The button icon.
+	 */
+	icon?: string;
+
+	/**
+	 * The button label.
+	 */
+	label?: string;
+
+	/**
+	 * The button value.
+	 */
+	value?: string;
+
+	/**
+	 * A tone variant.
+	 */
+	variant?: Context|Variant;
+}
 
 /**
  * Represents a message to display in a dialog box.
@@ -37,24 +62,19 @@ export class DialogBox extends HTMLElement {
 	static readonly observedAttributes = ["caption", "centered", "fade", "modal", "scrollable"];
 
 	/**
-	 * The template for a button.
-	 */
-	readonly #buttonTemplate: DocumentFragment = this.querySelector("template")!.content;
-
-	/**
 	 * The underlying Bootstrap modal.
 	 */
 	#modal!: Modal;
 
 	/**
-	 * The promise providing the dialog result.
-	 */
-	#promise: Promise<string> = Promise.resolve(DialogResult.None);
-
-	/**
 	 * The function invoked to resolve the dialog result.
 	 */
 	#resolve!: (value: string) => void;
+
+	/**
+	 * The promise providing the dialog result.
+	 */
+	#result: string = DialogResult.None;
 
 	/**
 	 * Creates a new dialog box.
@@ -142,8 +162,8 @@ export class DialogBox extends HTMLElement {
 	/**
 	 * The dialog result.
 	 */
-	get result(): Promise<string> {
-		return this.#promise;
+	get result(): string {
+		return this.#result;
 	}
 
 	/**
@@ -174,21 +194,36 @@ export class DialogBox extends HTMLElement {
 	}
 
 	/**
-	 * Shows an alert message with an "OK" button.
+	 * Shows an alert message with an "OK" button by default.
 	 * @param context The contextual modifier.
 	 * @param caption The title displayed in the header.
-	 * @param body The child content displayed in the body.
-	 * @returns The dialog box result.
+	 * @param message The child content displayed in the body.
+	 * @param buttons The buttons displayed in the footer.
+	 * @returns The dialog result.
 	 */
-	alert(context: Context, caption: string, body: DocumentFragment): Promise<DialogResult> {
-		return this.show(context, caption, this.#getBodyTemplate(context, body), [
-			{label: "OK", value: DialogResult.OK, variant: Variant.Primary}
-		]);
+	alert(context: Context, caption: string, message: DocumentFragment, buttons: IDialogButton[] = []): Promise<string> {
+		return this.show({
+			caption,
+			body: html`
+				<div class="d-flex gap-2">
+					<i class="icon icon-fill fs-1 text-${contextCss(context)}"> ${getIcon(context)}</i>
+					<div class="flex-grow-1">${message}</div>
+				</div>
+			`,
+			footer: html`
+				${(buttons.length ? buttons : [{label: "OK", value: DialogResult.OK, variant: Variant.Primary}]).map(button => html`
+					<button class="btn btn-${variantCss(button.variant ?? Variant.Primary)}" type="button" value="${button.value ?? DialogResult.None}">
+						${button.icon ? html`<i class="icon ${button.label ? "me-1" : ""}">${button.icon}</i>` : ""}
+						${button.label}
+					</button>
+				`)}
+			`
+		});
 	}
 
 	/**
 	 * Closes this dialog box.
-	 * @param result The dialog box result.
+	 * @param result The dialog result.
 	 */
 	close(result: string = DialogResult.None): void {
 		this.#result = result;
@@ -199,11 +234,11 @@ export class DialogBox extends HTMLElement {
 	 * Shows a confirmation message with two buttons, "OK" and "Cancel".
 	 * @param context The contextual modifier.
 	 * @param caption The title displayed in the header.
-	 * @param body The child content displayed in the body.
-	 * @returns The dialog box result.
+	 * @param message The child content displayed in the body.
+	 * @returns The dialog result.
 	 */
-	confirm(context: Context, caption: string, body: DocumentFragment): Promise<DialogResult> {
-		return this.show(context, caption, this.#getBodyTemplate(context, body), [
+	confirm(context: Context, caption: string, message: DocumentFragment): Promise<string> {
+		return this.alert(context, caption, message, [
 			{label: "OK", value: DialogResult.OK, variant: Variant.Primary},
 			{label: "Annuler", value: DialogResult.Cancel, variant: Variant.Secondary}
 		]);
@@ -227,35 +262,9 @@ export class DialogBox extends HTMLElement {
 	/**
 	 * Shows a message.
 	 * @param message The message to show.
-	 * @returns The dialog box result.
+	 * @returns The dialog result.
 	 */
-	show(message?: IMessage): Promise<DialogResult>;
-
-	/**
-	 * Shows a message.
-	 * @param context The contextual modifier.
-	 * @param caption The title displayed in the header.
-	 * @param body The child content displayed in the body.
-	 * @param buttons The buttons displayed in the footer.
-	 * @returns The dialog box result.
-	 */
-	show(context: Context, caption: string, body: DocumentFragment, buttons?: IDialogButton[]): Promise<DialogResult>;
-
-	/**
-	 * Shows a message.
-	 * @param message The message to show, or the contextual modifier.
-	 * @param caption The title displayed in the header.
-	 * @param body The child content displayed in the body.
-	 * @param buttons The buttons displayed in the footer.
-	 * @returns The dialog box result.
-	 */
-	show(message: IMessage|Context|null = null, caption = "", body = document.createDocumentFragment(), buttons: IDialogButton[] = []): Promise<DialogResult> {
-		if (typeof message == "string") {
-			const footer = document.createDocumentFragment();
-			footer.append(...buttons.map(button => this.#createButton(button)));
-			message = {body, caption, footer};
-		}
-
+	show(message: IDialogMessage|null = null): Promise<string> {
 		if (message) {
 			const footer = message.footer ?? document.createDocumentFragment();
 			for (const button of footer.querySelectorAll("button")) button.addEventListener("click", event => this.#close(event));
@@ -278,40 +287,6 @@ export class DialogBox extends HTMLElement {
 	#close(event: Event): void {
 		event.preventDefault();
 		this.close((event.target as Element).closest("button")!.value);
-	}
-
-	/**
-	 * Creates the component instance corresponding to the specified button.
-	 * @param button An object describing the appearance of the button.
-	 * @returns The component instance corresponding to the specified button.
-	 */
-	#createButton(button: IDialogButton): DialogButton {
-		const element = document.createElement("dialog-button");
-		const childContent = (this.#buttonTemplate.cloneNode(true) as DocumentFragment).querySelector("button")!;
-		childContent.addEventListener("click", event => this.#close(event));
-		element.appendChild(childContent);
-
-		element.context = button.context ?? null;
-		element.icon = button.icon ?? null;
-		element.label = button.label ?? "";
-		element.value = button.value ?? DialogResult.None;
-		element.variant = button.variant ?? null;
-		return element;
-	}
-
-	/**
-	 * Gets the body template corresponding to the specified context and message.
-	 * @param context The contextual modifier.
-	 * @param message The child content displayed in the body.
-	 * @returns The body template corresponding to the specified context and message.
-	 */
-	#getBodyTemplate(context: Context, message: DocumentFragment): DocumentFragment {
-		return html`
-			<div class="d-flex gap-2">
-				<i class="icon icon-fill fs-1 text-${toCss(context)}"> ${getIcon(context)}</i>
-				<div class="flex-grow-1">${message}</div>
-			</div>
-		`;
 	}
 
 	/**
