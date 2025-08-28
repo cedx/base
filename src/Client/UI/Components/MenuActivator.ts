@@ -14,13 +14,31 @@ export class MenuActivator extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
+		this.#updateAnchors();
+		addEventListener("popstate", this.#updateAnchors);
+		document.body.addEventListener("htmx:afterRequest", this.#updateAnchors);
+	}
+
+	/**
+	 * Method invoked when this component is disconnected.
+	 */
+	disconnectedCallback(): void {
+		removeEventListener("popstate", this.#updateAnchors);
+		document.body.removeEventListener("htmx:afterRequest", this.#updateAnchors);
+	}
+
+	/**
+	 * Updates the state of anchors.
+	 * @param event The dispatched event.
+	 */
+	readonly #updateAnchors: (event?: Event) => void = () => {
 		for (const anchor of this.querySelectorAll("a"))
 			if (anchor.href != location.href) anchor.classList.remove("active");
 			else {
 				anchor.classList.add("active");
 				anchor.closest(".dropdown")?.querySelector('[data-bs-toggle="dropdown"]')?.classList.add("active");
 			}
-	}
+	};
 }
 
 /**
