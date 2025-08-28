@@ -8,7 +8,7 @@ export class BackButton extends HTMLElement {
 	 */
 	constructor() {
 		super();
-		this.addEventListener("click", event => this.#goBack(event));
+		this.addEventListener("click", this.#goBack.bind(this));
 	}
 
 	/**

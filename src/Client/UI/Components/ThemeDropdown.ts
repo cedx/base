@@ -27,7 +27,7 @@ export class ThemeDropdown extends HTMLElement {
 	 */
 	constructor() {
 		super();
-		for (const button of this.querySelectorAll(".dropdown-menu button")) button.addEventListener("click", event => this.#setAppTheme(event));
+		for (const button of this.querySelectorAll(".dropdown-menu button")) button.addEventListener("click", this.#setAppTheme.bind(this));
 	}
 
 	/**

@@ -18,7 +18,7 @@ export class FullScreenToggler extends HTMLElement {
 	 */
 	constructor() {
 		super();
-		this.addEventListener("click", event => { void this.toggleFullScreen(event); });
+		this.addEventListener("click", this.toggleFullScreen.bind(this)); // eslint-disable-line @typescript-eslint/no-misused-promises
 	}
 
 	/**

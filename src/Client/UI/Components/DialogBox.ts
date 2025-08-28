@@ -82,8 +82,8 @@ export class DialogBox extends HTMLElement {
 	constructor() {
 		super();
 		this.firstElementChild!.addEventListener("hide.bs.modal", () => this.#resolve(this.#result));
-		this.querySelector(".btn-close")!.addEventListener("click", event => this.#close(event));
-		for (const button of this.querySelectorAll(".modal-footer button")) button.addEventListener("click", event => this.#close(event));
+		this.querySelector(".btn-close")!.addEventListener("click", this.#close.bind(this));
+		for (const button of this.querySelectorAll(".modal-footer button")) button.addEventListener("click", this.#close.bind(this));
 	}
 
 	/**
@@ -267,7 +267,7 @@ export class DialogBox extends HTMLElement {
 	show(message: IDialogMessage|null = null): Promise<string> {
 		if (message) {
 			const footer = message.footer ?? document.createDocumentFragment();
-			for (const button of footer.querySelectorAll("button")) button.addEventListener("click", event => this.#close(event));
+			for (const button of footer.querySelectorAll("button")) button.addEventListener("click", this.#close.bind(this));
 			this.body = message.body;
 			this.caption = message.caption;
 			this.footer = footer;
