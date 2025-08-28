@@ -14,30 +14,29 @@ export class MenuActivator extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
-		this.#updateAnchors();
-		addEventListener("popstate", this.#updateAnchors);
-		document.body.addEventListener("htmx:afterRequest", this.#updateAnchors);
+		this.#update();
+		addEventListener("popstate", this.#update);
+		document.body.addEventListener("htmx:afterRequest", this.#update);
 	}
 
 	/**
 	 * Method invoked when this component is disconnected.
 	 */
 	disconnectedCallback(): void {
-		removeEventListener("popstate", this.#updateAnchors);
-		document.body.removeEventListener("htmx:afterRequest", this.#updateAnchors);
+		removeEventListener("popstate", this.#update);
+		document.body.removeEventListener("htmx:afterRequest", this.#update);
 	}
 
 	/**
-	 * Updates the state of anchors.
+	 * Updates this component.
 	 * @param event The dispatched event.
 	 */
-	readonly #updateAnchors: (event?: Event) => void = () => {
-		for (const anchor of this.querySelectorAll("a"))
-			if (anchor.href != location.href) anchor.classList.remove("active");
-			else {
-				anchor.classList.add("active");
-				anchor.closest(".dropdown")?.querySelector('[data-bs-toggle="dropdown"]')?.classList.add("active");
-			}
+	readonly #update: (event?: Event) => void = () => {
+		for (const element of this.querySelectorAll(".active")) element.classList.remove("active");
+		for (const element of this.querySelectorAll("a")) if (element.href == location.href) {
+			element.classList.add("active");
+			element.closest(".dropdown")?.querySelector(".dropdown-toggle")?.classList.add("active");
+		}
 	};
 }
 
