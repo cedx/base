@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.23.0](https://github.com/cedx/base/compare/v0.22.0...v0.23.0)
+- Added the `UI.Components.FullScreenToggler` component.
+
 ## Version [0.22.0](https://github.com/cedx/base/compare/v0.21.1...v0.22.0)
 - Added the `result` property to the `UI.Components.DialogBox` component.
 - Fixed the `css()` and `html()` tag functions to handle arrays.
