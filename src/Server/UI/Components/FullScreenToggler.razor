@@ -1,0 +1,25 @@
+@namespace Belin.Base.UI.Components
+
+<fullscreen-toggler target="@Target" wakeLock="@WakeLock">
+	@ChildContent
+</fullscreen-toggler>
+
+@code {
+	/// <summary>
+	/// The child content.
+	/// </summary>
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+
+	/// <summary>
+	/// The CSS selector used to target the element.
+	/// </summary>
+	[Parameter]
+	public string Target { get; set; } = "body";
+
+	/// <summary>
+	/// Value indicating whether to prevent the device screen from dimming or locking when in full-screen mode.
+	/// </summary>
+	[Parameter]
+	public bool WakeLock { get; set; }
+}
