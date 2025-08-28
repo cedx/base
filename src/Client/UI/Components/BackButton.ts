@@ -1,5 +1,5 @@
 /**
- * A component that moves back one page in the session history when clicked.
+ * A component that moves back in the session history when clicked.
  */
 export class BackButton extends HTMLElement {
 
@@ -8,7 +8,7 @@ export class BackButton extends HTMLElement {
 	 */
 	constructor() {
 		super();
-		this.addEventListener("click", () => history.go(-this.steps));
+		this.addEventListener("click", event => this.#goBack(event));
 	}
 
 	/**
@@ -27,6 +27,15 @@ export class BackButton extends HTMLElement {
 	}
 	set steps(value: number) {
 		this.setAttribute("steps", value.toString());
+	}
+
+	/**
+	 * Moves back in the session history.
+	 * @param event The dispatched event.
+	 */
+	#goBack(event: Event): void {
+		event.preventDefault();
+		history.go(-this.steps);
 	}
 }
 
