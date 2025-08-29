@@ -72,7 +72,7 @@ export class FullScreenToggler extends HTMLElement {
 	 * @returns Resolves when the full-screen mode has been toggled.
 	 */
 	async toggleFullScreen(event?: Event): Promise<void> {
-		event?.preventDefault();
+		event?.stopPropagation();
 		if (document.fullscreenElement) await document.exitFullscreen();
 		else await this.#element.requestFullscreen();
 	}

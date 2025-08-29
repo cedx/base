@@ -72,7 +72,7 @@ export class KeyboardAccelerator extends HTMLElement {
 		if (!(modifiers & KeyboardModifiers.Alt) && event.altKey) return;
 		if (!(modifiers & KeyboardModifiers.Meta) && event.metaKey) return;
 
-		event.preventDefault();
+		event.stopPropagation();
 		(this.firstElementChild as HTMLElement|null)?.click();
 	}
 }

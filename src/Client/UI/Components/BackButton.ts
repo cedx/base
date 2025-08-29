@@ -34,7 +34,7 @@ export class BackButton extends HTMLElement {
 	 * @param event The dispatched event.
 	 */
 	goBack(event?: Event): void {
-		event?.preventDefault();
+		event?.stopPropagation();
 		history.go(-this.steps);
 	}
 }
