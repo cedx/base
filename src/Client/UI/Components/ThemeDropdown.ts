@@ -151,7 +151,7 @@ export class ThemeDropdown extends HTMLElement {
 	 */
 	#setAppTheme(event: Event): void {
 		event.preventDefault();
-		this.appTheme = (event.target as Element).closest("button")!.dataset.theme! as AppTheme;
+		this.appTheme = (event.currentTarget as HTMLElement).dataset.theme! as AppTheme;
 		this.save();
 	}
 

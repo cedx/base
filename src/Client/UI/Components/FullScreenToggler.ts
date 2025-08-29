@@ -4,7 +4,7 @@
 export class FullScreenToggler extends HTMLElement {
 
 	/**
-	 * The associated element.
+	 * The target element.
 	 */
 	#element: Element = document.body;
 
@@ -29,7 +29,7 @@ export class FullScreenToggler extends HTMLElement {
 	}
 
 	/**
-	 * The CSS selector used to target the element.
+	 * The CSS selector specifying the target element.
 	 */
 	get target(): string {
 		const value = this.getAttribute("target") ?? "";

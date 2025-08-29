@@ -286,7 +286,7 @@ export class DialogBox extends HTMLElement {
 	 */
 	#close(event: Event): void {
 		event.preventDefault();
-		this.close((event.target as Element).closest("button")!.value);
+		this.close((event.currentTarget as HTMLButtonElement).value);
 	}
 
 	/**
