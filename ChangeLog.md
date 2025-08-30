@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.25.0](https://github.com/cedx/base/compare/v0.24.0...v0.25.0)
+- Added the `Data.Mapping.PhysicalAddressTypeHandler` class.
+
 ## Version [0.24.0](https://github.com/cedx/base/compare/v0.23.0...v0.24.0)
 - Added support for [htmx](https://htmx.org) and the `popstate` event to the `UI.Components.MenuActivator` component.
 
