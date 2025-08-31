@@ -9,7 +9,7 @@
 		<ul class="dropdown-menu @(Alignment == Alignment.End ? "dropdown-menu-end" : string.Empty)">
 			@foreach (var theme in Enum.GetValues<AppTheme>()) {
 				<li>
-					<button class="dropdown-item d-flex align-items-center justify-content-between" data-theme="@theme" type="button">
+					<button class="dropdown-item d-flex align-items-center justify-content-between" type="button" value="@theme">
 						<span><i class="icon icon-fill me-1">@theme.GetIcon()</i> @theme.GetLabel()</span>
 						@if (theme == AppTheme) { <i class="icon ms-3">check</i> }
 					</button>

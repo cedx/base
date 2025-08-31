@@ -151,7 +151,7 @@ export class ThemeDropdown extends HTMLElement {
 	 */
 	#setAppTheme(event: Event): void {
 		event.preventDefault();
-		this.appTheme = (event.currentTarget as HTMLElement).dataset.theme! as AppTheme;
+		this.appTheme = (event.currentTarget as HTMLButtonElement).value as AppTheme;
 		this.save();
 	}
 
@@ -169,7 +169,7 @@ export class ThemeDropdown extends HTMLElement {
 	 */
 	#updateAppTheme(value: AppTheme): void {
 		this.querySelector(".dropdown-toggle > .icon")!.textContent = getIcon(value);
-		this.querySelector(`button[data-theme="${value}"]`)!.appendChild(this.querySelector(".dropdown-item > .icon")!);
+		this.querySelector(`button[value="${value}"]`)!.appendChild(this.querySelector(".dropdown-item > .icon")!);
 		this.#applyToDocument();
 	}
 
