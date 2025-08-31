@@ -60,7 +60,7 @@ export class Toaster extends HTMLElement {
 	/**
 	 * The template for a toast.
 	 */
-	readonly #toastTemplate: DocumentFragment = this.querySelector("template")!.content;
+	readonly #toastTemplate = this.querySelector("template")!.content;
 
 	/**
 	 * Creates a new toaster.
