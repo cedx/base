@@ -37,6 +37,15 @@ export class Toast extends HTMLElement {
 	#toast!: BootstrapToast;
 
 	/**
+	 * Creates a new toast.
+	 */
+	constructor() {
+		super();
+		this.firstElementChild!.addEventListener("hide.bs.toast", () => clearInterval(this.#timer));
+		this.firstElementChild!.addEventListener("show.bs.toast", () => this.#timer = window.setInterval(() => this.#updateElapsedTime(), 1_000));
+	}
+
+	/**
 	 * Registers the component.
 	 */
 	static {
@@ -172,11 +181,7 @@ export class Toast extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
-		const toast = this.firstElementChild!;
-		toast.addEventListener("hide.bs.toast", () => clearInterval(this.#timer));
-		toast.addEventListener("show.bs.toast", () => this.#timer = window.setInterval(() => this.#updateElapsedTime(), 1_000));
-
-		this.#toast = new BootstrapToast(toast);
+		this.#toast = new BootstrapToast(this.firstElementChild!);
 		if (this.open) this.show();
 	}
 

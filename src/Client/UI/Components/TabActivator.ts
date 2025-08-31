@@ -7,6 +7,16 @@ import {StorageArea} from "../StorageArea.js";
 export class TabActivator extends HTMLElement {
 
 	/**
+	 * Creates a new tab activator.
+	 */
+	constructor() {
+		super();
+		const {tabs} = this;
+		for (let index = 0; index < tabs.length; index++)
+			tabs.item(index).addEventListener("show.bs.tab", () => this.activeTabIndex = index);
+	}
+
+	/**
 	 * Registers the component.
 	 */
 	static {
@@ -64,12 +74,7 @@ export class TabActivator extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
-		const {activeTabIndex, tabs} = this;
-		for (let index = 0; index < tabs.length; index++) {
-			const tab = tabs.item(index);
-			tab.addEventListener("click", () => this.activeTabIndex = index);
-			if (index == activeTabIndex) Tab.getOrCreateInstance(tab).show();
-		}
+		Tab.getOrCreateInstance(this.tabs.item(this.activeTabIndex)).show();
 	}
 }
 
