@@ -1,6 +1,9 @@
 # Changelog
 
-## Version [0.27.0](https://github.com/cedx/base/compare/v0.20.0...v0.27.0)
+## Version [0.28.0](https://github.com/cedx/base/compare/v0.27.0...v0.28.0)
+- Added the `UI.Components.Alert` component.
+
+## Version [0.27.0](https://github.com/cedx/base/compare/v0.26.0...v0.27.0)
 - Added the `today()` function.
 - Replaced the `Duration` enumeration by the `TimeSpan` object.
 
