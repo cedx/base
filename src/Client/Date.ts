@@ -118,6 +118,16 @@ export function isWorkingDay(date: Date): boolean {
 }
 
 /**
+ * Gets the current date.
+ * @returns The current date.
+ */
+export function today(): Date {
+	const date = new Date;
+	date.setHours(0, 0, 0, 0);
+	return date;
+}
+
+/**
  * Converts the specified date to an ISO 8601 week.
  * @param date The date to convert.
  * @returns The ISO 8601 week corresponding to the specified date.
