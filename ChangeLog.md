@@ -1,5 +1,9 @@
 # Changelog
 
+## Version [0.26.0](https://github.com/cedx/base/compare/v0.25.0...v0.26.0)
+- Added the `Data.Mapping.MailAddressTypeHandler` class.
+- The `UI.Components.LoadingIndicator` component no longer applies the `.loading` class to the document `<body>`.
+
 ## Version [0.25.0](https://github.com/cedx/base/compare/v0.24.0...v0.25.0)
 - Added the `Data.Mapping.IPAddressTypeHandler` and `Data.Mapping.PhysicalAddressTypeHandler` classes.
 
