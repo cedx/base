@@ -1,4 +1,4 @@
-import {Duration} from "./Duration.js";
+import {TimeSpan} from "./TimeSpan.js";
 
 /**
  * Returns the date at midnight corresponding to the specified date.
@@ -60,9 +60,9 @@ export function getHolidays(date: Date): Date[] {
 
 	// Holidays depending on Easter.
 	const easter = getEaster(date);
-	holidays.push(new Date(easter.getTime() + Duration.Day)); // Easter monday.
-	holidays.push(new Date(easter.getTime() + (39 * Duration.Day))); // Ascension thursday.
-	holidays.push(new Date(easter.getTime() + (50 * Duration.Day))); // Pentecost monday.
+	holidays.push(new Date(easter.getTime() + TimeSpan.MillisecondsPerDay)); // Easter monday.
+	holidays.push(new Date(easter.getTime() + (39 * TimeSpan.MillisecondsPerDay))); // Ascension thursday.
+	holidays.push(new Date(easter.getTime() + (50 * TimeSpan.MillisecondsPerDay))); // Pentecost monday.
 
 	return holidays;
 }
@@ -84,7 +84,7 @@ export function getQuarter(date: Date): number {
 export function getWeekOfYear(date: Date): number {
 	const thursday = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 3 - ((date.getDay() + 6) % 7));
 	const firstWeek = new Date(thursday.getFullYear(), 0, 4);
-	return 1 + Math.round((((thursday.getTime() - firstWeek.getTime()) / Duration.Day) - 3 + ((firstWeek.getDay() + 6) % 7)) / 7);
+	return 1 + Math.round((((thursday.getTime() - firstWeek.getTime()) / TimeSpan.MillisecondsPerDay) - 3 + ((firstWeek.getDay() + 6) % 7)) / 7);
 }
 
 /**
