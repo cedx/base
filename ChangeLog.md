@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.27.0](https://github.com/cedx/base/compare/v0.20.0...v0.27.0)
+- Added the `today()` function.
+
 ## Version [0.26.0](https://github.com/cedx/base/compare/v0.25.0...v0.26.0)
 - Added the `Data.Mapping.MailAddressTypeHandler` class.
 - The `UI.Components.LoadingIndicator` component no longer applies the `.loading` class to the document `<body>`.
