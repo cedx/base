@@ -33,8 +33,3 @@ export const DialogResult = Object.freeze({
 	 */
 	Ignore: "Ignore"
 });
-
-/**
- * Specifies the return value of a dialog box.
- */
-export type DialogResult = typeof DialogResult[keyof typeof DialogResult];
