@@ -170,7 +170,7 @@ export class ThemeDropdown extends HTMLElement {
 	 */
 	#updateAppTheme(value: AppTheme): void {
 		this.querySelector(".dropdown-toggle > .icon")!.textContent = getIcon(value);
-		this.querySelector(`button[value="${value}"]`)!.appendChild(this.querySelector(".dropdown-item > .icon")!);
+		this.querySelector(`.dropdown-menu button[value="${value}"]`)!.appendChild(this.querySelector(".dropdown-item > .icon")!);
 		this.#applyToDocument();
 	}
 
