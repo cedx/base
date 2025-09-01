@@ -1,6 +1,6 @@
 @namespace Belin.Base.UI.Components
 
-<div class="alert alert-@Variant.ToCss() @(Dismissible ? "alert-dismissible" : string.Empty) @(Fade ? "fade show" : string.Empty)">
+<div class="alert alert-@Context.ToCss() @(Dismissible ? "alert-dismissible" : string.Empty) @(Fade ? "fade show" : string.Empty)">
 	@ChildContent
 	@if (Dismissible) { <button class="btn-close" data-bs-dismiss="alert" type="button"></button> }
 </div>
@@ -13,6 +13,12 @@
 	public RenderFragment? ChildContent { get; set; }
 
 	/// <summary>
+	/// A contextual modifier.
+	/// </summary>
+	[Parameter]
+	public Context Context { get; set; } = Context.Info;
+
+	/// <summary>
 	/// Value indicating whether this alert can be dismissed.
 	/// </summary>
 	[Parameter]
@@ -23,10 +29,4 @@
 	/// </summary>
 	[Parameter]
 	public bool Fade { get; set; }
-
-	/// <summary>
-	/// The tone variant.
-	/// </summary>
-	[Parameter]
-	public Variant Variant { get; set; }
 }
