@@ -1,8 +1,39 @@
 @namespace Belin.Base.UI.Components
 
-<type-ahead>
-	<datalist id="TODO"></datalist>
+<type-ahead list="@List" minLength="@MinLength" query="@Query" wait="@Wait">
+	<datalist id="@List">
+		@foreach (var value in Items) { <option value="@value"></option> }
+	</datalist>
 </type-ahead>
 
 @code {
+	/// <summary>
+	/// The data list items.
+	/// </summary>
+	[Parameter]
+	public IEnumerable<string> Items { get; set; } = [];
+
+	/// <summary>
+	/// The data list identifier.
+	/// </summary>
+	[Parameter, EditorRequired]
+	public required string List { get; set; }
+
+	/// <summary>
+	/// The minimum character length needed before triggering autocomplete suggestions.
+	/// </summary>
+	[Parameter]
+	public int MinLength { get; set; } = 2;
+
+	/// <summary>
+	/// The query to look up.
+	/// </summary>
+	[Parameter]
+	public string Query { get; set => field = value.Trim(); } = string.Empty;
+
+	/// <summary>
+	/// The delay in milliseconds to wait before triggering autocomplete suggestions.
+	/// </summary>
+	[Parameter]
+	public int Wait { get; set; } = 300;
 }
