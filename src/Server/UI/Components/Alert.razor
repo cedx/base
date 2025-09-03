@@ -1,7 +1,10 @@
 @namespace Belin.Base.UI.Components
 
-<div class="alert alert-@Context.ToCss() @(Dismissible ? "alert-dismissible" : string.Empty) @(Fade ? "fade show" : string.Empty)">
-	@ChildContent
+<div class="alert alert-@Context.ToCss() @(Dismissible ? "alert-dismissible" : string.Empty) @(Fade ? "fade show" : string.Empty) @CssClass">
+	<div class="d-flex align-items-center">
+		<i class="icon flex-shrink-0 me-2">@Context.GetIcon()</i>
+		<div>@ChildContent</div>
+	</div>
 	@if (Dismissible) { <button class="btn-close" data-bs-dismiss="alert" type="button"></button> }
 </div>
 
@@ -17,6 +20,12 @@
 	/// </summary>
 	[Parameter]
 	public Context Context { get; set; } = Context.Info;
+
+	/// <summary>
+	/// The CSS class string to apply to the underlying element.
+	/// </summary>
+	[Parameter]
+	public string CssClass { get; set; } = string.Empty;
 
 	/// <summary>
 	/// Value indicating whether this alert can be dismissed.
