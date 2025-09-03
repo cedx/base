@@ -69,7 +69,7 @@ export class FullScreenToggler extends HTMLElement {
 	/**
 	 * Toggles the full-screen mode of the associated element.
 	 * @param event The dispatched event.
-	 * @returns Resolves when the full-screen mode has been toggled.
+	 * @returns Completes when the full-screen mode has been toggled.
 	 */
 	async toggleFullScreen(event?: Event): Promise<void> {
 		event?.stopPropagation();
@@ -79,7 +79,7 @@ export class FullScreenToggler extends HTMLElement {
 
 	/**
 	 * Acquires a new wake lock.
-	 * @returns Resolves when the wake lock has been acquired.
+	 * @returns Completes when the wake lock has been acquired.
 	 */
 	async #acquireWakeLock(): Promise<void> {
 		if (this.#sentinel && !this.#sentinel.released) return;
@@ -105,7 +105,7 @@ export class FullScreenToggler extends HTMLElement {
 
 	/**
 	 * Releases the acquired wake lock.
-	 * @returns Resolves when the wake lock has been released.
+	 * @returns Completes when the wake lock has been released.
 	 */
 	async #releaseWakeLock(): Promise<void> {
 		if (!this.#sentinel || this.#sentinel.released) return;
