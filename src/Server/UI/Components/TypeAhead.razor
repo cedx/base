@@ -1,18 +1,10 @@
 @namespace Belin.Base.UI.Components
 
 <type-ahead list="@List" minLength="@MinLength" wait="@Wait">
-	<datalist id="@List">
-		@foreach (var value in Items) { <option value="@value"></option> }
-	</datalist>
+	<datalist id="@List"><!-- Options --></datalist>
 </type-ahead>
 
 @code {
-	/// <summary>
-	/// The data list items.
-	/// </summary>
-	[Parameter]
-	public IEnumerable<string> Items { get; set; } = [];
-
 	/// <summary>
 	/// The data list identifier.
 	/// </summary>
