@@ -1,10 +1,16 @@
 @namespace Belin.Base.UI.Components
 
-<type-ahead list="@List" minLength="@MinLength" wait="@Wait">
+<type-ahead delay="@Delay" list="@List" minLength="@MinLength">
 	<datalist id="@List"><!-- Options --></datalist>
 </type-ahead>
 
 @code {
+	/// <summary>
+	/// The delay in milliseconds to wait before triggering autocomplete suggestions.
+	/// </summary>
+	[Parameter]
+	public int Delay { get; set; } = 300;
+
 	/// <summary>
 	/// The data list identifier.
 	/// </summary>
@@ -16,10 +22,4 @@
 	/// </summary>
 	[Parameter]
 	public int MinLength { get; set; } = 2;
-
-	/// <summary>
-	/// The delay in milliseconds to wait before triggering autocomplete suggestions.
-	/// </summary>
-	[Parameter]
-	public int Wait { get; set; } = 300;
 }

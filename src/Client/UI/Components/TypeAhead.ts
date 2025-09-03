@@ -26,13 +26,24 @@ export class TypeAhead extends HTMLElement {
 	}
 
 	/**
+	 * The delay in milliseconds to wait before triggering autocomplete suggestions.
+	 */
+	get delay(): number {
+		const value = Number(this.getAttribute("delay"));
+		return Math.max(0, Number.isNaN(value) ? 300 : value);
+	}
+	set delay(value: number) {
+		this.setAttribute("delay", value.toString());
+	}
+
+	/**
 	 * The function invoked when the query has been changed.
 	 */
 	set handler(callback: (query: string) => Promise<string[]>) { // eslint-disable-line accessor-pairs
 		this.#debounced = this.#debounce(async query => { // eslint-disable-line @typescript-eslint/no-misused-promises
 			try { this.#updateItems(await callback(query)); }
 			catch { this.#updateItems([]); }
-		}, this.wait);
+		}, this.delay);
 	}
 
 	/**
@@ -64,17 +75,6 @@ export class TypeAhead extends HTMLElement {
 	}
 	set query(value: string) {
 		this.setAttribute("query", value);
-	}
-
-	/**
-	 * The delay in milliseconds to wait before triggering autocomplete suggestions.
-	 */
-	get wait(): number {
-		const value = Number(this.getAttribute("wait"));
-		return Math.max(0, Number.isNaN(value) ? 300 : value);
-	}
-	set wait(value: number) {
-		this.setAttribute("wait", value.toString());
 	}
 
 	/**
