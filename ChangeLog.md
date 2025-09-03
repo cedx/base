@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.29.0](https://github.com/cedx/base/compare/v0.28.0...v0.29.0)
+- Added the `Icon` property to the `UI.Components.Alert` component.
+
 ## Version [0.28.0](https://github.com/cedx/base/compare/v0.27.0...v0.28.0)
 - Added the `UI.Components.MarkupStringExtensions` class.
 - Added the `UI.Components.Alert` and `UI.Components.TypeAhead` components.
