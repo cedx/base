@@ -49,11 +49,11 @@ export class TypeAhead extends HTMLElement {
 	 * The minimum character length needed before triggering autocomplete suggestions.
 	 */
 	get minLength(): number {
-		const value = Number(this.getAttribute("minLength"));
+		const value = Number(this.getAttribute("minlength"));
 		return Math.max(1, Number.isNaN(value) ? 1 : value);
 	}
 	set minLength(value: number) {
-		this.setAttribute("minLength", value.toString());
+		this.setAttribute("minlength", value.toString());
 	}
 
 	/**

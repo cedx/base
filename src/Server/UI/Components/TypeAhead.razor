@@ -1,6 +1,6 @@
 @namespace Belin.Base.UI.Components
 
-<type-ahead list="@List" minLength="@MinLength" query="@Query" wait="@Wait">
+<type-ahead list="@List" minLength="@MinLength" wait="@Wait">
 	<datalist id="@List">
 		@foreach (var value in Items) { <option value="@value"></option> }
 	</datalist>
@@ -24,12 +24,6 @@
 	/// </summary>
 	[Parameter]
 	public int MinLength { get; set; } = 2;
-
-	/// <summary>
-	/// The query to look up.
-	/// </summary>
-	[Parameter]
-	public string Query { get; set => field = value.Trim(); } = string.Empty;
 
 	/// <summary>
 	/// The delay in milliseconds to wait before triggering autocomplete suggestions.
