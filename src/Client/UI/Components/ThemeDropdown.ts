@@ -61,6 +61,26 @@ export class ThemeDropdown extends HTMLElement {
 	}
 
 	/**
+	 * Value indicating whether to store the application theme in a cookie.
+	 */
+	get cookie(): boolean {
+		return this.hasAttribute("cookie");
+	}
+	set cookie(value: boolean) {
+		this.toggleAttribute("cookie", value);
+	}
+
+	/**
+	 * The URI for which the associated cookie is valid.
+	 */
+	get cookieDomain(): string {
+		return (this.getAttribute("cookiedomain") ?? "").trim();
+	}
+	set cookieDomain(value: string) {
+		this.setAttribute("cookiedomain", value);
+	}
+
+	/**
 	 * The label of the dropdown menu.
 	 */
 	get label(): string {
@@ -106,13 +126,18 @@ export class ThemeDropdown extends HTMLElement {
 
 	/**
 	 * Method invoked when this component is connected.
+	 * @returns Completes when this component has been connected.
 	 */
-	connectedCallback(): void {
-		const appTheme = localStorage.getItem(this.storageKey) as AppTheme|null;
-		if (appTheme) this.appTheme = appTheme;
-
+	async connectedCallback(): Promise<void> {
 		this.#dropdown = new Dropdown(this.querySelector(".dropdown-toggle")!);
 		this.#mediaQuery.addEventListener("change", this.#applyToDocument);
+
+		const cookie = this.cookie ? await cookieStore.get(this.storageKey) : null;
+		if (cookie) this.appTheme = cookie.value as AppTheme;
+		else {
+			const storage = localStorage.getItem(this.storageKey);
+			if (storage) this.appTheme = storage as AppTheme;
+		}
 	}
 
 	/**
@@ -134,7 +159,15 @@ export class ThemeDropdown extends HTMLElement {
 	 * Saves the current application theme into the local storage.
 	 */
 	save(): void {
-		localStorage.setItem(this.storageKey, this.appTheme);
+		const {appTheme, cookieDomain} = this;
+		localStorage.setItem(this.storageKey, appTheme);
+
+		if (this.cookie) void cookieStore.set({
+			domain: cookieDomain ? cookieDomain : null,
+			expires: Date.now() + (365 * 24 * 60 * 60 * 1_000),
+			name: this.storageKey,
+			value: appTheme
+		});
 	}
 
 	/**

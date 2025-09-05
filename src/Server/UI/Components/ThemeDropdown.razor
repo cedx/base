@@ -1,6 +1,6 @@
 @namespace Belin.Base.UI.Components
 
-<theme-dropdown alignment="@Alignment" appTheme="@AppTheme" label="@Label" storageKey="@StorageKey">
+<theme-dropdown alignment="@Alignment" appTheme="@AppTheme" cookie="@Cookie" cookieDomain="@CookieDomain" label="@Label" storageKey="@StorageKey">
 	<li class="nav-item dropdown">
 		<button class="dropdown-toggle nav-link" data-bs-toggle="dropdown" type="button">
 			<i class="icon icon-fill">@AppTheme.GetIcon()</i>
@@ -31,6 +31,18 @@
 	/// </summary>
 	[Parameter]
 	public AppTheme AppTheme { get; set; } = AppTheme.System;
+
+	/// <summary>
+	/// Value indicating whether to store the application theme in a cookie.
+	/// </summary>
+	[Parameter]
+	public bool Cookie { get; set; }
+
+	/// <summary>
+	/// The URI for which the associated cookie is valid.
+	/// </summary>
+	[Parameter]
+	public string CookieDomain { get; set; } = string.Empty;
 
 	/// <summary>
 	/// The label of the dropdown menu.
