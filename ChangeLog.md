@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.30.0](https://github.com/cedx/base/compare/v0.29.0...v0.30.0)
+- Added the `Cookie` and `CookieDomain` properties to the `UI.Components.ThemeDropdown` component.
+
 ## Version [0.29.0](https://github.com/cedx/base/compare/v0.28.0...v0.29.0)
 - Added the `Icon` property to the `UI.Components.Alert` component.
 
