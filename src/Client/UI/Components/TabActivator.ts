@@ -11,6 +11,7 @@ export class TabActivator extends HTMLElement {
 	 */
 	constructor() {
 		super();
+
 		const {tabs} = this;
 		for (let index = 0; index < tabs.length; index++)
 			tabs.item(index).addEventListener("show.bs.tab", () => this.activeTabIndex = index);
