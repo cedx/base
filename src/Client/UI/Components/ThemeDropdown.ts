@@ -13,6 +13,11 @@ export class ThemeDropdown extends HTMLElement {
 	static readonly observedAttributes = ["alignment", "apptheme", "label"];
 
 	/**
+	 * The abort controller used to remove the event listeners.
+	 */
+	readonly #abortController = new AbortController;
+
+	/**
 	 * The dropdown menu.
 	 */
 	#dropdown!: Dropdown;
@@ -27,8 +32,7 @@ export class ThemeDropdown extends HTMLElement {
 	 */
 	constructor() {
 		super();
-		for (const button of this.querySelectorAll(".dropdown-menu button"))
-			button.addEventListener("click", this.#setAppTheme.bind(this));
+		for (const button of this.querySelectorAll(".dropdown-menu button")) button.addEventListener("click", this.#setAppTheme);
 	}
 
 	/**
@@ -130,7 +134,7 @@ export class ThemeDropdown extends HTMLElement {
 	 */
 	async connectedCallback(): Promise<void> {
 		this.#dropdown = new Dropdown(this.querySelector(".dropdown-toggle")!);
-		this.#mediaQuery.addEventListener("change", this.#applyToDocument);
+		this.#mediaQuery.addEventListener("change", this.#applyToDocument, {signal: this.#abortController.signal});
 
 		const cookie = this.cookie ? await cookieStore.get(this.storageKey) : null;
 		if (cookie) this.appTheme = cookie.value as AppTheme;
@@ -144,8 +148,8 @@ export class ThemeDropdown extends HTMLElement {
 	 * Method invoked when this component is disconnected.
 	 */
 	disconnectedCallback(): void {
+		this.#abortController.abort();
 		this.#dropdown.dispose();
-		this.#mediaQuery.removeEventListener("change", this.#applyToDocument);
 	}
 
 	/**
@@ -183,11 +187,11 @@ export class ThemeDropdown extends HTMLElement {
 	 * Changes the current application theme.
 	 * @param event The dispatched event.
 	 */
-	#setAppTheme(event: Event): void {
+	readonly #setAppTheme: (event: Event) => void = event => {
 		event.preventDefault();
 		this.appTheme = (event.currentTarget as HTMLButtonElement).value as AppTheme;
 		this.save();
-	}
+	};
 
 	/**
 	 * Updates the alignment of the dropdown menu.

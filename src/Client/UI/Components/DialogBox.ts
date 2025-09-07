@@ -82,8 +82,8 @@ export class DialogBox extends HTMLElement {
 	constructor() {
 		super();
 		this.firstElementChild!.addEventListener("hide.bs.modal", () => this.#resolve(this.#result));
-		this.querySelector(".btn-close")!.addEventListener("click", this.#close.bind(this));
-		for (const button of this.querySelectorAll(".modal-footer button")) button.addEventListener("click", this.#close.bind(this));
+		this.querySelector(".btn-close")!.addEventListener("click", this.#close);
+		for (const button of this.querySelectorAll(".modal-footer button")) button.addEventListener("click", this.#close);
 	}
 
 	/**
@@ -267,7 +267,7 @@ export class DialogBox extends HTMLElement {
 	show(message: IDialogMessage|null = null): Promise<string> {
 		if (message) {
 			const footer = message.footer ?? document.createDocumentFragment();
-			for (const button of footer.querySelectorAll("button")) button.addEventListener("click", this.#close.bind(this));
+			for (const button of footer.querySelectorAll("button")) button.addEventListener("click", this.#close);
 			this.body = message.body;
 			this.caption = message.caption;
 			this.footer = footer;
@@ -284,10 +284,10 @@ export class DialogBox extends HTMLElement {
 	 * Closes this dialog box.
 	 * @param event The dispatched event.
 	 */
-	#close(event: Event): void {
+	readonly #close: (event: Event) => void = event => {
 		event.preventDefault();
 		this.close((event.currentTarget as HTMLButtonElement).value);
-	}
+	};
 
 	/**
 	 * Updates the title displayed in the header.

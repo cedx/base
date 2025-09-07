@@ -67,8 +67,7 @@ export class Toaster extends HTMLElement {
 	 */
 	constructor() {
 		super();
-		for (const toast of this.querySelectorAll("toaster-item"))
-			toast.addEventListener("hidden.bs.toast", () => toast.remove());
+		for (const toast of this.querySelectorAll("toaster-item")) toast.addEventListener("hidden.bs.toast", () => toast.remove());
 	}
 
 	/**

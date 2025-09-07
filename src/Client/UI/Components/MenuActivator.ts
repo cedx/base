@@ -4,6 +4,11 @@
 export class MenuActivator extends HTMLElement {
 
 	/**
+	 * The abort controller used to remove the event listeners.
+	 */
+	readonly #abortController = new AbortController;
+
+	/**
 	 * Registers the component.
 	 */
 	static {
@@ -15,16 +20,15 @@ export class MenuActivator extends HTMLElement {
 	 */
 	connectedCallback(): void {
 		this.#update();
-		addEventListener("popstate", this.#update);
-		document.body.addEventListener("htmx:afterRequest", this.#update);
+		addEventListener("popstate", this.#update, {signal: this.#abortController.signal});
+		document.body.addEventListener("htmx:afterRequest", this.#update, {signal: this.#abortController.signal});
 	}
 
 	/**
 	 * Method invoked when this component is disconnected.
 	 */
 	disconnectedCallback(): void {
-		removeEventListener("popstate", this.#update);
-		document.body.removeEventListener("htmx:afterRequest", this.#update);
+		this.#abortController.abort();
 	}
 
 	/**

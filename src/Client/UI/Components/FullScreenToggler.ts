@@ -4,6 +4,11 @@
 export class FullScreenToggler extends HTMLElement {
 
 	/**
+	 * The abort controller used to remove the event listeners.
+	 */
+	readonly #abortController = new AbortController;
+
+	/**
 	 * The target element.
 	 */
 	#element: Element = document.body;
@@ -18,7 +23,7 @@ export class FullScreenToggler extends HTMLElement {
 	 */
 	constructor() {
 		super();
-		this.addEventListener("click", this.toggleFullScreen.bind(this), {capture: true}); // eslint-disable-line @typescript-eslint/no-misused-promises
+		this.addEventListener("click", this.toggleFullScreen, {capture: true}); // eslint-disable-line @typescript-eslint/no-misused-promises
 	}
 
 	/**
@@ -53,17 +58,16 @@ export class FullScreenToggler extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
-		document.addEventListener("visibilitychange", this.#onVisibilityChanged);
+		document.addEventListener("visibilitychange", this.#onVisibilityChanged, {signal: this.#abortController.signal});
 		this.#element = document.querySelector(this.target) ?? document.body;
-		this.#element.addEventListener("fullscreenchange", this.#onFullScreenChanged);
+		this.#element.addEventListener("fullscreenchange", this.#onFullScreenChanged, {signal: this.#abortController.signal});
 	}
 
 	/**
 	 * Method invoked when this component is disconnected.
 	 */
 	disconnectedCallback(): void {
-		document.removeEventListener("visibilitychange", this.#onVisibilityChanged);
-		this.#element.removeEventListener("fullscreenchange", this.#onFullScreenChanged);
+		this.#abortController.abort();
 	}
 
 	/**
@@ -71,11 +75,11 @@ export class FullScreenToggler extends HTMLElement {
 	 * @param event The dispatched event.
 	 * @returns Completes when the full-screen mode has been toggled.
 	 */
-	async toggleFullScreen(event?: Event): Promise<void> {
+	readonly toggleFullScreen: (event?: Event) => Promise<void> = async event => {
 		event?.stopPropagation();
 		if (document.fullscreenElement) await document.exitFullscreen();
 		else await this.#element.requestFullscreen();
-	}
+	};
 
 	/**
 	 * Acquires a new wake lock.

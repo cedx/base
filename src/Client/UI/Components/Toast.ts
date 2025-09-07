@@ -17,6 +17,11 @@ export class Toast extends HTMLElement {
 	static readonly #timeUnits: Intl.RelativeTimeFormatUnit[] = ["second", "minute", "hour"];
 
 	/**
+	 * The abort controller used to remove the event listeners.
+	 */
+	readonly #abortController = new AbortController;
+
+	/**
 	 * The formatter used to format the relative time.
 	 */
 	#formatter!: Intl.RelativeTimeFormat;
@@ -173,8 +178,8 @@ export class Toast extends HTMLElement {
 	 */
 	connectedCallback(): void {
 		const root = this.firstElementChild!;
-		root.addEventListener("hide.bs.toast", this.#stopTimer);
-		root.addEventListener("show.bs.toast", this.#startTimer);
+		root.addEventListener("hide.bs.toast", this.#stopTimer, {signal: this.#abortController.signal});
+		root.addEventListener("show.bs.toast", this.#startTimer, {signal: this.#abortController.signal});
 
 		this.#toast = new BootstrapToast(root);
 		if (this.open) this.show();
@@ -184,11 +189,8 @@ export class Toast extends HTMLElement {
 	 * Method invoked when this component is disconnected.
 	 */
 	disconnectedCallback(): void {
-		const root = this.firstElementChild!;
-		root.removeEventListener("hide.bs.toast", () => this.#stopTimer);
-		root.removeEventListener("show.bs.toast", () => this.#startTimer);
-
 		this.#stopTimer();
+		this.#abortController.abort();
 		this.#toast.dispose();
 	}
 
