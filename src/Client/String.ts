@@ -11,10 +11,11 @@ export function capitalize(value: string, locale: Intl.Locale|string = navigator
 /**
  * Replaces all new lines in the specified value by HTML line breaks.
  * @param value The string to format.
+ * @param options Value indicating whether to use XHTML compatible line breaks.
  * @returns The formatted string.
  */
-export function newLineToBr(value: string): string {
-	return value.split(/\r?\n/g).join("<br>");
+export function newLineToBr(value: string, options: {xhtml?: boolean} = {}): string {
+	return value.split(/\r?\n/g).join(options.xhtml ? "<br />" : "<br>");
 }
 
 /**
