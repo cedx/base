@@ -37,7 +37,7 @@ Task("format")
 Task("lint")
 	.Description("Performs the static analysis of source code.")
 	.Does(() => StartShell("npx", "tsc --build tsconfig.json --noEmit"))
-	.Does(() => StartShell("npx", "eslint --config=etc/ESLint.js src/Client test/Client"));
+	.Does(() => StartShell("npx", "eslint --cache --cache-location=var --config=etc/ESLint.js src/Client test/Client"));
 
 Task("outdated")
 	.Description("Checks for outdated dependencies.")
