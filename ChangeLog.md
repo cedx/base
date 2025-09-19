@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.31.0](https://github.com/cedx/base/compare/v0.30.0...v0.31.0)
+- Added the `isShown` property to the `LoadingIndicator` and `OfflineIndicator` UI components.
+
 ## Version [0.30.0](https://github.com/cedx/base/compare/v0.29.0...v0.30.0)
 - Added the `Cookie` and `CookieDomain` properties to the `UI.Components.ThemeDropdown` component.
 
