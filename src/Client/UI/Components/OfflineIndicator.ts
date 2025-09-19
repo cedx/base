@@ -31,6 +31,13 @@ export class OfflineIndicator extends HTMLElement {
 	}
 
 	/**
+	 * Value indicating whether this component is shown.
+	 */
+	get isShown(): boolean {
+		return this.classList.contains("show");
+	}
+
+	/**
 	 * Value indicating whether to initially show this component.
 	 */
 	get open(): boolean {
