@@ -1,11 +1,11 @@
 /**
- * Converts the first character to uppercase.
+ * Converts the first character of the specified string to uppercase.
  * @param value The string to process.
  * @param culture The current culture.
  * @returns The processed string.
  */
 export function capitalize(value: string, culture: Intl.Locale|string = navigator.language): string {
-	return value.charAt(0).toLocaleUpperCase(culture) + value.slice(1);
+	return value.length == 0 ? "" : value.charAt(0).toLocaleUpperCase(culture) + value.slice(1);
 }
 
 /**
