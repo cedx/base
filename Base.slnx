@@ -1,4 +1,5 @@
 <Solution>
+	<Project Path="src/Server/Base/Base.csproj" />
 	<Project Path="src/Server/Data/Data.csproj" />
 	<Project Path="src/Server/UI/UI.csproj" />
 	<Project Path="test/Server/Tests.csproj">

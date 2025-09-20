@@ -1,5 +1,5 @@
 # Cédric Belin's Base
-![.NET](https://badgen.net/badge/.net/%3E%3D9.0/green) ![Version](https://badgen.net/badge/project/v0.31.0/blue) ![Licence](https://badgen.net/badge/licence/MIT/blue)
+![.NET](https://badgen.net/badge/.net/%3E%3D9.0/green) ![Version](https://badgen.net/badge/project/v0.32.0/blue) ![Licence](https://badgen.net/badge/licence/MIT/blue)
 
 Base library by [Cédric Belin](https://cedric-belin.fr), full stack developer,
 implemented in [C#](https://learn.microsoft.com/en-us/dotnet/csharp) and [TypeScript](https://www.typescriptlang.org).
