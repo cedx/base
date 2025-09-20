@@ -12,18 +12,6 @@ using System.Text.Json.Serialization;
 public readonly record struct DateRange(DateTime Start, DateTime End, DateRangeType Type = DateRangeType.Custom): IEquatable<DateRange> {
 
 	/// <summary>
-	/// The label corresponding to this date range.
-	/// </summary>
-	public string Label => Type switch {
-		DateRangeType.Day => Start.ToString("d MMM yyyy"),
-		DateRangeType.Week => Start.ToString($"S{CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(Start, CultureInfo.CurrentCulture.DateTimeFormat.CalendarWeekRule, CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek)} yyyy"),
-		DateRangeType.Month => Start.ToString("MMMM yyyy"),
-		DateRangeType.Quarter => Start.ToString($"T{(Start.Month - 1) / 3 + 1} yyyy"),
-		DateRangeType.Year => Start.Year.ToString(),
-		_ => End.ToString("d MMM yyyy")
-	};
-
-	/// <summary>
 	/// Creates a date range corresponding to the day including the specified date.
 	/// </summary>
 	/// <param name="date">The date.</param>
@@ -51,7 +39,7 @@ public readonly record struct DateRange(DateTime Start, DateTime End, DateRangeT
 	/// <param name="date">The date.</param>
 	/// <returns>The date range corresponding to the quarter including the specified date.</returns>
 	public static DateRange Quarter(DateTime date) {
-		var firstMonth = (int) (Math.Ceiling(date.Month / 3.0) * 3) - 2;
+		var firstMonth = (date.GetQuarter() * 3) - 2;
 		var lastMonth = firstMonth + 2;
 		return new(
 			new DateTime(date.Year, firstMonth, 1),
@@ -92,6 +80,20 @@ public readonly record struct DateRange(DateTime Start, DateTime End, DateRangeT
 	/// <param name="other">An object to compare with this object.</param>
 	/// <returns><see langword="true"/> if the specified object is equal to this object, otherwise <see langword="false"/>.</returns>
 	public bool Equals(DateRange? other) => other is not null && Start == other.Value.Start && End == other.Value.End;
+
+	/// <summary>
+	/// Gets the label corresponding to this date range.
+	/// </summary>
+	/// <param name="culture">The current culture.</param>
+	/// <returns>The label corresponding to this date range.</returns>
+	public string GetLabel(CultureInfo? culture = null) => Type switch {
+		DateRangeType.Day => Start.ToString("d MMM yyyy", culture),
+		DateRangeType.Week => Start.ToString($"S{Start.GetWeekOfYear(culture)} yyyy", culture),
+		DateRangeType.Month => Start.ToString("MMMM yyyy", culture),
+		DateRangeType.Quarter => Start.ToString($"T{Start.GetQuarter()} yyyy", culture),
+		DateRangeType.Year => Start.Year.ToString(culture),
+		_ => End.ToString("d MMM yyyy", culture)
+	};
 }
 
 /// <summary>

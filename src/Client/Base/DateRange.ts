@@ -1,4 +1,4 @@
-import {atMidnight, daysInMonth, getQuarter} from "./Date.js";
+import {atMidnight, daysInMonth, getQuarter, getWeekOfYear} from "./Date.js";
 import {TimeSpan} from "./TimeSpan.js";
 
 /**
@@ -152,5 +152,22 @@ export class DateRange {
 	 */
 	equals(other: DateRange): boolean {
 		return this.start.getTime() == other.start.getTime() && this.end.getTime() == other.end.getTime();
+	}
+
+	/**
+	 * The label corresponding to this date range.
+	 * @param culture The current culture.
+	 * @returns The label corresponding to this date range.
+	 */
+	getLabel(culture: Intl.Locale|string = navigator.language): string {
+		const {start, end, type} = this;
+		switch (type) {
+			case DateRangeType.Day: return start.toLocaleString(culture, {dateStyle: "medium"});
+			case DateRangeType.Week: return `S${getWeekOfYear(start)} ${start.getFullYear()}`;
+			case DateRangeType.Month: return start.toLocaleString(culture, {month: "long", year: "numeric"});
+			case DateRangeType.Quarter: return `T${getQuarter(start)} ${start.getFullYear()}`;
+			case DateRangeType.Year: return start.getFullYear().toString();
+			default: return end.toLocaleString(culture, {dateStyle: "medium"});
+		}
 	}
 }

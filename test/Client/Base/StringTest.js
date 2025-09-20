@@ -5,12 +5,12 @@ import {assert} from "chai";
  * Tests the features of the string functions.
  */
 describe("String", () => {
-	const locale = "en-US";
+	const culture = "en-US";
 
 	describe("capitalize()", () => {
 		it("should convert in uppercase the first character of the specified string", () => {
-			assert.equal(capitalize("", locale), "");
-			assert.equal(capitalize("foo bAr baZ", locale), "Foo bAr baZ");
+			assert.equal(capitalize("", culture), "");
+			assert.equal(capitalize("foo bAr baZ", culture), "Foo bAr baZ");
 		});
 	});
 
