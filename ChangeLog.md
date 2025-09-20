@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.32.0](https://github.com/cedx/base/compare/v0.31.0...v0.32.0)
+- Added the `DateRange` and `DateTimeExtensions` classes.
+
 ## Version [0.31.0](https://github.com/cedx/base/compare/v0.30.0...v0.31.0)
 - Added the `isShown` property to the `LoadingIndicator` and `OfflineIndicator` UI components.
 
