@@ -5,7 +5,7 @@ import {assert} from "chai";
  * Tests the features of the string functions.
  */
 describe("String", () => {
-	const culture = "en-US";
+	const culture = "fr-FR";
 
 	describe("capitalize()", () => {
 		it("should convert in uppercase the first character of the specified string", () => {

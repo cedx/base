@@ -10,7 +10,7 @@ public sealed class StringExtensionsTest {
 
 	[TestMethod]
 	public void Capitalize() {
-		var culture = CultureInfo.CreateSpecificCulture("en-US");
+		var culture = CultureInfo.CreateSpecificCulture("fr-FR");
 
 		// It should convert in uppercase the first character of the specified string.
 		AreEqual(string.Empty, string.Empty.Capitalize(culture));
