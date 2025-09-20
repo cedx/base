@@ -1,0 +1,28 @@
+namespace Belin.Base;
+
+/// <summary>
+/// Tests the features of the <see cref="DateTimeExtensions"/> class.
+/// </summary>
+[TestClass]
+public sealed class DateTimeExtensionsTest {
+
+	[TestMethod]
+	public void GetQuarter() {
+		// It should return the quarter number for the given date.
+		AreEqual(4, new DateTime(2015, 12, 31).GetQuarter());
+		AreEqual(3, new DateTime(2017, 7, 14).GetQuarter());
+		AreEqual(2, new DateTime(2020, 5, 3).GetQuarter());
+		AreEqual(1, new DateTime(2023, 1, 1).GetQuarter());
+		AreEqual(1, new DateTime(2024, 2, 29).GetQuarter());
+	}
+
+	[TestMethod]
+	public void GetWeekOfYear() {
+		// It should return the quarter number for the given date.
+		AreEqual(53, new DateTime(2015, 12, 31).GetWeekOfYear());
+		AreEqual(28, new DateTime(2017, 7, 14).GetWeekOfYear());
+		AreEqual(18, new DateTime(2020, 5, 3).GetWeekOfYear());
+		AreEqual(52, new DateTime(2023, 1, 1).GetWeekOfYear());
+		AreEqual(9, new DateTime(2024, 2, 29).GetWeekOfYear());
+	}
+}
