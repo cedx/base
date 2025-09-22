@@ -18,7 +18,7 @@ public static class DateTimeExtensions {
 	/// Gets the week number corresponding to the specified date.
 	/// </summary>
 	/// <param name="date">The date.</param>
-	/// <param name="culture">The current culture.</param>
+	/// <param name="culture">An object that supplies culture-specific formatting information.</param>
 	/// <returns>The week number corresponding to the specified date.</returns>
 	public static int GetWeekOfYear(this DateTime date, CultureInfo? culture = null) {
 		culture ??= CultureInfo.CurrentCulture;

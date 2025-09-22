@@ -84,7 +84,7 @@ public readonly record struct DateRange(DateTime Start, DateTime End, DateRangeT
 	/// <summary>
 	/// Gets the label corresponding to this date range.
 	/// </summary>
-	/// <param name="culture">The current culture.</param>
+	/// <param name="culture">An object that supplies culture-specific formatting information.</param>
 	/// <returns>The label corresponding to this date range.</returns>
 	public string GetLabel(CultureInfo? culture = null) => Type switch {
 		DateRangeType.Day => Start.ToString("d MMM yyyy", culture),
