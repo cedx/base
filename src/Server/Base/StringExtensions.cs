@@ -14,5 +14,5 @@ public static class StringExtensions {
 	/// <param name="culture">The current culture.</param>
 	/// <returns>The processed string.</returns>
 	public static string Capitalize(this string value, CultureInfo? culture = null) =>
-		value.Length == 0 ? string.Empty : char.ToUpper(value[0], culture ?? CultureInfo.CurrentUICulture) + value[1..];
+		value.Length == 0 ? string.Empty : char.ToUpper(value[0], culture ?? CultureInfo.CurrentCulture) + value[1..];
 }
