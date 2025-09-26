@@ -9,7 +9,7 @@
 	"type": "module",
 	"version": "0.32.0",
 	"devDependencies": {
-		"@playwright/browser-chromium": "^1.55.0",
+		"@playwright/browser-chromium": "^1.55.1",
 		"@types/bootstrap": "^5.2.10",
 		"@types/chai": "^5.2.2",
 		"@types/mocha": "^10.0.10",
@@ -19,7 +19,7 @@
 		"esbuild": "^0.25.10",
 		"globals": "^16.4.0",
 		"mocha": "^11.7.2",
-		"playwright": "^1.55.0",
+		"playwright": "^1.55.1",
 		"serve-handler": "^6.1.6",
 		"typedoc": "^0.28.13",
 		"typescript": "^5.9.2",
