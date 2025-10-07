@@ -1,6 +1,6 @@
-. tool/Clean.ps1
-. tool/Version.ps1
-. tool/Client/Build.ps1
+. $PSScriptRoot/Clean.ps1
+. $PSScriptRoot/Version.ps1
+. $PSScriptRoot/Client/Build.ps1
 
 Write-Host "Publishing the package..."
 $version = [xml] (Get-Content "Package.xml") | Select-Xml "//Version"

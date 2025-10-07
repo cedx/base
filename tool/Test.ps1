@@ -1,2 +1,2 @@
-. tool/Client/Test.ps1
-. tool/Server/Test.ps1
+. $PSScriptRoot/Client/Test.ps1
+. $PSScriptRoot/Server/Test.ps1
