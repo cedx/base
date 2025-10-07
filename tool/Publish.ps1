@@ -1,6 +1,12 @@
-. $PSScriptRoot/Clean.ps1
-. $PSScriptRoot/Version.ps1
-. $PSScriptRoot/Client/Build.ps1
+if ($release) {
+	. $PSScriptRoot/Clean.ps1
+	. $PSScriptRoot/Version.ps1
+	. $PSScriptRoot/Client/Build.ps1
+}
+else {
+	Write-Host 'The "Release" configuration must be enabled!'
+	exit 1
+}
 
 Write-Host "Publishing the package..."
 $version = [xml] (Get-Content "Package.xml") | Select-Xml "//Version"
