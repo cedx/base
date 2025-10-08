@@ -1,5 +1,7 @@
 namespace Belin.Base.Data;
 
+using System.ComponentModel;
+
 /// <summary>
 /// Tests the features of the <see cref="Sort"/> class.
 /// </summary>
@@ -16,7 +18,7 @@ public sealed class SortTest {
 		CollectionAssert.AreEqual(expected, Sort.Parse("foo,-bar"));
 	}
 
-	[TestMethod("ToString")]
+	[TestMethod, DisplayName("ToString")]
 	public void TestToString() {
 		// It should return an empty string for an empty sort.
 		IsEmpty(new Sort().ToString());

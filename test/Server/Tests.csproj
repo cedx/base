@@ -20,7 +20,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Data.Sqlite" Version="9.*" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.*" />
-		<PackageReference Include="MSTest" Version="3.*" />
+		<PackageReference Include="MSTest" Version="4.*" />
 		<ProjectReference Include="../../src/Server/Base/Base.csproj" />
 		<ProjectReference Include="../../src/Server/Data/Data.csproj" />
 	</ItemGroup>
