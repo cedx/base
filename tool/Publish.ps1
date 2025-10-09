@@ -4,11 +4,11 @@ if ($release) {
 	. $PSScriptRoot/Client/Build.ps1
 }
 else {
-	Write-Host 'The "Release" configuration must be enabled!'
+	Write-Output 'The "Release" configuration must be enabled!'
 	exit 1
 }
 
-Write-Host "Publishing the package..."
+Write-Output "Publishing the package..."
 $version = (Select-Xml "//Version" Package.xml).Node.InnerText
 git tag "v$version"
 git push origin "v$version"
