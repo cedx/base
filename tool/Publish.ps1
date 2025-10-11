@@ -9,7 +9,7 @@ else {
 }
 
 Write-Output "Publishing the package..."
-$version = (Select-Xml "//Version" Package.xml).Node.InnerText
+$version = (Import-PowerShellDataFile "Package.psd1").Version
 git tag "v$version"
 git push origin "v$version"
 npm publish --registry=https://registry.npmjs.org
