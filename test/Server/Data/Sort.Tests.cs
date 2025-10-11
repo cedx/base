@@ -6,7 +6,7 @@ using System.ComponentModel;
 /// Tests the features of the <see cref="Sort"/> class.
 /// </summary>
 [TestClass]
-public sealed class SortTest {
+public sealed class SortTests {
 
 	[TestMethod]
 	public void Parse() {

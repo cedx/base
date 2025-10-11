@@ -6,7 +6,7 @@ using System.Globalization;
 /// Tests the features of the <see cref="DateTimeExtensions"/> class.
 /// </summary>
 [TestClass]
-public sealed class DateTimeExtensionsTest {
+public sealed class DateTimeExtensionsTests {
 
 	[TestMethod]
 	public void GetQuarter() {

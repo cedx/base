@@ -6,7 +6,7 @@ using Microsoft.Data.Sqlite;
 /// Tests the features of the <see cref="UriTypeHandler"/> class.
 /// </summary>
 [TestClass]
-public sealed class UriTypeHandlerTest {
+public sealed class UriTypeHandlerTests {
 
 	[TestMethod]
 	public void Parse() {

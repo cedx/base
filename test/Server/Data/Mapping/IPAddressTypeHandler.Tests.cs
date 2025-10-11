@@ -7,7 +7,7 @@ using System.Net;
 /// Tests the features of the <see cref="IPAddressTypeHandler"/> class.
 /// </summary>
 [TestClass]
-public sealed class IPAddressTypeHandlerTest {
+public sealed class IPAddressTypeHandlerTests {
 
 	[TestMethod]
 	public void Parse() {

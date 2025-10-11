@@ -4,7 +4,7 @@ namespace Belin.Base;
 /// Tests the features of the <see cref="DateRange"/> structure.
 /// </summary>
 [TestClass]
-public sealed class DateRangeTest {
+public sealed class DateRangeTests {
 
 	[TestMethod]
 	public void End() {

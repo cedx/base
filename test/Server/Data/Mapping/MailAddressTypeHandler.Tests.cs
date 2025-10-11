@@ -1,39 +1,39 @@
 namespace Belin.Base.Data.Mapping;
 
 using Microsoft.Data.Sqlite;
-using System.Net.NetworkInformation;
+using System.Net.Mail;
 
 /// <summary>
-/// Tests the features of the <see cref="PhysicalAddressTypeHandler"/> class.
+/// Tests the features of the <see cref="MailAddressTypeHandler"/> class.
 /// </summary>
 [TestClass]
-public sealed class PhysicalAddressTypeHandlerTest {
+public sealed class MailAddressTypeHandlerTests {
 
 	[TestMethod]
 	public void Parse() {
-		var typeHandler = new PhysicalAddressTypeHandler();
+		var typeHandler = new MailAddressTypeHandler();
 
 		// It should return `null` if the value is invalid.
 		IsNull(typeHandler.Parse(123));
 		IsNull(typeHandler.Parse(string.Empty));
 
-		// It should return a physical address if the value is valid.
-		var value = typeHandler.Parse("8C:F8:C5:DE:C2:E0");
+		// It should return a mail address if the value is valid.
+		var value = typeHandler.Parse("contact@cedric-belin.fr");
 		IsNotNull(value);
-		AreEqual("8CF8C5DEC2E0", value.ToString());
+		AreEqual("contact@cedric-belin.fr", value.Address);
 	}
 
 	[TestMethod]
 	public void SetValue() {
 		var parameter = new SqliteParameter();
-		var typeHandler = new PhysicalAddressTypeHandler();
+		var typeHandler = new MailAddressTypeHandler();
 
 		// It should set the parameter to `null` if the value is `null`.
 		typeHandler.SetValue(parameter, null);
 		IsNull(parameter.Value);
 
 		// It should set the parameter to the string representation if the value is not `null`.
-		typeHandler.SetValue(parameter, PhysicalAddress.Parse("8C:F8:C5:DE:C2:E0"));
-		AreEqual("8CF8C5DEC2E0", parameter.Value);
+		typeHandler.SetValue(parameter, new MailAddress("contact@cedric-belin.fr"));
+		AreEqual("contact@cedric-belin.fr", parameter.Value);
 	}
 }

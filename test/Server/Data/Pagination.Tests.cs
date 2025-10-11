@@ -4,7 +4,7 @@ namespace Belin.Base.Data;
 /// Tests the features of the <see cref="Pagination"/> class.
 /// </summary>
 [TestClass]
-public sealed class PaginationTest {
+public sealed class PaginationTests {
 
 	[TestMethod]
 	public void CurrentPageIndex() {

@@ -6,7 +6,7 @@ using System.Globalization;
 /// Tests the features of the <see cref="StringExtensions"/> class.
 /// </summary>
 [TestClass]
-public sealed class StringExtensionsTest {
+public sealed class StringExtensionsTests {
 
 	[TestMethod]
 	public void Capitalize() {
