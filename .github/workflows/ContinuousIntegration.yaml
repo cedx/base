@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run tests
-        run: aa-exec --profile=chrome -- ./run.ps1 Client/Test
+        run: aa-exec --profile=chrome -- ./invoke.ps1 Client/Test
   server:
     runs-on: ubuntu-latest
     steps:
@@ -30,4 +30,4 @@ jobs:
         with:
           dotnet-version: 9
       - name: Run tests
-        run: ./run.ps1 Server/Test
+        run: ./invoke.ps1 Server/Test
