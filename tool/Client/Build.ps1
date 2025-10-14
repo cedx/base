@@ -1,3 +1,3 @@
-Write-Output "Building the client project..."
+"Building the client project..."
 $options = $release ? @() : @("--sourceMap")
 npx tsc --build src/Client/tsconfig.json @options

@@ -1,4 +1,4 @@
-Write-Output "Updating the version number in the sources..."
+"Updating the version number in the sources..."
 $version = (Import-PowerShellDataFile "Base.psd1").ModuleVersion
 (Get-Content "package.json") -replace '"version": "\d+(\.\d+){2}"', """version"": ""$version""" | Out-File "package.json"
 foreach ($item in Get-ChildItem "*/*.csproj" -Exclude "node_modules" -Recurse) {

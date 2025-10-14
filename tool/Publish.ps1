@@ -4,11 +4,11 @@ if ($release) {
 	. $PSScriptRoot/Client/Build.ps1
 }
 else {
-	Write-Output 'The "Release" configuration must be enabled!'
+	'The "Release" configuration must be enabled!'
 	exit 1
 }
 
-Write-Output "Publishing the package..."
+"Publishing the package..."
 $version = (Import-PowerShellDataFile "Base.psd1").ModuleVersion
 git tag "v$version"
 git push origin "v$version"
