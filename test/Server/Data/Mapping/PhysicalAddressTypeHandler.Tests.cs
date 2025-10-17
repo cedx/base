@@ -15,7 +15,7 @@ public sealed class PhysicalAddressTypeHandlerTests {
 
 		// It should return `null` if the value is invalid.
 		IsNull(typeHandler.Parse(123));
-		IsNull(typeHandler.Parse(string.Empty));
+		IsNull(typeHandler.Parse(""));
 
 		// It should return a physical address if the value is valid.
 		var value = typeHandler.Parse("8C:F8:C5:DE:C2:E0");

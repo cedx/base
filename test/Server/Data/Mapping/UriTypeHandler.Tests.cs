@@ -14,7 +14,7 @@ public sealed class UriTypeHandlerTests {
 
 		// It should return `null` if the value is invalid.
 		IsNull(typeHandler.Parse(123));
-		IsNull(typeHandler.Parse(string.Empty));
+		IsNull(typeHandler.Parse(""));
 
 		// It should return an URI if the value is valid.
 		var value = typeHandler.Parse("https://cedric-belin.fr");

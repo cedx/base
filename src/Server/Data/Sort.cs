@@ -33,7 +33,7 @@ public sealed class Sort(IEnumerable<KeyValuePair<string, SortOrder>>? propertie
 	/// </summary>
 	/// <returns>The string representation of this object.</returns>
 	public override string ToString() =>
-		string.Join(',', this.Select((property) => $"{(property.Value == SortOrder.Descending ? "-" : string.Empty)}{property.Key}"));
+		string.Join(',', this.Select((property) => $"{(property.Value == SortOrder.Descending ? "-" : "")}{property.Key}"));
 }
 
 /// <summary>

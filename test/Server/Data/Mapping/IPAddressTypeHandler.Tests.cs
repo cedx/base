@@ -15,7 +15,7 @@ public sealed class IPAddressTypeHandlerTests {
 
 		// It should return `null` if the value is invalid.
 		IsNull(typeHandler.Parse(123));
-		IsNull(typeHandler.Parse(string.Empty));
+		IsNull(typeHandler.Parse(""));
 
 		// It should return an IP address if the value is valid.
 		var value = typeHandler.Parse("127.0.0.1");

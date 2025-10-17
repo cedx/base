@@ -13,7 +13,7 @@ public sealed class StringExtensionsTests {
 		var culture = CultureInfo.CreateSpecificCulture("fr-FR");
 
 		// It should convert in uppercase the first character of the specified string.
-		AreEqual(string.Empty, string.Empty.Capitalize(culture));
+		AreEqual("", "".Capitalize(culture));
 		AreEqual("Foo bAr baZ", "foo bAr baZ".Capitalize(culture));
 	}
 }

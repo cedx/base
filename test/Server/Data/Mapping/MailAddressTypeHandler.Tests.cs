@@ -15,7 +15,7 @@ public sealed class MailAddressTypeHandlerTests {
 
 		// It should return `null` if the value is invalid.
 		IsNull(typeHandler.Parse(123));
-		IsNull(typeHandler.Parse(string.Empty));
+		IsNull(typeHandler.Parse(""));
 
 		// It should return a mail address if the value is valid.
 		var value = typeHandler.Parse("contact@cedric-belin.fr");

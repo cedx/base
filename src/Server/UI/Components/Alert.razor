@@ -1,6 +1,6 @@
 @namespace Belin.Base.UI.Components
 
-<div class="alert alert-@Context.ToCss() @(Dismissible ? "alert-dismissible" : string.Empty) @(Fade ? "fade show" : string.Empty) @CssClass">
+<div class="alert alert-@Context.ToCss() @(Dismissible ? "alert-dismissible" : "") @(Fade ? "fade show" : "") @CssClass">
 	<div class="d-flex align-items-center">
 		<i class="icon flex-shrink-0 me-2">@(string.IsNullOrEmpty(Icon) ? Context.GetIcon() : Icon)</i>
 		<div>@ChildContent</div>
@@ -25,7 +25,7 @@
 	/// The CSS class string to apply to the underlying element.
 	/// </summary>
 	[Parameter]
-	public string CssClass { get; set; } = string.Empty;
+	public string CssClass { get; set; } = "";
 
 	/// <summary>
 	/// Value indicating whether this alert can be dismissed.

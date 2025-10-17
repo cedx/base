@@ -1,6 +1,6 @@
 @namespace Belin.Base.UI.Components
 
-<loading-indicator class="@(Fade ? "fade" : string.Empty) @(Open ? "show" : "hide")" fade="@Fade" open="@Open">
+<loading-indicator class="@(Fade ? "fade" : "") @(Open ? "show" : "hide")" fade="@Fade" open="@Open">
 	@ChildContent
 </loading-indicator>
 

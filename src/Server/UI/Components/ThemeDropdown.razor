@@ -6,7 +6,7 @@
 			<i class="icon icon-fill">@AppTheme.GetIcon()</i>
 			<span class="mx-1">@Label</span>
 		</button>
-		<ul class="dropdown-menu @(Alignment == Alignment.End ? "dropdown-menu-end" : string.Empty)">
+		<ul class="dropdown-menu @(Alignment == Alignment.End ? "dropdown-menu-end" : "")">
 			@foreach (var theme in Enum.GetValues<AppTheme>()) {
 				<li>
 					<button class="dropdown-item d-flex align-items-center justify-content-between" type="button" value="@theme">
@@ -42,7 +42,7 @@
 	/// The URI for which the associated cookie is valid.
 	/// </summary>
 	[Parameter]
-	public string CookieDomain { get; set; } = string.Empty;
+	public string CookieDomain { get; set; } = "";
 
 	/// <summary>
 	/// The label of the dropdown menu.

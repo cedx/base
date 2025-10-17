@@ -1,8 +1,8 @@
 @namespace Belin.Base.UI.Components
 
 <dialog-box caption="@Caption" centered="@Centered" fade="@Fade" modal="@Modal" open="@Open">
-	<div class="modal @(Fade ? "fade" : string.Empty)" data-bs-backdrop="@(Modal ? "static" : "true")" tabindex="-1">
-		<div class="modal-dialog @(Centered ? "modal-dialog-centered" : string.Empty) @(Scrollable ? "modal-dialog-scrollable" : string.Empty)">
+	<div class="modal @(Fade ? "fade" : "")" data-bs-backdrop="@(Modal ? "static" : "true")" tabindex="-1">
+		<div class="modal-dialog @(Centered ? "modal-dialog-centered" : "") @(Scrollable ? "modal-dialog-scrollable" : "")">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h1 class="modal-title">@Caption</h1>
@@ -30,7 +30,7 @@
 	/// The title displayed in the header.
 	/// </summary>
 	[Parameter]
-	public string Caption { get; set => field = value.Trim(); } = string.Empty;
+	public string Caption { get; set => field = value.Trim(); } = "";
 
 	/// <summary>
 	/// Value indicating whether to vertically center this dialog box.
