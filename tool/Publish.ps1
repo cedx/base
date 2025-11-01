@@ -1,7 +1,7 @@
 if ($Release) {
-	. $PSScriptRoot/Clean.ps1
-	. $PSScriptRoot/Version.ps1
-	. $PSScriptRoot/Client/Build.ps1
+	. "$PSScriptRoot/Clean.ps1"
+	. "$PSScriptRoot/Version.ps1"
+	. "$PSScriptRoot/Client/Build.ps1"
 }
 else {
 	'The "-Release" switch must be set!'
