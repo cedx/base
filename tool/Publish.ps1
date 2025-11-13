@@ -16,5 +16,5 @@ npm publish
 
 dotnet pack --output var
 foreach ($item in Get-Item "var/*.nupkg") {
-	dotnet nuget push $item --api-key $Env:NUGET_API_KEY
+	dotnet nuget push $item --api-key $Env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json
 }
