@@ -1,4 +1,4 @@
 @{
-	ModuleVersion = "0.32.0"
+	ModuleVersion = "0.33.0"
 	PowerShellVersion = "7.5"
 }
