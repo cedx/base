@@ -4,7 +4,6 @@
 - Renamed the `getIcon()` functions to `icon()`.
 - Renamed the `getLabel()` functions to `label()`.
 - Renamed the `toCss()` functions to `cssClass()`.
-- Replaced the extension methods by [C# 14](https://learn.microsoft.com/en-us/dotnet/csharp) extension members.
 - Replaced the `GetIcon()` extension methods by `Icon` properties.
 - Replaced the `GetLabel()` extension methods by `Label` properties.
 - Replaced the `ToCss()` extension methods by `CssClass` properties.
