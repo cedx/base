@@ -1,5 +1,5 @@
 import {Toast as BootstrapToast} from "bootstrap";
-import {Context, cssClass, getIcon} from "../Context.js";
+import {Context, cssClass, icon} from "../Context.js";
 
 /**
  * Represents a notification.
@@ -295,7 +295,7 @@ export class Toast extends HTMLElement {
 	 * @param value The new value.
 	 */
 	#updateIcon(value: string|null): void {
-		this.querySelector(".toast-header .icon")!.textContent = (value ?? "").trim() || getIcon(this.context);
+		this.querySelector(".toast-header .icon")!.textContent = (value ?? "").trim() || icon(this.context);
 	}
 }
 

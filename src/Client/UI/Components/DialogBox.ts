@@ -1,5 +1,5 @@
 import {Modal} from "bootstrap";
-import {type Context, cssClass as contextCss, getIcon} from "../Context.js";
+import {type Context, cssClass as contextCss, icon as contextIcon} from "../Context.js";
 import {DialogResult} from "../DialogResult.js";
 import {html} from "../Tag.js";
 import {Variant, cssClass as variantCss} from "../Variant.js";
@@ -206,7 +206,7 @@ export class DialogBox extends HTMLElement {
 			caption,
 			body: html`
 				<div class="d-flex gap-2">
-					<i class="icon icon-fill fs-1 text-${contextCss(context)}"> ${getIcon(context)}</i>
+					<i class="icon icon-fill fs-1 text-${contextCss(context)}"> ${contextIcon(context)}</i>
 					<div class="flex-grow-1">${message}</div>
 				</div>
 			`,

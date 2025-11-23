@@ -43,7 +43,7 @@ export function cssClass(context: Context): string {
  * @param context The context.
  * @returns The icon corresponding to the specified context.
  */
-export function getIcon(context: Context): string {
+export function icon(context: Context): string {
 	switch (context) {
 		case Context.Danger: return "error";
 		case Context.Success: return "check_circle";

@@ -1,6 +1,6 @@
 import {Dropdown} from "bootstrap";
 import {Alignment} from "../Alignment.js";
-import {AppTheme, getIcon} from "../AppTheme.js";
+import {AppTheme, icon} from "../AppTheme.js";
 
 /**
  * A dropdown menu for switching the application theme.
@@ -206,7 +206,7 @@ export class ThemeDropdown extends HTMLElement {
 	 * @param value The new value.
 	 */
 	#updateAppTheme(value: AppTheme): void {
-		this.querySelector(".dropdown-toggle > .icon")!.textContent = getIcon(value);
+		this.querySelector(".dropdown-toggle > .icon")!.textContent = icon(value);
 		this.querySelector(`.dropdown-menu button[value="${value}"]`)!.appendChild(this.querySelector(".dropdown-item > .icon")!);
 		this.#applyToDocument();
 	}

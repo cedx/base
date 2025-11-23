@@ -29,7 +29,7 @@ export type AppTheme = typeof AppTheme[keyof typeof AppTheme];
  * @param theme The application theme.
  * @returns The icon corresponding to the specified theme.
  */
-export function getIcon(theme: AppTheme): string {
+export function icon(theme: AppTheme): string {
 	switch (theme) {
 		case AppTheme.Dark: return "dark_mode";
 		case AppTheme.Light: return "light_mode";
