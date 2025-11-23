@@ -40,21 +40,21 @@ public enum Size {
 }
 
 /// <summary>
-/// Provides extension methods for element sizes.
+/// Provides extension members for element sizes.
 /// </summary>
 public static class SizeExtensions {
+	extension(Size value) {
 
-	/// <summary>
-	/// Returns the CSS representation of the specified size.
-	/// </summary>
-	/// <param name="size">The size.</param>
-	/// <returns>The CSS representation of the specified size.</returns>
-	public static string ToCss(this Size size) => size switch {
-		Size.ExtraSmall => "xs",
-		Size.Small => "sm",
-		Size.Medium => "md",
-		Size.Large => "lg",
-		Size.ExtraLarge => "xl",
-		Size.ExtraExtraLarge => "xxl"
-	};
+		/// <summary>
+		/// The CSS representation of this size.
+		/// </summary>
+		public string CssClass => value switch {
+			Size.ExtraSmall => "xs",
+			Size.Small => "sm",
+			Size.Medium => "md",
+			Size.Large => "lg",
+			Size.ExtraLarge => "xl",
+			Size.ExtraExtraLarge => "xxl"
+		};
+	}
 }

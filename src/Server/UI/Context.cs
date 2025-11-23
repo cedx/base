@@ -30,26 +30,24 @@ public enum Context {
 }
 
 /// <summary>
-/// Provides extension methods for contextual modifiers.
+/// Provides extension members for contextual modifiers.
 /// </summary>
 public static class ContextExtensions {
+	extension(Context value) {
 
-	/// <summary>
-	/// Gets the icon corresponding to the specified context.
-	/// </summary>
-	/// <param name="context">The context.</param>
-	/// <returns>The icon corresponding to the specified context.</returns>
-	public static string GetIcon(this Context context) => context switch {
-		Context.Danger => "error",
-		Context.Warning => "warning",
-		Context.Info => "info",
-		Context.Success => "check_circle"
-	};
+		/// <summary>
+		/// The CSS representation of this context.
+		/// </summary>
+		public string CssClass => value.ToString().ToLowerInvariant();
 
-	/// <summary>
-	/// Returns the CSS representation of the specified context.
-	/// </summary>
-	/// <param name="context">The context.</param>
-	/// <returns>The CSS representation of the specified context.</returns>
-	public static string ToCss(this Context context) => context.ToString().ToLowerInvariant();
+		/// <summary>
+		/// The icon corresponding to this context.
+		/// </summary>
+		public string Icon => value switch {
+			Context.Danger => "error",
+			Context.Warning => "warning",
+			Context.Info => "info",
+			Context.Success => "check_circle"
+		};
+	}
 }

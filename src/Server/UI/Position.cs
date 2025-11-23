@@ -55,24 +55,24 @@ public enum Position {
 }
 
 /// <summary>
-/// Provides extension methods for element positions.
+/// Provides extension members for element positions.
 /// </summary>
 public static class PositionExtensions {
+	extension(Position value) {
 
-	/// <summary>
-	/// Returns the CSS representation of the specified position.
-	/// </summary>
-	/// <param name="position">The position.</param>
-	/// <returns>The CSS representation of the specified position.</returns>
-	public static string ToCss(this Position position) => position switch {
-		Position.TopStart => "top-0 start-0",
-		Position.TopCenter => "top-0 start-50 translate-middle-x",
-		Position.TopEnd => "top-0 end-0",
-		Position.MiddleStart => "top-50 start-0 translate-middle-y",
-		Position.MiddleCenter => "top-50 start-50 translate-middle",
-		Position.MiddleEnd => "top-50 end-0 translate-middle-y",
-		Position.BottomStart => "bottom-0 start-0",
-		Position.BottomCenter => "bottom-0 start-50 translate-middle-x",
-		Position.BottomEnd => "bottom-0 end-0"
-	};
+		/// <summary>
+		/// The CSS representation of this position.
+		/// </summary>
+		public string CssClass => value switch {
+			Position.TopStart => "top-0 start-0",
+			Position.TopCenter => "top-0 start-50 translate-middle-x",
+			Position.TopEnd => "top-0 end-0",
+			Position.MiddleStart => "top-50 start-0 translate-middle-y",
+			Position.MiddleCenter => "top-50 start-50 translate-middle",
+			Position.MiddleEnd => "top-50 end-0 translate-middle-y",
+			Position.BottomStart => "bottom-0 start-0",
+			Position.BottomCenter => "bottom-0 start-50 translate-middle-x",
+			Position.BottomEnd => "bottom-0 end-0"
+		};
+	}
 }

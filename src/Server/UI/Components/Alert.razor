@@ -1,8 +1,8 @@
 @namespace Belin.Base.UI.Components
 
-<div class="alert alert-@Context.ToCss() @(Dismissible ? "alert-dismissible" : "") @(Fade ? "fade show" : "") @CssClass">
+<div class="alert alert-@Context.CssClass @(Dismissible ? "alert-dismissible" : "") @(Fade ? "fade show" : "") @CssClass">
 	<div class="d-flex align-items-center">
-		<i class="icon flex-shrink-0 me-2">@(string.IsNullOrEmpty(Icon) ? Context.GetIcon() : Icon)</i>
+		<i class="icon flex-shrink-0 me-2">@(string.IsNullOrEmpty(Icon) ? Context.Icon : Icon)</i>
 		<div>@ChildContent</div>
 	</div>
 	@if (Dismissible) { <button class="btn-close" data-bs-dismiss="alert" type="button"></button> }

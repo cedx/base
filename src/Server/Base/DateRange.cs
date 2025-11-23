@@ -39,7 +39,7 @@ public readonly record struct DateRange(DateTime Start, DateTime End, DateRangeT
 	/// <param name="date">The date.</param>
 	/// <returns>The date range corresponding to the quarter including the specified date.</returns>
 	public static DateRange Quarter(DateTime date) {
-		var firstMonth = (date.GetQuarter() * 3) - 2;
+		var firstMonth = (date.Quarter * 3) - 2;
 		var lastMonth = firstMonth + 2;
 		return new(
 			new DateTime(date.Year, firstMonth, 1),
@@ -90,7 +90,7 @@ public readonly record struct DateRange(DateTime Start, DateTime End, DateRangeT
 		DateRangeType.Day => Start.ToString("d MMM yyyy", culture),
 		DateRangeType.Week => Start.ToString($"S{Start.GetWeekOfYear(culture)} yyyy", culture),
 		DateRangeType.Month => Start.ToString("MMMM yyyy", culture),
-		DateRangeType.Quarter => Start.ToString($"T{Start.GetQuarter()} yyyy", culture),
+		DateRangeType.Quarter => Start.ToString($"T{Start.Quarter} yyyy", culture),
 		DateRangeType.Year => Start.Year.ToString(culture),
 		_ => End.ToString("d MMM yyyy", culture)
 	};

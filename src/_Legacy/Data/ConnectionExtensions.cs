@@ -1,7 +1,7 @@
 namespace Belin.Base.Data;
 
 /// <summary>
-/// Provides extension methods for database connections.
+/// Provides extension members for database connections.
 /// </summary>
 public static class ConnectionExtensions {
 

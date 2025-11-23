@@ -3,25 +3,29 @@ namespace Belin.Base;
 using System.Globalization;
 
 /// <summary>
-/// Provides extension methods for dates and times.
+/// Provides extension members for dates and times.
 /// </summary>
 public static class DateTimeExtensions {
+	extension(DateTime value) {
 
-	/// <summary>
-	/// Gets the quarter corresponding to the specified date.
-	/// </summary>
-	/// <param name="date">The date.</param>
-	/// <returns>The quarter corresponding to the specified date.</returns>
-	public static int GetQuarter(this DateTime date) => (date.Month - 1) / 3 + 1;
+		/// <summary>
+		/// The quarter corresponding to this date.
+		/// </summary>
+		public int Quarter => (value.Month - 1) / 3 + 1;
 
-	/// <summary>
-	/// Gets the week number corresponding to the specified date.
-	/// </summary>
-	/// <param name="date">The date.</param>
-	/// <param name="culture">An object that supplies culture-specific formatting information.</param>
-	/// <returns>The week number corresponding to the specified date.</returns>
-	public static int GetWeekOfYear(this DateTime date, CultureInfo? culture = null) {
-		culture ??= CultureInfo.CurrentCulture;
-		return culture.Calendar.GetWeekOfYear(date, culture.DateTimeFormat.CalendarWeekRule, culture.DateTimeFormat.FirstDayOfWeek);
+		/// <summary>
+		/// The week number corresponding to this date.
+		/// </summary>
+		public int WeekOfYear => value.GetWeekOfYear();
+
+		/// <summary>
+		/// Gets the week number corresponding to this date.
+		/// </summary>
+		/// <param name="culture">An object that supplies culture-specific formatting information.</param>
+		/// <returns>The week number corresponding to this date.</returns>
+		public int GetWeekOfYear(CultureInfo? culture = null) {
+			culture ??= CultureInfo.CurrentCulture;
+			return culture.Calendar.GetWeekOfYear(value, culture.DateTimeFormat.CalendarWeekRule, culture.DateTimeFormat.FirstDayOfWeek);
+		}
 	}
 }

@@ -11,11 +11,11 @@ public sealed class DateTimeExtensionsTests {
 	[TestMethod]
 	public void GetQuarter() {
 		// It should return the quarter number for the given date.
-		AreEqual(4, new DateTime(2015, 12, 31).GetQuarter());
-		AreEqual(3, new DateTime(2017, 7, 14).GetQuarter());
-		AreEqual(2, new DateTime(2020, 5, 3).GetQuarter());
-		AreEqual(1, new DateTime(2023, 1, 1).GetQuarter());
-		AreEqual(1, new DateTime(2024, 2, 29).GetQuarter());
+		AreEqual(4, new DateTime(2015, 12, 31).Quarter);
+		AreEqual(3, new DateTime(2017, 7, 14).Quarter);
+		AreEqual(2, new DateTime(2020, 5, 3).Quarter);
+		AreEqual(1, new DateTime(2023, 1, 1).Quarter);
+		AreEqual(1, new DateTime(2024, 2, 29).Quarter);
 	}
 
 	[TestMethod]

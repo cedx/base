@@ -2,7 +2,7 @@
 @using System.Globalization
 
 <toaster-container autoHide="@AutoHide" context="@Context" culture="@Culture" delay="@Delay" fade="@Fade" icon="@Icon" position="@Position">
-	<div class="toast-container p-3 @(Position.ToCss())">
+	<div class="toast-container p-3 @(Position.CssClass)">
 		@ChildContent
 	</div>
 

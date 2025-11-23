@@ -3,15 +3,15 @@ namespace Belin.Base.UI.Components;
 using Microsoft.AspNetCore.Components;
 
 /// <summary>
-/// Provides extension methods for markup strings.
+/// Provides extension members for markup strings.
 /// </summary>
 public static class MarkupStringExtensions {
+	extension(MarkupString value) {
 
-	/// <summary>
-	/// Converts the specified markup string to a render fragment.
-	/// </summary>
-	/// <param name="markupString">The markup string.</param>
-	/// <returns>The render fragment corresponding to the specified markup string.</returns>
-	public static RenderFragment ToRenderFragment(this MarkupString markupString) =>
-		builder => builder.AddMarkupContent(0, markupString.Value);
+		/// <summary>
+		/// Converts this markup string to a render fragment.
+		/// </summary>
+		/// <returns>The render fragment corresponding to this markup string.</returns>
+		public RenderFragment ToRenderFragment() => builder => builder.AddMarkupContent(0, value.Value);
+	}
 }

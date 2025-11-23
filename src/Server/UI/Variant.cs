@@ -50,14 +50,14 @@ public enum Variant {
 }
 
 /// <summary>
-/// Provides extension methods for tone variants.
+/// Provides extension members for tone variants.
 /// </summary>
 public static class VariantExtensions {
+	extension(Variant value) {
 
-	/// <summary>
-	/// Returns the CSS representation of the specified variant.
-	/// </summary>
-	/// <param name="variant">The variant.</param>
-	/// <returns>The CSS representation of the specified variant.</returns>
-	public static string ToCss(this Variant variant) => variant.ToString().ToLowerInvariant();
+		/// <summary>
+		/// The CSS representation of this variant.
+		/// </summary>
+		public string CssClass => value.ToString().ToLowerInvariant();
+	}
 }
