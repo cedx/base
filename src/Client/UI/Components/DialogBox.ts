@@ -1,8 +1,8 @@
 import {Modal} from "bootstrap";
-import {type Context, cssClass as contextCss, icon as contextIcon} from "../Context.js";
+import {type Context, cssClass as contextCssClass, icon as contextIcon} from "../Context.js";
 import {DialogResult} from "../DialogResult.js";
 import {html} from "../Tag.js";
-import {Variant, cssClass as variantCss} from "../Variant.js";
+import {Variant, cssClass as variantCssClass} from "../Variant.js";
 
 /**
  * Represents a dialog box button.
@@ -206,13 +206,13 @@ export class DialogBox extends HTMLElement {
 			caption,
 			body: html`
 				<div class="d-flex gap-2">
-					<i class="icon icon-fill fs-1 text-${contextCss(context)}"> ${contextIcon(context)}</i>
+					<i class="icon icon-fill fs-1 text-${contextCssClass(context)}"> ${contextIcon(context)}</i>
 					<div class="flex-grow-1">${message}</div>
 				</div>
 			`,
 			footer: html`
 				${(buttons.length ? buttons : [{label: "OK", value: DialogResult.OK, variant: Variant.Primary}]).map(button => html`
-					<button class="btn btn-${variantCss(button.variant ?? Variant.Primary)}" type="button" value="${button.value ?? DialogResult.None}">
+					<button class="btn btn-${variantCssClass(button.variant ?? Variant.Primary)}" type="button" value="${button.value ?? DialogResult.None}">
 						${button.icon ? html`<i class="icon ${button.label ? "me-1" : ""}">${button.icon}</i>` : ""}
 						${button.label}
 					</button>
