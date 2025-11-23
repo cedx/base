@@ -1,5 +1,5 @@
 import {Context} from "../Context.js";
-import {Position, toCss} from "../Position.js";
+import {Position, cssClass} from "../Position.js";
 
 /**
  * Represents a notification.
@@ -205,8 +205,8 @@ export class Toaster extends HTMLElement {
 	 */
 	#updatePosition(value: Position): void {
 		const {classList} = this.firstElementChild!;
-		classList.remove(...Object.values(Position).flatMap(position => toCss(position).split(" ")));
-		classList.add(...toCss(value).split(" "));
+		classList.remove(...Object.values(Position).flatMap(position => cssClass(position).split(" ")));
+		classList.add(...cssClass(value).split(" "));
 	}
 }
 

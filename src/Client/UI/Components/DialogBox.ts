@@ -1,8 +1,8 @@
 import {Modal} from "bootstrap";
-import {type Context, toCss as contextCss, getIcon} from "../Context.js";
+import {type Context, cssClass as contextCss, getIcon} from "../Context.js";
 import {DialogResult} from "../DialogResult.js";
 import {html} from "../Tag.js";
-import {Variant, toCss as variantCss} from "../Variant.js";
+import {Variant, cssClass as variantCss} from "../Variant.js";
 
 /**
  * Represents a dialog box button.

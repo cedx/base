@@ -1,5 +1,5 @@
 import {Toast as BootstrapToast} from "bootstrap";
-import {Context, getIcon, toCss} from "../Context.js";
+import {Context, cssClass, getIcon} from "../Context.js";
 
 /**
  * Represents a notification.
@@ -257,12 +257,12 @@ export class Toast extends HTMLElement {
 		const contexts = Object.values(Context);
 
 		let {classList} = this.querySelector(".toast-header")!;
-		classList.remove(...contexts.map(context => `toast-header-${toCss(context)}`));
-		classList.add(`toast-header-${toCss(value)}`);
+		classList.remove(...contexts.map(context => `toast-header-${cssClass(context)}`));
+		classList.add(`toast-header-${cssClass(value)}`);
 
 		({classList} = this.querySelector(".toast-header .icon")!);
-		classList.remove(...contexts.map(context => `text-${toCss(context)}`));
-		classList.add(`text-${toCss(value)}`);
+		classList.remove(...contexts.map(context => `text-${cssClass(context)}`));
+		classList.add(`text-${cssClass(value)}`);
 	}
 
 	/**
