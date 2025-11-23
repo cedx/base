@@ -42,7 +42,7 @@ export function getIcon(theme: AppTheme): string {
  * @param theme The application theme.
  * @returns The label corresponding to the specified theme.
  */
-export function getLabel(theme: AppTheme): string {
+export function label(theme: AppTheme): string {
 	switch (theme) {
 		case AppTheme.Dark: return "Sombre";
 		case AppTheme.Light: return "Clair";
