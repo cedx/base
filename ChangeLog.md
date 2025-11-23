@@ -1,5 +1,14 @@
 # Changelog
 
+## Version [0.34.0](https://github.com/cedx/base/compare/v0.33.0...v0.34.0)
+- Renamed the `getIcon()` functions to `icon()`.
+- Renamed the `getLabel()` functions to `label()`.
+- Renamed the `toCss()` functions to `cssClass()`.
+- Replaced the extension methods by [C# 14](https://learn.microsoft.com/en-us/dotnet/csharp) extension members.
+- Replaced the `GetIcon()` extension methods by `Icon` properties.
+- Replaced the `GetLabel()` extension methods by `Label` properties.
+- Replaced the `ToCss()` extension methods by `CssClass` properties.
+
 ## Version [0.33.0](https://github.com/cedx/base/compare/v0.32.0...v0.33.0)
 - Added the `Data.Scenario` enumeration.
 
