@@ -28,12 +28,12 @@ public enum AppTheme {
 /// Provides extension members for application themes.
 /// </summary>
 public static class AppThemeExtensions {
-	extension(AppTheme value) {
+	extension(AppTheme appTheme) {
 
 		/// <summary>
 		/// The icon corresponding to this theme.
 		/// </summary>
-		public string Icon => value switch {
+		public string Icon => appTheme switch {
 			AppTheme.System => "contrast",
 			AppTheme.Light => "light_mode",
 			AppTheme.Dark => "dark_mode"
@@ -42,7 +42,7 @@ public static class AppThemeExtensions {
 		/// <summary>
 		/// The label corresponding to this theme.
 		/// </summary>
-		public string Label => value switch {
+		public string Label => appTheme switch {
 			AppTheme.System => "Auto",
 			AppTheme.Light => "Clair",
 			AppTheme.Dark => "Sombre"

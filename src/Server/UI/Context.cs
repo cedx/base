@@ -33,17 +33,17 @@ public enum Context {
 /// Provides extension members for contextual modifiers.
 /// </summary>
 public static class ContextExtensions {
-	extension(Context value) {
+	extension(Context context) {
 
 		/// <summary>
 		/// The CSS representation of this context.
 		/// </summary>
-		public string CssClass => value.ToString().ToLowerInvariant();
+		public string CssClass => context.ToString().ToLowerInvariant();
 
 		/// <summary>
 		/// The icon corresponding to this context.
 		/// </summary>
-		public string Icon => value switch {
+		public string Icon => context switch {
 			Context.Danger => "error",
 			Context.Warning => "warning",
 			Context.Info => "info",

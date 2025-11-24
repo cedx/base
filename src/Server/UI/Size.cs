@@ -43,12 +43,12 @@ public enum Size {
 /// Provides extension members for element sizes.
 /// </summary>
 public static class SizeExtensions {
-	extension(Size value) {
+	extension(Size size) {
 
 		/// <summary>
 		/// The CSS representation of this size.
 		/// </summary>
-		public string CssClass => value switch {
+		public string CssClass => size switch {
 			Size.ExtraSmall => "xs",
 			Size.Small => "sm",
 			Size.Medium => "md",

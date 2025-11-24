@@ -6,17 +6,17 @@ using System.Globalization;
 /// Provides extension members for dates and times.
 /// </summary>
 public static class DateTimeExtensions {
-	extension(DateTime value) {
+	extension(DateTime dateTime) {
 
 		/// <summary>
 		/// The quarter corresponding to this date.
 		/// </summary>
-		public int Quarter => (value.Month - 1) / 3 + 1;
+		public int Quarter => (dateTime.Month - 1) / 3 + 1;
 
 		/// <summary>
 		/// The week number corresponding to this date.
 		/// </summary>
-		public int WeekOfYear => value.GetWeekOfYear();
+		public int WeekOfYear => dateTime.GetWeekOfYear();
 
 		/// <summary>
 		/// Gets the week number corresponding to this date.
@@ -25,7 +25,7 @@ public static class DateTimeExtensions {
 		/// <returns>The week number corresponding to this date.</returns>
 		public int GetWeekOfYear(CultureInfo? culture = null) {
 			culture ??= CultureInfo.CurrentCulture;
-			return culture.Calendar.GetWeekOfYear(value, culture.DateTimeFormat.CalendarWeekRule, culture.DateTimeFormat.FirstDayOfWeek);
+			return culture.Calendar.GetWeekOfYear(dateTime, culture.DateTimeFormat.CalendarWeekRule, culture.DateTimeFormat.FirstDayOfWeek);
 		}
 	}
 }

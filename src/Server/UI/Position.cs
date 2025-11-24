@@ -58,12 +58,12 @@ public enum Position {
 /// Provides extension members for element positions.
 /// </summary>
 public static class PositionExtensions {
-	extension(Position value) {
+	extension(Position position) {
 
 		/// <summary>
 		/// The CSS representation of this position.
 		/// </summary>
-		public string CssClass => value switch {
+		public string CssClass => position switch {
 			Position.TopStart => "top-0 start-0",
 			Position.TopCenter => "top-0 start-50 translate-middle-x",
 			Position.TopEnd => "top-0 end-0",

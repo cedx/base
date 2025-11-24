@@ -53,11 +53,11 @@ public enum Variant {
 /// Provides extension members for tone variants.
 /// </summary>
 public static class VariantExtensions {
-	extension(Variant value) {
+	extension(Variant variant) {
 
 		/// <summary>
 		/// The CSS representation of this variant.
 		/// </summary>
-		public string CssClass => value.ToString().ToLowerInvariant();
+		public string CssClass => variant.ToString().ToLowerInvariant();
 	}
 }
