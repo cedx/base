@@ -12,6 +12,11 @@ using System.Text.Json.Serialization;
 public readonly record struct DateRange(DateTime Start, DateTime End, DateRangeType Type = DateRangeType.Custom): IEquatable<DateRange> {
 
 	/// <summary>
+	/// The label corresponding to this date range.
+	/// </summary>
+	public string Label => GetLabel();
+
+	/// <summary>
 	/// Creates a date range corresponding to the day including the specified date.
 	/// </summary>
 	/// <param name="date">The date.</param>

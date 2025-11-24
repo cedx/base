@@ -16,24 +16,13 @@ public class DataMapper {
 	private static readonly Dictionary<Type, Dictionary<string, PropertyInfo>> propertyMaps = [];
 
 	/// <summary>
-	/// Converts the specified data reader into an array of objects of the specified type.
+	/// Creates a new object of a given type from the specified data record.
 	/// </summary>
-	/// <typeparam name="T">The type of objects to return.</typeparam>
-	/// <param name="reader">The data reader to be converted.</param>
-	/// <returns>The array of objects corresponding to the specified data reader.</returns>
-	public IEnumerable<T> ConvertReader<T>(IDataReader reader) {
-		while (reader.Read()) yield return ConvertRecord<T>(reader);
-		reader.Close();
-	}
-
-	/// <summary>
-	/// Converts the specified data record to the specified type.
-	/// </summary>
-	/// <typeparam name="T">The type of object to return.</typeparam>
-	/// <param name="record">The data record to be converted.</param>
-	/// <returns>The object corresponding to the specified data record.</returns>
-	public T ConvertRecord<T>(IDataRecord record) {
-		var properties = new OrderedDictionary<string, object?>();
+	/// <typeparam name="T">The object type.</typeparam>
+	/// <param name="record">A data record providing the properties to be set on the created object.</param>
+	/// <returns>The newly created object.</returns>
+	public T CreateInstance<T>(IDataRecord record) {
+		var properties = new Dictionary<string, object?>();
 		for (var index = 0; index < record.FieldCount; index++) {
 			var key = record.GetName(index);
 			properties[key] = record.IsDBNull(index) ? null : record.GetValue(index);
@@ -43,10 +32,10 @@ public class DataMapper {
 	}
 
 	/// <summary>
-	/// Creates a new entity of the specified type using that type's parameterless constructor.
+	/// Creates a new object of a given type from the specified dictionary.
 	/// </summary>
-	/// <typeparam name="T">The entity type.</typeparam>
-	/// <param name="properties">The properties to be set on the newly created object.</param>
+	/// <typeparam name="T">The object type.</typeparam>
+	/// <param name="properties">A dictionary providing the properties to be set on the created object.</param>
 	/// <returns>The newly created object.</returns>
 	public T CreateInstance<T>(IDictionary<string, object?> properties) {
 		var culture = CultureInfo.InvariantCulture;
@@ -55,17 +44,35 @@ public class DataMapper {
 
 		foreach (var key in properties.Keys.Where(propertyMap.ContainsKey)) {
 			var propertyInfo = propertyMap[key];
-			propertyInfo.SetValue(instance, Convert.ChangeType(properties[key], propertyInfo.PropertyType, culture));
+			var propertyType = Nullable.GetUnderlyingType(propertyInfo.PropertyType) ?? propertyInfo.PropertyType;
+			var value = properties[key];
+
+			propertyInfo.SetValue(instance, true switch {
+				true when value is null => null,
+				true when propertyType.IsEnum => Enum.ToObject(propertyType, value),
+				_ => Convert.ChangeType(value, propertyType, culture)
+			});
 		}
 
 		return instance;
 	}
 
 	/// <summary>
-	/// Gets the property map associated with the specified entity type.
+	/// Creates new objects of a given type from the specified data reader.
 	/// </summary>
-	/// <typeparam name="T">The entity type.</typeparam>
-	/// <returns>The property map associated with the specified entity type.</returns>
+	/// <typeparam name="T">The object type.</typeparam>
+	/// <param name="reader">A data reader providing the properties to be set on the created objects.</param>
+	/// <returns>An enumerable of newly created objects.</returns>
+	public IEnumerable<T> CreateInstances<T>(IDataReader reader) {
+		while (reader.Read()) yield return CreateInstance<T>(reader);
+		reader.Close();
+	}
+
+	/// <summary>
+	/// Retrives a dictionary of mapped properties of the specified type.
+	/// </summary>
+	/// <typeparam name="T">The type to inspect.</typeparam>
+	/// <returns>The dictionary of mapped properties of the specified type.</returns>
 	public IDictionary<string, PropertyInfo> GetPropertyMap<T>() {
 		var type = typeof(T);
 		if (propertyMaps.TryGetValue(type, out var value)) return value;
