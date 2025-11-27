@@ -27,7 +27,7 @@ export interface IDialogButton {
 	/**
 	 * A tone variant.
 	 */
-	variant?: Context|Variant;
+	variant?: Variant;
 }
 
 /**

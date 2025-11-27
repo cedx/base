@@ -22,7 +22,7 @@ class Pager extends View {
 
 	/** Navigates to the specified page. **/
 	public function navigate(page: Int, ?event: Event) {
-		if (event != null) (cast event.target: Element).closest("button").blur();
+		if (event != null) (cast event.currentTarget: Element).blur();
 		if (page >= 1 && page <= pagination.pageCount && page != pagination.page) onNavigate.invoke(page);
 	}
 
