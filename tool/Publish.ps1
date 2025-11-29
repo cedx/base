@@ -4,7 +4,7 @@ if ($Release) {
 	& "$PSScriptRoot/Client/Build.ps1"
 }
 else {
-	'The "-Release" switch must be set!'
+	"The ""-Release"" switch must be set!"
 	exit 1
 }
 
