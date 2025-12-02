@@ -84,6 +84,13 @@ public readonly record struct DateRange(DateTime Start, DateTime End, DateRangeT
 	/// </summary>
 	/// <param name="other">An object to compare with this object.</param>
 	/// <returns><see langword="true"/> if the specified object is equal to this object, otherwise <see langword="false"/>.</returns>
+	public override bool Equals(object? other) => Equals(other as DateRange);
+
+	/// <summary>
+	/// Determines whether the specified object is equal to this object.
+	/// </summary>
+	/// <param name="other">An object to compare with this object.</param>
+	/// <returns><see langword="true"/> if the specified object is equal to this object, otherwise <see langword="false"/>.</returns>
 	public bool Equals(DateRange? other) => other is not null && Start == other.Value.Start && End == other.Value.End;
 
 	/// <summary>
