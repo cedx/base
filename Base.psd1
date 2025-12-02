@@ -6,6 +6,12 @@
 	CompanyName = "Cedric-Belin.fr"
 	Copyright = "© Cédric Belin"
 	Description = "Base library by Cédric Belin, full stack developer."
+	GUID = "101212c0-26d4-4e68-87a2-df8d95b6f6c8"
+
+	AliasesToExport = @()
+	CmdletsToExport = @()
+	FunctionsToExport = @()
+	VariablesToExport = @()
 
 	PrivateData = @{
 		PSData = @{
