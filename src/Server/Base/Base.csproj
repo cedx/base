@@ -23,6 +23,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<OutDir>../../../bin</OutDir>
+		<RootNamespace>Belin.Base</RootNamespace>
 		<TargetFramework>net10.0</TargetFramework>
 	</PropertyGroup>
 
