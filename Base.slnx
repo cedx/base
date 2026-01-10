@@ -45,7 +45,7 @@
 	</Folder>
 	<Folder Name="/Server/">
 		<Project Path="src/Server/Base/Base.csproj" />
-		<Project Path="src/Server/UI/Base.UI.csproj" />
+		<Project Path="src/Server/Base.UI/Base.UI.csproj" />
 		<Project Path="test/Server/Base.Tests.csproj">
 			<Build Solution="Release|*" Project="false" />
 		</Project>
