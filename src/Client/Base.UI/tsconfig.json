@@ -5,6 +5,6 @@
 		"composite": true,
 		"outDir": "../../../lib/UI",
 		"rootDir": ".",
-		"tsBuildInfoFile": "../../../var/UI.tsbuildinfo"
+		"tsBuildInfoFile": "../../../var/Base.UI.tsbuildinfo"
 	}
 }
