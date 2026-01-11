@@ -1,5 +1,9 @@
 # Changelog
 
+## Version [0.35.0](https://github.com/cedx/base/compare/v0.34.0...v0.35.0)
+- Added the `DateRange.Label` property.
+- Removed the `Belin.Base.Data` assembly.
+
 ## Version [0.34.0](https://github.com/cedx/base/compare/v0.33.0...v0.34.0)
 - Renamed the `getIcon()` functions to `icon()`.
 - Renamed the `getLabel()` functions to `label()`.
