@@ -9,16 +9,6 @@
 		<File Path="package.json" />
 		<File Path="PSModules.psd1" />
 	</Folder>
-	<Folder Name="/Client/">
-		<Project Path="src/Client/Base.esproj">
-			<Build />
-			<Deploy />
-		</Project>
-		<Project Path="test/Client/Base.Tests.esproj">
-			<Build />
-			<Deploy />
-		</Project>
-	</Folder>
 	<Folder Name="/Documentation/">
 		<File Path="Authors.txt" />
 		<File Path="ChangeLog.md" />
@@ -43,14 +33,20 @@
 		<File Path="tool/Version.ps1" />
 		<File Path="tool/Watch.ps1" />
 	</Folder>
-	<Folder Name="/Server/">
-		<Project Path="src/Server/Base/Base.csproj" />
-		<Project Path="src/Server/Base.UI/Base.UI.csproj" />
-		<Project Path="test/Server/Base.Tests.csproj">
-			<Build Solution="Release|*" Project="false" />
-		</Project>
-	</Folder>
 	<Folder Name="/Workflows/">
 		<File Path=".github/workflows/ContinuousIntegration.yaml" />
 	</Folder>
+	<Project Path="src/Client/Client.esproj">
+		<Build />
+		<Deploy />
+	</Project>
+	<Project Path="src/Server/Base/Server.csproj" />
+	<Project Path="src/Server/Base.UI/Server.UI.csproj" />
+	<Project Path="test/Client/Client.Tests.esproj">
+		<Build />
+		<Deploy />
+	</Project>
+	<Project Path="test/Server/Server.Tests.csproj">
+		<Build Solution="Release|*" Project="false" />
+	</Project>
 </Solution>
