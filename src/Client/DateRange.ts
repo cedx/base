@@ -75,6 +75,13 @@ export class DateRange {
 	}
 
 	/**
+	 * The label corresponding to this date range.
+	 */
+	get label(): string {
+		return this.getLabel();
+	}
+
+	/**
 	 * Creates a new date range from the specified JSON object.
 	 * @param json A JSON object representing a date range.
 	 * @returns The instance corresponding to the specified JSON object.
