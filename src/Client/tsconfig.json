@@ -1,7 +1,20 @@
 {
-	"files": [],
-	"references": [
-		{"path": "Base/tsconfig.json"},
-		{"path": "Base.UI/tsconfig.json"}
-	]
+	"include": ["**/*.ts"],
+	"compilerOptions": {
+		"declaration": true,
+		"declarationMap": true,
+		"erasableSyntaxOnly": true,
+		"incremental": true,
+		"module": "NodeNext",
+		"noEmit": false,
+		"noImplicitOverride": true,
+		"outDir": "../../lib",
+		"resolveJsonModule": true,
+		"rootDir": ".",
+		"skipLibCheck": true,
+		"strict": true,
+		"target": "ESNext",
+		"tsBuildInfoFile": "../../var/tsbuildinfo.json",
+		"verbatimModuleSyntax": true
+	}
 }
