@@ -37,13 +37,13 @@
 		<File Path=".github/workflows/ContinuousIntegration.yaml" />
 	</Folder>
 	<Project Path="src/Client/Client.esproj">
-		<Build />
+		<Build Project="false" />
 		<Deploy />
 	</Project>
 	<Project Path="src/Server/Base/Server.csproj" />
 	<Project Path="src/Server/Base.UI/Server.UI.csproj" />
 	<Project Path="test/Client/Client.Tests.esproj">
-		<Build />
+		<Build Project="false" />
 		<Deploy />
 	</Project>
 	<Project Path="test/Server/Server.Tests.csproj">
