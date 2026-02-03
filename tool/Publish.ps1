@@ -15,6 +15,6 @@ git push origin "v$version"
 npm publish
 
 dotnet pack --output var
-Get-Item var/*.nupkg | ForEach-Object {
+Get-ChildItem var -Filter *.nupkg | ForEach-Object {
 	dotnet nuget push $_ --api-key $Env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json
 }
