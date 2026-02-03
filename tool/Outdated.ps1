@@ -1,3 +1,3 @@
 "Checking for outdated dependencies..."
-dotnet package list --outdated
+Get-ChildItem src/Server -Directory | ForEach-Object { dotnet package list --outdated --project $_ }
 npm outdated
