@@ -12,6 +12,7 @@ else {
 $version = Import-PowerShellDataFile Base.psd1 | Select-Object -ExpandProperty ModuleVersion
 git tag "v$version"
 git push origin "v$version"
+npm login
 npm publish
 
 dotnet pack --output var
