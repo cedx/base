@@ -2,7 +2,7 @@
 
 <div class="alert alert-@Context.CssClass @(Dismissible ? "alert-dismissible" : "") @(Fade ? "fade show" : "") @CssClass">
 	<div class="d-flex align-items-center">
-		<i class="icon flex-shrink-0 me-2">@(string.IsNullOrEmpty(Icon) ? Context.Icon : Icon)</i>
+		@if (Icon is not null) { <i class="icon flex-shrink-0 me-2">@(Icon.Length > 0 ? Icon : Context.Icon)</i> }
 		<div>@ChildContent</div>
 	</div>
 	@if (Dismissible) { <button class="btn-close" data-bs-dismiss="alert" type="button"></button> }
@@ -41,7 +41,8 @@
 
 	/// <summary>
 	/// The icon displayed next to the alert message.
+	/// Use a <see langword="null"/> reference to remove the icon.
 	/// </summary>
 	[Parameter]
-	public string? Icon { get; set; }
+	public string? Icon { get; set; } = "";
 }
