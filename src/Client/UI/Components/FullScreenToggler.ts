@@ -51,7 +51,7 @@ export class FullScreenToggler extends HTMLElement {
 		return this.hasAttribute("wakeLock");
 	}
 	set wakeLock(value: boolean) {
-		this.toggleAttribute("target", value);
+		this.toggleAttribute("wakeLock", value);
 	}
 
 	/**
