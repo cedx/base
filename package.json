@@ -7,7 +7,7 @@
 	"name": "@cedx/base",
 	"repository": "cedx/base",
 	"type": "module",
-	"version": "0.36.0",
+	"version": "0.36.1",
 	"devDependencies": {
 		"@types/bootstrap": "^5.2.10",
 		"@types/chai": "^5.2.3",
