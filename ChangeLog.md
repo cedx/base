@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.36.1](https://github.com/cedx/base/compare/v0.36.0...v0.36.1)
+- Fixed the setter of the `UI.Components.FullScreenToggler.WakeLock` property.
+
 ## Version [0.36.0](https://github.com/cedx/base/compare/v0.35.0...v0.36.0)
 - The `Icon` property of the `UI.Components.Alert` component can be set to `null` to remove the icon.
 
