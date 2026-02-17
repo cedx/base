@@ -37,7 +37,7 @@ export class ViewportScroller {
 	 */
 	get scrollOffset(): number {
 		if (this.#scrollOffset < 0) {
-			const fontSize = Number.parseInt(getComputedStyle(document.body).fontSize);
+			const fontSize = Number.parseInt(getComputedStyle(document.body).fontSize, 10);
 			this.#scrollOffset = Number.isNaN(fontSize) ? 0 : fontSize * 2;
 
 			const navbar = document.body.querySelector<HTMLElement>(".navbar");
