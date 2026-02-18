@@ -263,6 +263,8 @@ export class Toast extends HTMLElement {
 		({classList} = this.querySelector(".toast-header .icon")!);
 		classList.remove(...contexts.map(context => `text-${cssClass(context)}`));
 		classList.add(`text-${cssClass(value)}`);
+
+		if (!this.icon) this.#updateIcon(icon(value));
 	}
 
 	/**
