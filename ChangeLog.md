@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [0.36.2](https://github.com/cedx/base/compare/v0.36.1...v0.36.2)
+- Fixed the update of the `context` attribute in the `UI.Components.Toast` component.
+
 ## Version [0.36.1](https://github.com/cedx/base/compare/v0.36.0...v0.36.1)
 - Fixed the setter of the `UI.Components.FullScreenToggler.WakeLock` property.
 
