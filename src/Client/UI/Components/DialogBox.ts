@@ -186,8 +186,8 @@ export class DialogBox extends HTMLElement {
 		if (newValue != oldValue) switch (attribute) {
 			case "caption": this.#updateCaption(newValue ?? ""); break;
 			case "centered": this.#updateCentered(newValue != null); break;
-			case "modal": this.#updateModal(newValue != null); break;
 			case "fade": this.#updateFade(newValue != null); break;
+			case "modal": this.#updateModal(newValue != null); break;
 			case "scrollable": this.#updateScrollable(newValue != null); break;
 			// No default
 		}
