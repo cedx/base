@@ -6,14 +6,14 @@ import {KeyboardModifiers} from "../KeyboardModifiers.js";
 export class KeyboardAccelerator extends HTMLElement {
 
 	/**
-	 * The abort controller used to remove the event listeners.
-	 */
-	#abortController: AbortController|null = null;
-
-	/**
 	 * The mapping between the modifier names and their values.
 	 */
 	static readonly #modifiers = new Map(Object.entries(KeyboardModifiers).filter(([key]) => key != "None"));
+
+	/**
+	 * The abort controller used to remove the event listeners.
+	 */
+	#abortController: AbortController|null = null;
 
 	/**
 	 * Registers the component.
@@ -52,7 +52,7 @@ export class KeyboardAccelerator extends HTMLElement {
 	 */
 	connectedCallback(): void {
 		this.#abortController = new AbortController;
-		addEventListener("keyup", this.#activateChildContent, {capture: true, signal: this.#abortController.signal});
+		addEventListener("keyup", this.#activateChildContent, {signal: this.#abortController.signal});
 	}
 
 	/**
@@ -78,7 +78,7 @@ export class KeyboardAccelerator extends HTMLElement {
 		if (!(modifiers & KeyboardModifiers.Alt) && event.altKey) return;
 		if (!(modifiers & KeyboardModifiers.Meta) && event.metaKey) return;
 
-		event.stopPropagation();
+		event.preventDefault();
 		(this.firstElementChild as HTMLElement|null)?.click();
 	}
 }

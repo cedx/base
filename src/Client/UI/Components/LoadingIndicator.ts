@@ -64,6 +64,7 @@ export class LoadingIndicator extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
+		this.#requestCount = 0;
 		if (this.open) this.show();
 	}
 
