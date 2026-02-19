@@ -6,7 +6,7 @@ export class FullScreenToggler extends HTMLElement {
 	/**
 	 * The abort controller used to remove the event listeners.
 	 */
-	readonly #abortController = new AbortController;
+	#abortController: AbortController|null = null;
 
 	/**
 	 * The target element.
@@ -58,6 +58,7 @@ export class FullScreenToggler extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
+		this.#abortController = new AbortController;
 		document.addEventListener("visibilitychange", this.#onVisibilityChanged, {signal: this.#abortController.signal});
 		this.#element = document.querySelector(this.target) ?? document.body;
 		this.#element.addEventListener("fullscreenchange", this.#onFullScreenChanged, {signal: this.#abortController.signal});
@@ -67,7 +68,7 @@ export class FullScreenToggler extends HTMLElement {
 	 * Method invoked when this component is disconnected.
 	 */
 	disconnectedCallback(): void {
-		this.#abortController.abort();
+		this.#abortController?.abort();
 	}
 
 	/**
@@ -112,8 +113,7 @@ export class FullScreenToggler extends HTMLElement {
 	 * @returns Completes when the wake lock has been released.
 	 */
 	async #releaseWakeLock(): Promise<void> {
-		if (!this.#sentinel || this.#sentinel.released) return;
-		await this.#sentinel.release();
+		if (this.#sentinel && !this.#sentinel.released) await this.#sentinel.release();
 	}
 }
 

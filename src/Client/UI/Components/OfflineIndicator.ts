@@ -11,7 +11,7 @@ export class OfflineIndicator extends HTMLElement {
 	/**
 	 * The abort controller used to remove the event listeners.
 	 */
-	readonly #abortController = new AbortController;
+	#abortController: AbortController|null = null;
 
 	/**
 	 * Registers the component.
@@ -64,6 +64,7 @@ export class OfflineIndicator extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
+		this.#abortController = new AbortController;
 		for (const event of ["online", "offline"]) addEventListener(event, this.#updateVisibility, {signal: this.#abortController.signal});
 		if (this.open) this.show();
 		else this.#updateVisibility();
@@ -73,7 +74,7 @@ export class OfflineIndicator extends HTMLElement {
 	 * Method invoked when this component is disconnected.
 	 */
 	disconnectedCallback(): void {
-		this.#abortController.abort();
+		this.#abortController?.abort();
 	}
 
 	/**

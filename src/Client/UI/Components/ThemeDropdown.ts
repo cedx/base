@@ -15,7 +15,7 @@ export class ThemeDropdown extends HTMLElement {
 	/**
 	 * The abort controller used to remove the event listeners.
 	 */
-	readonly #abortController = new AbortController;
+	#abortController: AbortController|null = null;
 
 	/**
 	 * The dropdown menu.
@@ -133,6 +133,7 @@ export class ThemeDropdown extends HTMLElement {
 	 * @returns Completes when this component has been connected.
 	 */
 	async connectedCallback(): Promise<void> {
+		this.#abortController = new AbortController;
 		this.#dropdown = new Dropdown(this.querySelector(".dropdown-toggle")!);
 		this.#mediaQuery.addEventListener("change", this.#applyToDocument, {signal: this.#abortController.signal});
 
@@ -148,7 +149,7 @@ export class ThemeDropdown extends HTMLElement {
 	 * Method invoked when this component is disconnected.
 	 */
 	disconnectedCallback(): void {
-		this.#abortController.abort();
+		this.#abortController?.abort();
 		this.#dropdown.dispose();
 	}
 

@@ -8,7 +8,7 @@ export class KeyboardAccelerator extends HTMLElement {
 	/**
 	 * The abort controller used to remove the event listeners.
 	 */
-	readonly #abortController = new AbortController;
+	#abortController: AbortController|null = null;
 
 	/**
 	 * The mapping between the modifier names and their values.
@@ -51,6 +51,7 @@ export class KeyboardAccelerator extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
+		this.#abortController = new AbortController;
 		addEventListener("keyup", this.#activateChildContent, {capture: true, signal: this.#abortController.signal});
 	}
 
@@ -58,7 +59,7 @@ export class KeyboardAccelerator extends HTMLElement {
 	 * Method invoked when this component is disconnected.
 	 */
 	disconnectedCallback(): void {
-		this.#abortController.abort();
+		this.#abortController?.abort();
 	}
 
 	/**

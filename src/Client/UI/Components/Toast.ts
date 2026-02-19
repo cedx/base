@@ -19,7 +19,7 @@ export class Toast extends HTMLElement {
 	/**
 	 * The abort controller used to remove the event listeners.
 	 */
-	readonly #abortController = new AbortController;
+	#abortController: AbortController|null = null;
 
 	/**
 	 * The formatter used to format the relative time.
@@ -177,6 +177,8 @@ export class Toast extends HTMLElement {
 	 * Method invoked when this component is connected.
 	 */
 	connectedCallback(): void {
+		this.#abortController = new AbortController;
+
 		const root = this.firstElementChild!;
 		root.addEventListener("hide.bs.toast", this.#stopTimer, {signal: this.#abortController.signal});
 		root.addEventListener("show.bs.toast", this.#startTimer, {signal: this.#abortController.signal});
@@ -190,7 +192,7 @@ export class Toast extends HTMLElement {
 	 */
 	disconnectedCallback(): void {
 		this.#stopTimer();
-		this.#abortController.abort();
+		this.#abortController?.abort();
 		this.#toast.dispose();
 	}
 
