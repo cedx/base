@@ -4,14 +4,6 @@
 export class BackButton extends HTMLElement {
 
 	/**
-	 * Creates a new back button.
-	 */
-	constructor() {
-		super();
-		this.addEventListener("click", this.goBack, {capture: true});
-	}
-
-	/**
 	 * Registers the component.
 	 */
 	static {
@@ -33,10 +25,10 @@ export class BackButton extends HTMLElement {
 	 * Moves back in the session history.
 	 * @param event The dispatched event.
 	 */
-	readonly goBack: (event?: Event) => void = event => {
-		event?.stopPropagation();
+	goBack(event: Event): void {
+		event.preventDefault();
 		history.go(-this.steps);
-	};
+	}
 }
 
 /**
