@@ -25,8 +25,8 @@ export class BackButton extends HTMLElement {
 	 * Moves back in the session history.
 	 * @param event The dispatched event.
 	 */
-	goBack(event: Event): void {
-		event.preventDefault();
+	goBack(event?: Event): void {
+		event?.preventDefault();
 		history.go(-this.steps);
 	}
 }

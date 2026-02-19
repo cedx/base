@@ -19,14 +19,6 @@ export class FullScreenToggler extends HTMLElement {
 	#sentinel: WakeLockSentinel|null = null;
 
 	/**
-	 * Creates a new full-screen toggler.
-	 */
-	constructor() {
-		super();
-		this.addEventListener("click", this.toggleFullScreen, {capture: true}); // eslint-disable-line @typescript-eslint/no-misused-promises
-	}
-
-	/**
 	 * Registers the component.
 	 */
 	static {
@@ -76,19 +68,18 @@ export class FullScreenToggler extends HTMLElement {
 	 * @param event The dispatched event.
 	 * @returns Completes when the full-screen mode has been toggled.
 	 */
-	readonly toggleFullScreen: (event?: Event) => Promise<void> = async event => {
-		event?.stopPropagation();
+	async toggleFullScreen(event?: Event): Promise<void> {
+		event?.preventDefault();
 		if (document.fullscreenElement) await document.exitFullscreen();
 		else await this.#element.requestFullscreen();
-	};
+	}
 
 	/**
 	 * Acquires a new wake lock.
 	 * @returns Completes when the wake lock has been acquired.
 	 */
 	async #acquireWakeLock(): Promise<void> {
-		if (this.#sentinel && !this.#sentinel.released) return;
-		if (this.wakeLock) this.#sentinel = await navigator.wakeLock.request();
+		if (this.wakeLock && (!this.#sentinel || this.#sentinel.released)) this.#sentinel = await navigator.wakeLock.request();
 	}
 
 	/**
