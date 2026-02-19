@@ -1,5 +1,5 @@
-import Htmx, {type HtmxResponseInfo} from "htmx.org";
-export default Htmx as unknown as typeof Htmx.default;
+import htmx, {type HtmxResponseInfo} from "htmx.org";
+export const Htmx = htmx as unknown as typeof htmx.default;
 
 /**
  * Provides details about an `htmx` event.

@@ -1,5 +1,9 @@
 # Changelog
 
+## Version [0.37.0](https://github.com/cedx/base/compare/v0.36.2...v0.37.0)
+- Added a dependency on [htmx](https://htmx.org).
+- Fixed the usage of the `AbortController` class.
+
 ## Version [0.36.2](https://github.com/cedx/base/compare/v0.36.1...v0.36.2)
 - Fixed the update of the `context` attribute in the `UI.Components.Toast` component.
 
