@@ -7,7 +7,7 @@
 	"name": "@cedx/base",
 	"repository": "cedx/base",
 	"type": "module",
-	"version": "0.36.2",
+	"version": "0.37.0",
 	"dependencies": {
 		"@preact/signals-core": "^1.13.0"
 	},
