@@ -52,7 +52,7 @@ export class KeyboardAccelerator extends HTMLElement {
 	 */
 	connectedCallback(): void {
 		this.#abortController = new AbortController;
-		addEventListener("keyup", this.#activateChildContent, {signal: this.#abortController.signal});
+		addEventListener("keyup", event => this.#activateChildContent(event), {signal: this.#abortController.signal});
 	}
 
 	/**
@@ -66,7 +66,7 @@ export class KeyboardAccelerator extends HTMLElement {
 	 * Activates the child content when the specified keyboard event designates the same key and modifiers as this keyboard accelerator.
 	 * @param event The dispatched event.
 	 */
-	readonly #activateChildContent: (event: KeyboardEvent) => void = event => {
+	#activateChildContent(event: KeyboardEvent): void {
 		if (event.key != this.key) return;
 
 		const {activeElement} = document;

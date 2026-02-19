@@ -180,8 +180,8 @@ export class Toast extends HTMLElement {
 		this.#abortController = new AbortController;
 
 		const root = this.firstElementChild!;
-		root.addEventListener("hide.bs.toast", this.#stopTimer, {signal: this.#abortController.signal});
-		root.addEventListener("show.bs.toast", this.#startTimer, {signal: this.#abortController.signal});
+		root.addEventListener("hide.bs.toast", () => this.#stopTimer(), {signal: this.#abortController.signal});
+		root.addEventListener("show.bs.toast", () => this.#startTimer(), {signal: this.#abortController.signal});
 
 		this.#toast = new BootstrapToast(root);
 		if (this.open) this.show();
@@ -226,14 +226,16 @@ export class Toast extends HTMLElement {
 	/**
 	 * Starts the timer.
 	 */
-	readonly #startTimer: () => void = () =>
+	#startTimer(): void {
 		this.#timer = window.setInterval(() => this.#updateElapsedTime(), 1_000);
+	}
 
 	/**
 	 * Stops the timer.
 	 */
-	readonly #stopTimer: () => void = () =>
+	#stopTimer(): void {
 		clearInterval(this.#timer);
+	}
 
 	/**
 	 * Updates the value indicating whether to automatically hide this toast.

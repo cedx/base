@@ -65,7 +65,8 @@ export class OfflineIndicator extends HTMLElement {
 	 */
 	connectedCallback(): void {
 		this.#abortController = new AbortController;
-		for (const event of ["online", "offline"]) addEventListener(event, this.#updateVisibility, {signal: this.#abortController.signal});
+		for (const event of ["online", "offline"]) addEventListener(event, () => this.#updateVisibility(), {signal: this.#abortController.signal});
+
 		if (this.open) this.show();
 		else this.#updateVisibility();
 	}
@@ -104,7 +105,7 @@ export class OfflineIndicator extends HTMLElement {
 	/**
 	 * Updates the visibility of this component.
 	 */
-	readonly #updateVisibility: () => void = () => {
+	#updateVisibility(): void {
 		if (navigator.onLine) this.hide();
 		else this.show();
 	}

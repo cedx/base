@@ -51,9 +51,9 @@ export class FullScreenToggler extends HTMLElement {
 	 */
 	connectedCallback(): void {
 		this.#abortController = new AbortController;
-		document.addEventListener("visibilitychange", this.#onVisibilityChanged, {signal: this.#abortController.signal});
+		document.addEventListener("visibilitychange", () => this.#onVisibilityChanged(), {signal: this.#abortController.signal});
 		this.#element = document.querySelector(this.target) ?? document.body;
-		this.#element.addEventListener("fullscreenchange", this.#onFullScreenChanged, {signal: this.#abortController.signal});
+		this.#element.addEventListener("fullscreenchange", () => this.#onFullScreenChanged(), {signal: this.#abortController.signal});
 	}
 
 	/**
@@ -86,18 +86,18 @@ export class FullScreenToggler extends HTMLElement {
 	 * Acquires or releases the wake lock when the document enters or exits the full-screen mode.
 	 * @param event The dispatched event.
 	 */
-	readonly #onFullScreenChanged: (event: Event) => void = () => {
+	#onFullScreenChanged(): void {
 		if (document.fullscreenElement) void this.#acquireWakeLock();
 		else void this.#releaseWakeLock();
-	};
+	}
 
 	/**
 	 * Eventually acquires a new wake lock when the document visibility has changed.
 	 * @param event The dispatched event.
 	 */
-	readonly #onVisibilityChanged: (event: Event) => void = () => {
+	#onVisibilityChanged(): void {
 		if (document.fullscreenElement && !document.hidden) void this.#acquireWakeLock();
-	};
+	}
 
 	/**
 	 * Releases the acquired wake lock.

@@ -135,7 +135,7 @@ export class ThemeDropdown extends HTMLElement {
 	async connectedCallback(): Promise<void> {
 		this.#abortController = new AbortController;
 		this.#dropdown = new Dropdown(this.querySelector(".dropdown-toggle")!);
-		this.#mediaQuery.addEventListener("change", this.#applyToDocument, {signal: this.#abortController.signal});
+		this.#mediaQuery.addEventListener("change", () => this.#applyToDocument(), {signal: this.#abortController.signal});
 
 		const cookie = this.cookie ? await cookieStore.get(this.storageKey) : null;
 		if (cookie) this.appTheme = cookie.value as AppTheme;
@@ -178,11 +178,11 @@ export class ThemeDropdown extends HTMLElement {
 	/**
 	 * Applies the application theme to the document.
 	 */
- 	readonly #applyToDocument: () => void = () => {
+ 	#applyToDocument(): void {
 		const {appTheme} = this;
 		const bsTheme = appTheme == AppTheme.System ? (this.#mediaQuery.matches ? AppTheme.Dark : AppTheme.Light) : appTheme;
 		document.documentElement.dataset.bsTheme = bsTheme.toLowerCase();
-	};
+	}
 
 	/**
 	 * Changes the current application theme.

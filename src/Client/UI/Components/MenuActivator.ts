@@ -21,8 +21,8 @@ export class MenuActivator extends HTMLElement {
 	connectedCallback(): void {
 		this.#abortController = new AbortController;
 		this.#update();
-		addEventListener("popstate", this.#update, {signal: this.#abortController.signal});
-		document.body.addEventListener("htmx:afterRequest", this.#update, {signal: this.#abortController.signal});
+		addEventListener("popstate", () => this.#update(), {signal: this.#abortController.signal});
+		document.body.addEventListener("htmx:afterRequest", () => this.#update(), {signal: this.#abortController.signal});
 	}
 
 	/**
@@ -34,15 +34,14 @@ export class MenuActivator extends HTMLElement {
 
 	/**
 	 * Updates this component.
-	 * @param event The dispatched event.
 	 */
-	readonly #update: (event?: Event) => void = () => {
+	#update(): void {
 		for (const element of this.querySelectorAll(".active")) element.classList.remove("active");
 		for (const element of this.querySelectorAll("a")) if (element.href == location.href) {
 			element.classList.add("active");
 			element.closest(".dropdown")?.querySelector(".dropdown-toggle")?.classList.add("active");
 		}
-	};
+	}
 }
 
 /**
