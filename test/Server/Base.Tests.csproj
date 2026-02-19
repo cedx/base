@@ -21,7 +21,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.*" />
 		<PackageReference Include="MSTest" Version="4.*" />
-		<ProjectReference Include="../../src/Server/Base/Server.csproj" />
+		<ProjectReference Include="../../src/Server/Base/Base.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
